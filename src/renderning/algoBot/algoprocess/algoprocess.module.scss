@@ -1,0 +1,36 @@
+@import '../../../scss/mixins/index.scss';
+
+.algoprocessAlignment {
+    padding: 120px 0;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+
+    .centeralignment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h2 {
+        margin: 16px 0;
+        @include heading1;
+        color: #0B0B14;
+        text-align: center;
+    }
+
+    .centerAlignmentImage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 0 0 0;
+
+        @include breakpoint("sm-max") {
+            padding: 0;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    }
+}

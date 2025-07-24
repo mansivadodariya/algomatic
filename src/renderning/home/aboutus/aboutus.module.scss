@@ -1,0 +1,71 @@
+@import '../../../scss/mixins/index.scss';
+
+.aboutusSctionAlignment {
+    padding: 120px 0;
+
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 640px;
+        gap: 120px;
+
+        @include breakpoint("md-max") {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .griditems {
+            h2 {
+                color: #0B0B14;
+                @include heading1;
+                margin: 16px 0;
+            }
+
+            p {
+                color: #737373;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 30px;
+                margin: 0 0 16px 0;
+
+                @include breakpoint("sm-max") {
+                    @include font14;
+                }
+            }
+
+            :global(.atropos) {
+                border-radius: 30px;
+
+                @include breakpoint("sm-max") {
+                    border-radius: 12px;
+                }
+
+            }
+
+            .image {
+                position: relative;
+                border-radius: 30px;
+                height: 670px;
+                width: 100%;
+
+                @include breakpoint("sm-max") {
+                    height: 320px;
+                    border-radius: 12px;
+                }
+
+                img {
+                    border-radius: 30px;
+
+                    @include breakpoint("sm-max") {
+                        border-radius: 12px;
+
+                    }
+                }
+            }
+        }
+    }
+}

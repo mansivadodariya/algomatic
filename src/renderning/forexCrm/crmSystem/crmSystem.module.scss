@@ -1,0 +1,237 @@
+@import '../../../scss/mixins/index.scss';
+
+.crmSystemAlignment {
+    margin: 120px 0;
+
+    @include breakpoint("md-max") {
+        margin: 60px 0;
+    }
+
+    .blueBox {
+        border-radius: 34px;
+        padding: 120px 0;
+        background: var(--Foundation-Blue-Normal, #9657FA);
+
+        @include breakpoint("md-max") {
+            padding: 60px 0;
+        }
+
+        @include breakpoint("sm-max") {
+            border-radius: 12px;
+        }
+
+        h2 {
+            @include heading1;
+            color: #fff;
+            max-width: 950px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .threeCol {
+            display: grid;
+            padding: 60px 0 100px 0;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+
+            @include breakpoint("md-max") {
+                padding: 60px 0;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            @include breakpoint("sm-max") {
+                gap: 20px;
+                grid-template-columns: 1fr;
+            }
+
+            .threeColItems {
+                  background-color: rgb(255 255 255 / 3%);
+                padding: 30px;
+                border-radius: 18px;
+
+                .allIconalignment {
+                    .iconGrid:last-child {
+                        padding: 0;
+                    }
+
+                    .iconGrid {
+                        display: grid;
+                        grid-template-columns: 20px 1fr;
+                        padding: 0 0 16px 0;
+                        gap: 14px;
+
+                        span {
+                          color: #fff;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                            display: block;
+
+                            @include breakpoint("sm-max") {
+                                @include font14;
+                            }
+                        }
+                    }
+                }
+
+                .iconTextAlignment {
+                    display: flex;
+                    align-items: center;
+                    gap: 18px;
+                    padding: 0 0 24px 0;
+
+                    img {
+                        max-width: 70px;
+                    }
+
+                    p {
+                        color: var(--Foundation-White-Normal, #FFF);
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: normal;
+
+                        @include breakpoint("sm-max") {
+                            @include font14;
+                        }
+                    }
+                }
+            }
+        }
+
+        .teamSection {
+            display: flex;
+            padding: 100px 0 0 0;
+            justify-content: space-between;
+
+            @include breakpoint("sm-max") {
+                padding: 40px 0 0 0;
+                grid-template-columns: 1fr;
+                display: grid;
+                gap: 40px;
+            }
+
+            h3 {
+                @include heading1;
+                color: #fff;
+                max-width: 550px;
+            }
+
+            .secAlignment {
+                display: flex;
+                align-items: center;
+                gap: 30px;
+                @include breakpoint("sm-max") {
+                    display: grid;
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+                span {
+                    display: block;
+                    color: var(--Foundation-White-Light, #FFF);
+                    max-width: 200px;
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                    padding: 5px 0 0 0;
+                    letter-spacing: -0.24px;
+                }
+
+                p {
+                    color: var(--Foundation-White-Light, #FFF);
+                    font-size: 48px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 64px;
+                    letter-spacing: -0.48px;
+                }
+            }
+        }
+
+        .fourCol {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            border-bottom: 1px solid #ffffff24;
+            padding: 60px 0 20px 0;
+
+
+            @include breakpoint("md-max") {
+                grid-template-columns: 1fr;
+            }
+
+            .fourColItems:last-child {
+                border: none;
+
+                @include breakpoint("md-max") {
+                    padding: 20px 0;
+                    border-bottom: 1px solid #ffffff24;
+                    border-right: none;
+                }
+            }
+
+            .fourColItems {
+                padding: 0 20px 20px 20px;
+     border-right: 1px solid #ffffff24;
+
+                @include breakpoint("md-max") {
+                    padding: 20px 0;
+                    border-right: none;
+
+                    border-bottom: 1px solid #ffffff24;
+                }
+
+                span {
+                    display: block;
+            color: #fff;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px;
+
+                    @include breakpoint("sm-max") {
+                        @include font14;
+                    }
+                }
+
+                p {
+                    color: var(--Foundation-White-Normal, #FFF);
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 600;
+                    margin: 0 0 10px 0;
+                    line-height: 30px;
+                    /* 150% */
+                }
+            }
+        }
+
+
+        .cemteralignment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0 16px 0;
+
+            button {
+                border-radius: 40px;
+                border-radius: 40px;
+                border: 1px solid var(--foundation-blue-light-active, #B0B0FF);
+                background: rgba(176, 200, 255, 0.20);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                color: #fff;
+                cursor: text;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                text-transform: uppercase;
+                padding: 6px 20px;
+            }
+        }
+    }
+}

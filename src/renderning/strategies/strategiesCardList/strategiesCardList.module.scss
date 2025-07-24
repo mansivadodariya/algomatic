@@ -1,0 +1,89 @@
+@import '../../../scss/mixins/index.scss';
+
+.strategiesCardList {
+  padding: 120px 0;
+
+  @include breakpoint("md-max") {
+    padding: 60px 0;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 20px;
+
+    @include breakpoint("md-max") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint("sm-max") {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .noData {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #6b7280;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 40px 0;
+  }
+
+  .paginationBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 40px;
+
+    .currentPage {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0f0f1a;
+    }
+  }
+
+  .btn {
+    width: 44px;
+    height: 44px;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #2563eb;
+      border-color: #2563eb;
+      transform: translateY(-2px);
+
+      .pagination_icon {
+        color: white;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      background-color: #f9f9f9;
+      border-color: #e5e7eb;
+    }
+  }
+
+  .pagination_icon {
+    width: 18px;
+    height: 18px;
+    color: #6b7280;
+    transition: color 0.3s;
+  }
+}

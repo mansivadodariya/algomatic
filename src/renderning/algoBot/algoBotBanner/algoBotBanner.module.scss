@@ -1,0 +1,79 @@
+@import '../../../scss/mixins/index.scss';
+
+.algoBotBanner {
+   background-color: #f7f7f7;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    padding: 100px 0;
+    border-radius: 34px;
+    background-size: cover;
+
+    @include breakpoint("md-max") {
+        border-radius: 12px;
+        padding: 60px 20px;
+    }
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+    .centerButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        @include heading1;
+        color: #0B0B14;
+        text-align: center;
+        max-width: 800px;
+        margin: 16px auto;
+    }
+
+    p {
+        color: var(--Foundation-White-Darker, #595959);
+        text-align: center;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+        @include breakpoint("sm-max") {
+            @include font14;
+        }
+    }
+}
+
+.bannerCenterAlignment {
+    max-width: calc(1030px + 40px);
+    padding: 0 20px;
+    margin: 0 auto;
+
+    .box {
+        width: 100%;
+        margin-top: -350px;
+        border-radius: 20px;
+        border: 6px solid #D9E4FF;
+        background: #FFF;
+        box-shadow: 0px 4px 54px 0px rgba(1, 78, 255, 0.14);
+        height: 670px;
+        position: relative;
+
+        @include breakpoint("md-max") {
+            height: 520px;
+            margin-top: -280px;
+        }
+
+        @include breakpoint("md-max") {
+            height: 320px;
+            margin-top: -280px;
+        }
+
+        img {
+            border-radius: 20px;
+            @include breakpoint("sm-max") {
+                border-radius: 12px;
+            }
+        }
+    }
+}

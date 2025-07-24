@@ -1,0 +1,30 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p 7878",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "atropos": "^2.0.2",
+    "axios": "^1.7.7",
+    "classnames": "^2.5.1",
+    "dotenv": "^17.0.1",
+    "env": "^0.0.2",
+    "graphql-request": "^7.1.0",
+    "lucide-react": "^0.525.0",
+    "marked": "^14.1.2",
+    "next": "14.2.14",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-fast-marquee": "^1.6.5",
+    "react-hot-toast": "^2.4.1",
+    "react-slick": "^0.30.2",
+    "sass": "^1.79.4",
+    "scss": "^0.2.4",
+    "slick-carousel": "^1.8.1"
+  }
+}

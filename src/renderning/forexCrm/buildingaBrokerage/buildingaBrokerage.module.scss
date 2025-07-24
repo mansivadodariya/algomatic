@@ -1,0 +1,61 @@
+@import '../../../scss/mixins/index.scss';
+
+.buildingaBrokerage {
+    border-radius: 34px;
+    background: var(--Foundation-Blue-Normal, #9657FA);
+    padding: 80px 80px 80px 80px;
+    height: 420px;
+
+    @include breakpoint("md-max") {
+        height: auto;
+        padding: 60px 20px;
+    }
+
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 540px;
+        gap: 80px;
+
+        @include breakpoint("md-max") {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        button {
+            border: none;
+            background: #fff;
+            padding: 12px 24px;
+            color: #9657FA;
+            border-radius: 999px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            border: none;
+            align-items: center;
+            gap: 6px;
+            line-height: 24px;
+            transition: .3s ease-in-out;
+            cursor: pointer;
+        }
+
+        h2 {
+            @include heading1;
+            font-size: 38px;
+            line-height: 45px;
+            margin: 0 0 30px 0;
+            color: #fff;
+        }
+
+        .img {
+            img {
+                width: 100%;
+            }
+        }
+    }
+}

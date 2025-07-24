@@ -1,0 +1,89 @@
+@import '../../../scss/mixins/index.scss';
+
+.boostBusiness {
+    padding: 120px 0;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: 650px 1fr;
+        gap: 100px;
+        @include breakpoint("md-max") {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        .griditems {
+
+
+
+            .subgrid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                @include breakpoint("sm-max") {
+                    grid-template-columns: 1fr;
+                }
+
+                .subgridItems {
+                    border-radius: 22px;
+                    border: 1px solid #9657FA;
+                    background: rgba(230, 230, 230, 0.20);
+                    padding: 30px;
+
+                    @include breakpoint("sm-max") {
+                        padding: 22px;
+                        border-radius: 12px;
+                    }
+
+                    h3 {
+                        color: var(--Foundation-Blue-Normal, #9657FA);
+                        font-size: 40px;
+                        margin: 0 0 10px 0;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: normal;
+
+                        @include breakpoint("sm-max") {
+                            font-size: 30px;
+                        }
+                    }
+
+                    span {
+                        display: block;
+                        color: var(--Foundation-Blue-Normal, #0F0F1A);
+                        font-size: 20px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 30px;
+                        
+                    }
+                }
+            }
+
+            .text {
+                .spacer {
+                    padding: 0 0 20px 0;
+                }
+
+                h2 {
+                    @include heading1;
+                    color: var(--Foundation-Blue-Dark, #0B0B14);
+                    margin: 0 0 16px 0;
+                }
+
+                p {
+                    color: var(--foundation-white-dark-active, #737373);
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 30px;
+
+                    @include breakpoint("sm-max") {
+                        @include font14;
+                    }
+                }
+            }
+        }
+    }
+}

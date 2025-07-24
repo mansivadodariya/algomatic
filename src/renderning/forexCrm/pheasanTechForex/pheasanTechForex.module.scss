@@ -1,0 +1,184 @@
+@import '../../../scss/mixins/index.scss';
+
+.pheasanTechForexalignment {
+    padding: 0 0 120px 0;
+    @include breakpoint("md-max") {
+        padding: 0 0 60px 0;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+        padding: 0 0 16px 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: var(--Foundation-Blue-Dark, #0B0B14);
+        margin: 0 0 60px 0;
+        @include heading1;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+
+        @include breakpoint("md-max") {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include breakpoint("sm-max") {
+            grid-template-columns: 1fr;
+        }
+
+        .top {
+            margin: 60px 0 0 0;
+            @include breakpoint("md-max") {
+                margin: 0;
+            }
+        }
+
+        .griditems {
+              background: #9657fa38;
+    border: 1px solid #9657FA;
+            border-radius: 22px;
+            padding: 30px;
+
+            .allIconText {
+                .icongrid:last-child {
+                    padding: 0;
+                }
+
+                .icongrid {
+                    display: grid;
+                    grid-template-columns: 20px 1fr;
+                    gap: 14px;
+                    padding: 0 0 18px 0;
+
+                    svg {
+                        width: 20px;
+                    }
+
+                    span {
+                        display: block;
+                        color: #0B0B14;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        @include breakpoint("sm-max") {
+                            @include font14;
+                        }
+                    }
+                }
+            }
+
+            .cardHeader {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                padding: 0 0 30px 0;
+
+
+                p {
+                   color: #9657FA;
+                    font-size: 40px;
+                    font-style: normal;
+                    font-weight: 300;
+                    line-height: normal;
+                }
+
+                span {
+                    display: block;
+                    color: var(--Foundation-Blue-Normal, #0F0F1A);
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+        }
+    }
+}
+
+.savingBoxDesign {
+    border-radius: 34px;
+    background-color: #f7f7f7;
+    padding: 100px 0;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+        padding: 40px 0;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 550px;
+        gap: 40px;
+
+        @include breakpoint("md-max") {
+            grid-template-columns: 1fr;
+        }
+
+        h2 {
+            @include heading1;
+            color: var(--Foundation-Blue-Dark, #0B0B14);
+            margin: 16px 0;
+        }
+
+        .twoCol {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+
+
+            @include breakpoint("sm-max") {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            h3 {
+                color: var(--Foundation-Blue-Normal, #0F0F1A);
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                margin: 0 0 14px 0;
+                line-height: 30px;
+            }
+
+            p {
+                color: var(--foundation-white-dark-active, #737373);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 30px;
+            }
+        }
+
+        .text {
+            padding: 0 0 40px 0;
+
+            p {
+                color: var(--foundation-white-dark-active, #737373);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                @include breakpoint("sm-max") {
+                    @include font14;
+                }
+            }
+        }
+
+        .img {
+            img {
+                width: 100%;
+                display: block;
+                border-radius: 20px;
+
+            }
+        }
+    }
+}

@@ -1,0 +1,112 @@
+@import '../../../scss/mixins/index.scss';
+
+.workProcess {
+  background-color: #f7f7f7;
+    border-radius: 34px;
+    padding: 120px 0;
+
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+    .centerAlignment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h2 {
+        color: var(--Foundation-Blue-Dark, #0B0B14);
+        margin: 16px 0;
+        text-align: center;
+        @include heading1;
+    }
+
+    p {
+        color: var(--foundation-white-dark-active, #737373);
+        text-align: center;
+        font-size: 18px;
+        max-width: 800px;
+        margin: 0 auto;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 30px;
+
+        @include breakpoint("sm-max") {
+            @include font14;
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        padding: 60px 0 0 0;
+
+
+        @include breakpoint("md-max") {
+            grid-template-columns: repeat(2 , 1fr);
+        }
+
+        @include breakpoint("sm-max") {
+            grid-template-columns: repeat(1 , 1fr);
+            gap: 20px;
+        }
+
+
+        .gridiitems {
+
+            h3 {
+                color: var(--Foundation-Blue-Normal, #0F0F1A);
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                text-align: center;
+                line-height: 30px;
+                margin: 0 0 12px 0;
+                letter-spacing: -0.2px;
+            }
+
+            span {
+                display: block;
+                color: var(--foundation-white-dark-active, #737373);
+                text-align: center;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 26px;
+
+                @include breakpoint("sm-max") {
+                    @include font14;
+                }
+            }
+
+            .center {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 0 20px 0;
+
+                .counter {
+                    background-color: #9657FA;
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #FFF;
+                    text-align: center;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+}

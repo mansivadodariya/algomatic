@@ -1,0 +1,121 @@
+@import '../../../scss/mixins/index.scss';
+
+.solutionSection {
+    border-radius: 34px;
+    background: var(--Foundation-Blue-Normal, #9657FA);
+    padding: 120px 0;
+
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+    .cemteralignment {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 16px 0;
+
+        button {
+            border-radius: 40px;
+            border-radius: 40px;
+            border: 1px solid var(--foundation-blue-light-active, #B0B0FF);
+            background: rgba(176, 200, 255, 0.20);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            color: #fff;
+            cursor: text;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            padding: 6px 20px;
+        }
+    }
+
+    h2 {
+        @include heading1;
+        color: #fff;
+        text-align: center;
+        margin: 0 0 16px 0;
+    }
+
+    p {
+        color: var(--foundation-white-normal-hover, #E6E6E6);
+        text-align: center;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 30px;
+
+        @include breakpoint("sm-max") {
+            @include font14;
+        }
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1411764706);
+        padding: 60px 0 20px 0;
+
+        @include breakpoint("md-max") {
+            border-bottom: none;
+            grid-template-columns: 1fr;
+            gap: 0;
+            padding: 40px 0 0 0;
+        }
+
+        h3 {
+            color: var(--Foundation-White-Normal, #FFF);
+            font-size: 50px;
+            font-style: normal;
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            line-height: normal;
+
+            @include breakpoint("md-max") {
+                font-size: 32px;
+            }
+        }
+
+        span {
+            display: block;
+            color: var(--foundation-blue-light-hover, #DBDBDD);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 26px;
+            /* 155.556% */
+        }
+
+        .griditems:last-child {
+            border-right: none;
+
+            @include breakpoint("md-max") {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1411764706);
+
+            }
+        }
+
+        .griditems {
+            border-right: 1px solid rgba(255, 255, 255, 0.1411764706);
+            padding: 10px 20px;
+
+            @include breakpoint("md-max") {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1411764706);
+                padding: 20px;
+
+            }
+        }
+    }
+}

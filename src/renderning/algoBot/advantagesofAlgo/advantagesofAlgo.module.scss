@@ -1,0 +1,81 @@
+@import '../../../scss/mixins/index.scss';
+
+.advantagesofAlgo {
+ background-color: #f7f7f7;
+    padding: 120px 0;
+    border-radius: 34px;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+
+    .btnCenter {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 16px 0;
+    }
+
+    h2 {
+        @include heading1;
+        color: #0B0B14;
+        text-align: center;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 60px 0 0 0;
+        gap: 30px;
+
+        @include breakpoint("md-max") {
+            padding: 40px 0 0 0;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @include breakpoint("sm-max") {
+            grid-template-columns:  1fr;
+            gap: 20px;
+        }
+
+        .griditems {
+            padding: 30px;
+            border-radius: 30px;
+            border: 1px solid #9657FA;
+            background: var(--Foundation-White-Normal, #FFF);
+
+            h3 {
+                color: var(--Foundation-Blue-Normal, #0F0F1A);
+                font-size: 22px;
+                font-style: normal;
+                font-weight: 700;
+                margin: 0 0 11px 0;
+                line-height: 32px;
+            }
+
+            p {
+                color: var(--foundation-white-dark-active, #737373);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 30px;
+                @include breakpoint("sm-max") {
+                    @include font14;
+                }
+            }
+
+            .icon {
+                padding: 0 0 24px 0;
+
+                img {
+                    display: block;
+                    max-width: 80px;
+                }
+            }
+        }
+    }
+}

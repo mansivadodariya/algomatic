@@ -1,0 +1,103 @@
+@import '../../../scss/mixins/index.scss';
+
+.faqSection {
+    padding: 0 0 120px 0;
+    @include breakpoint("md-max") {
+        padding: 0 0 60px 0;
+    }
+    .center {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        text-align: center;
+        @include heading1;
+        color: var(--Foundation-Blue-Dark, #0B0B14);
+        margin: 16px 0 40px 0;
+    }
+
+    .mainBox {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .faq {
+            padding: 20px 0;
+            border-bottom: 1px solid #BFBFBF;
+
+            &.toogle {
+                .faqHeader {
+                    .icon {
+                        svg {
+                            transform: rotate(180deg);
+                            transition: .3s ease-in-out;
+                        }
+                    }
+                }
+            }
+
+            .faqBody {
+                &.hide {
+                    max-height: 0px;
+                    overflow: hidden;
+                    transition: .5s all cubic-bezier(.165, .84, .44, 1);
+                }
+
+                &.show {
+                    max-height: 100vh;
+                    overflow: hidden;
+                    transition: .5s cubic-bezier(.47, 0, .745, .715);
+                }
+
+                p {
+                    padding: 20px 0 0 0;
+                    color: var(--foundation-white-dark-active, #737373);
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 28px;
+                    @include breakpoint("sm-max") {
+                        @include font14;
+                    }
+                }
+            }
+
+            .faqHeader {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                p {
+                    color: var(--Foundation-Blue-Normal, #0F0F1A);
+                    font-size: 20px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 30px;
+
+                    @include breakpoint("sm-max") {
+                        @include font14;
+                    }
+                }
+
+                .icon {
+                    width: 35px;
+                    height: 35px;
+                    min-width: 35px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    border: 1px solid #BFBFBF;
+
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                        transition: .3s ease-in-out;
+                    }
+
+                }
+            }
+        }
+    }
+}

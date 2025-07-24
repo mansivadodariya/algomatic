@@ -1,0 +1,20 @@
+@import '../../scss/mixins/index.scss';
+
+.commonButton {
+    button {
+        border-radius: 40px;
+        border: 1px solid #9657FA;
+    background: #9657fa0f;
+        color: #9657FA;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        cursor: text;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-transform: uppercase;
+        padding: 6px 20px;
+    }
+}

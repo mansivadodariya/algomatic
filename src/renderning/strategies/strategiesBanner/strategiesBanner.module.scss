@@ -1,0 +1,43 @@
+@import '../../../scss/mixins/index.scss';
+
+.StrategiesBanner {
+background-color: #f7f7f7;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding: 100px 0;
+    border-radius: 34px;
+    background-size: cover;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+    @include breakpoint("sm-max") {
+        border-radius: 12px;
+    }
+
+    .buttonCenter {
+        display: flex;
+        justify-content: center;
+    }
+
+    h2 {
+        @include heading1;
+        color: #0B0B14;
+        max-width: 700px;
+        margin: 16px auto;
+        text-align: center;
+    }
+
+    p {
+        color: var(--Foundation-White-Darker, #595959);
+        text-align: center;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        text-align: center;
+        line-height: 30px;
+
+        @include breakpoint("sm-max") {
+            @include font14;
+        }
+    }
+}

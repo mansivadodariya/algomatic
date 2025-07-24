@@ -1,0 +1,174 @@
+@import '../../scss/mixins/index.scss';
+
+.footer {
+    padding: 100px 0 0 0;
+
+    .footerGrid {
+        display: grid;
+        grid-template-columns: 380px 1fr 420px;
+        gap: 50px;
+        padding: 0 0 40px 0;
+        border-bottom: 1px solid #BFBFBF;
+
+        @include breakpoint("md-max"){
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @include breakpoint("sm-max"){
+            grid-template-columns: 1fr;
+        }
+
+        .secButton {
+            button {
+                &:hover {
+                    svg {
+                        path {
+                            fill: #fff;
+                            transition: .3s ease-in-out;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .input {
+            padding: 0 0 30px 0;
+
+            input {
+                width: 100%;
+                border-radius: 25px;
+                color: var(--foundation-white-dark-active, #737373);
+                height: 50px;
+                padding: 0 16px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                font-family: "Inter", sans-serif;
+                line-height: normal;
+                border: 1px solid var(--foundation-white-normal-active, #CCC);
+
+                &:focus {
+                    outline: none;
+                    border: 1px solid #9657FA;
+                }
+            }
+
+            ::placeholder {
+                font-family: "Inter", sans-serif;
+                color: var(--foundation-white-dark-active, #737373);
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+
+        .lastText {
+            h3 {
+                color: var(--Foundation-Blue-Dark, #0B0B14);
+                font-size: 26px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 34px;
+                margin: 0 0 20px 0;
+                letter-spacing: -0.28px;
+
+                @include breakpoint("sm-max") {
+                    font-size: 20px;
+                    line-height: 30px;
+                }
+            }
+        }
+
+        .footerGridItems {
+        
+             .logo {
+            position: relative;
+            width: 180px;
+            cursor: pointer;
+            height: 44px;
+            @include breakpoint("sm-max") {
+                width: 120px;
+                height: 30px;
+            }
+        }
+            .menuCol {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+
+                a {
+                    display: block;
+                    cursor: pointer;
+                    color: var(--Foundation-Blue-Normal, #0F0F1A);
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 400;
+                    padding: 0 0 16px 0;
+                    line-height: normal;
+                }
+            }
+
+            .subtitle {
+                padding: 0 0 20px 0;
+
+                h3 {
+                    color: var(--foundation-white-dark-active, #737373);
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: normal;
+                    letter-spacing: -0.18px;
+                }
+            }
+
+            .twoCol {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+                padding: 40px 0 0 0;
+
+                .twoColItems:last-child {
+                    grid-column: span 2;
+                }
+
+                .twoColItems {
+                    p {
+                        color: var(--foundation-white-dark-active, #737373);
+                        font-size: 16px;
+                        font-style: normal;
+                        margin: 0 0 5px 0;
+                        font-weight: 500;
+                        line-height: normal;
+                        letter-spacing: -0.18px;
+                    }
+
+                    a {
+                        display: block;
+                        cursor: pointer;
+                        color: var(--Foundation-Blue-Normal, #0F0F1A);
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .copyRight {
+        padding: 20px 0;
+
+        p {
+            text-align: center;
+            color: #0F0F1A;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+    }
+}

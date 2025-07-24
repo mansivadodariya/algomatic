@@ -1,0 +1,141 @@
+@import '../../../scss/mixins/index.scss';
+
+.requirementsSection {
+    padding: 120px 0;
+    @include breakpoint("md-max") {
+        padding: 60px 0;
+    }
+    .btnCenter {
+        display: flex;
+        padding: 0 0 16px 0;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .title {
+        padding: 0 0 60px 0;
+
+        h2 {
+            text-align: center;
+            @include heading1;
+            color: #0B0B14;
+        }
+    }
+
+    .box {
+        border-radius: 34px;
+    background-color: #f7f7f7;
+        padding: 70px 40px;
+
+        @include breakpoint("sm-max") {
+            border-radius: 12px;
+            padding: 30px 0;
+        }
+
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 600px;
+            gap: 60px;
+
+            @include breakpoint("md-max") {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .document {
+                h3 {
+                    color: var(--Foundation-Blue-Dark, #0B0B14);
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 800;
+                    margin: 0 0 30px 0;
+                    line-height: normal;
+                    letter-spacing: -0.28px;
+                }
+
+                .twoCol {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 40px;
+
+                    @include breakpoint("sm-max") {
+                        grid-template-columns: 1fr;
+                        gap: 20px;
+                    }
+
+                    .twoColItems {
+                        .iconText {
+                            display: grid;
+                            grid-template-columns: 24px 1fr;
+                            gap: 14px;
+                            padding: 0 0 24px 0 ;
+
+                            span {
+                                display: block;
+                                color: var(--foundation-white-dark-active, #737373);
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 500;
+                                line-height: normal;
+
+                                @include breakpoint("sm-max") {
+                                    @include font14;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .firstText {
+                padding: 0 0 30px 0;
+
+                h3 {
+                    color: var(--Foundation-Blue-Dark, #0B0B14);
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 800;
+                    margin: 0 0 8px 0;
+                    line-height: normal;
+                    letter-spacing: -0.28px;
+                }
+
+                p {
+                    color: var(--foundation-white-dark-active, #737373);
+                    font-size: 18px;
+                    margin: 0 0 14px 0;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+
+                    @include breakpoint("sm-max") {
+                        @include font14;
+                    }
+
+                    span {
+                        color: #0F0F1A;
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+
+        .img {
+            width: 100%;
+            position: relative;
+            border-radius: 24px;
+            height: 600px;
+            @include breakpoint("sm-max") {
+                height: 320px;
+            }
+            img {
+                border-radius: 24px;
+                @include breakpoint("sm-max") {
+                    border-radius: 12px;
+                }
+            }
+        }
+    }
+}

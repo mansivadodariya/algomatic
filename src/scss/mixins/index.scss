@@ -1,0 +1,10 @@
+@import "breakpoints";
+@import "typography";
+@import "input";
+@import "layout";
+
+
+@mixin heading-font {
+    font-family: "Big Shoulders", sans-serif;
+    font-weight: 900 !important;
+  }
