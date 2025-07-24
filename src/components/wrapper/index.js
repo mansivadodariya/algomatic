@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import Header from "../header";
 import Footer from "../footer";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import { usePathname } from "next/navigation";
 
 export default function Wrapper({ children }) {
   const { toasts } = useToasterStore();
+  const pathName = usePathname();
   const TOAST_LIMIT = 1;
   useEffect(() => {
     toasts
@@ -23,7 +25,7 @@ export default function Wrapper({ children }) {
       />
       <Header />
       {children}
-      <Footer />
+      {pathName?.includes("/payment-history") || pathName?.includes("/profile") ? null : <Footer />}
     </div>
   );
 }

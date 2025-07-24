@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start -p 7878",
     "lint": "next lint"
@@ -22,6 +22,7 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.5",
     "react-hot-toast": "^2.4.1",
+    "react-phone-input-2": "^2.15.1",
     "react-slick": "^0.30.2",
     "sass": "^1.79.4",
     "scss": "^0.2.4",

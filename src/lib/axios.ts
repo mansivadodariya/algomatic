@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import toast from "react-hot-toast";
 // If you use a toast library like react-hot-toast, import it here:
@@ -7,10 +8,7 @@ import toast from "react-hot-toast";
 // import { useLoading } from "@/contexts/LoadingContext";
 // import { toast } from "@/components/ui/use-toast";
 
-// const API_BASE_URL = "https://c393-2405-201-200d-1869-f87a-5d22-ab5c-fde3.ngrok-free.app/api/v1/";
-const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3002/api/v1/";
-// console.log(process.env.NEXT_PUBLIC_BACKEND_URL, API_BASE_URL, "------------------- process.env.BACKEND_URL");
-
+export const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3002/api/v1/";
 export const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -27,9 +25,15 @@ export const api = axios.create({
 //   setLoadingGlobal = handler;
 // };
 
+// attach token client-side only
 api.interceptors.request.use(
   (config) => {
-    // if ( setLoadingGlobal ) setLoadingGlobal( true );
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers["x-auth-token"] = token;
+      }
+    }
     // Attach token if present
     // const token = localStorage.getItem( "admin_token" ); // Do NOT parse, it's a string JWT
     // if ( token )
@@ -56,6 +60,13 @@ api.interceptors.response.use(
     // {
     // toast.success(response.data.message);
     // }
+    // if()
+    // if(response.data.message){
+    //   toast.success(response.data.message);
+    // }
+    // if(response?.data?.message){
+    //   toast.success(response.data.message);
+    // }
     return response;
   },
   (error) => {
@@ -74,7 +85,10 @@ api.interceptors.response.use(
     } else if (error.message) {
       message = error.message;
     }
-    toast(message);
+    if (error.response.data?.message) {
+      message = error.response.data.message;
+    }
+    toast.error(message);
     return Promise.reject(error);
   }
 );

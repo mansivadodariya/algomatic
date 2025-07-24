@@ -1,0 +1,288 @@
+.wrapper {
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+
+.logo {
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+
+  .button {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    // shrink internal shared button padding for more compact tabs
+    button {
+      padding: 6px 20px;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  flex: 1;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.passwordRow {
+  display: flex;
+  gap: 1rem;
+
+  .inputGroup {
+    flex: 1;
+  }
+}
+
+.passwordRowPhone {
+  .inputGroup {
+    // flex: 1;
+    width: 100%;
+    // height: 50px;
+    border: 1px solid hsl(0, 0%, 100%);
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+  }
+}
+
+.input {
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #9657fa;
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+}
+
+.errorPlaceholder {
+  &::placeholder {
+    color: #e53935;
+  }
+}
+
+.error {
+  color: #e53935;
+  font-size: 0.875rem;
+  text-align: left;
+  margin-top: 0.25rem;
+}
+
+.forgot {
+  text-align: left;
+  margin-bottom: 1rem;
+
+  button {
+    font-size: 0.875rem;
+    background: transparent;
+    border: none;
+    color: #9657fa;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #9657fa 0%, #9657fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.switch {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #666;
+
+  button {
+    background: transparent;
+    border: none;
+    color: #9657fa;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: inherit;
+
+    &:hover {
+      color: #9657fa;
+    }
+  }
+}
+
+.inputGroup {
+  position: relative;
+}
+.eyeIcon {
+  position: absolute;
+  right: 22px;
+  top: 55%;
+  color: #999;
+  transform: translateY(-50%);
+  cursor: pointer;
+  user-select: none;
+}
+
+// changePassword.module.scss
+.phoneInput {
+  width: 100% !important;
+  height: 42px !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  background-color: #fff !important;
+  outline: none !important;
+}
+
+.phoneButton {
+  width: 9% !important;
+  height: 42px !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 8px 0px 0px 8px !important;
+  background-color: #fff !important;
+  outline: none !important;
+}
+
+/* Add this to the bottom of your authModal.module.scss */
+
+@media (max-width: 1024px) {
+  .formContainer {
+    padding: 0 1rem;
+  }
+
+  .passwordRow {
+    flex-direction: column;
+  }
+
+  .inputGroup {
+    width: 100%;
+  }
+
+  .eyeIcon {
+    right: 16px;
+    font-size: 18px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 1rem 0.5rem;
+  }
+
+  .logo img {
+    max-width: 160px;
+    height: auto;
+  }
+
+  .form {
+    gap: 0.75rem;
+  }
+
+  .primaryButton {
+    padding: 0.65rem;
+    font-size: 0.95rem;
+  }
+
+  .phoneButton {
+    width: 12% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .passwordRow {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .eyeIcon {
+    right: 14px;
+    font-size: 16px !important;
+  }
+
+  .phoneButton {
+    width: 15% !important;
+  }
+
+  .input {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .primaryButton {
+    font-size: 0.9rem;
+  }
+
+  .switch {
+    font-size: 0.85rem;
+  }
+}
+
+/* Optional: Scale logo or image container */
+@media (max-width: 360px) {
+  .logo img {
+    max-width: 140px;
+  }
+
+  .phoneInput {
+    font-size: 0.9rem !important;
+  }
+
+  .form {
+    gap: 0.6rem;
+  }
+}

@@ -1,0 +1,138 @@
+.wrapper {
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f9fafc;
+  border-radius: 12px;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+
+  .logo {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #222;
+    text-align: left;
+  }
+}
+
+.description {
+  margin-bottom: 1.5rem;
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-align: left;
+
+  p {
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  ul {
+    padding-left: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+      list-style: disc;
+    }
+  }
+}
+
+.formContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.otpLabel {
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #9657fa;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+.errorPlaceholder {
+  &::placeholder {
+    color: #e53935;
+  }
+}
+
+.primaryButton {
+  padding: 0.75rem;
+  width: 100%;
+  background: linear-gradient(90deg, #9657fa 0%, #9657fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(90deg, #0035d5 0%, #005ce0 100%);
+  }
+}
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.supportText {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+
+  a {
+    color: #9657fa;
+    text-decoration: underline;
+
+    &:hover {
+      color: #0047d5;
+    }
+  }
+}

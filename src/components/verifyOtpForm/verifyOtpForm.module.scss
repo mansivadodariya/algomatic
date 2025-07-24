@@ -1,0 +1,141 @@
+.wrapper {
+  text-align: center;
+  width: 100%;
+  padding: 2rem;
+  background: #f9f9fb;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+
+  .logo {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .otpLabel {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e1e1e;
+  }
+}
+
+.instructions {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.otpInputs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.otpInput {
+  width: 48px;
+  height: 55px;
+  font-size: 1.4rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #9657fa;
+    outline: none;
+  }
+}
+
+.primaryButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #9657fa 0%, #9657fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(90deg, #0035d5 0%, #005ce0 100%);
+  }
+}
+
+.resendSection {
+  margin-top: 1rem;
+
+  .timerText {
+    color: #888;
+    font-size: 0.9rem;
+  }
+
+  .resendButton {
+    background: none;
+    border: none;
+    color: #9657fa;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.backToLogin {
+  margin-top: 10px;
+
+  button {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.9rem;
+    cursor: pointer;
+
+    &:hover {
+      color: #222;
+      text-decoration: underline;
+    }
+  }
+}
+
+.error {
+  color: #e53935;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+.errorText {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.otpInput:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

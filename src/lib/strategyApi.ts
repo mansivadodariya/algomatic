@@ -1,30 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "./axios";
-
-// const API_BASE_URL = "https://d0cf-122-182-206-37.ngrok-free.app/api/v1";
-const API_BASE_URL = process.env.BACKEND_URL;
-// export const getStrategies = async (page = 1, limit = 10) => {
-//   const [data, setData] = useState([])
-//   const [loading, setLoading] = useState(true)
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const res = await fetch(`${API_BASE_URL}/strategies?page=${page}&limit=${limit}`)
-//         const result = await res.json()
-//         setData(result)
-//       } catch (error) {
-//         console.error("Error fetching strategies:", error)
-//       } finally {
-//         setLoading(false)
-//       }
-//     }
-
-//     fetchData()
-//   }, [page, limit])
-
-//   return { data, loading }
-// }
+import axios from "axios";
+import { API_BASE_URL } from "./axios";
 
 export const getStrategies = async (page = 1, limit = 10) => {
   try {
@@ -76,6 +53,75 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
     console.log(res, "------------------- res");
     return res.data;
+  } catch (error) {
+    console.error("Error fetching strategy by id:", error);
+    return [];
+  }
+};
+
+export const updateMetaAccountNo = async (paymentId: string, metaAccountNo: string) => {
+  try {
+    const userObj = {
+      metaAccountNo: metaAccountNo,
+    };
+    const res = await api.put(`/user/updateMetaAccountNo/${paymentId}`, userObj);
+    return res.data;
+  } catch (error) {
+    console.error("Error updating meta account no:", error);
+    throw error;
+  }
+};
+
+export const editUser = async (userId: string, user: any) => {
+  try {
+    const userObj = {
+      name: user?.name,
+      phone: user?.phone,
+      // metaAccountNo: user?.metaAccountNo,
+    };
+    const res = await api.put(`/user/edit/${userId}`, userObj);
+    return res.data;
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error;
+  }
+};
+
+export const getPaymentHistory = async () => {
+  try {
+    const res = await api.get(`/user/paymentList`);
+    return res.data.payload.data;
+  } catch (error) {
+    console.error("Error fetching strategy by id:", error);
+    return [];
+  }
+};
+
+export const sendBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string }) => {
+  try {
+    const calculatePlanEndDate = (startDateStr: string, planType: string) => {
+      const months = +planType.replace(/\D/g, "");
+      const date = new Date(startDateStr);
+
+      date.setMonth(date.getMonth() + months);
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+
+      return `${year}-${month}-${day}T23:59`;
+    };
+    const formatedDate = calculatePlanEndDate(data.date, data.planType);
+
+    const dataObj = {
+      email: data.email,
+      account_number: data?.metaAccountNo,
+      end_date: formatedDate, // "2025-08-01T14:30"
+    };
+
+    // console.log(dataObj, "---------------------- dataObj 1");
+    // const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj);
+    // console.log(response, "---------------------- bot exe file 2");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];
