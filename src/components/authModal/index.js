@@ -144,7 +144,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <div className={styles.logo}>
-              <Image src={Logo} alt="RejoiceFX" width={200} height={50} />
+              <Image src={Logo} alt="Algomatic" width={200} height={50} />
             </div>
           </div>
 

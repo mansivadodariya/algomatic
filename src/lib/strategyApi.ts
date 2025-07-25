@@ -35,6 +35,7 @@ export const getStrategyPlans = async (id: string) => {
 };
 
 interface PaymentLinkData {
+  userId: string;
   name: string;
   email: string;
   metaAccountNo: string;
@@ -44,6 +45,7 @@ interface PaymentLinkData {
 export const getPaymentLink = async (data: PaymentLinkData) => {
   try {
     const dataObj = {
+      userId: data.userId,
       name: data.name,
       email: data.email,
       metaAccountNo: data.metaAccountNo,
@@ -119,9 +121,13 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
       end_date: formatedDate, // "2025-08-01T14:30"
     };
 
-    // console.log(dataObj, "---------------------- dataObj 1");
-    // const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj);
-    // console.log(response, "---------------------- bot exe file 2");
+    const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    console.log(response, "---------------------- response");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];

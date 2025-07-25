@@ -244,8 +244,17 @@
     }
   }
   
+  .logo {
+    margin-bottom: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .submitBtn {
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
 .error {

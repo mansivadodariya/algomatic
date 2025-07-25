@@ -197,6 +197,7 @@ export default function StrategiesPlans({ item, index }) {
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");
+        setIsBtnLoading(false);
         return;
       }
       if (response?.success == false) {
@@ -292,7 +293,7 @@ export default function StrategiesPlans({ item, index }) {
               </div>
 
               {/* Meta Account No input */}
-              <div className={styles.inputGroup}>
+              {/* <div className={styles.inputGroup}>
                 <label>Meta Account No{errors.metaAccountNo ? <span className={styles.error}>*</span> : ""}</label>
                 <input
                   type="text"
@@ -301,11 +302,9 @@ export default function StrategiesPlans({ item, index }) {
                   value={formData.metaAccountNo}
                   onChange={(e) => {
                     setFormData({ ...formData, metaAccountNo: e.target.value });
-                    // setErrors({ ...errors, metaAccountNo: "" });
                   }}
-                  // required
                 />
-              </div>
+              </div> */}
 
               {/* Submit button */}
               <div className={styles.submitBtn}>
@@ -321,7 +320,7 @@ export default function StrategiesPlans({ item, index }) {
         <Modal isOpen={showLoginInstructionModal} onClose={() => setShowLoginInstructionModal(false)} size="small" closeStyle={true}>
           <div className="px-6 py-8 sm:px-8 bg-white rounded-2xl shadow-xl max-w-md mx-auto text-center">
             <div className={styles.logo}>
-              <Image src={Logo} alt="RejoiceFX" width={200} height={50} />
+              <Image src={Logo} alt="Algomatic" width={200} height={50} />
             </div>
 
             <p className="text-sm text-gray-500 mb-6">You need to be logged in before purchasing a strategy plan.</p>

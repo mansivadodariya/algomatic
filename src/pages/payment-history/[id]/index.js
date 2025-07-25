@@ -27,14 +27,14 @@ export default function Dashboard() {
   }, [isUserLoggedIn]);
 
   useEffect(() => {
-      (async () => {
-        try {
-          const data = await getPaymentHistory();
-          setPayments(data);
-        } catch (e) {
-          console.error(e);
-        }
-      })();
+    (async () => {
+      try {
+        const data = await getPaymentHistory();
+        setPayments(data);
+      } catch (e) {
+        console.error(e);
+      }
+    })();
   }, []);
 
   // meta account no popup open
@@ -43,16 +43,23 @@ export default function Dashboard() {
     setMetaModalOpen(true);
   };
   const handleMetaSave = async () => {
-    if (!metaAccountNo) {
-      toast.error("Meta account no is required");
+    const trimmedMeta = metaAccountNo.trim();
+    if (!trimmedMeta) {
+      toast.error("Meta account number is required");
       return;
     }
+    if (!/^\d+$/.test(trimmedMeta)) {
+      toast.error("Meta account number must be numeric only");
+      return;
+    }
+
     setSavingMeta(true);
     try {
       await updateMetaAccountNo(selectedPayment._id, metaAccountNo);
       const refreshed = await getPaymentHistory();
       setPayments(refreshed);
       setMetaModalOpen(false);
+      toast.success("Meta account updated! The EXE file has been sent to your email.");
 
       // send bot exe file in user's mail
       await sendBotExeToUser({
@@ -65,12 +72,11 @@ export default function Dashboard() {
       console.error(e);
     }
   };
-
   return (
     <>
       <hr className={styles.hr} />
       <div className={styles.dashboardWrapper}>
-        {/* Sidebar */}       
+        {/* Sidebar */}
 
         {/* Main content */}
         <main className={styles.content}>
@@ -96,22 +102,25 @@ export default function Dashboard() {
                       <td>{idx + 1}</td>
                       <td>{new Date(p.createdAt).toLocaleString()}</td>
                       <td title={p?.strategyPlanId?.strategyId?.title ?? "-"}>
-                        <div className={styles.truncateText}>
-                          {p?.strategyPlanId?.strategyId?.title ?? "-"}
-                        </div>
+                        <div className={styles.truncateText}>{p?.strategyPlanId?.strategyId?.title ?? "-"}</div>
                       </td>
                       <td>{p.planType ?? "-"}</td>
                       <td>${p.amount ?? "-"}</td>
                       <td>{p.transactionId ?? "-"}</td>
                       <td>
-                        {p.metaAccountNo ? (
-                          p.metaAccountNo
+                        {p.metaAccountNo == null ? (
+                          p.paymentStatus === "paid" ? (
+                            <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
+                              + Add
+                            </button>
+                          ) : (
+                            "-"
+                          )
                         ) : (
-                          <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                            + Add
-                          </button>
+                          p.metaAccountNo
                         )}
                       </td>
+
                       <td>
                         <span className={`${p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}`}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
                       </td>
