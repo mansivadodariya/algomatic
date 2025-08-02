@@ -14,7 +14,7 @@ import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
 const Logo = "/assets/logo/logo.svg";
-const Logoimg = "/assets/logo/logo.avif";
+const Logoimg = "/assets/logo/logo.png";
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [header, setHeader] = useState(false);
@@ -69,61 +69,81 @@ export default function Header() {
 
   const menuItems = [
     {
-      title: "Forex CRM",
+      title: "About",
       submenu: [],
-      routes: "/forex-crm",
+      routes: "/",
     },
     {
-      title: "Forex Licenses",
-      submenu: [
-        {
-          title: "Mauritius Forex License",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/mauritius-forex-license",
-        },
-        {
-          title: "St. Vincent Forex License",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/vincent-forex-license",
-        },
-      ],
+      title: "How It Works",
+      submenu: [],
+      routes: "/",
     },
     {
-      title: "Algo Bot & Strategies",
-      submenu: [
-        {
-          title: "AI bot development",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/algo-bot",
-        },
-        {
-          title: "Strategies",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/strategies",
-        },
-      ],
+      title: "Features",
+      submenu: [],
+      routes: "/",
     },
     {
-      title: "Forex Services",
-      submenu: [
-        {
-          title: "Web and Mobile App Development",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/mobile-web-development",
-        },
-        {
-          title: "AI/ML Development",
-          description:
-            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-          redirectLink: "/ai-development",
-        },
-      ],
+      title: "Backtesting",
+      submenu: [],
+      routes: "/",
     },
+    {
+      title: "Marketplace",
+      submenu: [],
+      routes: "/",
+    },
+    // {
+    //   title: "Forex Licenses",
+    //   submenu: [
+    //     {
+    //       title: "Mauritius Forex License",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/mauritius-forex-license",
+    //     },
+    //     {
+    //       title: "St. Vincent Forex License",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/vincent-forex-license",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Algo Bot & Strategies",
+    //   submenu: [
+    //     {
+    //       title: "AI bot development",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/algo-bot",
+    //     },
+    //     {
+    //       title: "Strategies",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/strategies",
+    //     },
+    //   ],
+    // },
+    // {
+    //   title: "Forex Services",
+    //   submenu: [
+    //     {
+    //       title: "Web and Mobile App Development",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/mobile-web-development",
+    //     },
+    //     {
+    //       title: "AI/ML Development",
+    //       description:
+    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+    //       redirectLink: "/ai-development",
+    //     },
+    //   ],
+    // },
     // {
     //   title: "FX Tools",
     //   submenu: [
@@ -155,19 +175,31 @@ export default function Header() {
 
   return (
     <>
-      {/* <header className={styles.header}>
-        <div className="container">
+      <header className={styles.header}>
+        <div className="container-xl">
           <div className={styles.headerAlignment}>
-            <div className={styles.logo} style={{ position: "relative", width: "180px", height: "42px" }}>
+            <div
+              className={styles.logo}
+              style={{ position: "relative", width: "180px", height: "42px" }}
+            >
               <Link href="/">
                 <Image src={Logo} layout="fill" />
               </Link>
             </div>
             <div className={styles.menuAlignment}>
               {menuItems.map((menu, index) => (
-                <div key={index} className={styles.relativeHeader} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
+                <div
+                  key={index}
+                  className={styles.relativeHeader}
+                  onMouseEnter={() => handleMouseEnter(index)}
+                  onMouseLeave={handleMouseLeave}
+                >
                   <div className={styles.menu}>
-                    {menu?.routes ? <Link href={menu?.routes}>{menu.title}</Link> : menu?.title}
+                    {menu?.routes ? (
+                      <Link href={menu?.routes}>{menu.title}</Link>
+                    ) : (
+                      menu?.title
+                    )}
 
                     {menu.submenu.length > 0 && <DownArrow />}
                   </div>
@@ -179,11 +211,21 @@ export default function Header() {
                     })}
                   ></div>
                   {menu.submenu.length > 0 && (
-                    <div className={classNames(styles.submenubox, hoveredMenu === index ? styles.show : styles.hide)}>
+                    <div
+                      className={classNames(
+                        styles.submenubox,
+                        hoveredMenu === index ? styles.show : styles.hide
+                      )}
+                    >
                       <div className="container">
                         <div className={styles.grid}>
                           {menu.submenu.map((item, i) => (
-                            <Link className={styles.boxLine} href={item?.redirectLink} onClick={handleLinkClick} target={item.isNewTab ? "_blank" : ""}>
+                            <Link
+                              className={styles.boxLine}
+                              href={item?.redirectLink}
+                              onClick={handleLinkClick}
+                              target={item.isNewTab ? "_blank" : ""}
+                            >
                               <div key={i}>
                                 <h3>{item.title}</h3>
                                 <p>{item.description}</p>
@@ -209,7 +251,9 @@ export default function Header() {
                     text={
                       <div className={styles.userIconWrapper}>
                         <UserCircle className={styles.userIcon} />
-                        {user?.name?.slice(0, 8).length > 8 ? "..." : user?.name}
+                        {user?.name?.slice(0, 8).length > 8
+                          ? "..."
+                          : user?.name}
                         <ChevronDown className={styles.downIcon} />
                       </div>
                     }
@@ -249,23 +293,34 @@ export default function Header() {
                   )}
                 </div>
               ) : (
-                <Button text="Login" onClick={() => setShowLogin(true)} />
+                <>
+                  <div onClick={() => setShowLogin(true)}>
+                    <Commonarrowbutton
+                      Text="Login"
+                      Butttonvarient="lightoutlined"
+                    />
+                  </div>
+                </>
               )}
               <div className={styles.menuAlignment}>
-                <Link href="/contact-us">
-                  <Button text="Contact Us" icon={<RightLgArrow />} />
-                </Link>
+                <Commonarrowbutton
+                  Text="Contact Us"
+                  Butttonvarient="lightoutlined"
+                  link="/contact-us"
+                />
               </div>
-              <div className={styles.mobileMenu} onClick={() => setHeader(!header)}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                  <path d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
-                </svg>
+              <div
+                className={`${styles.mobileMenu} ${header ? styles.active : ""}`}
+                onClick={() => setHeader(!header)}
+              >
+                <span></span>
+                <span></span>
               </div>
             </div>
           </div>
         </div>
-      </header> */}
-      <header className={styles.header}>
+      </header>
+      {/* <header className={styles.header}>
         <div className="container-xl">
           <div className={styles.headerwrapper}>
             <div className={styles.headerlogo}>
@@ -278,16 +333,21 @@ export default function Header() {
               <Link href={"/"}>How It Works</Link>
               <Link href={"/"}>Features</Link>
               <Link href={"/"}>Backtesting</Link>
+              <Link href={"/"}>Marketplace</Link>
               <Link href={"/"}>Contact Us</Link>
             </div>
             <div className={styles.headerbtn}>
               <Commonarrowbutton Text="Login" Butttonvarient="lightoutlined" />
             </div>
+            <div className={`${styles.menubutton} ${styles.active}`}>
+              <span></span>
+              <span></span>
+            </div>
           </div>
         </div>
-      </header>
-      {/* <MobileHeader header={header} setHeader={setHeader} />
-      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} /> */}
+      </header> */}
+      <MobileHeader header={header} setHeader={setHeader} />
+      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} />
     </>
   );
 }

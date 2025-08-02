@@ -8,7 +8,7 @@ const Telegramicon = "/assets/icons/telegramicon.png";
 const Instagramicon = "/assets/icons/instagramicon.png";
 const Facebookicon = "/assets/icons/facebookicon.png";
 
-const Logoimg = "/assets/logo/logo.avif";
+const Logoimg = "/assets/logo/logo.png";
 const QrImg = "/assets/images/qrimage.avif";
 
 export default function Footernew() {
