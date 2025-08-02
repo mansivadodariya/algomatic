@@ -83,91 +83,92 @@ export default function Dashboard() {
 
   return (
     <>
-      <hr className={styles.hr} />
-      <div className={styles.dashboardWrapper}>
-        {/* Sidebar */}
+      <div className={styles.dashboarlayout}>
+        <hr className={styles.hr} />
+        <div className={styles.dashboardWrapper}>
+          {/* Sidebar */}
 
-        {/* Main content */}
-        <main className={styles.content}>
-          {activeTab === "profile" && isProfileEdit ? (
-            <section>
-              <div
-                style={{ display: "flex", cursor: "pointer" }}
-                onClick={() => {
-                  setActiveTab("profile");
-                  setIsProfileEdit(false);
-                }}
-              >
-                <div>
-                  <ChevronLeft className={styles.arrowIcon} />
-                </div>
-                <h1 className={styles.contantHeader}>Back</h1>
-              </div>
-              <div className={styles.profileGrid}>
-                <div>
-                  <span>Name</span>
-                  {isProfileEdit ? <input type="text" value={user?.name} onChange={(e) => setUser({ ...user, name: e.target.value })} className={styles.inputField} /> : <p>{user.name}</p>}
-                </div>
-                <div>
-                  <span>Email</span>
-                  {isProfileEdit ? <input type="email" value={user?.email} /* onChange={(e) => setUser({ ...user, email: e.target.value })}  */ className={styles.inputField} disabled /> : <p>{user.email}</p>}
-                </div>
-                <div>
-                  <span>Country Code</span>
-                  {isProfileEdit ? <input type="tel" value={user?.countryCode} onChange={(e) => setUser({ ...user, countryCode: e.target.value })} className={styles.inputField} /> : <p>{user.countryCode}</p>}
-                </div>
-                <div>
-                  <span>Phone</span>
-                  {isProfileEdit ? <input type="tel" value={user.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
-                </div>
-              </div>
-              {isProfileEdit && (
-                <button
-                  onClick={() => {
-                    handleProfileSave();
-                  }}
-                  className={styles.saveButton}
-                >
-                  Save Changes
-                </button>
-              )}
-            </section>
-          ) : activeTab === "profile" && !isProfileEdit ? (
-            <section>
-              <div style={{ display: "flex" }}>
-                <h1 className={styles.contantHeader}>Profile</h1>
-                <SquarePen
-                  className={styles.editIcon}
+          {/* Main content */}
+          <main className={styles.content}>
+            {activeTab === "profile" && isProfileEdit ? (
+              <section>
+                <div
+                  style={{ display: "flex", cursor: "pointer" }}
                   onClick={() => {
                     setActiveTab("profile");
-                    setIsProfileEdit(true);
+                    setIsProfileEdit(false);
                   }}
-                />
-              </div>
-              <div className={styles.profileGrid}>
-                <div>
-                  <span>Name</span>
-                  <p>{user?.name}</p>
+                >
+                  <div>
+                    <ChevronLeft className={styles.arrowIcon} />
+                  </div>
+                  <h1 className={styles.contantHeader}>Back</h1>
                 </div>
-                <div>
-                  <span>Email</span>
-                  <p>{user?.email}</p>
+                <div className={styles.profileGrid}>
+                  <div>
+                    <span>Name</span>
+                    {isProfileEdit ? <input type="text" value={user?.name} onChange={(e) => setUser({ ...user, name: e.target.value })} className={styles.inputField} /> : <p>{user.name}</p>}
+                  </div>
+                  <div>
+                    <span>Email</span>
+                    {isProfileEdit ? <input type="email" value={user?.email} /* onChange={(e) => setUser({ ...user, email: e.target.value })}  */ className={styles.inputField} disabled /> : <p>{user.email}</p>}
+                  </div>
+                  <div>
+                    <span>Country Code</span>
+                    {isProfileEdit ? <input type="tel" value={user?.countryCode} onChange={(e) => setUser({ ...user, countryCode: e.target.value })} className={styles.inputField} /> : <p>{user.countryCode}</p>}
+                  </div>
+                  <div>
+                    <span>Phone</span>
+                    {isProfileEdit ? <input type="tel" value={user.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
+                  </div>
                 </div>
-                <div>
-                  <span>Country Code</span>
-                  <p>{user?.countryCode??"-"}</p>
+                {isProfileEdit && (
+                  <button
+                    onClick={() => {
+                      handleProfileSave();
+                    }}
+                    className={styles.saveButton}
+                  >
+                    Save Changes
+                  </button>
+                )}
+              </section>
+            ) : activeTab === "profile" && !isProfileEdit ? (
+              <section>
+                <div style={{ display: "flex", cursor: "pointer" }}>
+                  <h1 className={styles.contantHeader}>Profile</h1>
+                  <SquarePen
+                    className={styles.editIcon}
+                    onClick={() => {
+                      setActiveTab("profile");
+                      setIsProfileEdit(true);
+                    }}
+                  />
                 </div>
-                <div>
-                  <span>Phone</span>
-                  <p>{user?.phone}</p>
+                <div className={styles.profileGrid}>
+                  <div>
+                    <span>Name</span>
+                    <p>{user?.name}</p>
+                  </div>
+                  <div>
+                    <span>Email</span>
+                    <p>{user?.email}</p>
+                  </div>
+                  <div>
+                    <span>Country Code</span>
+                    <p>{user?.countryCode ?? "-"}</p>
+                  </div>
+                  <div>
+                    <span>Phone</span>
+                    <p>{user?.phone}</p>
+                  </div>
                 </div>
-              </div>
-            </section>
-          ) : (
-            ""
-          )}
-          
-        </main>
+              </section>
+            ) : (
+              ""
+            )}
+          </main>
+        </div>
       </div>
       {/*    */}
       {metaModalOpen && (

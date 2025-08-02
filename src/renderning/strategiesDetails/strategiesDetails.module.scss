@@ -1,132 +1,192 @@
-@import '../../scss/mixins/index.scss';
+@import "../../scss/mixins/index.scss";
 
 .strategiesDetailsAlignment {
-    padding: 60px 0;
+  padding: 84px 0;
 
-    .center {
-        max-width: 800px;
-        margin: 0 auto;
+  .hr {
+    height: 1px;
+    background: #e5e7eb;
+    width: 100%;
+    margin: 0;
+  }
 
-        .img {
-            img {
-                width: 100%;
-                border-radius: 12px;
-                display: block;
-                margin-bottom: 20px;
-            }
-        }
-    }
+  .center {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px 0 0 0;
 
-    .backbtn {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 0 0 24px 0;
+    .img {
+      img {
+        width: 100%;
+        border-radius: 12px;
+        display: block;
         margin-bottom: 20px;
-        cursor: pointer;
-        svg {
-            transform: rotate(180deg);
-        }
+      }
+    }
+  }
 
-        span {
-            display: block;
-            font-size: 16px;
-            color: #0F0F1A;
-        }
+  .backbtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 0 24px 0;
+    margin-bottom: 20px;
+    cursor: pointer;
+    svg {
+      transform: rotate(180deg);
     }
 
-    .details {
-
-        h2 {
-            color: var(--Foundation-Blue-Normal, #0F0F1A);
-            font-size: 32px;
-            font-style: normal;
-            margin: 0 0 24px 0;
-            font-weight: 700;
-            line-height: 42px;
-        }
-
-        p {
-            color: var(--foundation-white-dark-active, #737373);
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 400;
-            margin: 0 0 10px 0;
-            line-height: 32px;
-            @include breakpoint("sm-max") {
-                @include font14;
-            }
-        }
+    span {
+      display: block;
+      font-size: 16px;
+      color: #0f0f1a;
     }
+  }
+
+  .details {
+    h2 {
+      color: var(--Foundation-Blue-Normal, #0f0f1a);
+      font-size: 32px;
+      font-style: normal;
+      margin: 0 0 24px 0;
+      font-weight: 700;
+      line-height: 42px;
+    }
+
+    p {
+      color: var(--foundation-white-dark-active, #737373);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      margin: 0 0 10px 0;
+      line-height: 32px;
+      @include breakpoint("sm-max") {
+        @include font14;
+      }
+    }
+  }
+}
+.tutorialslider {
+  position: relative;
+  margin-bottom: 50px;
+
+  .nextArrow,
+  .prevArrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #dbdbdb;
+    }
+
+    &.disable {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .nextArrow {
+    right: -40px;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  .prevArrow {
+    left: -40px;
+  }
+  .tutorialitem {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 500px;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
-
-
 .strategiesCardList {
-    .grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 0 0px;
-        margin-top: 40px;
-        margin-bottom: 40px;
-        grid-template-columns: repeat(4 , 1fr);
-        gap: 40px 20px;
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0 0px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 20px;
 
-        @include breakpoint("md-max") {
-            grid-template-columns: repeat(2 , 1fr);
-        }
-
-        @include breakpoint("sm-max") {
-            grid-template-columns: repeat(1 , 1fr);
-        }
-
+    @include breakpoint("md-max") {
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    .paginationBtn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 50px;
-        margin-top: 40px;
-      }
-      
-      .btn {
-        width: 44px;
-        height: 44px;
-        background-color: white;
-        border: 1px solid #d1d5db; // Light border
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-        transition: all 0.3s ease;
-      
-        &:hover {
-          background-color: #2563eb; // Blue hover (matches your button)
-          border-color: #2563eb;
-          transform: translateY(-2px);
-        }
-      
-        &:hover .pagination_icon {
-          color: white;
-        }
-      
-        &:active {
-          transform: translateY(0);
-        }
-      }
-      
-      .pagination_icon {
-        width: 18px;
-        height: 18px;
-        color: #6b7280;
-        transition: color 0.3s;
-      }
-      
+    @include breakpoint("sm-max") {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  .paginationBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 40px;
+  }
+
+  .btn {
+    width: 44px;
+    height: 44px;
+    background-color: white;
+    border: 1px solid #d1d5db; // Light border
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #2563eb; // Blue hover (matches your button)
+      border-color: #2563eb;
+      transform: translateY(-2px);
+    }
+
+    &:hover .pagination_icon {
+      color: white;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .pagination_icon {
+    width: 18px;
+    height: 18px;
+    color: #6b7280;
+    transition: color 0.3s;
+  }
 }
 
 .skeleton {
@@ -138,13 +198,20 @@
 .skeleton::after {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: linear-gradient(90deg, #eee 0%, #f5f5f5 50%, #eee 100%);
   animation: shimmer 1.5s infinite;
   z-index: 1;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }

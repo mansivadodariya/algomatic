@@ -71,3 +71,7 @@ a {
 textarea {
   resize: none;
 }
+
+html {
+  scroll-behavior: smooth;
+}

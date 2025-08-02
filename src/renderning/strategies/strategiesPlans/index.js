@@ -142,7 +142,6 @@
 //   );
 // }
 
-
 import React, { useState, useEffect } from "react";
 import Button from "@/components/button";
 import toast from "react-hot-toast";
@@ -152,6 +151,7 @@ import { useRouter } from "next/router";
 import Modal from "@/components/modal";
 import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
+import Commonarrowbutton from "@/components/commonarrowbutton";
 const Logo = "/assets/logo/logo.svg";
 
 export default function StrategiesPlans({ item, index }) {
@@ -202,14 +202,17 @@ export default function StrategiesPlans({ item, index }) {
       }
       if (response?.success == false) {
         toast.error("Submission failed!");
+        setIsBtnLoading(false);
         throw new Error("Failed to submit");
       }
       setModalOpen(false);
       setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "" });
     } catch (error) {
+      setIsBtnLoading(false);
       toast.error("Submission failed!");
     } finally {
       setLoading(false);
+      setIsBtnLoading(false);
     }
   };
 
@@ -239,7 +242,8 @@ export default function StrategiesPlans({ item, index }) {
           <div className={styles.buttonAlignment}>
             <h3 className={styles.planTitle}>{item?.planType}</h3>
             <div onClick={handleClick}>
-              <Button text="Buy Now" />
+              {/* <Button text="Buy Now" /> */}
+              <Commonarrowbutton Text="Buy Now" Butttonvarient="Blueoutlined" />
             </div>
           </div>
 
@@ -308,7 +312,8 @@ export default function StrategiesPlans({ item, index }) {
 
               {/* Submit button */}
               <div className={styles.submitBtn}>
-                <Button text={loading ? "Processing..." : "Proceed to pay"} onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
+                {/* <Button text={loading ? "Processing..." : "Proceed to pay"} onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} /> */}
+                <Commonarrowbutton Text={loading ? "Processing..." : "Proceed to pay"} Butttonvarient="Blueoutlined" onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
               </div>
             </div>
           </div>
@@ -327,7 +332,20 @@ export default function StrategiesPlans({ item, index }) {
             <br />
 
             <div className={styles.submitBtn}>
-              <Button
+              <Commonarrowbutton
+                Text="Login"
+                Butttonvarient="Blueoutlined"
+                buttonclassName="widthfull"
+                onClick={() => {
+                  setShowLoginInstructionModal(false);
+                  setShowLogin(true);
+                  setBackToStrategyPlan(true);
+                }}
+                isBtnLoading={isBtnLoading}
+                disabled={loading}
+              />
+
+              {/* <Button
                 text="Login"
                 onClick={() => {
                   setShowLoginInstructionModal(false);
@@ -335,7 +353,7 @@ export default function StrategiesPlans({ item, index }) {
                   setBackToStrategyPlan(true);
                 }}
                 className="flex-1"
-              />
+              /> */}
             </div>
           </div>
         </Modal>

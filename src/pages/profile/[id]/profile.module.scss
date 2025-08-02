@@ -5,12 +5,20 @@
 //   background: #f9fafc;
 // }
 
+.dashboarlayout {
+  padding-top: 84px;
+}
+
 .dashboardWrapper {
   display: flex;
   width: 75vw;
   min-height: 87vh;
   background: #f9fafc;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 90vw;
+  }
 }
 
 .sidebar {
@@ -34,6 +42,7 @@
   height: 1px;
   background: #e5e7eb;
   width: 100%;
+  margin: 0;
 }
 
 .hrLogout {

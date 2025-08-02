@@ -130,6 +130,24 @@
   }
 }
 
+.Loadibgbutton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(90deg, #9657fa 0%, #9657fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: not-allowed;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
 .primaryButton {
   width: 100%;
   padding: 0.75rem;
@@ -141,6 +159,10 @@
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 
   &:hover {
     transform: translateY(-1px);

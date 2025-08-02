@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { BaseURL } from "@/utils/config";
-const Strategies = "/assets/images/strategiesDetails.jpg";
 import { marked } from "marked";
 import styles from "./strategiesDetails.module.scss";
 import RightBlackLg from "@/components/icons/rightBlackLg";
 import { useRouter } from "next/router";
 import { getStrategyById, getStrategyPlans } from "@/lib/strategyApi";
 import StrategiesPlans from "../strategies/strategiesPlans";
+import Slider from "react-slick";
+import Leftarrow from "../../../public/assets/icons/leftarrow";
 
-// Simple skeleton loader component
+// --- Arrow Components ---
+function SampleNextArrow({ onClick, disabled }) {
+  return (
+    <div className={`${styles.nextArrow} ${disabled ? styles.disable : ""}`} onClick={disabled ? null : onClick}>
+      <Leftarrow />
+    </div>
+  );
+}
+
+function SamplePrevArrow({ onClick, disabled }) {
+  return (
+    <div className={`${styles.prevArrow} ${disabled ? styles.disable : ""}`} onClick={disabled ? null : onClick}>
+      <Leftarrow />
+    </div>
+  );
+}
+
+// --- Skeleton Loader ---
 function Skeleton() {
   return (
     <div className={styles.strategiesDetailsAlignment}>
+      <hr className={styles.hr} />
       <div className="container">
         <div className={styles.center}>
           <div className={styles.backbtn} style={{ opacity: 0.5 }}>
@@ -37,10 +56,13 @@ function Skeleton() {
   );
 }
 
+// --- Main Component ---
 export default function StrategiesDetails() {
   const [sterategyDetails, setSterategyDetails] = useState(null);
   const [stetaritegyCard, setStetaritegyCard] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const router = useRouter();
   const { id } = router?.query;
 
@@ -63,38 +85,69 @@ export default function StrategiesDetails() {
     fetchStrategy();
   }, [id]);
 
+  const getEmbedUrl = (url) => {
+    if (!url) return "";
+    const shortRegex = /https?:\/\/youtu\.be\/([a-zA-Z0-9_-]+)/;
+    const longRegex = /https?:\/\/(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
+    const shortMatch = url.match(shortRegex);
+    const longMatch = url.match(longRegex);
+    if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+    if (longMatch) return `https://www.youtube.com/embed/${longMatch[2]}`;
+    return url;
+  };
+
   if (loading) return <Skeleton />;
+
+  const totalSlides = sterategyDetails?.link?.length || 0;
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex),
+    nextArrow: <SampleNextArrow disabled={currentSlide >= totalSlides - 1} />,
+    prevArrow: <SamplePrevArrow disabled={currentSlide === 0} />,
+  };
 
   return (
     <div className={styles.strategiesDetailsAlignment}>
+      <hr className={styles.hr} />
       <div className="container">
         <div className={styles.center}>
-          <div className={styles.backbtn} onClick={() => router.push("/strategies")}>
+          <div className={styles.backbtn} onClick={() => router.push("/marketplace")}>
             <RightBlackLg />
             <span>Back</span>
           </div>
+
           <div className={styles.details}>
             <h2>{sterategyDetails?.title}</h2>
-            {/* image */}
+
+            {/* Image */}
             <div className={styles.img}>
-              <img src={sterategyDetails?.imageUrl || Strategies} alt="Strategies" />
+              <img src={sterategyDetails?.imageUrl || "/assets/images/strategiesDetails.jpg"} alt="Strategies" />
             </div>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: marked(sterategyDetails?.description || ""),
-              }}
-            />
+
+            {/* Description */}
+            <p dangerouslySetInnerHTML={{ __html: marked(sterategyDetails?.description || "") }} />
+
+            {/* Tutorial Video Slider */}
+            <h2>Tutorial</h2>
+            <div className={styles.tutorialslider}>
+              <Slider {...settings}>
+                {sterategyDetails?.link.map((item, i) => (
+                  <div key={i} className={styles.tutorialitem}>
+                    <iframe src={getEmbedUrl(item)} title={`YouTube video ${i}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen width="100%" height="400" frameBorder="0" />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            {/* Strategy Plans */}
             <h2>Plans</h2>
-            {/* Plan cards */}
-            <div>
-              <div className={styles.strategiesCardList}>
-                <div className={styles.grid}>
-                  {stetaritegyCard?.length > 0 &&
-                    stetaritegyCard?.map((item, i) => {
-                      return <StrategiesPlans item={item} index={i} key={i} />;
-                    })}
-                </div>
-              </div>
+            <div className={styles.strategiesCardList}>
+              <div className={styles.grid}>{stetaritegyCard?.length > 0 && stetaritegyCard.map((item, i) => <StrategiesPlans item={item} index={i} key={i} />)}</div>
             </div>
           </div>
         </div>

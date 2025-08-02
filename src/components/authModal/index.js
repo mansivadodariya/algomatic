@@ -10,13 +10,14 @@ import SendOtpModal from "../sendOtpForm";
 import { Eye, EyeOff } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Loader from "../loader";
 
 const Logo = "/assets/logo/logo.svg";
 
 const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   const [mode, setMode] = useState("login");
   const [showOtp, setShowOtp] = useState(false);
-  const { setUser, backToStrategyPlan, setBackToStrategyPlan, /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen */ } = useAppContext();
+  const { setUser, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen */ } = useAppContext();
 
   const initialData = {
     name: "",
@@ -31,6 +32,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
@@ -91,7 +93,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
     }
 
     if (mode === "signup" && !formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirm password is required*";
+      newErrors.confirmPassword = "Password is required*";
     } else if (mode === "signup" && formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       newErrors.confirmPassword = "Passwords do not match";
@@ -99,6 +101,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
 
     if (mode === "signup" && !formData.countryCode) {
       newErrors.countryCode = "Country code is required*";
+      toast.error("Country code is required");
     }
 
     setErrors(newErrors);
@@ -108,6 +111,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
+      setIsSubmitting(true);
       if (mode === "login") {
         console.log(formData, "------------------- formData");
         const login = await loginUser(formData.email, formData.password);
@@ -126,6 +130,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
 
           onClose();
         }
+        setIsSubmitting(false);
       } else {
         const signup = await signUpUser(formData.name, formData.email, formData.phone, formData.password, formData.confirmPassword, formData.countryCode);
         if (signup?.success) {
@@ -166,6 +171,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                   <div className={styles.inputGroup}>
                     <PhoneInput
                       country={"in"}
+                      placeholder={errors.phone || ""}
                       enableSearch
                       inputClass={styles.phoneInput}
                       buttonClass={styles.phoneButton}
@@ -186,7 +192,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                         }
                       }}
                     />
-                    {errors.countryCode && <p className={styles.error}>{errors.countryCode}</p>}
+                    {/* {errors.countryCode && <p className={styles.error}>{errors.countryCode}</p>} */}
                   </div>
                 </div>
               )}
@@ -230,8 +236,16 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                 </div>
               )}
 
-              <button type="submit" className={styles.primaryButton}>
-                {mode === "login" ? "Login" : "Signup"}
+              <button type="submit" className={styles.primaryButton} disabled={isSubmitting}>
+                {isSubmitting ? (
+                  <div className={styles.buttonLoader}>
+                    <Loader />
+                  </div>
+                ) : mode === "login" ? (
+                  "Login"
+                ) : (
+                  "Signup"
+                )}
               </button>
             </form>
 

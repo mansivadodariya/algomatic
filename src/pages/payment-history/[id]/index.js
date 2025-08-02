@@ -7,6 +7,7 @@ import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
 import { ArrowLeft, ChevronLeft, ChevronLeftCircle, ChevronsLeft, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
 import toast from "react-hot-toast";
+import Loader from "@/components/loader";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -17,7 +18,6 @@ export default function Dashboard() {
   const [metaAccountNo, setMetaAccountNo] = useState("");
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
-
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     if (!storedUser) {
@@ -74,64 +74,70 @@ export default function Dashboard() {
   };
   return (
     <>
-      <hr className={styles.hr} />
-      <div className={styles.dashboardWrapper}>
-        {/* Sidebar */}
+      <div className={styles.dashboarlayout}>
+        <hr className={styles.hr} />
+        <div className={styles.dashboardWrapper}>
+          {/* Sidebar */}
 
-        {/* Main content */}
-        <main className={styles.content}>
-          <section>
-            <h1 className={styles.contantHeader}>Payment History</h1>
-            <div className={styles.tableWrapper}>
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Purchased Date</th>
-                    <th>Strategy Name</th>
-                    <th>Plan</th>
-                    <th>Amount</th>
-                    <th>Transaction ID</th>
-                    <th>Meta Account No</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {payments.map((p, idx) => (
-                    <tr key={p._id || idx}>
-                      <td>{idx + 1}</td>
-                      <td>{new Date(p.createdAt).toLocaleString()}</td>
-                      <td title={p?.strategyPlanId?.strategyId?.title ?? "-"}>
-                        <div className={styles.truncateText}>{p?.strategyPlanId?.strategyId?.title ?? "-"}</div>
-                      </td>
-                      <td>{p.planType ?? "-"}</td>
-                      <td>${p.amount ?? "-"}</td>
-                      <td>{p.transactionId ?? "-"}</td>
-                      <td>
-                        {p.metaAccountNo == null ? (
-                          p.paymentStatus === "paid" ? (
-                            <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                              + Add
-                            </button>
-                          ) : (
-                            "-"
-                          )
-                        ) : (
-                          p.metaAccountNo
-                        )}
-                      </td>
-
-                      <td>
-                        <span className={`${p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}`}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
-                      </td>
+          {/* Main content */}
+          <main className={styles.content}>
+            <section>
+              <h1 className={styles.contantHeader}>Payment History</h1>
+              <div className={styles.tableWrapper}>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Purchased Date</th>
+                      <th>Strategy Name</th>
+                      <th>Plan</th>
+                      <th>Amount</th>
+                      <th>Transaction ID</th>
+                      <th>Meta Account No</th>
+                      <th>Status</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-              {payments.length === 0 && <div className={styles.noTransactions}>No transactions found.</div>}
-            </div>
-          </section>
-        </main>
+                  </thead>
+                  <tbody>
+                    {payments.map((p, idx) => (
+                      <tr key={p._id || idx}>
+                        <td>{idx + 1}</td>
+                        <td>{new Date(p.createdAt).toLocaleString()}</td>
+                        <td title={p?.strategyPlanId?.strategyId?.title ?? "-"}>
+                          <div className={styles.truncateText}>{p?.strategyPlanId?.strategyId?.title ?? "-"}</div>
+                        </td>
+                        <td>{p.planType ?? "-"}</td>
+                        <td>${p.amount ?? "-"}</td>
+                        <td>{p.transactionId ?? "-"}</td>
+                        <td>
+                          {p.metaAccountNo == null ? (
+                            p.paymentStatus === "paid" ? (
+                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
+                                + Add
+                              </button>
+                            ) : (
+                              "-"
+                            )
+                          ) : (
+                            p.metaAccountNo
+                          )}
+                        </td>
+
+                        <td>
+                          <span className={`${p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}`}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                {payments.length === 0 && (
+                  <div className={styles.noTransactions}>
+                    <Loader />
+                  </div>
+                )}
+              </div>
+            </section>
+          </main>
+        </div>
       </div>
       {/*    */}
       {metaModalOpen && (

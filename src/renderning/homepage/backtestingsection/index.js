@@ -7,7 +7,7 @@ const myfxbook = "/assets/images/myfxbook.png";
 export default function Backtestingsection() {
   return (
     <>
-      <div className={styles.backtestingsectionmain}>
+      <div className={styles.backtestingsectionmain} id="Backtesting">
         <div className="container-sm">
           <div className={styles.backtestingsection}>
             <div className={styles.backtestingsectionleft}>
@@ -42,17 +42,11 @@ export default function Backtestingsection() {
                   <img src={myfxbook} alt="myfxbook" />
                 </div>
                 <div className={styles.backtestinglastflxright}>
-                  <a
-                    href="https://www.myfxbook.com/portfolio/algomaticbot-200k/11536065"
-                    target="__blank"
-                  >
+                  <a href="https://www.myfxbook.com/portfolio/algomaticbot-200k/11536065" target="__blank">
                     <span>Portfolio</span>
                     <span>$200K</span>
                   </a>
-                  <a
-                    href="https://www.myfxbook.com/portfolio/algomaticbot-10k/11536062"
-                    target="__blank"
-                  >
+                  <a href="https://www.myfxbook.com/portfolio/algomaticbot-10k/11536062" target="__blank">
                     <span>Portfolio</span>
                     <span>$10K</span>
                   </a>

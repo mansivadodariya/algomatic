@@ -22,7 +22,7 @@ export default function StrategiesCard({ item, index }) {
   return (
     <>
       <div className={styles.strategiesCard} key={index}>
-        <Link href={`/strategies/${item?._id}`}>
+        <Link href={`/marketplace/${item?._id}`}>
           <div className={styles.imageWrapper}>
             <Image
               src={item?.imageUrl || AiIcon}

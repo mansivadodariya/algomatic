@@ -37,10 +37,7 @@ export default function Header() {
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLogin");
     setIsUserLoggedIn(loginStatus);
-    const storedUser =
-      typeof window !== "undefined"
-        ? JSON.parse(localStorage.getItem("user"))
-        : null;
+    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     setUser(storedUser);
   }, []);
 
@@ -71,28 +68,36 @@ export default function Header() {
     {
       title: "About",
       submenu: [],
-      routes: "/",
+      routes: "/#About",
     },
     {
       title: "How It Works",
       submenu: [],
-      routes: "/",
+      routes: "/#Howitworks",
     },
     {
       title: "Features",
       submenu: [],
-      routes: "/",
+      routes: "/#Keyfeatures",
     },
     {
       title: "Backtesting",
       submenu: [],
-      routes: "/",
+      routes: "/#Backtesting",
     },
     {
       title: "Marketplace",
       submenu: [],
-      routes: "/",
+      routes: "/marketplace",
     },
+    {
+      title: "Contact Us",
+      submenu: [],
+      Target: "__blank",
+      // routes: "/contact-us",
+      routes: "https://api.whatsapp.com/send?phone=971509706562",
+    },
+
     // {
     //   title: "Forex Licenses",
     //   submenu: [
@@ -185,15 +190,12 @@ export default function Header() {
             </div>
             <div className={styles.menuAlignment}>
               {menuItems.map((menu, index) => (
-                <div
-                  key={index}
-                  className={styles.relativeHeader}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                >
+                <div key={index} className={styles.relativeHeader} onMouseEnter={() => handleMouseEnter(index)} onMouseLeave={handleMouseLeave}>
                   <div className={styles.menu}>
                     {menu?.routes ? (
-                      <Link href={menu?.routes}>{menu.title}</Link>
+                      <Link href={menu?.routes} target={menu?.Target}>
+                        {menu.title}
+                      </Link>
                     ) : (
                       menu?.title
                     )}
@@ -208,21 +210,11 @@ export default function Header() {
                     })}
                   ></div>
                   {menu.submenu.length > 0 && (
-                    <div
-                      className={classNames(
-                        styles.submenubox,
-                        hoveredMenu === index ? styles.show : styles.hide
-                      )}
-                    >
+                    <div className={classNames(styles.submenubox, hoveredMenu === index ? styles.show : styles.hide)}>
                       <div className="container">
                         <div className={styles.grid}>
                           {menu.submenu.map((item, i) => (
-                            <Link
-                              className={styles.boxLine}
-                              href={item?.redirectLink}
-                              onClick={handleLinkClick}
-                              target={item.isNewTab ? "_blank" : ""}
-                            >
+                            <Link className={styles.boxLine} href={item?.redirectLink} onClick={handleLinkClick} target={item.isNewTab ? "_blank" : ""}>
                               <div key={i}>
                                 <h3>{item.title}</h3>
                                 <p>{item.description}</p>
@@ -248,9 +240,7 @@ export default function Header() {
                     text={
                       <div className={styles.userIconWrapper}>
                         <UserCircle className={styles.userIcon} />
-                        {user?.name?.slice(0, 8).length > 8
-                          ? "..."
-                          : user?.name}
+                        <span>{user?.name?.slice(0, 8).length > 8 ? "..." : user?.name}</span>
                         <ChevronDown className={styles.downIcon} />
                       </div>
                     }
@@ -292,26 +282,18 @@ export default function Header() {
               ) : (
                 <>
                   <div onClick={() => setShowLogin(true)}>
-                    <Commonarrowbutton
-                      Text="Login"
-                      Butttonvarient="lightoutlined"
-                    />
+                    <Commonarrowbutton Text="Login" Butttonvarient="lightoutlined" />
                   </div>
                 </>
               )}
-              <div className={styles.menuAlignment}>
+              {/* <div className={styles.menuAlignment}>
                 <Commonarrowbutton
                   Text="Contact Us"
                   Butttonvarient="lightoutlined"
                   link="/contact-us"
                 />
-              </div>
-              <div
-                className={`${styles.mobileMenu} ${
-                  header ? styles.active : ""
-                }`}
-                onClick={() => setHeader(!header)}
-              >
+              </div> */}
+              <div className={`${styles.mobileMenu} ${header ? styles.active : ""}`} onClick={() => setHeader(!header)}>
                 <span></span>
                 <span></span>
               </div>
@@ -346,12 +328,7 @@ export default function Header() {
         </div>
       </header> */}
       <MobileHeader header={header} setHeader={setHeader} />
-      <AuthModal
-        isOpen={showLogin}
-        setShowLogin={setShowLogin}
-        onClose={() => setShowLogin(false)}
-        setIsUserLoggedIn={setIsUserLoggedIn}
-      />
+      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} />
     </>
   );
 }

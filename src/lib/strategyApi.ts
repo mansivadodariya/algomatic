@@ -13,6 +13,16 @@ export const getStrategies = async (page = 1, limit = 10) => {
   }
 };
 
+export const getCategoryWithStrategies = async (page = 1, limit = 10) => {
+  try {
+    const res = await api.get(`/categories?page=${page}&limit=${limit}`);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    return [];
+  }
+};
+
 export const getStrategyById = async (id: string) => {
   try {
     const res = await api.get(`/strategies/${id}`);
