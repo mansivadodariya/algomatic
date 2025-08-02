@@ -178,12 +178,9 @@ export default function Header() {
       <header className={styles.header}>
         <div className="container-xl">
           <div className={styles.headerAlignment}>
-            <div
-              className={styles.logo}
-              style={{ position: "relative", width: "180px", height: "42px" }}
-            >
+            <div className={styles.logo}>
               <Link href="/">
-                <Image src={Logo} layout="fill" />
+                <img src={Logo} alt="logo" />
               </Link>
             </div>
             <div className={styles.menuAlignment}>
@@ -310,7 +307,9 @@ export default function Header() {
                 />
               </div>
               <div
-                className={`${styles.mobileMenu} ${header ? styles.active : ""}`}
+                className={`${styles.mobileMenu} ${
+                  header ? styles.active : ""
+                }`}
                 onClick={() => setHeader(!header)}
               >
                 <span></span>
@@ -347,7 +346,12 @@ export default function Header() {
         </div>
       </header> */}
       <MobileHeader header={header} setHeader={setHeader} />
-      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} />
+      <AuthModal
+        isOpen={showLogin}
+        setShowLogin={setShowLogin}
+        onClose={() => setShowLogin(false)}
+        setIsUserLoggedIn={setIsUserLoggedIn}
+      />
     </>
   );
 }

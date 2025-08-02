@@ -9,26 +9,34 @@ const Logo = "/assets/logo/logo.svg";
 
 export default function MobileHeader({ setHeader, header }) {
   return (
-    <div
-      className={classNames(
-        styles.mobileHeader,
-        header ? styles.show : styles.hide
-      )}
-    >
-      <div className={styles.menudetails}>
-        <div className={styles.menulinks}>
-          <Link href="/">About</Link>
-          <Link href="/">How It Works</Link>
-          <Link href="/">Features</Link>
-          <Link href="/">Backtesting</Link>
-          <Link href="/">Marketplace</Link>
+    <>
+      <div
+        className={classNames(
+          styles.mobileHeaderoverlay,
+          header ? styles.open : styles.hide
+        )}
+      ></div>
+      <div
+        className={classNames(
+          styles.mobileHeader,
+          header ? styles.show : styles.hide
+        )}
+      >
+        <div className={styles.menudetails}>
+          <div className={styles.menulinks}>
+            <Link href="/">About</Link>
+            <Link href="/">How It Works</Link>
+            <Link href="/">Features</Link>
+            <Link href="/">Backtesting</Link>
+            <Link href="/">Marketplace</Link>
+          </div>
+          <Commonarrowbutton
+            Text="Contact Us"
+            Butttonvarient="lightoutlined"
+            link="/contact-us"
+          />
         </div>
-        <Commonarrowbutton
-          Text="Contact Us"
-          Butttonvarient="lightoutlined"
-          link="/contact-us"
-        />
       </div>
-    </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 .clientstoriesmain {
-  padding: 90px 60px;
+  padding: 90px 0;
   background-color: #f7f7f7;
 
   .clientstoriestitle {
@@ -16,6 +16,16 @@
       color: #111;
       font-family: "Urbanist", sans-serif;
 
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+
       span {
         color: #9657fa;
         font-style: italic;
@@ -30,6 +40,11 @@
       line-height: 28px;
       color: #616161;
       max-width: 650px;
+
+      @media (max-width: 1200px) {
+        font-size: 16px;
+        line-height: 24px;
+      }
     }
   }
 

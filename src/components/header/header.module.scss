@@ -235,18 +235,23 @@
     align-items: center;
     justify-content: space-between;
 
-    @media (max-width:1024px) {
+    @media (max-width: 1100px) {
       border-radius: 20px;
     }
 
     .logo {
       position: relative;
-      width: 200px;
+      width: 133px;
       cursor: pointer;
-      height: 66px;
-      @include breakpoint("sm-max") {
+      height: 32px;
+      @media (max-width: 900px) {
         width: 120px;
-        height: 30px;
+        height: auto;
+      }
+
+      img {
+        width: 100%;
+        height: auto;
       }
     }
 
@@ -355,7 +360,7 @@
       cursor: pointer;
       transition: 0.4s ease-in-out;
 
-      @media (max-width: 1024px) {
+      @media (max-width: 1100px) {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -393,7 +398,7 @@
       align-items: center;
       gap: 24px;
 
-      @media (max-width: 1024px) {
+      @media (max-width: 1100px) {
         display: none;
       }
 

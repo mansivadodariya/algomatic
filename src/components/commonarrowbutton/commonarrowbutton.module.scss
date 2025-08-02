@@ -9,6 +9,10 @@
   cursor: pointer;
   border: none;
 
+  @media (max-width:576px) {
+    padding: 10px 20px;
+  }
+
   span {
     font-size: 17px;
     font-weight: 500;

@@ -39,14 +39,22 @@ export default function Footernew() {
             <div className={styles.footerrightflx}>
               <div className={styles.contactsection}>
                 <h3>Contact Us</h3>
-                <div className={styles.contactitem}>
+                <Link
+                  href="https://wa.me/971509706562"
+                  target="_blank"
+                  className={styles.contactitem}
+                >
                   <Whatsappicon />
                   <p>+971 50 970 6562</p>
-                </div>
-                <div className={styles.contactitem}>
+                </Link>
+                <Link
+                  href="mailto:support@algomaticbot.com"
+                  target="_blank"
+                  className={styles.contactitem}
+                >
                   <Emailicon />
                   <p>support@algomaticbot.com</p>
-                </div>
+                </Link>
                 <div className={styles.qrcontainer}>
                   <img src={QrImg} alt="QR Code" />
                 </div>
@@ -71,9 +79,15 @@ export default function Footernew() {
             <div className={styles.footerbottom}>
               <p>©2025 AlgoMatic All Rights Reserved</p>
               <div className={styles.socials}>
-                <img src={Telegramicon} alt="Telegramicon" />
-                <img src={Instagramicon} alt="Instagramicon" />
-                <img src={Facebookicon} alt="Facebookicon" />
+                <Link href="https://web.telegram.org/" target="_blank">
+                  <img src={Telegramicon} alt="Telegramicon" />
+                </Link>
+                <Link href="http://instagram.com/" target="_blank">
+                  <img src={Instagramicon} alt="Instagramicon" />
+                </Link>
+                <Link href="https://www.facebook.com/" target="_blank">
+                  <img src={Facebookicon} alt="Facebookicon" />
+                </Link>
               </div>
             </div>
           </div>

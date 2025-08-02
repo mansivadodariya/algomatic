@@ -2,11 +2,19 @@
   padding: 90px 60px;
   background-color: #f7f7f7;
 
+  @media (max-width: 1200px) {
+    padding: 60px 0;
+  }
+
   .keyfeaturesflx {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 60px;
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+    }
 
     .keyfeaturesflxleft {
       position: sticky;
@@ -17,12 +25,32 @@
       gap: 24px;
       max-width: 535px;
 
+      @media (max-width: 1200px) {
+        position: static;
+        max-width: 100%;
+      }
+
       h5 {
         font-size: 52px;
         font-weight: 600;
         line-height: 62px;
         color: #111;
         font-family: "Urbanist", sans-serif;
+
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
 
         span {
           color: #9657fa;
@@ -37,6 +65,11 @@
         font-weight: 500;
         line-height: 28px;
         color: #616161;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
 
       .keyfeaturestagsflx {
@@ -66,6 +99,24 @@
       flex-direction: column;
       gap: 54px;
       padding-bottom: 90px;
+
+      @media (max-width: 1200px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 38px;
+        max-width: 100%;
+        &::before {
+          display: none;
+        }
+      }
+
+      @media (max-width: 900px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 36px;
+        &::before {
+          display: block;
+        }
+      }
 
       &::before {
         content: "";
@@ -144,6 +195,11 @@
             line-height: 28px;
             color: #111;
             font-family: "Urbanist", sans-serif;
+
+            @media (max-width:900px) {
+              font-size: 22px;
+              line-height: 24px;
+            }
           }
         }
 

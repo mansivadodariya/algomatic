@@ -8,6 +8,26 @@
     align-items: center;
     gap: 40px;
 
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      max-width: 538px;
+      margin: 0 auto;
+    }
+
+    @media (max-width:768px) {
+      padding: 20px;
+    }
+
+    @media (max-width:576px) {
+      padding: 0;
+    }
+
+    &:last-child {
+      @media (max-width:1200px) {
+        flex-direction: column-reverse;
+      }
+    }
+
     .whatalgoboxanimate {
       max-width: 400px;
       height: 400px;
@@ -27,6 +47,10 @@
     .whatalgoboxcontent {
       width: calc(100% - 400px);
 
+      @media (max-width:1200px) {
+        width: 100%;
+      }
+
       h2 {
         font-size: 52px;
         font-weight: 600;
@@ -34,6 +58,16 @@
         color: #111;
         font-family: "Urbanist", sans-serif;
         margin-bottom: 16px;
+
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width:1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
 
         span {
           color: #9657fa;
@@ -49,6 +83,11 @@
         line-height: 28px;
         color: #616161;
         max-width: 591px;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+          line-height: 24px;
+        }
       }
     }
   }

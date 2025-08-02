@@ -1,6 +1,10 @@
 .algovideosectionmain {
   padding-top: 90px;
 
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
   .algovideosectionvidealignment {
     max-width: 900px;
     margin: 0 auto;

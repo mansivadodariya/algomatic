@@ -1,5 +1,33 @@
 @import "../../scss/mixins/index.scss";
 
+.mobileHeaderoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  opacity: 0;
+  transition: opacity 0.325s cubic-bezier(0.4, 0, 0.6, 1) 80ms,
+  visibility 0s step-end 80ms;
+  
+  &.open {
+    opacity: 1;
+    visibility: visible;
+    backdrop-filter: blur(20px);
+    transition: opacity 0.32s cubic-bezier(0.4, 0, 0.6, 1) 80ms,
+    visibility 0s step-start 80ms;
+  }
+  
+  &.hide {
+    opacity: 0;
+    visibility: hidden;
+    backdrop-filter: blur(0);
+    transition: opacity 0.325s cubic-bezier(0.4, 0, 0.6, 1) 80ms,
+      visibility 0s step-end 80ms;
+  }
+}
+
 .mobileHeader {
   position: fixed;
   top: 0;
@@ -9,7 +37,7 @@
   padding: 10px 0;
   display: none;
 
-  @media (max-width:1024px) {
+  @media (max-width:1100px) {
     display: block;
   }
 
@@ -17,7 +45,6 @@
     .menudetails {
       height: 0;
       transition: 0.3s ease-in-out;
-      border-radius: 20px;
     }
   }
 
@@ -25,12 +52,11 @@
     .menudetails {
       height: 408px;
       transition: 0.3s ease-in-out;
-      border-radius: 0;
     }
   }
 
   .menudetails {
-    padding: 20px 20px 50px;
+    padding: 20px;
     background-color: #fff;
     margin: 0 20px;
     overflow: hidden;
