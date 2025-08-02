@@ -1,0 +1,107 @@
+.clientstoriesmain {
+  padding: 90px 60px;
+  background-color: #f7f7f7;
+
+  .clientstoriestitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 60px;
+
+    h5 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", sans-serif;
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+      color: #616161;
+      max-width: 650px;
+    }
+  }
+
+  .clientreviewmarquee {
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgb(0, 0, 0) 12.5%,
+      rgb(0, 0, 0) 87.5%,
+      rgba(0, 0, 0, 0) 100%
+    );
+
+    .clientreviewmarqueeflx {
+      display: flex;
+      align-items: flex-start;
+      margin: 4px 0;
+
+      .clientreviewboxmain {
+        max-width: 371px;
+        padding: 24px;
+        border-radius: 24px;
+        box-shadow: 0px 1px 2px 0px rgba(69, 69, 69, 0.24),
+          0px 0px 0px 1px rgba(71, 71, 71, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-right: 32px;
+        background-color: #fff;
+
+        .clientreviewbody {
+          p {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            color: #616161;
+          }
+        }
+
+        .clientreviewfoot {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+
+          .clientreviewfootimage {
+            width: 56px;
+            height: 56px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+          }
+
+          .clientreviewfoottext {
+            span {
+              font-size: 18px;
+              font-weight: 500;
+              line-height: 32px;
+              color: #111;
+            }
+
+            p {
+              font-size: 14px;
+              font-weight: 500;
+              line-height: 20px;
+              color: #666666;
+            }
+          }
+        }
+      }
+    }
+  }
+}

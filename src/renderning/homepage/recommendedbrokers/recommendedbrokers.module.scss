@@ -1,0 +1,80 @@
+.recommendedbrokersmain {
+  padding: 80px 24px;
+
+  .recommendedbrokerstitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 48px;
+
+    h4 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", sans-serif;
+      margin-top: 14px;
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", serif;
+      }
+    }
+  }
+
+  .marqueecontainer {
+    mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgb(0, 0, 0) 12.5%,
+      rgb(0, 0, 0) 87.5%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    padding: 10px;
+
+    .marqueeimage1,
+    .marqueeimage2,
+    .marqueeimage3,
+    .marqueeimage4,
+    .marqueeimage5 {
+      margin-left: 56px;
+
+      img {
+        height: 50px;
+        object-fit: contain;
+      }
+    }
+
+    .marqueeimage1 {
+      img {
+        width: 215px;
+      }
+    }
+
+    .marqueeimage2 {
+      img {
+        width: 165px;
+      }
+    }
+
+    .marqueeimage3 {
+      img {
+        width: 82px;
+      }
+    }
+
+    .marqueeimage4 {
+      img {
+        width: 179px;
+      }
+    }
+
+    .marqueeimage5 {
+      img {
+        width: 87px;
+      }
+    }
+  }
+}

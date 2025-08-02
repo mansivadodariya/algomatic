@@ -1,0 +1,94 @@
+.howitworkssectionmain {
+  padding: 90px 60px;
+
+  .howitworkstitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+    margin-bottom: 60px;
+
+    h3 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", sans-serif;
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+      color: #616161;
+      max-width: 650px;
+    }
+  }
+
+  .howitworksgrd {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    .howitworkscardmain {
+      padding: 43px 28px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      overflow: hidden;
+      background: linear-gradient(
+        180deg,
+        rgb(243, 243, 241) 54.93%,
+        rgb(250, 250, 247) 100%
+      );
+      border-radius: 30px;
+
+      &:hover {
+        .howitworkscardimage {
+          img {
+            scale: 1.1;
+          }
+        }
+      }
+
+      .howitworkscardcontent {
+        h4 {
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 28px;
+          color: #111;
+          font-family: "Urbanist", sans-serif;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 28px;
+          color: #616161;
+        }
+      }
+
+      .howitworkscardimage {
+        height: 228px;
+        transition: 0.4s ease-in-out;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: 0.4s ease-in-out;
+        }
+      }
+    }
+  }
+}

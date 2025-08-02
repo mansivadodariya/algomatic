@@ -3,6 +3,7 @@ import Header from "../header";
 import Footer from "../footer";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { usePathname } from "next/navigation";
+import Footernew from "../footernew";
 
 export default function Wrapper({ children }) {
   const { toasts } = useToasterStore();
@@ -25,7 +26,8 @@ export default function Wrapper({ children }) {
       />
       <Header />
       {children}
-      {pathName?.includes("/payment-history") || pathName?.includes("/profile") ? null : <Footer />}
+      <Footernew />
+      {/* {pathName?.includes("/payment-history") || pathName?.includes("/profile") ? null : <Footer />} */}
     </div>
   );
 }

@@ -3,6 +3,17 @@ import Aboutus from './aboutus'
 import Service from './service'
 import Calculator from './calculator'
 import React , {useEffect} from 'react'
+import Homeherobanner from '../homepage/homeherobanner'
+import Whatalgosection from '../homepage/whatalgosection'
+import Howitworkssection from '../homepage/howitworkssection'
+import Keyfeaturessection from '../homepage/keyfeaturessection'
+import Algovideosection from '../homepage/algovideosection'
+import Pricingsection from '../homepage/pricingsection'
+import Backtestingsection from '../homepage/backtestingsection'
+import Recommendedbrokers from '../homepage/recommendedbrokers'
+import Clientstories from '../homepage/clientstories'
+import Faqsection from '../homepage/faqsection'
+import Transformsection from '../homepage/transformsection'
 export default function Homepage() {
   useEffect(() => {
     window.scrollTo({
@@ -13,10 +24,26 @@ export default function Homepage() {
 }, [])
   return (
     <div>
-      <Herobanner/>
+
+      {/* <-- old sections --> */}
+      {/* <Herobanner/>
       <Aboutus/>
       <Service/>
-      <Calculator/>
+      <Calculator/> */}
+
+
+      {/* <-- new sections --> */}
+      <Homeherobanner />
+      <Whatalgosection />
+      <Howitworkssection />
+      <Keyfeaturessection />
+      <Algovideosection />
+      <Pricingsection />
+      <Backtestingsection />
+      <Recommendedbrokers />
+      <Clientstories />
+      <Faqsection />
+      <Transformsection />
     </div>
   )
 }

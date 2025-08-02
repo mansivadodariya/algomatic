@@ -1,0 +1,118 @@
+.backtestingsectionmain {
+  padding: 80px 8px;
+  background-color: #f7f7f7;
+
+  .backtestingsection {
+    background-color: #fff;
+    border-radius: 24px;
+    box-shadow: 0 1px 2px 0 rgba(69, 69, 69, 0.24),
+      0 0 0 1px rgba(71, 71, 71, 0.08);
+    padding: 98px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 40px;
+
+    .backtestingsectionleft {
+      border: 1px solid #ebebeb;
+      background-color: #f7f7f7;
+      border-radius: 16px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+
+    .backtestingsectionright {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      h3 {
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 62px;
+        color: #111;
+        font-family: "Urbanist", sans-serif;
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", serif;
+        }
+      }
+
+      .backtestingcontent {
+        display: flex;
+        flex-direction: column;
+        gap: 21px;
+
+        p {
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 27px;
+          color: #666666;
+        }
+
+        span {
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 27px;
+          color: #666666;
+        }
+
+        .backtestingcontentflx {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+      }
+
+      .backtestinglastflx {
+        display: flex;
+        gap: 10px;
+
+        .myfxbook {
+          padding: 10px;
+          background-color: #141414;
+          border-radius: 10px;
+
+          img {
+            width: 190px;
+            height: 49px;
+          }
+        }
+
+        a {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-color: #cdcdcd;
+          border-radius: 10px;
+          width: 114px;
+          padding: 10px;
+          transition: 0.4s ease-in-out;
+
+          &:hover {
+            background-color: #e0e0e0;
+
+            span {
+              scale: 1.1;
+            }
+          }
+
+          span {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 19px;
+            color: #111111;
+            transition: 0.2s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+}

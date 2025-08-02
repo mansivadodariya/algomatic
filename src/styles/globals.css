@@ -6,9 +6,9 @@ body {
 }
 
 
-html {
+/* html {
   user-select: none;
-}
+} */
 
 * {
   box-sizing: border-box;
@@ -38,6 +38,24 @@ a {
 
 .container-lg {
   max-width: calc(1860px + 40px);
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.container-sm {
+  max-width: calc(1152px + 40px);
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.container-xl {
+  max-width: calc(1200px + 40px);
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.container-md {
+  max-width: calc(1228px + 40px);
   padding: 0 20px;
   margin: 0 auto;
 }

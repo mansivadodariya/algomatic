@@ -12,7 +12,9 @@ import MobileHeader from "../mobileHeader";
 import AuthModal from "../authModal";
 import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
+import Commonarrowbutton from "../commonarrowbutton";
 const Logo = "/assets/logo/logo.svg";
+const Logoimg = "/assets/logo/logo.avif";
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [header, setHeader] = useState(false);
@@ -35,7 +37,10 @@ export default function Header() {
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLogin");
     setIsUserLoggedIn(loginStatus);
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
+    const storedUser =
+      typeof window !== "undefined"
+        ? JSON.parse(localStorage.getItem("user"))
+        : null;
     setUser(storedUser);
   }, []);
 
@@ -73,12 +78,14 @@ export default function Header() {
       submenu: [
         {
           title: "Mauritius Forex License",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/mauritius-forex-license",
         },
         {
           title: "St. Vincent Forex License",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/vincent-forex-license",
         },
       ],
@@ -88,12 +95,14 @@ export default function Header() {
       submenu: [
         {
           title: "AI bot development",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/algo-bot",
         },
         {
           title: "Strategies",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/strategies",
         },
       ],
@@ -103,12 +112,14 @@ export default function Header() {
       submenu: [
         {
           title: "Web and Mobile App Development",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/mobile-web-development",
         },
         {
           title: "AI/ML Development",
-          description: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+          description:
+            "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
           redirectLink: "/ai-development",
         },
       ],
@@ -144,7 +155,7 @@ export default function Header() {
 
   return (
     <>
-      <header className={styles.header}>
+      {/* <header className={styles.header}>
         <div className="container">
           <div className={styles.headerAlignment}>
             <div className={styles.logo} style={{ position: "relative", width: "180px", height: "42px" }}>
@@ -253,9 +264,30 @@ export default function Header() {
             </div>
           </div>
         </div>
+      </header> */}
+      <header className={styles.header}>
+        <div className="container-xl">
+          <div className={styles.headerwrapper}>
+            <div className={styles.headerlogo}>
+              <Link href={"/"}>
+                <img src={Logoimg} alt="logo" />
+              </Link>
+            </div>
+            <div className={styles.headelinksflx}>
+              <Link href={"/"}>About</Link>
+              <Link href={"/"}>How It Works</Link>
+              <Link href={"/"}>Features</Link>
+              <Link href={"/"}>Backtesting</Link>
+              <Link href={"/"}>Contact Us</Link>
+            </div>
+            <div className={styles.headerbtn}>
+              <Commonarrowbutton Text="Login" Butttonvarient="lightoutlined" />
+            </div>
+          </div>
+        </div>
       </header>
-      <MobileHeader header={header} setHeader={setHeader} />
-      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} />
+      {/* <MobileHeader header={header} setHeader={setHeader} />
+      <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} /> */}
     </>
   );
 }

@@ -1,0 +1,107 @@
+.faqsectionmain {
+  padding: 90px 60px;
+
+  .faqsectiontitle {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 60px;
+
+    h6 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", sans-serif;
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", serif;
+      }
+    }
+  }
+
+  .faqgrdmain {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 32px;
+    max-width: 1032px;
+    margin: 0 auto;
+
+    .faqboxmain {
+      padding: 24px 36px;
+      background-color: #fff;
+      border-radius: 30px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+
+      &.faqboxmainactive {
+        border-color: #f3f3f1;
+        background: linear-gradient(
+          180deg,
+          rgb(243, 243, 241) 52%,
+          rgb(250, 250, 247) 100%
+        );
+        .faqboxheader {
+          .faqicon {
+            svg {
+              transform: rotate(180deg);
+            }
+          }
+        }
+
+        .faqboxcontent {
+          max-height: 500px; // Adjust this value if content is taller
+          margin-top: 20px;
+        }
+      }
+
+      .faqboxheader {
+        display: flex;
+        justify-content: space-between;
+
+        h1 {
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 28px;
+          color: #37312f;
+          font-family: "Urbanist", sans-serif;
+          max-width: 404px;
+        }
+
+        .faqicon {
+          width: 24px;
+          height: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          svg {
+            transition: 0.3s ease-in-out;
+            polyline {
+              stroke: #37312f;
+            }
+          }
+        }
+      }
+
+      .faqboxcontent {
+        max-height: 0;
+        margin-top: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+
+        p {
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 28px;
+          color: #616161;
+        }
+      }
+    }
+  }
+}

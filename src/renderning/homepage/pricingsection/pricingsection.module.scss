@@ -1,0 +1,132 @@
+.pricingsectionmain {
+  padding: 90px 60px;
+
+  .pricingsectiontitle {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 60px;
+
+    h1 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", sans-serif;
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+      color: #616161;
+      max-width: 600px;
+    }
+  }
+
+  .pricingcardgrdmain {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 32px;
+
+    .pricingcard {
+      padding: 45px 38px;
+      border-radius: 33px;
+      border: 1px solid #f0ece7;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 25px;
+
+      &.pricingcardactive {
+        background: linear-gradient(180deg, #f3f3f1 52%, #fafafa 100%);
+        border-color: #f3f3f1;
+      }
+
+      .pricingcardcontent {
+        .pricingcardtitle {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 18px;
+
+          h2 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 28px;
+            color: #37312f;
+            font-family: "Urbanist", sans-serif;
+            margin-bottom: 8px;
+          }
+
+          p {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 28px;
+            color: #989897;
+          }
+
+          .pricingcardtitlebadge {
+            border-radius: 50%;
+            background: radial-gradient(
+              75% 35% at 50% 50%,
+              #f0ece7 35.31285191441441%,
+              #ffffff 100%
+            );
+            border: 1px solid #f3f3f1;
+            padding: 9px;
+
+            svg {
+              width: 28px;
+              height: 28px;
+            }
+          }
+        }
+
+        .pricecardbody {
+          h3 {
+            font-size: 52px;
+            font-weight: 600;
+            line-height: 62px;
+            color: #111;
+            font-family: "Urbanist", sans-serif;
+            margin-bottom: 25px;
+          }
+
+          .priceingdetailsmain {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            .priceingdetailsflx {
+              display: flex;
+              align-items: center;
+              gap: 13px;
+
+              p {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 27px;
+                color: #616161;
+              }
+            }
+          }
+        }
+      }
+
+      .pricingbutton {
+        width: 100%;
+      }
+    }
+  }
+}
