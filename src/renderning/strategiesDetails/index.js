@@ -136,7 +136,7 @@ export default function StrategiesDetails() {
             <h2>Tutorial</h2>
             <div className={styles.tutorialslider}>
               <Slider {...settings}>
-                {sterategyDetails?.link.map((item, i) => (
+                {sterategyDetails?.link?.map((item, i) => (
                   <div key={i} className={styles.tutorialitem}>
                     <iframe src={getEmbedUrl(item)} title={`YouTube video ${i}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen width="100%" height="400" frameBorder="0" />
                   </div>
