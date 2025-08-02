@@ -129,6 +129,7 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
       email: data.email,
       account_number: data?.metaAccountNo,
       end_date: formatedDate, // "2025-08-01T14:30"
+      file_name: "test",
     };
 
     const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
