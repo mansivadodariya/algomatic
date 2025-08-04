@@ -56,7 +56,7 @@ export default function Keyfeaturessection() {
   return (
     <>
       <div className={styles.keyfeaturessectionmain} id="Keyfeatures">
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.keyfeaturesflx}>
             <div className={styles.keyfeaturesflxleft}>
               <Commonlable Text="Key Features" />

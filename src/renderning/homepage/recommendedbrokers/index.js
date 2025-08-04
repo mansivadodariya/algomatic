@@ -12,7 +12,7 @@ export default function Recommendedbrokers() {
   return (
     <>
       <div className={styles.recommendedbrokersmain}>
-        <div className="container-sm">
+        <div className="container-xl">
           <div className={styles.recommendedbrokerstitle}>
             <Commonlable Text="Try It Yourself" />
             <h4>

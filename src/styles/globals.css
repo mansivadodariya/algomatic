@@ -42,7 +42,7 @@ a {
   margin: 0 auto;
 }
 
-.container-sm {
+.container-xl {
   max-width: calc(1152px + 40px);
   padding: 0 20px;
   margin: 0 auto;
@@ -54,7 +54,7 @@ a {
   margin: 0 auto;
 }
 
-.container-md {
+.container-xl {
   max-width: calc(1228px + 40px);
   padding: 0 20px;
   margin: 0 auto;

@@ -11,7 +11,7 @@ export default function Pricingsection() {
   return (
     <>
       <div className={styles.pricingsectionmain}>
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.pricingsectiontitle}>
             <Commonlable Text="Our Pricing Plans" />
             <h1>

@@ -8,7 +8,7 @@ export default function Backtestingsection() {
   return (
     <>
       <div className={styles.backtestingsectionmain} id="Backtesting">
-        <div className="container-sm">
+        <div className="container-xl">
           <div className={styles.backtestingsection}>
             <div className={styles.backtestingsectionleft}>
               <img src={backtestingimage} alt="backtestingimage" />

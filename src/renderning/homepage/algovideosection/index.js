@@ -6,7 +6,7 @@ export default function Algovideosection() {
   return (
     <>
       <div className={styles.algovideosectionmain}>
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.algovideosectionvidealignment}>
             <iframe
               width="100%"

@@ -9,7 +9,7 @@ export default function Howitworkssection() {
   return (
     <>
       <div className={styles.howitworkssectionmain} id="Howitworks">
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.howitworkstitle}>
             <Commonlable Text="Work Pattern" />
             <h3>

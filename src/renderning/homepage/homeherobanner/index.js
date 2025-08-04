@@ -10,7 +10,7 @@ export default function Homeherobanner() {
       </video>
       <div className={styles.homeherobannercontentmain}>
         <div className={styles.homeherowrapper}>
-          <div className="container-sm">
+          <div className="container-xl">
             <div className={styles.homeherobannercontent}>
               <Commonlable Text="Zero Loss Trading Strategy" />
               <h1>

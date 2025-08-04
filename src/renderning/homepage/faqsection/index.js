@@ -90,7 +90,7 @@ export default function Faqsection() {
   return (
     <>
       <div className={styles.faqsectionmain}>
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.faqsectiontitle}>
             <Commonlable Text="Common Question" />
             <h6>

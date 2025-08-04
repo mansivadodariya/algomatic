@@ -7,7 +7,7 @@ export default function Transformsection() {
   return (
     <>
       <div className={styles.transformsectionmain}>
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.transformboxmain}>
             <div className={styles.transformbox}>
               <div className={styles.transformboxtitle}>

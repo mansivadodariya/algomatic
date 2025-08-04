@@ -65,7 +65,7 @@ export default function Clientstories() {
   return (
     <>
       <div className={styles.clientstoriesmain}>
-        <div className="container-md">
+        <div className="container-xl">
           <div className={styles.clientstoriestitle}>
             <Commonlable Text="Our Pricing Plans" />
             <h5>

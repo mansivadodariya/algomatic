@@ -7,7 +7,7 @@ export default function Whatalgosection() {
   return (
     <>
       <div className={styles.whatalgosectionmain} id="About">
-        <div className="container-sm">
+        <div className="container-xl">
           <div className={styles.whatalgoboxmain}>
             <div className={styles.whatalgoboxanimate}>
               <Whatalgoicon />
