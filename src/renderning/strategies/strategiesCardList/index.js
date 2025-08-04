@@ -28,7 +28,7 @@ export default function StrategiesCardList() {
   };
 
   return (
-    <div className="container">
+    <div className="container-xl">
       <div className={styles.strategiesCardList}>
         {strategyCard.length > 0 &&
           strategyCard?.map((item, i) => {

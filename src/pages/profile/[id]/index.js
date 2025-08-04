@@ -86,9 +86,7 @@ export default function Dashboard() {
       <div className={styles.dashboarlayout}>
         <hr className={styles.hr} />
         <div className={styles.dashboardWrapper}>
-          {/* Sidebar */}
-
-          {/* Main content */}
+          {/* <div className="container-xl"> */}
           <main className={styles.content}>
             {activeTab === "profile" && isProfileEdit ? (
               <section>
@@ -168,6 +166,7 @@ export default function Dashboard() {
               ""
             )}
           </main>
+          {/* </div> */}
         </div>
       </div>
       {/*    */}

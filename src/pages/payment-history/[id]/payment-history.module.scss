@@ -4,14 +4,14 @@
 
 .dashboardWrapper {
   display: flex;
-  width: 75vw;
+  // width: 62.5vw;
   min-height: 87vh;
   background: #f9fafc;
   margin: 0 auto;
 
-  @media (max-width: 768px) {
-    width: 90vw;
-  }
+  // @media (max-width: 768px) {
+  //   width: 90vw;
+  // }
 }
 
 .sidebar {
@@ -116,6 +116,8 @@
   flex: 1;
   padding: 1rem;
   overflow-x: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .contantHeader {
