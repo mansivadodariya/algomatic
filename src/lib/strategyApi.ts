@@ -109,7 +109,7 @@ export const getPaymentHistory = async () => {
   }
 };
 
-export const sendBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string }) => {
+export const sendBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
   try {
     const calculatePlanEndDate = (startDateStr: string, planType: string) => {
       const months = +planType.replace(/\D/g, "");
@@ -129,7 +129,7 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
       email: data.email,
       account_number: data?.metaAccountNo,
       end_date: formatedDate, // "2025-08-01T14:30"
-      file_name: "test",
+      file_name: data?.file_name || "test",
     };
 
     const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {

@@ -67,6 +67,7 @@ export default function Dashboard() {
         metaAccountNo: metaAccountNo,
         date: selectedPayment.createdAt,
         planType: selectedPayment.planType,
+        file_name: selectedPayment?.planType === "3Months" ? "test" : "SF_2_Legs_with_static_input",
       });
     } catch (e) {
       console.error(e);
