@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./pricingsection.module.scss";
 import Commonlable from "@/components/commonlable";
 import Coreicon from "../../../../public/assets/icons/coreicon";
@@ -6,8 +6,19 @@ import Checkicon from "../../../../public/assets/icons/checkicon";
 import Commonarrowbutton from "@/components/commonarrowbutton";
 import Plusplanicon from "../../../../public/assets/icons/plusplanicon";
 import Trophyicon from "../../../../public/assets/icons/trophyicon";
+import { getCategory } from "@/lib/categoryApi";
 
 export default function Pricingsection() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategory().then((res) => {
+      console.log(res);
+      setCategories(res.payload.data);
+    });
+  }, []);
+
+  console.log(categories);
   return (
     <>
       <div className={styles.pricingsectionmain}>
@@ -17,119 +28,38 @@ export default function Pricingsection() {
             <h1>
               Choose the <span>Best Plan</span> for Your Needs
             </h1>
-            <p>
-              Find the right plan, with flexible choices and transparent pricing
-              details.
-            </p>
+            <p>Find the right plan, with flexible choices and transparent pricing details.</p>
           </div>
+
           <div className={styles.pricingcardgrdmain}>
-            <div
-              className={`${styles.pricingcard} ${styles.pricingcardactive}`}
-            >
-              <div className={styles.pricingcardcontent}>
-                <div className={styles.pricingcardtitle}>
-                  <div>
-                    <h2>Core Plan</h2>
-                    <p>For Beginners</p>
-                  </div>
-                  <div className={styles.pricingcardtitlebadge}>
-                    <Coreicon />
-                  </div>
-                </div>
-                <div className={styles.pricecardbody}>
-                  <h3>$199</h3>
-                  <div className={styles.priceingdetailsmain}>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>Perfect for Learners</p>
+            {categories.map((item) => (
+              <div className={`${styles.pricingcard} ${styles.pricingcardactive}`}>
+                <div className={styles.pricingcardcontent}>
+                  <div className={styles.pricingcardtitle}>
+                    <div>
+                      <h2>{item.title}</h2>
+                      <p>{item.strategies.map((strategy) => strategy.strategyPlans[0]?.planType).join(", ")}</p>
                     </div>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>Manual Trading Setup</p>
+                    <div className={styles.pricingcardtitlebadge}>
+                      <Coreicon />
+                    </div>
+                  </div>
+                  <div className={styles.pricecardbody}>
+                    <h3>${item.strategies[0]?.strategyPlans[0]?.price}</h3>
+                    <div className={styles.priceingdetailsmain}>
+                      <div className={styles.priceingdetailsflx}>
+                        <Checkicon />
+                        <p>{item.strategies.map((strategy) => strategy.title).join(", ")}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className={styles.pricingbutton}>
-                <Commonarrowbutton
-                  Text="contact us"
-                  Butttonvarient="lightoutlined"
-                  buttonclassName="widthfull"
-                />
-              </div>
-            </div>
-            <div className={styles.pricingcard}>
-              <div className={styles.pricingcardcontent}>
-                <div className={styles.pricingcardtitle}>
-                  <div>
-                    <h2>Plus Plan</h2>
-                    <p>For Advanced Traders</p>
-                  </div>
-                  <div className={styles.pricingcardtitlebadge}>
-                    <Plusplanicon />
-                  </div>
-                </div>
-                <div className={styles.pricecardbody}>
-                  <h3>$299</h3>
-                  <div className={styles.priceingdetailsmain}>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>
-                        Advanced tools and EA-driven strategies for serious
-                        traders
-                      </p>
-                    </div>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>Semi Automatic Trading Setup</p>
-                    </div>
-                  </div>
+                <div className={styles.pricingbutton}>
+                  <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link="/marketplace" />
                 </div>
               </div>
-              <div className={styles.pricingbutton}>
-                <Commonarrowbutton
-                  Text="contact us"
-                  Butttonvarient="darkoutlined"
-                  buttonclassName="widthfull"
-                />
-              </div>
-            </div>
-            <div
-              className={`${styles.pricingcard} ${styles.pricingcardactive}`}
-            >
-              <div className={styles.pricingcardcontent}>
-                <div className={styles.pricingcardtitle}>
-                  <div>
-                    <h2>Platinum Plan</h2>
-                    <p>For Pro Traders</p>
-                  </div>
-                  <div className={styles.pricingcardtitlebadge}>
-                    <Trophyicon />
-                  </div>
-                </div>
-                <div className={styles.pricecardbody}>
-                  <h3>$499</h3>
-                  <div className={styles.priceingdetailsmain}>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>High performance trading EA for big fund managers</p>
-                    </div>
-                    <div className={styles.priceingdetailsflx}>
-                      <Checkicon />
-                      <p>Fully Automatic Trading Setup</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles.pricingbutton}>
-                <Commonarrowbutton
-                  Text="contact us"
-                  Butttonvarient="lightoutlined"
-                  buttonclassName="widthfull"
-                />
-              </div>
-            </div>
-          </div>
+            ))}
+          </div>          
         </div>
       </div>
     </>

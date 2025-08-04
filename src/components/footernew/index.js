@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./footernew.module.scss";
 import Link from "next/link";
 import Commonarrowbutton from "../commonarrowbutton";
 import Whatsappicon from "../../../public/assets/icons/Whatsappicon";
 import Emailicon from "../../../public/assets/icons/Emailicon";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 const Telegramicon = "/assets/icons/telegramicon.png";
 const Instagramicon = "/assets/icons/instagramicon.png";
 const Facebookicon = "/assets/icons/facebookicon.png";
@@ -12,6 +13,15 @@ const Logoimg = "/assets/logo/logo.png";
 const QrImg = "/assets/images/qrimage.avif";
 
 export default function Footernew() {
+  const [utilitySettings, setUtilitySettings] = useState({});
+  useEffect(() => {
+    getUtilitySettings().then((res) => {
+      console.log(res);
+      setUtilitySettings(res?.payload);
+    });
+  }, []);
+  console.log(utilitySettings, "-------------------utilitySettings");
+
   return (
     <footer className={styles.footermain}>
       <div className="container-xl">
@@ -40,20 +50,22 @@ export default function Footernew() {
               <div className={styles.contactsection}>
                 <h3>Contact Us</h3>
                 <Link
-                  href="https://wa.me/971509706562"
+                  href={`https://wa.me/${utilitySettings?.phoneNo}`}
                   target="_blank"
                   className={styles.contactitem}
                 >
                   <Whatsappicon />
-                  <p>+971 50 970 6562</p>
+                  {/* <p>+971 50 970 6562</p> */}
+                  <p>{utilitySettings?.phoneNo}</p>
                 </Link>
                 <Link
-                  href="mailto:support@algomaticbot.com"
+                  href={`mailto:${utilitySettings?.email}`}
                   target="_blank"
                   className={styles.contactitem}
                 >
                   <Emailicon />
-                  <p>support@algomaticbot.com</p>
+                  {/* <p>support@algomaticbot.com</p> */}
+                  <p>{utilitySettings?.email}</p>
                 </Link>
                 <div className={styles.qrcontainer}>
                   <img src={QrImg} alt="QR Code" />

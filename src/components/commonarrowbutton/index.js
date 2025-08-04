@@ -21,9 +21,11 @@ export default function Commonarrowbutton({ Text, Butttonvarient, link, Target, 
   );
 
   if (link && link !== "none") {
-    const targetValue = Target || "_blank";
+    const linkProps = {};
+    if (Target) linkProps.target = Target;
+
     return (
-      <Link href={link} target={targetValue}>
+      <Link href={link} {...linkProps}>
         {buttonContent}
       </Link>
     );
