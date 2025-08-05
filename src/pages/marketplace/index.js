@@ -26,8 +26,6 @@ export default function index() {
 
 // export async function getServerSideProps() {
 //   const data = await getStrategies(1, 10)
-//   console.log(data?.payload?.data[0],'-------------vfvfvf')
-//   // console.log(data?.payload?.data,'-------------vfvfvf')
 //   return {
 //     props: {
 //       FX_StrategieContent: data?.payload?.data || [],

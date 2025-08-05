@@ -36,7 +36,6 @@ export const getStrategyById = async (id: string) => {
 export const getStrategyPlans = async (id: string) => {
   try {
     const res = await api.get(`/strategyPlan/all/${id}`);
-    console.log(res, "------------------- res");
     return res.data;
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
@@ -61,9 +60,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
       metaAccountNo: data.metaAccountNo,
       strategyPlanId: data.strategyPlanId,
     };
-    console.log(dataObj, "------------------- getPaymentLink payload");
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
-    console.log(res, "------------------- res");
     return res.data;
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
@@ -129,7 +126,7 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
       email: data.email,
       account_number: data?.metaAccountNo,
       end_date: formatedDate, // "2025-08-01T14:30"
-      file_name: data?.file_name || "test",
+      file_name: data?.file_name/*  || "test" */,
     };
 
     const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
@@ -138,7 +135,6 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
         "Access-Control-Allow-Origin": "*",
       },
     });
-    console.log(response, "---------------------- response");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];

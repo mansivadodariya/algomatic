@@ -113,7 +113,6 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
     if (validate()) {
       setIsSubmitting(true);
       if (mode === "login") {
-        console.log(formData, "------------------- formData");
         const login = await loginUser(formData.email, formData.password);
         if (login?.success) {
           toast.success("Login Successful");

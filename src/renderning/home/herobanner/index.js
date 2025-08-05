@@ -37,8 +37,6 @@ export default function Herobanner() {
   // const banners = [Banner1, Banner2, Banner3];
   const [animateClass, setAnimateClass] = useState('');
 
-  console.log("activeSlide", activeSlide)
-
   useEffect(() => {
     if (activeSlide) {
       setAnimateClass('animate__animated animate__fadeIn');

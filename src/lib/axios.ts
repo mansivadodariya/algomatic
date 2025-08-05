@@ -74,21 +74,25 @@ api.interceptors.response.use(
     let message = "An unexpected error occurred.";
     if (error.response) {
       // Server responded with a status other than 2xx
-      // if ( error.response.status === 401 )
-      // {
-      //   // Unauthorized: clear localStorage and reload (logout)
-      //   // localStorage.clear();
-      //   // window.location.href = "/login"; // Redirect to login page
-      //   // window.location.reload();
-      // }
+      if ( error.response.status === 401 )
+      {
+        toast.error("Session Expired, please login again");
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 1000);
+      } else {
+        toast.error(message);
+      }
       // message = error.response.data?.message || error.response.statusText;
-    } else if (error.message) {
-      message = error.message;
-    }
-    if (error.response.data?.message) {
-      message = error.response.data.message;
-    }
-    toast.error(message);
+    } 
+    // else if (error.message) {
+    //   message = error.message;
+    // }
+    // if (error.response.data?.message) {
+    //   message = error.response.data.message;
+    //   toast.error(message);
+    // }
     return Promise.reject(error);
   }
 );

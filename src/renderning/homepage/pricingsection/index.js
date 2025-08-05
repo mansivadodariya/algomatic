@@ -13,12 +13,10 @@ export default function Pricingsection() {
 
   useEffect(() => {
     getCategory().then((res) => {
-      console.log(res);
       setCategories(res.payload.data);
     });
   }, []);
 
-  console.log(categories);
   return (
     <>
       <div className={styles.pricingsectionmain}>

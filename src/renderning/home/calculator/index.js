@@ -55,7 +55,6 @@ export default function Calculator() {
 
   const steps = ["Compliance", "Logo", "Website", "CRM & Trader's Room", "CRM Mobile App", "Risk Management System", "Liquidity"];
 
-  console.log("selectedRadio", selectedRadio);
 
   const handleNext = () => {
     setCurrentStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
@@ -85,9 +84,6 @@ export default function Calculator() {
   const [error, setError] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const disposableDomains = ["soebing", "yopmail", "sharklasers", "guerrillamail", "getairmail", "grr", "guerrillamailblock", "pokemail", "spam4", "cazlq", "sloveniakm", "mybx", "memsg", "matra", "maildrop"];
-
-
-console.log("selectedRadioselectedRadio", selectedRadio)
 
   const bindInput = (value) => {
       var regex = new RegExp("^[^0-9]*$");

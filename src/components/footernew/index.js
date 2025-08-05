@@ -16,11 +16,9 @@ export default function Footernew() {
   const [utilitySettings, setUtilitySettings] = useState({});
   useEffect(() => {
     getUtilitySettings().then((res) => {
-      console.log(res);
       setUtilitySettings(res?.payload);
     });
   }, []);
-  console.log(utilitySettings, "-------------------utilitySettings");
 
   return (
     <footer className={styles.footermain}>

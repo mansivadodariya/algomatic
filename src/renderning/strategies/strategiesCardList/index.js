@@ -18,7 +18,6 @@ export default function StrategiesCardList() {
     }
     fetchStrategies();
   }, [page]);
-  console.log(strategyCard, "-------------------strategyCard");
 
   const totalPages = Math.ceil(totalCount / limit);
 
