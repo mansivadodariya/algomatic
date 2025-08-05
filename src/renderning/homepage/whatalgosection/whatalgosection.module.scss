@@ -56,8 +56,9 @@
         font-weight: 600;
         line-height: 62px;
         color: #111;
-        font-family: "Urbanist", sans-serif;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
         margin-bottom: 16px;
+        max-width: 591px;
 
         @media (max-width: 1200px) {
           font-size: 43px;
@@ -73,13 +74,13 @@
           color: #9657fa;
           font-style: italic;
           font-weight: 400;
-          font-family: "PT Serif", serif;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
         }
       }
 
       p {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 28px;
         color: #616161;
         max-width: 591px;

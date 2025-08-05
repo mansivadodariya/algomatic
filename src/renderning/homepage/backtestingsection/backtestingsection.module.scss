@@ -56,7 +56,7 @@
         font-weight: 600;
         line-height: 62px;
         color: #111;
-        font-family: "Urbanist", sans-serif;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
 
         @media (max-width: 1200px) {
           font-size: 43px;
@@ -72,14 +72,14 @@
           color: #9657fa;
           font-style: italic;
           font-weight: 400;
-          font-family: "PT Serif", serif;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
         }
       }
 
       .backtestingcontent {
         display: flex;
         flex-direction: column;
-        gap: 21px;
+        gap: 8px;
 
         @media (max-width: 900px) {
           gap: 5px;
@@ -87,14 +87,14 @@
 
         p {
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 27px;
           color: #666666;
         }
 
         span {
           font-size: 18px;
-          font-weight: 700;
+          font-weight: 500;
           line-height: 27px;
           color: #666666;
         }

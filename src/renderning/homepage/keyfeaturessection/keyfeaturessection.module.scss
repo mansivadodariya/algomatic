@@ -35,7 +35,7 @@
         font-weight: 600;
         line-height: 62px;
         color: #111;
-        font-family: "Urbanist", sans-serif;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
 
         @media (max-width: 1200px) {
           font-size: 43px;
@@ -56,13 +56,13 @@
           color: #9657fa;
           font-style: italic;
           font-weight: 400;
-          font-family: "PT Serif", serif;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
         }
       }
 
       p {
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 400;
         line-height: 28px;
         color: #616161;
 
@@ -85,7 +85,7 @@
           border: 1px solid #f3f3f1;
           white-space: nowrap;
           font-size: 17px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 20px;
           color: #616161;
         }
@@ -194,7 +194,7 @@
             font-weight: 600;
             line-height: 28px;
             color: #111;
-            font-family: "Urbanist", sans-serif;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
 
             @media (max-width:900px) {
               font-size: 22px;
@@ -205,7 +205,7 @@
 
         p {
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 400;
           line-height: 28px;
           color: #616161;
         }
