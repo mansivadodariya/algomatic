@@ -57,7 +57,7 @@ export default function StrategiesPlans({ item, index }) {
         return;
       }
       if (response?.success == false) {
-        toast.error("Submission failed 1!");
+        toast.error("Submission failed due to some error!");
         setIsBtnLoading(false);
         throw new Error("Failed to submit");
       }
@@ -65,7 +65,7 @@ export default function StrategiesPlans({ item, index }) {
       setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "" });
     } catch (error) {
       setIsBtnLoading(false);
-      toast.error("Submission failed 2!");
+      toast.error("Submission failed due to some error!"); //check ip is whitelist or not
     } finally {
       setLoading(false);
       setIsBtnLoading(false);

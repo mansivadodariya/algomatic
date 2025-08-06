@@ -27,6 +27,7 @@ export default function StrategiesCardList() {
   };
 
   return (
+    <>
     <div className="container-xl">
       <div className={styles.strategiesCardList}>
         {strategyCard.length > 0 &&
@@ -60,5 +61,6 @@ export default function StrategiesCardList() {
         )}
       </div>
     </div>
+    </>
   );
 }

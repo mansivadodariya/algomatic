@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./payment-history.module.scss";
 import Button from "@/components/button";
-import { getPaymentHistory, editUser, updateMetaAccountNo, sendBotExeToUser } from "@/lib/strategyApi";
+import { getPaymentHistory, editUser, updateMetaAccountNo, sendRejoiceBotExeToUser, getBotByName, sendSerlinkBotExeToUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
 import toast from "react-hot-toast";
@@ -12,7 +12,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [payments, setPayments] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState("");
-  console.log(selectedPayment,'--------------selectedPayment')
+  console.log(selectedPayment, "--------------selectedPayment");
   const [metaModalOpen, setMetaModalOpen] = useState(false);
   const [metaAccountNo, setMetaAccountNo] = useState("");
   const [savingMeta, setSavingMeta] = useState(false);
@@ -54,21 +54,40 @@ export default function Dashboard() {
 
     setSavingMeta(true);
     try {
-      console.log(selectedPayment._id,'----------------------------selectedPayment 2')
+      console.log(selectedPayment, "----------------------------selectedPayment 2");
       await updateMetaAccountNo(selectedPayment._id, metaAccountNo);
       const refreshed = await getPaymentHistory();
       setPayments(refreshed);
       setMetaModalOpen(false);
       toast.success("Meta account updated! The EXE file has been sent to your email.");
 
-      // send bot exe file in user's mail
-      await sendBotExeToUser({
-        email: user.email,
-        metaAccountNo: metaAccountNo,
-        date: selectedPayment.createdAt,
-        planType: selectedPayment.planType,
-        file_name: selectedPayment?.botName /* ?? "test" */,
-      });
+      const botName = selectedPayment?.botName;
+      console.log(botName, "------------------botName");
+      const botData = await getBotByName(botName);
+      console.log(botData, "------------------botData");
+
+      // Rejoice company id from db
+      if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
+        console.log("rejoice company bot sending mail ---------")
+        await sendRejoiceBotExeToUser({
+          email: user.email,
+          metaAccountNo: metaAccountNo,
+          date: selectedPayment.createdAt,
+          planType: selectedPayment.planType,
+          file_name: selectedPayment?.botName,
+        });
+      }
+      // Algo client Serlink company id from db
+      if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
+        console.log("Serlink company bot sending mail ---------")
+        await sendSerlinkBotExeToUser({
+          email: user.email,
+          metaAccountNo: metaAccountNo,
+          date: selectedPayment.createdAt,
+          planType: selectedPayment.planType,
+          file_name: selectedPayment?.botName,
+        })
+      }
     } catch (e) {
       console.error(e);
     }

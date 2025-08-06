@@ -106,7 +106,23 @@ export const getPaymentHistory = async () => {
   }
 };
 
-export const sendBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+export const getBotByName = async (botName: string) => {
+  try {
+    console.log(botName, "----------------botName 4")
+    const res = await api.get(`/bot/getBotByName?name=${botName}`);
+    console.log(res, "----------------botName 5")
+    console.log(res.data.payload.data, "----------------botName 6")
+    return res.data.payload;
+  } catch (error) {
+    console.error("Error fetching strategy by id:", error);
+    return [];
+  }
+};
+
+
+// rejoice company api
+export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+  console.log("----------------algo rejoice company api 1");
   try {
     const calculatePlanEndDate = (startDateStr: string, planType: string) => {
       const months = +planType.replace(/\D/g, "");
@@ -121,12 +137,13 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
       return `${year}-${month}-${day}T23:59`;
     };
     const formatedDate = calculatePlanEndDate(data.date, data.planType);
+    console.log(formatedDate, "----------------formatedDate rejoice api 2");
 
     const dataObj = {
       email: data.email,
       account_number: data?.metaAccountNo,
       end_date: formatedDate, // "2025-08-01T14:30"
-      file_name: data?.file_name/*  || "test" */,
+      file_name: data?.file_name || "test",
     };
 
     const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
@@ -135,8 +152,68 @@ export const sendBotExeToUser = async (data: { email: string; metaAccountNo: str
         "Access-Control-Allow-Origin": "*",
       },
     });
+    console.log(response, "----------------response rejoice api ");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];
   }
 };
+
+// algo client Serlink company api
+export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+  console.log("----------------algo client Serlink company api 1");
+  try {
+    const calculatePlanEndDate = (
+      startDateStr: string,
+      planType: string
+    ): { endDate: string; totalDays: number } => {
+      const months = +planType.replace(/\D/g, "");
+      const date = new Date(startDateStr);
+    
+      date.setMonth(date.getMonth() + months);
+    
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+    
+      // Map of fixed plan durations
+      const planDaysMap: { [key: number]: number } = {
+        3: 90,
+        6: 180,
+        9: 270,
+        12: 365,
+      };
+    
+      const totalDays = planDaysMap[months] || 0;
+    
+      return {
+        endDate: `${year}-${month}-${day}T23:59`,
+        totalDays,
+      };
+    };
+    
+    // Usage
+    const { endDate, totalDays } = calculatePlanEndDate(data.date, data.planType);
+    console.log(endDate,"::::", totalDays, "----------------totalDays 2");
+    
+    const dataObj = {
+      account_id: data?.metaAccountNo,
+      days_valid: totalDays,
+      email: data?.email
+    }
+
+    const response = await axios.post(`http://18.208.156.217:5000/api/generate-ea`, dataObj, {
+      headers: {
+        'Authorization': 'Bearer 4534405',
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    console.log(response, "----------------response client serlink api ");
+    
+  } catch (error) {
+    console.error("Error fetching strategy by id:", error);
+    return [];
+  }
+};
+
