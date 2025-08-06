@@ -197,11 +197,13 @@ export default function StrategiesDetails() {
             </div>
 
             {/* Description */}
-            <p
-              dangerouslySetInnerHTML={{
-                __html: marked(sterategyDetails?.description || ""),
-              }}
-            />
+            <div className={styles.description}>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: marked(sterategyDetails?.description || ""),
+                }}
+              />
+            </div>
 
             {/* Tutorial Video Slider */}
             <h2>Tutorial</h2>
@@ -210,7 +212,15 @@ export default function StrategiesDetails() {
                 {sterategyDetails?.link?.map((item, i) => (
                   <div key={i}>
                     <div className={styles.tutorialitem}>
-                      <iframe src={getEmbedUrl(item)} title={`YouTube video ${i}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen width="100%" height="400" frameBorder="0" />
+                      <iframe
+                        src={getEmbedUrl(item)}
+                        title={`YouTube video ${i}`}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        width="100%"
+                        height="400"
+                        frameBorder="0"
+                      />
                     </div>
                   </div>
                 ))}
