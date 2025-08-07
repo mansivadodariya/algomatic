@@ -202,13 +202,27 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
       email: data?.email
     }
 
-    const response = await axios.post(`http://18.208.156.217:5000/api/generate-ea`, dataObj, {
+    // const response = await axios.post(`http://18.208.156.217:5000/api/generate-ea`, dataObj, {
+    //   headers: {
+    //     'Authorization': 'Bearer 4534405',
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "*",
+    //   },
+    // });
+    const response = await fetch('http://18.208.156.217:5000/api/generate-ea', {
+      method: 'POST',
       headers: {
         'Authorization': 'Bearer 4534405',
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json',
+        // Do NOT include Access-Control-Allow-Origin in requests
       },
+      body: JSON.stringify(dataObj),
     });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
     console.log(response, "----------------response client serlink api ");
     
   } catch (error) {

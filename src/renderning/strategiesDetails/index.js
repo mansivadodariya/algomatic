@@ -213,7 +213,7 @@ export default function StrategiesDetails() {
                   <div key={i}>
                     <div className={styles.tutorialitem}>
                       <iframe
-                        src={getEmbedUrl(item)}
+                        src={getEmbedUrl(item?.url)}
                         title={`YouTube video ${i}`}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
