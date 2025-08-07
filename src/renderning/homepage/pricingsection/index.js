@@ -13,7 +13,10 @@ export default function Pricingsection() {
 
   useEffect(() => {
     getCategory().then((res) => {
-      setCategories(res.payload.data);
+      console.log(res.payload.data[0]?.strategies, "----------------res2222")
+      
+      // setCategories(res.payload.data[0]?.strategies);
+      setCategories(res.payload.data[0]?.strategies.slice(0, 3));
     });
   }, []);
 
@@ -36,18 +39,19 @@ export default function Pricingsection() {
                   <div className={styles.pricingcardtitle}>
                     <div>
                       <h2>{item.title}</h2>
-                      <p>{item.strategies.map((strategy) => strategy.strategyPlans[0]?.planType).join(", ")}</p>
+                      <p>{item.strategyPlans[0]?.planType}</p>
                     </div>
                     <div className={styles.pricingcardtitlebadge}>
                       <Coreicon />
                     </div>
                   </div>
                   <div className={styles.pricecardbody}>
-                    <h3>${item.strategies[0]?.strategyPlans[0]?.price}</h3>
+                    <h3>${item.strategyPlans[0]?.price}</h3>
                     <div className={styles.priceingdetailsmain}>
                       <div className={styles.priceingdetailsflx}>
                         <Checkicon />
-                        <p>{item.strategies.map((strategy) => strategy.title).join(", ")}</p>
+                        {/* <p>{item.strategyPlans.map((strategy) => strategy.title).join(", ")}</p> */}
+                        <p>{item.shortDescription}</p>
                       </div>
                     </div>
                   </div>
