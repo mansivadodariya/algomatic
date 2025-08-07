@@ -4,7 +4,7 @@ import CommonButton from "@/components/commonButton";
 import Commonlable from "@/components/commonlable";
 export default function StrategiesBanner() {
   return (
-    <div className="container-lg">
+    <div className="container-xl">
       <div className={styles.StrategiesBanner}>
         {/* <div className={styles.buttonCenter}>
           <CommonButton text="Strategies" />

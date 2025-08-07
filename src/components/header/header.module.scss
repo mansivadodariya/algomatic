@@ -302,8 +302,11 @@
           border: none;
           text-align: left;
           cursor: pointer;
-          font-size: 14px;
-          color: #111;
+          font-size: 17px;
+          font-weight: 400;
+          line-height: 20px;
+          color: #616161;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
           transition: background 0.25s ease, color 0.25s ease;
           width: 100%;
 
@@ -412,11 +415,11 @@
         // color: #616161;
         cursor: pointer;
         transition: 0.4s ease-in-out;
-        
+
         a {
           font-size: 17px;
           font-weight: 400;
-          line-height: 22px;
+          line-height: 20px;
           color: #616161;
           font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
           transition: 0.4s ease-in-out;
@@ -469,11 +472,12 @@
         }
         span {
           display: block;
-          color: var(--Foundation-Blue-Normal, #9657fa);
-          font-size: 18px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: normal;
+          // color: var(--Foundation-Blue-Normal, #9657fa);
+          font-size: 17px;
+          font-weight: 400;
+          line-height: 22px;
+          color: #616161;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
           @include breakpoint("sm-max") {
             @include font14;
           }
@@ -491,12 +495,13 @@
       }
 
       p {
-        color: var(--foundation-white-dark-active, #737373);
-        font-size: 16px;
-        font-style: normal;
+        // color: var(--foundation-white-dark-active, #737373);
+        font-size: 17px;
         font-weight: 400;
+        line-height: 22px;
+        color: #616161;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
         margin: 0 0 20px 0;
-        line-height: 24px;
       }
       &:hover {
         svg {
@@ -511,7 +516,7 @@
         color: var(--Foundation-Blue-Normal, #9657fa);
         font-size: 18px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 400;
         line-height: normal;
         @include breakpoint("sm-max") {
           @include font14;
