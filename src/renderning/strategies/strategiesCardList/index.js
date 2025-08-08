@@ -38,8 +38,6 @@ export default function StrategiesCardList() {
               {item.strategies.length > 0 && (
                 <div className={styles.grid}>{item.strategies?.map((item, i) => <StrategiesCard key={i} item={item} index={i} />)}</div>
               )}
-
-              {/* <div className={styles.grid}>{strategyCard.length > 0 ? strategyCard?.strategies?.map((item, i) => <StrategiesCard key={i} item={item} index={i} />) : <p className={styles.noData}>No Data Found</p>}</div> */}
            </div>
             )
           })}

@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styles from "./pricingsection.module.scss";
 import Commonlable from "@/components/commonlable";
-import Coreicon from "../../../../public/assets/icons/coreicon";
 import Checkicon from "../../../../public/assets/icons/checkicon";
 import Commonarrowbutton from "@/components/commonarrowbutton";
+import { getCategory } from "@/lib/categoryApi";
+import Coreicon from "../../../../public/assets/icons/coreicon";
 import Plusplanicon from "../../../../public/assets/icons/plusplanicon";
 import Trophyicon from "../../../../public/assets/icons/trophyicon";
-import { getCategory } from "@/lib/categoryApi";
 
 export default function Pricingsection() {
   const [categories, setCategories] = useState([]);
+
+  const icons = [
+    <Coreicon />,
+    <Plusplanicon />,
+    <Trophyicon />,
+  ]
 
   useEffect(() => {
     getCategory().then((res) => {
@@ -30,20 +36,21 @@ export default function Pricingsection() {
           </div>
 
           <div className={styles.pricingcardgrdmain}>
-            {categories.map((item) => (
+            {categories.map((item, index) => (
               <div className={`${styles.pricingcard} ${styles.pricingcardactive}`}>
                 <div className={styles.pricingcardcontent}>
                   <div className={styles.pricingcardtitle}>
                     <div>
-                      <h2>{item.title}</h2>
-                      <p>{item.strategyPlans[0]?.planType}</p>
+                      <h2 className={styles.cardsTitle}>{item.title}</h2>
+                      {item.strategyPlans.map((plan) => (
+                        <p className={styles.itemPrice}key={plan.id}>{plan.planType}: {plan.price}$</p>
+                      ))}
                     </div>
                     <div className={styles.pricingcardtitlebadge}>
-                      <Coreicon />
+                      {icons[index]}
                     </div>
                   </div>
                   <div className={styles.pricecardbody}>
-                    <h3>${item.strategyPlans[0]?.price}</h3>
                     <div className={styles.priceingdetailsmain}>
                       <div className={styles.priceingdetailsflx}>
                         <Checkicon />
@@ -53,7 +60,7 @@ export default function Pricingsection() {
                   </div>
                 </div>
                 <div className={styles.pricingbutton}>
-                  <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link="/marketplace" />
+                  <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link={`/marketplace/${item?._id}`} />
                 </div>
               </div>
             ))}

@@ -13,6 +13,7 @@ import AuthModal from "../authModal";
 import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 const Logo = "/assets/logo/logo.svg";
 const Logoimg = "/assets/logo/logo.png";
 export default function Header() {
@@ -21,6 +22,7 @@ export default function Header() {
   const { showLogin, setShowLogin } = useAppContext();
   const [showMenu, setShowMenu] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
+  const [getUtilitySettingsData, setGetUtilitySettingsData] = useState({});
 
   const menuRef = useRef(null);
   const router = useRouter();
@@ -39,6 +41,10 @@ export default function Header() {
     setIsUserLoggedIn(loginStatus);
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     setUser(storedUser);
+
+    getUtilitySettings().then((res) => {
+      setGetUtilitySettingsData(res.payload);
+    });
   }, []);
 
   useEffect(() => {
@@ -95,83 +101,9 @@ export default function Header() {
       submenu: [],
       Target: "__blank",
       // routes: "/contact-us",
-      routes: "https://api.whatsapp.com/send?phone=971509706562",
+      // routes: "https://api.whatsapp.com/send?phone=971509706562",
+      routes: `https://api.whatsapp.com/send?phone=${getUtilitySettingsData?.phoneNo}`,
     },
-
-    // {
-    //   title: "Forex Licenses",
-    //   submenu: [
-    //     {
-    //       title: "Mauritius Forex License",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/mauritius-forex-license",
-    //     },
-    //     {
-    //       title: "St. Vincent Forex License",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/vincent-forex-license",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Algo Bot & Strategies",
-    //   submenu: [
-    //     {
-    //       title: "AI bot development",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/algo-bot",
-    //     },
-    //     {
-    //       title: "Strategies",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/strategies",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "Forex Services",
-    //   submenu: [
-    //     {
-    //       title: "Web and Mobile App Development",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/mobile-web-development",
-    //     },
-    //     {
-    //       title: "AI/ML Development",
-    //       description:
-    //         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    //       redirectLink: "/ai-development",
-    //     },
-    //   ],
-    // },
-    // {
-    //   title: "FX Tools",
-    //   submenu: [
-    //     {
-    //       title: "FX Guru",
-    //       description: "Your intelligent FX Copilot. Get accurate and instant answers to all your forex-related queries - whether it's market trends, strategies, or technical definitions.",
-    //       redirectLink: "https://fxguru.rejoicehub.com/",
-    //       isNewTab: true,
-    //     },
-    //     {
-    //       title: "Trade Snap",
-    //       description: "Instantly analyze chart snapshots to receive real-time Buy/Sell signals. A smart companion to guide your entry and exit decisions.",
-    //       redirectLink: "https://trade-snap.rejoicehub.com/",
-    //       isNewTab: true,
-    //     },
-    //     {
-    //       title: "FX Signal",
-    //       description: "Unlock smarter trading with 20+ expert-grade indicators covering trend, momentum, volume, and volatility—designed for deep, actionable technical insights.",
-    //       redirectLink: "https://fxsignal.rejoicehub.com/",
-    //       isNewTab: true,
-    //     },
-    //   ],
-    // },
   ];
 
   const handleLinkClick = () => {

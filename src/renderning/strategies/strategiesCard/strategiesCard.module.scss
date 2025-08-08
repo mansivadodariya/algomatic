@@ -10,6 +10,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 14px;
   height: 100%;
 
@@ -175,6 +176,37 @@
           }
         }
       }
+    }
+  }
+}
+
+.planstags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+
+  .plantag {
+    display: flex;
+    justify-content: space-between;
+    gap: 4px;
+    align-items: center;
+    border-radius: 1px;
+    background-color: #fff;
+    border: 1px solid #e0e7ff;
+    padding: 6px 12px;
+
+    .planType {
+      font-size: 12px;
+      line-height: 16px;
+      color: #64748b;
+    }
+
+    .planPrice {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 600;
+      color: #3571e9;
     }
   }
 }

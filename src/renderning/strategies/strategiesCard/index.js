@@ -21,22 +21,27 @@ export default function StrategiesCard({ item, index }) {
 
   return (
     <>
-      <div className={styles.strategiesCard} key={index}>
-        <Link href={`/marketplace/${item?._id}`}>
+      <Link href={`/marketplace/${item?._id}`} className={styles.strategiesCard} key={index}>
+        <div>
           <div className={styles.imageWrapper}>
-            <Image
-              src={item?.imageUrl || AiIcon}
-              alt="strategy"
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={item?.imageUrl || AiIcon} alt="strategy" layout="fill" objectFit="cover" />
           </div>
           <div className={styles.details}>
             <h3>{item?.title}</h3>
             <p>{item?.shortDescription}</p>
+            {/* <p>{item?.shortDescription}</p> */}
+            {console.log(item?.strategyPlans, "----------lglglglg")}
           </div>
-        </Link>
-      </div>
+        </div>
+        <div className={styles.planstags}>
+          {item?.strategyPlans?.map((plan) => (
+            <div key={plan?._id} className={styles.plantag}>
+              <span className={styles.planType}>{plan?.planType}</span>
+              <span className={styles.planPrice}>${plan?.price}</span>
+            </div>
+          ))}
+        </div>
+      </Link>
 
       {modalOpen && (
         <div className={styles.linkmodal}>
@@ -53,17 +58,12 @@ export default function StrategiesCard({ item, index }) {
               <span>Link</span>
               <div className={styles.linkText}>
                 <a>{item?.link}</a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  onClick={() => handleCopy(item?.link)}
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" onClick={() => handleCopy(item?.link)}>
                   <path d="M384 336l-192...z" />
                 </svg>
               </div>
               <p>
-                Send your transaction screenshot to{" "}
-                <a>yash@rejoicehub.com</a>
+                Send your transaction screenshot to <a>yash@rejoicehub.com</a>
               </p>
             </div>
           </div>
