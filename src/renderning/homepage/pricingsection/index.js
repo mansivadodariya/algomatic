@@ -19,7 +19,7 @@ export default function Pricingsection() {
 
   useEffect(() => {
     getCategory().then((res) => {
-      setCategories(res.payload.data[0]?.strategies.slice(0, 3));
+      setCategories(res.payload?.data[0]?.strategies.slice(0, 3));
     });
   }, []);
 
@@ -36,7 +36,7 @@ export default function Pricingsection() {
           </div>
 
           <div className={styles.pricingcardgrdmain}>
-            {categories.map((item, index) => (
+            {categories && categories.map((item, index) => (
               <div className={`${styles.pricingcard} ${styles.pricingcardactive}`}>
                 <div className={styles.pricingcardcontent}>
                   <div className={styles.pricingcardtitle}>

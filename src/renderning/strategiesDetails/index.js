@@ -8,7 +8,7 @@ import { getStrategyById, getStrategyPlans } from "@/lib/strategyApi";
 import StrategiesPlans from "../strategies/strategiesPlans";
 import Slider from "react-slick";
 import Leftarrow from "../../../public/assets/icons/leftarrow";
-import Dropdownicon from "../../../out/assets/images/dropdownicon";
+import Dropdownicon from "../../../public/assets/icons/dropdownicon";
 import { capitalize } from "lodash";
 
 // --- Arrow Components ---

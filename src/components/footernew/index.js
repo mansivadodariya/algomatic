@@ -31,37 +31,21 @@ export default function Footernew() {
                   <img src={Logoimg} alt="logo" />
                 </Link>
               </div>
-              <p>
-                Join the revolution of forex trading with AlgoMatic. Let smart
-                automation help you trade smarter, faster, and more efficiently.
-              </p>
+              <p>Join the revolution of forex trading with AlgoMatic. Let smart automation help you trade smarter, faster, and more efficiently.</p>
             </div>
-            <Commonarrowbutton
-              Text="Contact Us"
-              Butttonvarient="darkoutlined"
-              link={`https://wa.me/${utilitySettings?.phoneNo}`}
-              buttonclassName="widthfull"
-            />
+            <Commonarrowbutton Text="Contact Us" Butttonvarient="darkoutlined" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" buttonclassName="widthfull" />
           </div>
 
           <div className={styles.footrright}>
             <div className={styles.footerrightflx}>
               <div className={styles.contactsection}>
                 <h3>Contact Us</h3>
-                <Link
-                  href={`https://wa.me/${utilitySettings?.phoneNo}`}
-                  target="_blank"
-                  className={styles.contactitem}
-                >
+                <Link href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.contactitem}>
                   <Whatsappicon />
                   {/* <p>+971 50 970 6562</p> */}
                   <p>{utilitySettings?.phoneNo}</p>
                 </Link>
-                <Link
-                  href={`mailto:${utilitySettings?.email}`}
-                  target="_blank"
-                  className={styles.contactitem}
-                >
+                <Link href={`mailto:${utilitySettings?.email}`} target="_blank" className={styles.contactitem}>
                   <Emailicon />
                   {/* <p>support@algomaticbot.com</p> */}
                   <p>{utilitySettings?.email}</p>
@@ -73,17 +57,7 @@ export default function Footernew() {
 
               <div className={styles.risksection}>
                 <h3>Risk Warning</h3>
-                <p>
-                  Forex trading, including automated trading with Algomatic,
-                  involves significant risk and is not suitable for all
-                  investors. You may lose more than your initial investment, and
-                  past performance is not indicative of future results. The
-                  forex market is highly volatile, and market conditions can
-                  change rapidly. This website does not provide investment
-                  advice, and users are encouraged to consult with a qualified
-                  financial advisor before making any trading decisions. By
-                  using Algomatic, you acknowledge and accept these risks.
-                </p>
+                <p>Forex trading, including automated trading with Algomatic, involves significant risk and is not suitable for all investors. You may lose more than your initial investment, and past performance is not indicative of future results. The forex market is highly volatile, and market conditions can change rapidly. This website does not provide investment advice, and users are encouraged to consult with a qualified financial advisor before making any trading decisions. By using Algomatic, you acknowledge and accept these risks.</p>
               </div>
             </div>
 
