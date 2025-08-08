@@ -147,7 +147,6 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
         "Access-Control-Allow-Origin": "*",
       },
     });
-    // (response, "----------------response rejoice api ");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];
@@ -215,8 +214,6 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
-    (response, "----------------response client serlink api ");
     
   } catch (error) {
     console.error("Error fetching strategy by id:", error);

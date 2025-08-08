@@ -104,9 +104,7 @@ export default function Header() {
       title: "Contact Us",
       submenu: [],
       Target: "__blank",
-      // routes: "/contact-us",
-      // routes: "https://api.whatsapp.com/send?phone=971509706562",
-      routes: `https://api.whatsapp.com/send?phone=${getUtilitySettingsData?.phoneNo}`,
+      routes: `https://wa.me/${getUtilitySettingsData?.phoneNo}`,
     },
   ];
 

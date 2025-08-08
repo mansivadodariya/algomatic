@@ -39,6 +39,7 @@ export default function Footernew() {
             <Commonarrowbutton
               Text="Contact Us"
               Butttonvarient="darkoutlined"
+              link={`https://wa.me/${utilitySettings?.phoneNo}`}
               buttonclassName="widthfull"
             />
           </div>

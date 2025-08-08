@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./mobileHeader.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import DownArrow from "../icons/downArrow";
 import classNames from "classnames";
 import Commonarrowbutton from "../commonarrowbutton";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 const Logo = "/assets/logo/logo.svg";
 
 export default function MobileHeader({ setHeader, header }) {
+   const [utilitySettings, setUtilitySettings] = useState({});
+   useEffect(() => {
+     getUtilitySettings().then((res) => {
+       setUtilitySettings(res?.payload);
+     });
+   }, []);
   return (
     <>
       <div className={classNames(styles.mobileHeaderoverlay, header ? styles.open : styles.hide)}></div>
@@ -30,9 +37,10 @@ export default function MobileHeader({ setHeader, header }) {
               Marketplace
             </Link>
           </div>
-          <Commonarrowbutton Text="Contact Us" Butttonvarient="lightoutlined" link="https://api.whatsapp.com/send?phone=971509706562" Target="blank" />
+          <Commonarrowbutton Text="Contact Us" Butttonvarient="lightoutlined" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" />
         </div>
       </div>
     </>
   );
 }
+

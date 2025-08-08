@@ -29,7 +29,7 @@ export default function Homeherobanner() {
               </h1>
               <p>Algomatic is a smart trading bot that leverages arbitrage opportunities in the XAUUSD forex market, executing real-time trades for maximum profit and minimal risk</p>
               <div className={styles.herobannerbuttons}>
-                <Commonarrowbutton Text="contact us" Butttonvarient="dark" link={`https://api.whatsapp.com/send?phone=${getUtilitySettingsData?.phoneNo}`} Target="blank" />
+                <Commonarrowbutton Text="contact us" Butttonvarient="dark" link={`https://wa.me/${getUtilitySettingsData?.phoneNo}`} Target="blank" />
                 <Commonarrowbutton Text="explore algomatic" Butttonvarient="light" link="/marketplace" />
               </div>
             </div>
