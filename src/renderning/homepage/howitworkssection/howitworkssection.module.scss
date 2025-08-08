@@ -1,5 +1,5 @@
 .howitworkssectionmain {
-  padding: 90px 60px;
+  padding: 90px 0;
 
   @media (max-width:900px) {
     padding: 40px 0;
@@ -59,11 +59,11 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
 
-    @media (max-width: 1200px) {
+    @media (max-width: 1024px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 768px) {
       grid-template-columns: repeat(1, 1fr);
     }
 
@@ -81,13 +81,13 @@
       border-radius: 30px;
 
       &:last-child {
-        @media (max-width: 1200px) {
+        @media (max-width: 1024px) {
           grid-column: span 2;
           max-width: 50%;
           margin: 0 auto;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
           grid-column: 1;
           max-width: 100%;
           margin: 0;

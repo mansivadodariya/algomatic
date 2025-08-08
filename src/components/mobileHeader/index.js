@@ -17,7 +17,7 @@ export default function MobileHeader({ setHeader, header }) {
    }, []);
   return (
     <>
-      <div className={classNames(styles.mobileHeaderoverlay, header ? styles.open : styles.hide)}></div>
+      <div className={classNames(styles.mobileHeaderoverlay, header ? styles.open : styles.hide)} onClick={() => setHeader(!header)}></div>
       <div className={classNames(styles.mobileHeader, header ? styles.show : styles.hide)}>
         <div className={styles.menudetails}>
           <div className={styles.menulinks}>

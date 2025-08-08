@@ -12,6 +12,17 @@
   background-color: #25d366;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
+
+  @media (max-width:1024px) {
+    bottom: 30px;
+    right: 30px;
+  }
+
+  @media (max-width:768px) {
+    bottom: 20px;
+    right: 20px;
+  }
+
   svg {
     width: 24px;
     height: 24px;
