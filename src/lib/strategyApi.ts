@@ -108,10 +108,7 @@ export const getPaymentHistory = async () => {
 
 export const getBotByName = async (botName: string) => {
   try {
-    console.log(botName, "----------------botName 4")
     const res = await api.get(`/bot/getBotByName?name=${botName}`);
-    console.log(res, "----------------botName 5")
-    console.log(res.data.payload.data, "----------------botName 6")
     return res.data.payload;
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
@@ -122,7 +119,6 @@ export const getBotByName = async (botName: string) => {
 
 // rejoice company api
 export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
-  console.log("----------------algo rejoice company api 1");
   try {
     const calculatePlanEndDate = (startDateStr: string, planType: string) => {
       const months = +planType.replace(/\D/g, "");
@@ -137,7 +133,6 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
       return `${year}-${month}-${day}T23:59`;
     };
     const formatedDate = calculatePlanEndDate(data.date, data.planType);
-    console.log(formatedDate, "----------------formatedDate rejoice api 2");
 
     const dataObj = {
       email: data.email,
@@ -152,7 +147,7 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
         "Access-Control-Allow-Origin": "*",
       },
     });
-    console.log(response, "----------------response rejoice api ");
+    // (response, "----------------response rejoice api ");
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];
@@ -161,7 +156,6 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
 
 // algo client Serlink company api
 export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
-  console.log("----------------algo client Serlink company api 1");
   try {
     const calculatePlanEndDate = (
       startDateStr: string,
@@ -194,7 +188,6 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
     
     // Usage
     const { endDate, totalDays } = calculatePlanEndDate(data.date, data.planType);
-    console.log(endDate,"::::", totalDays, "----------------totalDays 2");
     
     const dataObj = {
       account_id: data?.metaAccountNo,
@@ -223,7 +216,7 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     
-    console.log(response, "----------------response client serlink api ");
+    (response, "----------------response client serlink api ");
     
   } catch (error) {
     console.error("Error fetching strategy by id:", error);

@@ -13,9 +13,6 @@ export default function Pricingsection() {
 
   useEffect(() => {
     getCategory().then((res) => {
-      console.log(res.payload.data[0]?.strategies, "----------------res2222")
-      
-      // setCategories(res.payload.data[0]?.strategies);
       setCategories(res.payload.data[0]?.strategies.slice(0, 3));
     });
   }, []);
@@ -50,7 +47,6 @@ export default function Pricingsection() {
                     <div className={styles.priceingdetailsmain}>
                       <div className={styles.priceingdetailsflx}>
                         <Checkicon />
-                        {/* <p>{item.strategyPlans.map((strategy) => strategy.title).join(", ")}</p> */}
                         <p>{item.shortDescription}</p>
                       </div>
                     </div>

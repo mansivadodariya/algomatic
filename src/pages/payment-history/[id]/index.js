@@ -12,7 +12,7 @@ export default function Dashboard() {
   const router = useRouter();
   const [payments, setPayments] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState("");
-  console.log(selectedPayment, "--------------selectedPayment");
+  (selectedPayment, "--------------selectedPayment");
   const [metaModalOpen, setMetaModalOpen] = useState(false);
   const [metaAccountNo, setMetaAccountNo] = useState("");
   const [savingMeta, setSavingMeta] = useState(false);
@@ -54,7 +54,6 @@ export default function Dashboard() {
 
     setSavingMeta(true);
     try {
-      console.log(selectedPayment, "----------------------------selectedPayment 2");
       await updateMetaAccountNo(selectedPayment._id, metaAccountNo);
       const refreshed = await getPaymentHistory();
       setPayments(refreshed);
@@ -62,13 +61,11 @@ export default function Dashboard() {
       toast.success("Meta account updated! The EXE file has been sent to your email.");
 
       const botName = selectedPayment?.botName;
-      console.log(botName, "------------------botName");
       const botData = await getBotByName(botName);
-      console.log(botData, "------------------botData");
 
       // Rejoice company id from db
       if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
-        console.log("rejoice company bot sending mail ---------")
+        ("rejoice company bot sending mail ---------")
         await sendRejoiceBotExeToUser({
           email: user.email,
           metaAccountNo: metaAccountNo,
@@ -79,7 +76,6 @@ export default function Dashboard() {
       }
       // Algo client Serlink company id from db
       if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
-        console.log("Serlink company bot sending mail ---------")
         await sendSerlinkBotExeToUser({
           email: user.email,
           metaAccountNo: metaAccountNo,
