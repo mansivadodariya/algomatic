@@ -109,11 +109,13 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('----------------')
     e.preventDefault();
     if (validate()) {
       setIsSubmitting(true);
       if (mode === "login") {
         const login = await loginUser(formData.email, formData.password);
+        console.log(login,'-------------login')
         if (login?.success) {
           toast.success("Login Successful");
           localStorage.setItem("user", JSON.stringify(login.payload));
@@ -128,15 +130,24 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
           // }
 
           onClose();
+        }else{
+          toast.error(login?.message);
+          setIsSubmitting(false);
         }
         setIsSubmitting(false);
       } else {
         const signup = await signUpUser(formData.name, formData.email, formData.phone, formData.password, formData.confirmPassword, formData.countryCode);
+        console.log(signup,'-------------signup')
         if (signup?.success) {
           toast.success("Signup Successful");
           setShowLogin(true);
           setFormData(initialData);
+          setIsSubmitting(false);
           setMode("login");
+        }else{
+          toast.error(signup?.message);
+          setIsSubmitting(false);
+          // setIsSubmitting(false);
         }
       }
     }

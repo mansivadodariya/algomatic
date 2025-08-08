@@ -40,6 +40,10 @@ export default function Header() {
     const loginStatus = localStorage.getItem("isLogin");
     setIsUserLoggedIn(loginStatus);
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
+  //   const storedUser = typeof window !== "undefined" && localStorage.getItem("user")
+  // ? JSON.parse(localStorage.getItem("user"))
+  // : null;
+
     setUser(storedUser);
 
     getUtilitySettings().then((res) => {

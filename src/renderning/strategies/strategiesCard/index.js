@@ -29,14 +29,18 @@ export default function StrategiesCard({ item, index }) {
           <div className={styles.details}>
             <h3>{item?.title}</h3>
             <p>{item?.shortDescription}</p>
-            {/* <p>{item?.shortDescription}</p> */}
-            {console.log(item?.strategyPlans, "----------lglglglg")}
           </div>
         </div>
         <div className={styles.planstags}>
-          {item?.strategyPlans?.map((plan) => (
+          {/* {item?.strategyPlans?.map((plan) => (
             <div key={plan?._id} className={styles.plantag}>
               <span className={styles.planType}>{plan?.planType}</span>
+              <span className={styles.planPrice}>${plan?.price}</span>
+            </div>
+          ))} */}
+          {item?.strategyPlans?.map((plan) => (
+            <div key={plan?._id} className={styles.plantag}>
+              <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
               <span className={styles.planPrice}>${plan?.price}</span>
             </div>
           ))}

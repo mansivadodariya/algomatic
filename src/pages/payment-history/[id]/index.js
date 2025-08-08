@@ -7,16 +7,18 @@ import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
 import toast from "react-hot-toast";
 import Loader from "@/components/loader";
+import Useicon from "../../../../public/assets/icons/useicon";
 
 export default function Dashboard() {
   const router = useRouter();
   const [payments, setPayments] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState("");
-  (selectedPayment, "--------------selectedPayment");
+  selectedPayment, "--------------selectedPayment";
   const [metaModalOpen, setMetaModalOpen] = useState(false);
   const [metaAccountNo, setMetaAccountNo] = useState("");
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     if (!storedUser) {
@@ -28,10 +30,13 @@ export default function Dashboard() {
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true);
         const data = await getPaymentHistory();
         setPayments(data);
       } catch (e) {
         console.error(e);
+      } finally {
+        setLoading(false);
       }
     })();
   }, []);
@@ -65,7 +70,7 @@ export default function Dashboard() {
 
       // Rejoice company id from db
       if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
-        ("rejoice company bot sending mail ---------")
+        ("rejoice company bot sending mail ---------");
         await sendRejoiceBotExeToUser({
           email: user.email,
           metaAccountNo: metaAccountNo,
@@ -82,7 +87,7 @@ export default function Dashboard() {
           date: selectedPayment.createdAt,
           planType: selectedPayment.planType,
           file_name: selectedPayment?.botName,
-        })
+        });
       }
     } catch (e) {
       console.error(e);
@@ -112,6 +117,7 @@ export default function Dashboard() {
                     </tr>
                   </thead>
                   <tbody>
+                    {/* {payments.length < 0 && <div>No data found</div>}
                     {payments.map((p, idx) => (
                       <tr key={p._id || idx}>
                         <td>{idx + 1}</td>
@@ -140,13 +146,54 @@ export default function Dashboard() {
                           <span className={`${p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}`}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
                         </td>
                       </tr>
+                    ))} */}
+                    {payments.map((p, idx) => (
+                      <tr key={p._id || idx}>
+                        <td>{idx + 1}</td>
+                        <td>{new Date(p.createdAt).toLocaleString()}</td>
+                        <td title={p?.strategyPlanId?.strategyId?.title ?? "-"}>
+                          <div className={styles.truncateText}>{p?.strategyPlanId?.strategyId?.title ?? "-"}</div>
+                        </td>
+                        <td>{p.planType ?? "-"}</td>
+                        <td>${p.amount ?? "-"}</td>
+                        <td>{p.transactionId ?? "-"}</td>
+                        <td>
+                          {p.metaAccountNo == null ? (
+                            p.paymentStatus === "paid" ? (
+                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
+                                + Add
+                              </button>
+                            ) : (
+                              "-"
+                            )
+                          ) : (
+                            p.metaAccountNo
+                          )}
+                        </td>
+                        <td>
+                          <span className={p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
+                        </td>
+                      </tr>
                     ))}
                   </tbody>
                 </table>
-                {payments.length === 0 && (
+                {loading && (
                   <div className={styles.noTransactions}>
                     <Loader />
                   </div>
+                )}
+                {payments.length === 0 && (
+                  <>
+                    <div className={styles.tablenodatamain}>
+                      <div className={styles.tablenodataflx}>
+                        <div className={styles.nodatausericon}>
+                          <Useicon />
+                        </div>
+                        <h1>No data found</h1>
+                        <p>No payment records available.</p>
+                      </div>
+                    </div>
+                  </>
                 )}
               </div>
             </section>

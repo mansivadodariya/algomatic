@@ -43,7 +43,8 @@ export default function Pricingsection() {
                     <div>
                       <h2 className={styles.cardsTitle}>{item.title}</h2>
                       {item.strategyPlans.map((plan) => (
-                        <p className={styles.itemPrice}key={plan.id}>{plan.planType}: {plan.price}$</p>
+                        // <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
+                        <p className={styles.itemPrice}key={plan.id}>{plan.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}: {plan.price}$</p>
                       ))}
                     </div>
                     <div className={styles.pricingcardtitlebadge}>

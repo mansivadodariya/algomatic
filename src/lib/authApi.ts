@@ -6,6 +6,7 @@ import { api } from "./axios";
 export const loginUser = async (email: string, password: string) => {
   try {
     const res = await api.post(`/user/login`, { email, password });
+    console.log(res,'-------------login')
     return res.data;
   } catch (error) {
     console.error("Error fetching login:", error);
