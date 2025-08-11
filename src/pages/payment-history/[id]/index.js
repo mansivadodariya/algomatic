@@ -8,6 +8,7 @@ import Modal from "@/components/modal";
 import toast from "react-hot-toast";
 import Loader from "@/components/loader";
 import Useicon from "../../../../public/assets/icons/useicon";
+import CommonButton from "@/components/commonButton";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function Dashboard() {
   const [selectedPayment, setSelectedPayment] = useState("");
   const [metaModalOpen, setMetaModalOpen] = useState(false);
   const [metaAccountNo, setMetaAccountNo] = useState([]);
+  const [viewMoreMetaData, setViewMoreMetaData] = useState([]);
+  const [viewMoreMetaDataModalOpen, setViewMoreMetaDataModalOpen] = useState(false);
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
@@ -148,6 +151,27 @@ export default function Dashboard() {
                           {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
                             p.paymentStatus === "paid" ? (
                               <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
+                                + Add Meta Account No
+                              </button>
+                            ) : (
+                              "-"
+                            )
+                          ) : (
+                            <button
+                              className={styles.addMetaBtn}
+                              onClick={() => {
+                                setViewMoreMetaDataModalOpen(true);
+                                setViewMoreMetaData(p.metaAccountNo);
+                              }}
+                            >
+                              View More
+                            </button>
+                          )}
+                        </td>
+                        {/* <td>
+                          {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
+                            p.paymentStatus === "paid" ? (
+                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
                                 + Add
                               </button>
                             ) : (
@@ -156,7 +180,7 @@ export default function Dashboard() {
                           ) : (
                             p.metaAccountNo.join(", ")
                           )}
-                        </td>
+                        </td> */}
                         <td>
                           <span className={p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
                         </td>
@@ -196,6 +220,25 @@ export default function Dashboard() {
             return <input key={idx} className={styles.input} type="text" value={metaAccountNo[idx]} onChange={(e) => setMetaAccountNo((prev) => [...prev.slice(0, idx), e.target.value, ...prev.slice(idx + 1)])} placeholder="Enter meta account no" style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }} />;
           })}
           <Button text="Save" purple onClick={handleMetaSave} isBtnLoading={savingMeta} />
+        </Modal>
+      )}
+
+      {/* view more meta data btn */}
+      {viewMoreMetaDataModalOpen && (
+        <Modal modalclass="metamodal" size="small" isOpen={viewMoreMetaDataModalOpen} onClose={() => setViewMoreMetaDataModalOpen(false)}>
+          <div className={styles.modalbody}>
+            <h3>Meta Account No</h3>
+            <div className={styles.metamodalbody}>
+              {viewMoreMetaData.map((metaNo, idx) => {
+                return (
+                  <p>
+                    <span>{idx + 1}. </span>
+                    {metaNo}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
         </Modal>
       )}
     </>

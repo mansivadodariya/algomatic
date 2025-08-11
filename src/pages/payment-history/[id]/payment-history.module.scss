@@ -1,3 +1,5 @@
+@import "../../../scss/mixins/index.scss";
+
 .dashboarlayout {
   padding-top: 84px;
 }
@@ -436,3 +438,167 @@
     }
   }
 }
+.modalbody {
+  width: 100%;
+
+  .close {
+    right: 0;
+    left: 100%;
+    width: fit-content;
+  }
+
+  h3 {
+    color: #0f0f1a;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .metamodalbody {
+    max-height: 500px;
+    overflow-y: auto;
+
+    p {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 28px;
+      color: #616161;
+      text-align: left !important;
+      margin-bottom: 10px;
+
+      @media (max-width: 1200px) {
+        font-size: 16px;
+        line-height: 24px;
+      }
+
+      span {
+        color: #737373;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+// .linkmodal {
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(0, 0, 0, 0.5);
+//   z-index: 9999;
+
+//   .whiteModal {
+//     background: #fff;
+//     width: 600px;
+//     border-radius: 12px;
+//     position: relative;
+
+//     @include breakpoint("sm-max") {
+//       width: calc(100% - 20px);
+//     }
+
+//     .modalbody {
+//       padding: 24px;
+
+//       span {
+//         color: #737373;
+//         font-size: 16px;
+//       }
+
+//       h3 {
+//         color: #0f0f1a;
+//         font-size: 22px;
+//         font-weight: 600;
+//         margin-bottom: 10px;
+//       }
+
+//       p {
+//         margin-top: 20px;
+//         font-size: 18px;
+//         font-weight: 500;
+//         line-height: 28px;
+//         color: #616161;
+
+//         @media (max-width: 1200px) {
+//           font-size: 16px;
+//           line-height: 24px;
+//         }
+
+//         a {
+//           color: #9657fa;
+//           cursor: pointer;
+//         }
+//       }
+
+//       .linkText {
+//         margin-top: 10px;
+//         border-radius: 6px;
+//         border: 1px solid #9657fa6e;
+//         background: rgba(230, 230, 230, 0.2);
+//         padding: 10px;
+//         position: relative;
+
+//         svg {
+//           width: 14px;
+//           height: 14px;
+//           cursor: pointer;
+//           position: absolute;
+//           top: 50%;
+//           right: 14px;
+//           transform: translateY(-50%);
+//           path {
+//             fill: #9657fa;
+//           }
+//         }
+
+//         span {
+//           color: #737373;
+//           font-size: 14px;
+//           white-space: nowrap;
+//           overflow: hidden;
+//           text-overflow: ellipsis;
+//           width: 90%;
+//           display: block;
+//         }
+//       }
+//     }
+
+//     .modalClose {
+//       position: absolute;
+//       top: 0;
+//       right: 0;
+//       padding: 16px 24px;
+//       display: flex;
+//       justify-content: flex-end;
+
+//       div {
+//         border-radius: 6px;
+//         background: rgba(230, 230, 255, 0.6);
+//         width: 32px;
+//         height: 32px;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         cursor: pointer;
+
+//         svg {
+//           width: 14px;
+//           height: 14px;
+
+//           path {
+//             fill: #9657fa;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

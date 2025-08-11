@@ -119,10 +119,23 @@ export default function StrategiesPlans({ item, index }) {
           </div>
 
           <div className={styles.planbottom}>
-            {/* <p className={styles.planPrice}>${item?.price}</p> */}
-            <p className={styles.planPrice}>${planPrice.finalPlanPrice}</p>
+            <div className={styles.planpricing}>
+              <div className={styles.planPriceflx}>
+                <div className={styles.oldprice}>
+                  <span>M.R.P.:</span>
+                  <del className={styles.planPrice}>${item?.initialPrice}</del>
+                </div>
+                <div className={styles.discount}>
+                  <span>Discount :</span>
+                  <p className={styles.planPrice}>-{item?.discount}%</p>
+                </div>
+              </div>
+              <p className={styles.discountedPlanPrice}>${planPrice.finalPlanPrice}</p>
+            </div>
             <div className={styles.valueincreasermain}>
-              <button className={noOfPlans <= 1 ? styles.disable : styles.enable} disabled={noOfPlans <= 1} onClick={() => handleStrategyPlanQunatity("subtract")}>-</button>
+              <button className={noOfPlans <= 1 ? styles.disable : styles.enable} disabled={noOfPlans <= 1} onClick={() => handleStrategyPlanQunatity("subtract")}>
+                -
+              </button>
               <spam>{noOfPlans}</spam>
               <button onClick={() => handleStrategyPlanQunatity("add")}>+</button>
             </div>

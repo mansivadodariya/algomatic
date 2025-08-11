@@ -32,12 +32,6 @@ export default function StrategiesCard({ item, index }) {
           </div>
         </div>
         <div className={styles.planstags}>
-          {/* {item?.strategyPlans?.map((plan) => (
-            <div key={plan?._id} className={styles.plantag}>
-              <span className={styles.planType}>{plan?.planType}</span>
-              <span className={styles.planPrice}>${plan?.price}</span>
-            </div>
-          ))} */}
           {item?.strategyPlans?.map((plan) => (
             <div key={plan?._id} className={styles.plantag}>
               <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
