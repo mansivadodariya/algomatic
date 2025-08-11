@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./payment-history.module.scss";
 import Button from "@/components/button";
-import { getPaymentHistory, editUser, updateMetaAccountNo, sendRejoiceBotExeToUser, getBotByName, sendSerlinkBotExeToUser } from "@/lib/strategyApi";
+import { getPaymentHistory, editUser, updateMetaAccountNo, sendRejoiceBotExeToUser, getBotByName, sendSpiralBotExeToUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
 import toast from "react-hot-toast";
@@ -13,9 +13,8 @@ export default function Dashboard() {
   const router = useRouter();
   const [payments, setPayments] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState("");
-  selectedPayment, "--------------selectedPayment";
   const [metaModalOpen, setMetaModalOpen] = useState(false);
-  const [metaAccountNo, setMetaAccountNo] = useState("");
+  const [metaAccountNo, setMetaAccountNo] = useState([]);
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
@@ -47,14 +46,24 @@ export default function Dashboard() {
     setMetaModalOpen(true);
   };
   const handleMetaSave = async () => {
-    const trimmedMeta = metaAccountNo.trim();
-    if (!trimmedMeta) {
-      toast.error("Meta account number is required");
-      return;
-    }
-    if (!/^\d+$/.test(trimmedMeta)) {
-      toast.error("Meta account number must be numeric only");
-      return;
+    // validation error
+    for (let i = 0; i < metaAccountNo.length; i++) {
+      const trimmedMeta = metaAccountNo[i].trim();
+
+      if (!trimmedMeta) {
+        toast.error(`Meta account number ${i + 1} is required`);
+        return;
+      }
+
+      if (!/^\d+$/.test(trimmedMeta)) {
+        toast.error(`Meta account number ${i + 1} must be numeric only`);
+        return;
+      }
+
+      if (trimmedMeta.length < 6) {
+        toast.error(`Meta account number ${i + 1} must be at least 6 digits`);
+        return;
+      }
     }
 
     setSavingMeta(true);
@@ -70,23 +79,31 @@ export default function Dashboard() {
 
       // Rejoice company id from db
       if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
-        ("rejoice company bot sending mail ---------");
-        await sendRejoiceBotExeToUser({
-          email: user.email,
-          metaAccountNo: metaAccountNo,
-          date: selectedPayment.createdAt,
-          planType: selectedPayment.planType,
-          file_name: selectedPayment?.botName,
+        console.log("rejoice company bot sending mail ---------");
+        // send multiple rejoice bot exe to user
+        metaAccountNo.map(async (metaNo, idx) => {
+          await sendRejoiceBotExeToUser({
+            email: user.email,
+            metaAccountNo: metaNo,
+            date: selectedPayment.createdAt,
+            planType: selectedPayment.planType,
+            file_name: selectedPayment?.botName,
+          });
         });
       }
-      // Algo client Serlink company id from db
+
+      // Algo client spiral company id from db
       if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
-        await sendSerlinkBotExeToUser({
-          email: user.email,
-          metaAccountNo: metaAccountNo,
-          date: selectedPayment.createdAt,
-          planType: selectedPayment.planType,
-          file_name: selectedPayment?.botName,
+        console.log("spiral company bot sending mail ---------");
+        // send multiple spiral bot exe to user
+        metaAccountNo.map(async (metaNo, idx) => {
+          await sendSpiralBotExeToUser({
+            email: user.email,
+            metaAccountNo: metaNo,
+            date: selectedPayment.createdAt,
+            planType: selectedPayment.planType,
+            file_name: selectedPayment?.botName,
+          });
         });
       }
     } catch (e) {
@@ -117,7 +134,6 @@ export default function Dashboard() {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {payments.length < 0 && <div>No data found</div>}
                     {payments.map((p, idx) => (
                       <tr key={p._id || idx}>
                         <td>{idx + 1}</td>
@@ -129,7 +145,7 @@ export default function Dashboard() {
                         <td>${p.amount ?? "-"}</td>
                         <td>{p.transactionId ?? "-"}</td>
                         <td>
-                          {p.metaAccountNo == null ? (
+                          {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
                             p.paymentStatus === "paid" ? (
                               <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
                                 + Add
@@ -138,36 +154,7 @@ export default function Dashboard() {
                               "-"
                             )
                           ) : (
-                            p.metaAccountNo
-                          )}
-                        </td>
-
-                        <td>
-                          <span className={`${p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}`}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
-                        </td>
-                      </tr>
-                    ))} */}
-                    {payments.map((p, idx) => (
-                      <tr key={p._id || idx}>
-                        <td>{idx + 1}</td>
-                        <td>{new Date(p.createdAt).toLocaleString()}</td>
-                        <td title={p?.strategyPlanId?.strategyId?.title ?? "-"}>
-                          <div className={styles.truncateText}>{p?.strategyPlanId?.strategyId?.title ?? "-"}</div>
-                        </td>
-                        <td>{p.planType ?? "-"}</td>
-                        <td>${p.amount ?? "-"}</td>
-                        <td>{p.transactionId ?? "-"}</td>
-                        <td>
-                          {p.metaAccountNo == null ? (
-                            p.paymentStatus === "paid" ? (
-                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                                + Add
-                              </button>
-                            ) : (
-                              "-"
-                            )
-                          ) : (
-                            p.metaAccountNo
+                            p.metaAccountNo.join(", ")
                           )}
                         </td>
                         <td>
@@ -204,8 +191,10 @@ export default function Dashboard() {
       {/*    */}
       {metaModalOpen && (
         <Modal size="small" isOpen={metaModalOpen} onClose={() => setMetaModalOpen(false)}>
-          <h3>Add Meta Account Number</h3>
-          <input className={styles.input} type="text" value={metaAccountNo} onChange={(e) => setMetaAccountNo(e.target.value)} placeholder="Enter meta account no" style={{ width: "100%", padding: "0.5rem", margin: "1rem 0" }} />
+          <h3 style={{ marginBottom: "1rem", textAlign: "start" }}>Add Meta Account Number</h3>
+          {Array.from({ length: selectedPayment.noOfBots }).map((_, idx) => {
+            return <input key={idx} className={styles.input} type="text" value={metaAccountNo[idx]} onChange={(e) => setMetaAccountNo((prev) => [...prev.slice(0, idx), e.target.value, ...prev.slice(idx + 1)])} placeholder="Enter meta account no" style={{ width: "100%", padding: "0.5rem", margin: "0.5rem 0" }} />;
+          })}
           <Button text="Save" purple onClick={handleMetaSave} isBtnLoading={savingMeta} />
         </Modal>
       )}

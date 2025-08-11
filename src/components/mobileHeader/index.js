@@ -34,7 +34,7 @@ export default function MobileHeader({ setHeader, header }) {
               Backtesting
             </Link>
             <Link href="/marketplace" onClick={() => setHeader(!header)}>
-              Marketplace
+              Algo Bot
             </Link>
           </div>
           <Commonarrowbutton Text="Contact Us" Butttonvarient="lightoutlined" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" />

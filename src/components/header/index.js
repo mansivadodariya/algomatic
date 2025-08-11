@@ -96,7 +96,7 @@ export default function Header() {
       routes: "/#Backtesting",
     },
     {
-      title: "Marketplace",
+      title: "Algo Bot",
       submenu: [],
       routes: "/marketplace",
     },

@@ -47,18 +47,21 @@ interface PaymentLinkData {
   userId: string;
   name: string;
   email: string;
-  metaAccountNo: string;
+  metaAccountNo: string[];
   strategyPlanId: string;
+  noOfBots: number;
 }
 
 export const getPaymentLink = async (data: PaymentLinkData) => {
   try {
     const dataObj = {
-      userId: data.userId,
-      name: data.name,
-      email: data.email,
-      metaAccountNo: data.metaAccountNo,
-      strategyPlanId: data.strategyPlanId,
+      userId: data?.userId,
+      name: data?.name,
+      email: data?.email,
+      // metaAccountNo: [""],
+      // metaAccountNo: data?.metaAccountNo,
+      strategyPlanId: data?.strategyPlanId,
+      noOfBots: data?.noOfBots,
     };
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
     return res.data;
@@ -68,7 +71,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
   }
 };
 
-export const updateMetaAccountNo = async (paymentId: string, metaAccountNo: string) => {
+export const updateMetaAccountNo = async (paymentId: string, metaAccountNo: string[]) => {
   try {
     const userObj = {
       metaAccountNo: metaAccountNo,
@@ -132,6 +135,8 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
 
       return `${year}-${month}-${day}T23:59`;
     };
+
+    // calculate expiry date of plan
     const formatedDate = calculatePlanEndDate(data.date, data.planType);
 
     const dataObj = {
@@ -141,7 +146,7 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
       file_name: data?.file_name || "test",
     };
 
-    const response = await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
+    await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
@@ -153,9 +158,10 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
   }
 };
 
-// algo client Serlink company api
-export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+// algo client spiral company api
+export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
   try {
+
     const calculatePlanEndDate = (
       startDateStr: string,
       planType: string
@@ -171,9 +177,17 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
     
       // Map of fixed plan durations
       const planDaysMap: { [key: number]: number } = {
+        1: 30,
+        2: 60,
         3: 90,
+        4: 120,
+        5: 150,
         6: 180,
+        7: 210,
+        8: 240,
         9: 270,
+        10: 300,
+        11: 330,
         12: 365,
       };
     
@@ -185,35 +199,25 @@ export const sendSerlinkBotExeToUser = async (data: { email: string; metaAccount
       };
     };
     
-    // Usage
+    // calculate expiry date and total days of plan
     const { endDate, totalDays } = calculatePlanEndDate(data.date, data.planType);
     
     const dataObj = {
       account_id: data?.metaAccountNo,
       days_valid: totalDays,
-      email: data?.email
+      email: data?.email,
+      template: data?.file_name || "template_EA.mq5",
     }
 
-    // const response = await axios.post(`http://18.208.156.217:5000/api/generate-ea`, dataObj, {
-    //   headers: {
-    //     'Authorization': 'Bearer 4534405',
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    // });
-    const response = await fetch('http://18.208.156.217:5000/api/generate-ea', {
+    // await fetch('http://18.208.156.217:5000/api/generate-ea', {
+    await fetch('https://ea.aistrategy19.com/api/generate-ea', {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer 4534405',
         'Content-Type': 'application/json',
-        // Do NOT include Access-Control-Allow-Origin in requests
       },
       body: JSON.stringify(dataObj),
     });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
     
   } catch (error) {
     console.error("Error fetching strategy by id:", error);

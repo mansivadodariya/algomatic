@@ -19,6 +19,11 @@ export default function StrategiesPlans({ item, index }) {
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const [showLoginInstructionModal, setShowLoginInstructionModal] = useState(false);
   const { showLogin, setShowLogin, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen  */ } = useAppContext();
+  const [noOfPlans, setNoOfPlans] = useState(1);
+  const [planPrice, setPlanPrice] = useState({
+    initialPlanPrice: item?.price,
+    finalPlanPrice: item?.price,
+  });
   const [formData, setFormData] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -49,7 +54,7 @@ export default function StrategiesPlans({ item, index }) {
     setLoading(true);
     setIsBtnLoading(true);
     try {
-      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id });
+      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans });
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");
@@ -91,6 +96,16 @@ export default function StrategiesPlans({ item, index }) {
     }
   };
 
+  const handleStrategyPlanQunatity = (type) => {
+    if (type === "add") {
+      setNoOfPlans(noOfPlans + 1);
+      setPlanPrice({ ...planPrice, finalPlanPrice: planPrice.initialPlanPrice * (noOfPlans + 1) });
+    } else {
+      setNoOfPlans(noOfPlans - 1);
+      setPlanPrice({ ...planPrice, finalPlanPrice: planPrice.initialPlanPrice * (noOfPlans - 1) });
+    }
+  };
+
   return (
     <>
       <div className={styles.strategiesCard} key={index}>
@@ -103,7 +118,15 @@ export default function StrategiesPlans({ item, index }) {
             </div>
           </div>
 
-          <p className={styles.planPrice}>${item?.price}</p>
+          <div className={styles.planbottom}>
+            {/* <p className={styles.planPrice}>${item?.price}</p> */}
+            <p className={styles.planPrice}>${planPrice.finalPlanPrice}</p>
+            <div className={styles.valueincreasermain}>
+              <button className={noOfPlans <= 1 ? styles.disable : styles.enable} disabled={noOfPlans <= 1} onClick={() => handleStrategyPlanQunatity("subtract")}>-</button>
+              <spam>{noOfPlans}</spam>
+              <button onClick={() => handleStrategyPlanQunatity("add")}>+</button>
+            </div>
+          </div>
         </div>
       </div>
 
