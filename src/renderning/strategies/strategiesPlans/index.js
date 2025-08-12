@@ -8,10 +8,12 @@ import Modal from "@/components/modal";
 import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
 import Commonarrowbutton from "@/components/commonarrowbutton";
+import { getCouponByCouponCode } from "@/lib/couponApi";
 const Logo = "/assets/logo/logo.svg";
 
 export default function StrategiesPlans({ item, index }) {
   const router = useRouter();
+  const [inputValueForDebauncing, setInputValueForDebauncing] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const user = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
   const [errors, setErrors] = useState({});
@@ -28,7 +30,29 @@ export default function StrategiesPlans({ item, index }) {
     name: user?.name || "",
     email: user?.email || "",
     metaAccountNo: "",
+    couponId: "",
+    couponCode: "",
+    couponDiscount: "",
   });
+
+  // debounce for coupon code
+  useEffect(() => {
+    if (!inputValueForDebauncing) return; // skip empty input
+
+    const delayDebounce = setTimeout(async () => {
+      const couponData = await getCouponByCouponCode(inputValueForDebauncing);
+      if (!couponData?.success) {
+        toast.error(couponData?.message || "Invalid coupon code!");
+        // return;
+      } else {
+        toast.success("Coupon code applied successfully!");
+      }
+
+      setFormData({ ...formData, couponCode: inputValueForDebauncing, couponDiscount: couponData?.payload?.discount, couponId: couponData?.payload?._id ?? "" });
+    }, 800);
+    return () => clearTimeout(delayDebounce);
+  }, [inputValueForDebauncing]);
+
 
   useEffect(() => {
     if (user) {
@@ -43,18 +67,18 @@ export default function StrategiesPlans({ item, index }) {
     if (!formData?.name) newErrors.name = "Name is required";
     if (!formData?.email) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData?.email)) newErrors.email = "Invalid email";
-    // if (!formData.metaAccountNo) newErrors.metaAccountNo = "Meta Account No is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
+  // handle buy now click
   const handleSubmit = async () => {
     if (!validate()) return;
 
     setLoading(true);
     setIsBtnLoading(true);
     try {
-      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans });
+      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId /* couponId: getCoupon?._id */ });
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");
@@ -67,7 +91,7 @@ export default function StrategiesPlans({ item, index }) {
         throw new Error("Failed to submit");
       }
       setModalOpen(false);
-      setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "" });
+      setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "", couponCode: "" });
     } catch (error) {
       setIsBtnLoading(false);
       toast.error("Submission failed due to some error!"); //check ip is whitelist or not
@@ -83,7 +107,7 @@ export default function StrategiesPlans({ item, index }) {
 
   const handleModalClose = () => {
     setModalOpen(false);
-    setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "" });
+    setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "", couponCode: "" });
     setErrors({});
   };
 
@@ -188,6 +212,41 @@ export default function StrategiesPlans({ item, index }) {
                 />
               </div>
 
+              {/* Add Coupon */}
+              <div className={styles.inputGroup}>
+                <label>Add Coupon Code</label>
+                <input
+                  type="text"
+                  name="couponCode"
+                  placeholder="Enter your coupon code"
+                  value={formData.couponCode}
+                  onChange={async (e) => {
+                    setFormData({ ...formData, couponCode: e.target.value });
+                    setInputValueForDebauncing(e.target.value);
+                  }}
+                />
+              </div>
+
+              {/* show final ammounts */}
+              <div className={`${styles.inputGroup} ${styles.finalAmountmain}`}>
+                <label>Final Amount</label>                
+                <div className={styles.priceDetails}>
+                  <p>
+                    <span className={styles.label}>MRP:</span> ${item?.initialPrice.toFixed(2)}
+                  </p>
+                  <p>
+                    <span className={styles.label}>Discount:</span> {item?.discount ?? 0}%
+                  </p>
+                  {formData.couponDiscount > 0 && (
+                    <p>
+                      <span className={styles.label}>Coupon Discount:</span> {formData.couponDiscount}%
+                    </p>
+                  )}
+                  <hr className={styles.separator} />
+                  <p className={styles.finalAmount}>Final Amount: ${(item?.initialPrice - (item?.initialPrice * (item?.discount ?? 0)) / 100 - (item?.initialPrice * (formData.couponDiscount ?? 0)) / 100).toFixed(2)}</p>
+                </div>
+              </div>
+
               {/* Meta Account No input */}
               {/* <div className={styles.inputGroup}>
                 <label>Meta Account No{errors.metaAccountNo ? <span className={styles.error}>*</span> : ""}</label>
@@ -204,8 +263,7 @@ export default function StrategiesPlans({ item, index }) {
 
               {/* Submit button */}
               <div className={styles.submitBtn}>
-                {/* <Button text={loading ? "Processing..." : "Proceed to pay"} onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} /> */}
-                <Commonarrowbutton Text={loading ? "Processing..." : "Proceed to pay"} Butttonvarient="Blueoutlined" onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
+                <Commonarrowbutton  Text={loading ? "Processing..." : "Proceed to pay"} Butttonvarient="Blueoutlined" onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
               </div>
             </div>
           </div>

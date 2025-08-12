@@ -50,6 +50,7 @@ interface PaymentLinkData {
   metaAccountNo: string[];
   strategyPlanId: string;
   noOfBots: number;
+  couponId: string | null;
 }
 
 export const getPaymentLink = async (data: PaymentLinkData) => {
@@ -62,6 +63,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
       // metaAccountNo: data?.metaAccountNo,
       strategyPlanId: data?.strategyPlanId,
       noOfBots: data?.noOfBots,
+      couponId: data?.couponId?? null,
     };
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
     return res.data;
