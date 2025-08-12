@@ -57,36 +57,38 @@ export default function Pricingsection() {
                       </div>
                       <div className={styles.pricingcardtitlebadge}>{icons[index]}</div>
                     </div>
-                    <div className={styles.pricecardbody}>
-                      {/* <div className={styles.cardsplanslist}>
-                        {item.strategyPlans.map((plan) => (
-\                          <p className={styles.itemPrice} key={plan.id}>
-                            {plan.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}: {plan.price}$
-                          </p>
-                        ))}
-                      </div> */}
-                      <div className={styles.planstags}>
-                        {item?.strategyPlans?.map((plan) => (
-                          <div className={styles.plantag} key={plan?._id}>
-                            <div className={styles.planhead}>
-                              <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
-                              <span className={styles.planPrice}>${plan?.price}</span>
-                            </div>
-                            <div className={styles.planmrp}>
-                              <span className={styles.planmrpitle}>M.R.P.:</span>
-                              <del className={styles.planmrpamount}>${plan?.initialPrice ?? 0}</del>
-                            </div>
-                            <div className={styles.plandiscount}>
-                              <span className={styles.plandiscountitle}>Discount :</span>
-                              <span className={styles.plandiscountamount}>-{plan?.discount ?? 0}%</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
                   </div>
-                  <div className={styles.pricingbutton}>
-                    <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link={`/marketplace/${item?._id}`} />
+                   <div>
+                      <div className={styles.pricecardbody}>
+                        {/* <div className={styles.cardsplanslist}>
+                          {item.strategyPlans.map((plan) => (
+  \                          <p className={styles.itemPrice} key={plan.id}>
+                              {plan.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}: {plan.price}$
+                            </p>
+                          ))}
+                        </div> */}
+                        <div className={styles.planstags}>
+                          {item?.strategyPlans?.map((plan) => (
+                            <div className={styles.plantag} key={plan?._id}>
+                              <div className={styles.planhead}>
+                                <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
+                                <span className={styles.planPrice}>${plan?.price}</span>
+                              </div>
+                              <div className={styles.planmrp}>
+                                <span className={styles.planmrpitle}>M.R.P.:</span>
+                                <del className={styles.planmrpamount}>${plan?.initialPrice ?? 0}</del>
+                              </div>
+                              <div className={styles.plandiscount}>
+                                <span className={styles.plandiscountitle}>Discount :</span>
+                                <span className={styles.plandiscountamount}>-{plan?.discount ?? 0}%</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className={styles.pricingbutton}>
+                        <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link={`/marketplace/${item?._id}`} />
+                      </div>
                   </div>
                 </div>
               ))}
