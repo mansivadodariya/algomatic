@@ -43,16 +43,13 @@ export default function StrategiesPlans({ item, index }) {
       const couponData = await getCouponByCouponCode(inputValueForDebauncing);
       if (!couponData?.success) {
         toast.error(couponData?.message || "Invalid coupon code!");
-        // return;
       } else {
         toast.success("Coupon code applied successfully!");
+        setFormData((prev) => ({ ...prev, couponCode: inputValueForDebauncing, couponDiscount: couponData?.payload?.discount, couponId: couponData?.payload?._id ?? null }));
       }
-
-      setFormData({ ...formData, couponCode: inputValueForDebauncing, couponDiscount: couponData?.payload?.discount, couponId: couponData?.payload?._id ?? "" });
     }, 800);
     return () => clearTimeout(delayDebounce);
   }, [inputValueForDebauncing]);
-
 
   useEffect(() => {
     if (user) {
@@ -78,7 +75,7 @@ export default function StrategiesPlans({ item, index }) {
     setLoading(true);
     setIsBtnLoading(true);
     try {
-      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId /* couponId: getCoupon?._id */ });
+      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId });
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");
@@ -173,7 +170,14 @@ export default function StrategiesPlans({ item, index }) {
           <div className={styles.whiteModal}>
             <div className={styles.modalClose}>
               <h2>Strategy Plan</h2>
-              <div onClick={() => handleModalClose()}>&#10005;</div>
+              <div
+                onClick={() => {
+                  handleModalClose();
+                  setInputValueForDebauncing("");
+                }}
+              >
+                &#10005;
+              </div>
             </div>
             <div className={styles.modalbody}>
               <h3>For {item?.planType}</h3>
@@ -220,19 +224,24 @@ export default function StrategiesPlans({ item, index }) {
                   name="couponCode"
                   placeholder="Enter your coupon code"
                   value={formData.couponCode}
-                  onChange={async (e) => {
-                    setFormData({ ...formData, couponCode: e.target.value });
-                    setInputValueForDebauncing(e.target.value);
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setFormData((prev) => ({ ...prev, couponCode: value }));
+                    setInputValueForDebauncing(value);
                   }}
                 />
               </div>
 
               {/* show final ammounts */}
               <div className={`${styles.inputGroup} ${styles.finalAmountmain}`}>
-                <label>Final Amount</label>                
+                <label>Final Amount</label>
                 <div className={styles.priceDetails}>
+                  {console.log(item?.initialPrice,'--------------------------- iteam initial price')}
                   <p>
-                    <span className={styles.label}>MRP:</span> ${item?.initialPrice.toFixed(2)}
+                    <span className={styles.label}>MRP:</span> ${item?.initialPrice}
+                  </p>
+                  <p>
+                    <span className={styles.label}>Iteams:</span> {noOfPlans}
                   </p>
                   <p>
                     <span className={styles.label}>Discount:</span> {item?.discount ?? 0}%
@@ -243,7 +252,8 @@ export default function StrategiesPlans({ item, index }) {
                     </p>
                   )}
                   <hr className={styles.separator} />
-                  <p className={styles.finalAmount}>Final Amount: ${(item?.initialPrice - (item?.initialPrice * (item?.discount ?? 0)) / 100 - (item?.initialPrice * (formData.couponDiscount ?? 0)) / 100).toFixed(2)}</p>
+                  {/* <p className={styles.finalAmount}>Final Amount: ${(item?.initialPrice - (item?.initialPrice * (item?.discount ?? 0)) / 100 - (item?.initialPrice * (formData.couponDiscount ?? 0)) / 100).toFixed(2)}</p> */}
+                  <p className={styles.finalAmount}>Final Amount: ${planPrice?.initialPlanPrice * noOfPlans - (formData?.couponDiscount ? (item?.initialPrice * (formData?.couponDiscount ?? 0)) / 100 : 0) * noOfPlans}</p>
                 </div>
               </div>
 
@@ -263,7 +273,7 @@ export default function StrategiesPlans({ item, index }) {
 
               {/* Submit button */}
               <div className={styles.submitBtn}>
-                <Commonarrowbutton  Text={loading ? "Processing..." : "Proceed to pay"} Butttonvarient="Blueoutlined" onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
+                <Commonarrowbutton Text={loading ? "Processing..." : "Proceed to pay"} Butttonvarient="Blueoutlined" onClick={handleSubmit} isBtnLoading={isBtnLoading} disabled={loading} />
               </div>
             </div>
           </div>
@@ -272,7 +282,14 @@ export default function StrategiesPlans({ item, index }) {
 
       {/* Show warning modal */}
       {showLoginInstructionModal && (
-        <Modal isOpen={showLoginInstructionModal} onClose={() => setShowLoginInstructionModal(false)} size="small" closeStyle={true}>
+        <Modal
+          isOpen={showLoginInstructionModal}
+          onClose={() => {
+            setShowLoginInstructionModal(false);
+          }}
+          size="small"
+          closeStyle={true}
+        >
           <div className="px-6 py-8 sm:px-8 bg-white rounded-2xl shadow-xl max-w-md mx-auto text-center">
             <div className={styles.logo}>
               <Image src={Logo} alt="Algomatic" width={200} height={50} />
