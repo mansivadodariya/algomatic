@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Affiliatetabs from "./affiliatetabs";
-import Affiliatetable from "./affiliatetable";
+import WithdrawList from "./withdrawList";
 import Modal from "@/components/modal";
 import styles from "./affiliateDashboard.module.scss";
+import { useAppContext } from "@/context/AppContext";
+import AffialiateUserPaymentList from "./affiliateUserPaymentList";
+import MyAffiliateUserList from "./myAffiliateUserList";
 
 export default function AffiliateDashboard() {
+  const [selectedTabs, setSelectedTab] = useState({
+    pendingWithdrawAmount: false, // modal
+    withdrawList: false,  // table done
+    myUser: false, // table done
+    paymentList: true, // table
+  });
+
   return (
     <>
-      <Affiliatetabs />
-      <Affiliatetable />
-      <Modal isOpen={false} onClose={() => {}} size="large" modalclass="large">
+      <Affiliatetabs selectedTabs={selectedTabs} setSelectedTab={setSelectedTab} />
+      {selectedTabs.withdrawList && <WithdrawList />}
+      {selectedTabs.pendingWithdrawAmount && <WithdrawList />}
+      {selectedTabs.myUser && <MyAffiliateUserList />}
+      {selectedTabs.paymentList && <AffialiateUserPaymentList />}
+
+      {/* withdraw request modal */}
+      {/* <Modal isOpen={false} onClose={() => {}} size="large" modalclass="large">
         <div className={styles.modalheader}>
           <h4>Add Affiliate</h4>
         </div>
@@ -25,16 +40,12 @@ export default function AffiliateDashboard() {
             </div>
             <div className={styles.formgroup}>
               <label htmlFor="password">Password</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Enter password"
-              />
+              <input type="password" id="password" placeholder="Enter password" />
             </div>
             <button type="submit">Submit</button>
           </form>
         </div>
-      </Modal>
+      </Modal> */}
     </>
   );
 }

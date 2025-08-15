@@ -389,3 +389,28 @@
     opacity: 0.9;
   }
 }
+
+.affiliateCoderel {
+  position: relative;
+  border: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+
+  .iicon {
+    position: absolute;
+    top: calc(50% + 2px);
+    right: 12px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

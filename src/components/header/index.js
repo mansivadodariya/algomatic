@@ -14,7 +14,6 @@ import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
 import { getUtilitySettings } from "@/lib/utilitySettingsApi";
-import { becomeAffiliate } from "@/lib/userApi";
 const Logo = "/assets/logo/logo.svg";
 const Logoimg = "/assets/logo/logo.png";
 export default function Header() {

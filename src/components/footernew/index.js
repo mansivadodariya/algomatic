@@ -14,6 +14,7 @@ const QrImg = "/assets/images/qrimage.avif";
 
 export default function Footernew() {
   const [utilitySettings, setUtilitySettings] = useState({});
+
   useEffect(() => {
     getUtilitySettings().then((res) => {
       setUtilitySettings(res?.payload);
@@ -42,12 +43,10 @@ export default function Footernew() {
                 <h3>Contact Us</h3>
                 <Link href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.contactitem}>
                   <Whatsappicon />
-                  {/* <p>+971 50 970 6562</p> */}
                   <p>{utilitySettings?.phoneNo}</p>
                 </Link>
                 <Link href={`mailto:${utilitySettings?.email}`} target="_blank" className={styles.contactitem}>
                   <Emailicon />
-                  {/* <p>support@algomaticbot.com</p> */}
                   <p>{utilitySettings?.email}</p>
                 </Link>
                 <div className={styles.qrcontainer}>
@@ -64,15 +63,21 @@ export default function Footernew() {
             <div className={styles.footerbottom}>
               <p>©2025 AlgoMatic All Rights Reserved</p>
               <div className={styles.socials}>
-                <Link href="https://web.telegram.org/" target="_blank">
-                  <img src={Telegramicon} alt="Telegramicon" />
-                </Link>
-                <Link href="http://instagram.com/" target="_blank">
-                  <img src={Instagramicon} alt="Instagramicon" />
-                </Link>
-                <Link href="https://www.facebook.com/" target="_blank">
-                  <img src={Facebookicon} alt="Facebookicon" />
-                </Link>
+                {utilitySettings?.telegramLink && (
+                  <Link href={utilitySettings?.telegramLink ?? "https://web.telegram.org/a/"} target="_blank">
+                    <img src={Telegramicon} alt="Telegramicon" />
+                  </Link>
+                )}
+                {utilitySettings?.instagramLink && (
+                  <Link href={utilitySettings?.instagramLink ?? "https://www.instagram.com/"} target="_blank">
+                    <img src={Instagramicon} alt="Instagramicon" />
+                  </Link>
+                )}
+                {utilitySettings?.facebookLink && (
+                  <Link href={utilitySettings?.facebookLink ?? "https://www.facebook.com/"} target="_blank">
+                    <img src={Facebookicon} alt="Facebookicon" />
+                  </Link>
+                )}
               </div>
             </div>
           </div>

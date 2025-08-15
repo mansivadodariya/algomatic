@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./affiliatetabs.module.scss";
 import Totalearningicon from "../../../../public/assets/icons/totalearningicon";
 import Totalwithdrawelicon from "../../../../public/assets/icons/totalwithdrawelicon";
 import Pendingwithdrawelicon from "../../../../public/assets/icons/pendingwithdrawelicon";
 import Totalusericon from "../../../../public/assets/icons/totalusericon";
 import Totaluserpaymenticon from "../../../../public/assets/icons/totaluserpaymenticon";
+import { getAffiliateDashboardTabData } from "@/lib/userApi";
 
-export default function Affiliatetabs() {
+export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
+  const [affiliateDashboardData, setAffiliateDashboardData] = useState({});
+
+  useEffect(() => {
+    getAffiliateDashboardTabData()
+      .then((res) => {
+        if (res.success) {
+          setAffiliateDashboardData(res.payload);
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      });
+  }, []);
+
+  // handle tab selection for table view
+  const handleTabSelection = (tab) => {
+    const tabs = {
+      withdrawList: false,
+      pendingWithdrawAmount: false,
+      myUser: false,
+      paymentList: false,
+    };
+    tabs[tab] = true;
+    setSelectedTab(tabs);
+  };
+  console.log(selectedTabs,'------------ selectedTabs')
+
   return (
     <>
       <div className={styles.affiliatetabsmain}>
@@ -15,49 +45,53 @@ export default function Affiliatetabs() {
             <h1>Referral Program</h1>
           </div>
           <div className={styles.affiliatetabstabs}>
-            <div className={styles.Affiliatetab}>
+            <div className={`${styles.Affiliatetab} ${selectedTabs?.totalEarningAmount ? styles.active : ""}`}>
               <div className={styles.Affiliatetabicon}>
                 <Totalearningicon />
               </div>
               <div>
                 <p>Total Earning</p>
-                <h2>$ 2420</h2>
+                <h2>${affiliateDashboardData?.totalEarningAmount}</h2>
               </div>
             </div>
-            <div className={styles.Affiliatetab}>
+
+            <div className={`${styles.Affiliatetab} ${selectedTabs.withdrawList ? styles.active : ""}`} onClick={() => handleTabSelection("withdrawList")}>
               <div className={styles.Affiliatetabicon}>
                 <Totalwithdrawelicon />
               </div>
               <div>
                 <p>Total Withdrawal</p>
-                <h2>$ 2420</h2>
+                <h2>${affiliateDashboardData?.totalWithdrawAmount}</h2>
               </div>
             </div>
-            <div className={styles.Affiliatetab}>
+
+            <div className={`${styles.Affiliatetab} ${selectedTabs.pendingWithdrawAmount ? styles.active : ""}`} onClick={() => handleTabSelection("pendingWithdrawAmount")}>
               <div className={styles.Affiliatetabicon}>
                 <Pendingwithdrawelicon />
               </div>
               <div>
                 <p>Pending Withdrawal</p>
-                <h2>$ 2420</h2>
+                <h2>${affiliateDashboardData?.pendingWithdrawAmount}</h2>
               </div>
             </div>
-            <div className={styles.Affiliatetab}>
+
+            <div className={`${styles.Affiliatetab} ${selectedTabs.myUser ? styles.active : ""}`} onClick={() => handleTabSelection("myUser")}>
               <div className={styles.Affiliatetabicon}>
                 <Totalusericon />
               </div>
               <div>
                 <p>Total Users</p>
-                <h2>$ 2420</h2>
+                <h2>{affiliateDashboardData?.myUserCount}</h2>
               </div>
             </div>
-            <div className={styles.Affiliatetab}>
+
+            <div className={`${styles.Affiliatetab} ${selectedTabs.paymentList ? styles.active : ""}`} onClick={() => handleTabSelection("paymentList")}>
               <div className={styles.Affiliatetabicon}>
                 <Totaluserpaymenticon />
               </div>
               <div>
                 <p>Total User Payments</p>
-                <h2>$ 2420</h2>
+                <h2>{affiliateDashboardData?.totalUserPaymentCount}</h2>
               </div>
             </div>
           </div>

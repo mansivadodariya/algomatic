@@ -36,10 +36,10 @@
           tr {
             th {
               padding: 12px 24px;
-              font-size: 12px;
+              font-size: 14px;
               font-weight: 600;
-              line-height: 16px;
-              color: #6b7280;
+              line-height: 20px;
+              color: #111827;
             }
           }
         }
@@ -57,12 +57,16 @@
               background-color: #f9fafb;
             }
 
+            .green {
+              color: green;
+            }
+
             td {
               padding: 16px 24px;
-              font-size: 14px;
+              font-size: 12px;
               font-weight: 600;
-              line-height: 20px;
-              color: #111827;
+              line-height: 16px;
+              color: #6b7280;
 
               .tableid,
               .tablecustomername {

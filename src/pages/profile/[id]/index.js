@@ -5,7 +5,7 @@ import Button from "@/components/button";
 import { getPaymentHistory, editUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
-import { ArrowLeft, ChevronLeft, ChevronLeftCircle, ChevronsLeft, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronLeftCircle, ChevronsLeft, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -109,7 +109,16 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <span>Email</span>
-                    {isProfileEdit ? <input type="email" value={user?.email} /* onChange={(e) => setUser({ ...user, email: e.target.value })}  */ className={styles.inputField} disabled /> : <p>{user.email}</p>}
+                    {isProfileEdit ? (
+                      <div className={styles.affiliateCoderel}>
+                        <input type="email" value={user?.email} /* onChange={(e) => setUser({ ...user, email: e.target.value })}  */ className={styles.inputField} disabled />
+                        <div className={styles.iicon} title="You cannot edit this field">
+                          <Info color="#616161" />
+                        </div>
+                      </div>
+                    ) : (
+                      <p>{user.email}</p>
+                    )}
                   </div>
                   <div>
                     <span>Country Code</span>
@@ -117,7 +126,20 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <span>Phone</span>
-                    {isProfileEdit ? <input type="tel" value={user.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
+                    {isProfileEdit ? <input type="tel" value={user?.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
+                  </div>
+                  <div>
+                    <span>My Affiliate Code</span>
+                    {isProfileEdit ? (
+                      <div className={styles.affiliateCoderel}>
+                        <input type="text" value={user?.myAffiliateCode} onChange={(e) => setUser({ ...user, myAffiliateCode: e.target.value })} className={styles.inputField} disabled />
+                        <div className={styles.iicon} title="You cannot edit this field">
+                          <Info color="#616161" />
+                        </div>
+                      </div>
+                    ) : (
+                      <p>{user?.myAffiliateCode}</p>
+                    )}
                   </div>
                 </div>
                 {isProfileEdit && (
@@ -159,6 +181,10 @@ export default function Dashboard() {
                   <div>
                     <span>Phone</span>
                     <p>{user?.phone}</p>
+                  </div>
+                  <div>
+                    <span>My Affiliate Code</span>
+                    <p>{user?.myAffiliateCode}</p>
                   </div>
                 </div>
               </section>
