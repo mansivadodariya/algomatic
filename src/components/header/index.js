@@ -14,6 +14,7 @@ import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
 import { getUtilitySettings } from "@/lib/utilitySettingsApi";
+import { becomeAffiliate } from "@/lib/userApi";
 const Logo = "/assets/logo/logo.svg";
 const Logoimg = "/assets/logo/logo.png";
 export default function Header() {
@@ -40,9 +41,9 @@ export default function Header() {
     const loginStatus = localStorage.getItem("isLogin");
     setIsUserLoggedIn(loginStatus);
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
-  //   const storedUser = typeof window !== "undefined" && localStorage.getItem("user")
-  // ? JSON.parse(localStorage.getItem("user"))
-  // : null;
+    //   const storedUser = typeof window !== "undefined" && localStorage.getItem("user")
+    // ? JSON.parse(localStorage.getItem("user"))
+    // : null;
 
     setUser(storedUser);
 
@@ -197,6 +198,14 @@ export default function Header() {
                         }}
                       >
                         Payment History
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowMenu(false);
+                          router.push(`/affiliate/${user?._id}`);
+                        }}
+                      >
+                        Affiliate dashboard
                       </button>
                       <button
                         onClick={() => {

@@ -211,7 +211,6 @@ export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountN
       template: data?.file_name || "template_EA.mq5",
     }
 
-    // await fetch('http://18.208.156.217:5000/api/generate-ea', {
     await fetch('https://ea.aistrategy19.com/api/generate-ea', {
       method: 'POST',
       headers: {

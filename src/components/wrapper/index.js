@@ -29,7 +29,7 @@ export default function Wrapper({ children }) {
       {children}
       {/* <Footernew /> */}
       <Whatsappbubble />
-      {pathName?.includes("/payment-history") || pathName?.includes("/profile") ? null : <Footernew />}
+      {pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
     </div>
   );
 }

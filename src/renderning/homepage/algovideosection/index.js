@@ -3,7 +3,8 @@ import styles from "./algovideosection.module.scss";
 const algothumbnail = "/assets/images/algothumbnail.webp";
 
 const videoLinks = {
-  english: "https://www.youtube.com/embed/8kG21pjj-yk",
+  // english: "https://www.youtube.com/embed/8kG21pjj-yk",
+  english: "https://www.youtube.com/embed/F2pBWMHfvxI",
   spanish: "https://www.youtube.com/embed/VIDEO_ID_SPANISH",
   indonesian: "https://www.youtube.com/embed/VIDEO_ID_INDONESIAN",
   chinese: "https://www.youtube.com/embed/VIDEO_ID_CHINESE",
@@ -21,7 +22,7 @@ export default function Algovideosection() {
     <>
       {/* <div className="container-xl">
         <div className={styles.algovideosectionlanguage}>
-          <p>Select your preferred language:</p>
+          <p>Select your preferred language :</p>
           <select value={selectedLanguage} onChange={handleLanguageChange} className={styles.languageSelect}>
             <option value="english">English</option>
             <option value="spanish">Spanish</option>
