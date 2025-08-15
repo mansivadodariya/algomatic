@@ -1,0 +1,128 @@
+.affiliatetabsmain {
+  padding-top: 100px;
+
+  @media (max-width:768px) {
+    padding-top: 90px;
+  }
+
+  .Affiliatetabstitle {
+    h1 {
+      text-align: center;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      margin-bottom: 16px;
+
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+    }
+  }
+
+  .affiliatetabstabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @media (max-width: 1230px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .Affiliatetab {
+      background-color: #fff;
+      border: 1px solid #e5e7eb;
+      padding: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      &:nth-child(1) {
+        .Affiliatetabicon {
+          background-color: #4f46e5;
+        }
+      }
+
+      &:nth-child(2) {
+        .Affiliatetabicon {
+          background-color: #3b82f6;
+        }
+      }
+
+      &:nth-child(3) {
+        .Affiliatetabicon {
+          background-color: #10b981;
+        }
+      }
+
+      &:nth-child(4) {
+        .Affiliatetabicon {
+          background-color: #ef4444;
+        }
+      }
+
+      &:nth-child(5) {
+        grid-column: 4 span;
+        width: 100%;
+        max-width: calc(25% - 16px);
+        margin: 0 auto;
+
+        @media (max-width: 1230px) {
+          grid-column: 1 span;
+          max-width: 100%;
+        }
+
+        .Affiliatetabicon {
+          background-color: #f59e0b;
+        }
+      }
+
+      .Affiliatetabicon {
+        width: 55px;
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #4f46e5;
+        color: #fff;
+
+        svg {
+          width: 27px;
+          height: 27px;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 28px;
+        color: #616161;
+      }
+
+      h2 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 30px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      }
+    }
+  }
+}
