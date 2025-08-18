@@ -9,7 +9,7 @@ export default function Document() {
         </title>
         <meta
           name="description"
-          content="Start and scale your Forex brokerage with Algomatic . We specialize in Forex CRM, brokerage licensing, algorithmic trading software, and a marketplace for innovative trading strategies."
+          content="Algomatic is a smart trading bot that leverages arbitrage opportunities in the XAUUSD forex market, executing real-time trades for maximum profit and minimal risk."
         />
         <meta
           name="keywords"

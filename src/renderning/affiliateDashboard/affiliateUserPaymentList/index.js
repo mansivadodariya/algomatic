@@ -7,12 +7,13 @@ import _ from "lodash";
 export default function AffialiateUserPaymentList() {
   const [userList, setUserList] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(5);
 
   useEffect(() => {
     setLoader(true);
-    affiliatePaymentList()
+    affiliatePaymentList(page, pageSize)
       .then((res) => {
-        console.log(res.payload, "------------userList");
         setUserList(res.payload);
         setLoader(false);
       })
@@ -20,7 +21,19 @@ export default function AffialiateUserPaymentList() {
         console.log(err);
         setLoader(false);
       });
-  }, []);
+  }, [page]);
+
+  const handleNext = () => {
+    if (userList?.totalPages > userList?.currentPage) {
+      setPage(page + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (userList?.currentPage > 1) {
+      setPage(page - 1);
+    }
+  };
 
   return (
     <>
@@ -70,28 +83,30 @@ export default function AffialiateUserPaymentList() {
             {/* Pagination */}
             <div className={styles.tablepaginationmain}>
               <div className={styles.tablepagination}>
-                <div className={`${styles.paginationleft} ${userList?.currentPage === 1 ? styles.disabled : ""}`}>
+                <div onClick={handlePrevious} className={`${styles.paginationleft} ${userList?.currentPage === 1 ? styles.disabled : ""}`}>
                   <Paginationicon />
                 </div>
                 <div className={styles.paginationcenter}>
                   {userList?.currentPage > 1 && (
-                    <div className={styles.paginationcenteritem}>
-                      <span>{userList?.currentPage + 1}</span>
+                    <div className={styles.paginationcenteritem} onClick={() => setPage(userList?.currentPage - 1)}>
+                      <span>{userList?.currentPage - 1}</span>
                     </div>
                   )}
                   <div className={`${styles.paginationcenteritem} ${styles.active}`}>
                     <span>{userList?.currentPage}</span>
                   </div>
                   {userList?.totalPages > userList?.currentPage && (
-                    <div className={styles.paginationcenteritem}>
+                    <div className={styles.paginationcenteritem} onClick={() => setPage(userList?.currentPage + 1)}>
                       <span>{userList?.currentPage + 1}</span>
                     </div>
                   )}
                 </div>
-                <div className={`${styles.paginationright} ${userList?.totalPages > userList?.currentPage ? "" : styles.disabled}`}>
+                <div onClick={handleNext} className={`${styles.paginationright} ${userList?.totalPages > userList?.currentPage ? "" : styles.disabled}`}>
                   <Paginationicon />
                 </div>
               </div>
+
+              <span className={styles.paginationrighttext}>{`Results: ${(page - 1) * pageSize + 1} - ${(page - 1) * pageSize + (userList?.data?.length || 0)} of ${userList?.totalRecords || 0}`}</span>
             </div>
           </div>
         </div>

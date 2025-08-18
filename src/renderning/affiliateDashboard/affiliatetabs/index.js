@@ -42,7 +42,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
       <div className={styles.affiliatetabsmain}>
         <div className="container-xl">
           <div className={styles.Affiliatetabstitle}>
-            <h1>Referral Program</h1>
+            <h1>Referral Dashboard</h1>
           </div>
           <div className={styles.affiliatetabstabs}>
             <div className={`${styles.Affiliatetab} ${selectedTabs?.totalEarningAmount ? styles.active : ""}`}>

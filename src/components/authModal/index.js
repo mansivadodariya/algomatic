@@ -26,6 +26,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
     phone: "",
     password: "",
     confirmPassword: "",
+    uplineAffiliateCode: "",
   };
 
   const [formData, setFormData] = useState(initialData);
@@ -109,13 +110,13 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('----------------')
+    console.log("----------------");
     e.preventDefault();
     if (validate()) {
       setIsSubmitting(true);
       if (mode === "login") {
         const login = await loginUser(formData.email, formData.password);
-        console.log(login,'-------------login')
+        console.log(login, "-------------login");
         if (login?.success) {
           toast.success("Login Successful");
           localStorage.setItem("user", JSON.stringify(login.payload));
@@ -130,21 +131,21 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
           // }
 
           onClose();
-        }else{
+        } else {
           toast.error(login?.message);
           setIsSubmitting(false);
         }
         setIsSubmitting(false);
       } else {
-        const signup = await signUpUser(formData.name, formData.email, formData.phone, formData.password, formData.confirmPassword, formData.countryCode);
-        console.log(signup,'-------------signup')
+        const signup = await signUpUser(formData.name, formData.email, formData.phone, formData.password, formData.confirmPassword, formData.countryCode, formData?.uplineAffiliateCode);
+        console.log(signup, "-------------signup");
         if (signup?.success) {
           toast.success("Signup Successful");
           setShowLogin(true);
           setFormData(initialData);
           setIsSubmitting(false);
           setMode("login");
-        }else{
+        } else {
           toast.error(signup?.message);
           setIsSubmitting(false);
           // setIsSubmitting(false);
@@ -155,7 +156,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} size="large">
+      <Modal isOpen={isOpen} onClose={onClose} /* size="large" */>
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <div className={styles.logo}>
@@ -167,13 +168,23 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
             <form className={styles.form} onSubmit={handleSubmit}>
               {mode === "signup" && (
                 <div className={styles.inputGroup}>
-                  <input type="text" name="name" placeholder={errors.name || "Full Name"} value={formData.name} onChange={handleInputChange} className={`${styles.input} ${errors.name ? styles.errorPlaceholder : ""}`} />
+                  <input type="text" name="name" placeholder={errors.name || "Full Name"} value={formData?.name} onChange={handleInputChange} className={`${styles.input} ${errors.name ? styles.errorPlaceholder : ""}`} />
                 </div>
               )}
 
               <div className={styles.inputGroup}>
-                <input type="email" name="email" placeholder={errors.email || "Email Address"} value={formData.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
+                <input type="email" name="email" placeholder={errors.email || "Email Address"} value={formData?.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
               </div>
+
+
+              {/* affialiate code */}
+              {mode === "signup" && (
+                <div className={styles.passwordRow}>
+                  <div className={styles.inputGroup}>
+                    <input type="text" name="uplineAffiliateCode" placeholder={errors.uplineAffiliateCode || "Affiliate Code"} value={formData?.uplineAffiliateCode} onChange={handleInputChange} className={`${styles.input} ${errors.uplineAffiliateCode ? styles.errorPlaceholder : ""}`} />
+                  </div>
+                </div>
+              )}
 
               {/* Country code and phone */}
               {mode === "signup" && (
@@ -185,7 +196,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                       enableSearch
                       inputClass={styles.phoneInput}
                       buttonClass={styles.phoneButton}
-                      value={formData.countryCode}
+                      value={formData?.countryCode}
                       onChange={(value, data) => {
                         const dialCode = data.dialCode;
                         const phoneWithoutCode = value.replace(dialCode, "").replace(/^\+/, "");
@@ -205,19 +216,19 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                     {/* {errors.countryCode && <p className={styles.error}>{errors.countryCode}</p>} */}
                   </div>
                 </div>
-              )}
+              )}              
 
               {mode === "signup" ? (
                 <div className={styles.passwordRow}>
                   <div className={styles.inputGroup}>
-                    <input type={showPassword ? "text" : "password"} name="password" placeholder={errors.password || "Password"} value={formData.password} onChange={handleInputChange} className={`${styles.input} ${errors.password ? styles.errorPlaceholder : ""}`} />
+                    <input type={showPassword ? "text" : "password"} name="password" placeholder={errors.password || "Password"} value={formData?.password} onChange={handleInputChange} className={`${styles.input} ${errors.password ? styles.errorPlaceholder : ""}`} />
                     <span className={styles.eyeIcon} onClick={togglePasswordVisibility}>
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </span>
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder={errors.confirmPassword || "Confirm Password"} value={formData.confirmPassword} onChange={handleInputChange} className={`${styles.input} ${errors.confirmPassword ? styles.errorPlaceholder : ""}`} />
+                    <input type={showConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder={errors.confirmPassword || "Confirm Password"} value={formData?.confirmPassword} onChange={handleInputChange} className={`${styles.input} ${errors.confirmPassword ? styles.errorPlaceholder : ""}`} />
                     <span className={styles.eyeIcon} onClick={toggleConfirmPasswordVisibility}>
                       {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </span>

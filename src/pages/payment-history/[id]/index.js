@@ -126,7 +126,7 @@ export default function Dashboard() {
                 <table>
                   <thead>
                     <tr>
-                      <th>#</th>
+                      <th>No</th>
                       <th>Purchased Date</th>
                       <th>Strategy Name</th>
                       <th>Plan</th>

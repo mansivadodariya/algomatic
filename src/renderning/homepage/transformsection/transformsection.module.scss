@@ -81,8 +81,11 @@
       }
 
       .transformboxinputmain {
+        display: flex;
+        justify-content: center;
         max-width: 485px;
         margin: 0 auto;
+        gap: 24px;
 
         label {
           padding: 7px;

@@ -1,0 +1,74 @@
+.withdrawformmain {
+  margin-top: 16px;
+
+  .withdrawformlayout {
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+
+    .withdrawformtitle {
+      margin-bottom: 16px;
+
+      h3 {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 28px;
+        color: #111827;
+        font-family: "Urbanist", sans-serif;
+      }
+    }
+
+    .withdrawform {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      .formgroup {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        label {
+          font-size: 14px;
+          font-weight: 600;
+          color: #111827;
+        }
+
+        input {
+          padding: 10px 12px;
+          border: 1px solid #d1d5db;
+          border-radius: 6px;
+          font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s ease;
+
+          &:focus {
+            border-color: #111827;
+          }
+        }
+      }
+
+      .formactions {
+        display: flex;
+        justify-content: flex-end;
+
+        .submitbtn {
+          background-color: #111827;
+          color: #fff;
+          padding: 10px 20px;
+          font-size: 14px;
+          font-weight: 600;
+          border: none;
+          border-radius: 6px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #374151;
+          }
+        }
+      }
+    }
+  }
+}

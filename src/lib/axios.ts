@@ -73,17 +73,23 @@ api.interceptors.response.use(
     // if ( setLoadingGlobal ) setLoadingGlobal( false );
     let message = "An unexpected error occurred.";
     if (error.response) {
-      // Server responded with a status other than 2xx
-      if ( error.response.status === 401 )
-      {
-        toast.error("Session Expired, please login again");
-        localStorage.clear();
-        setTimeout(() => {
-          window.location.href = "/";
-        }, 1000);
-      } else {
-        toast.error(message);
+      console.log(error.response.data.message,'-----------------------------error.response')
+
+      if(error?.response?.data?.message){
+        console.log('--------------1')
+        toast.error(error.response.data.message);
       }
+      // else if ( error.response.status === 401 ){
+      //   console.log('--------------2')
+      //   toast.error("Session Expired, please login again");
+      //   localStorage.clear();
+      //   setTimeout(() => {
+      //     window.location.href = "/";
+      //   }, 1000);
+      // } else {
+      //   console.log('--------------3')
+      //   toast.error(message);
+      // }
       // message = error.response.data?.message || error.response.statusText;
     } 
     // else if (error.message) {

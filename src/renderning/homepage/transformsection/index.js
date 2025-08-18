@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./transformsection.module.scss";
 import Commonlable from "@/components/commonlable";
 import Commonarrowbutton from "@/components/commonarrowbutton";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 
 export default function Transformsection() {
+  const [utilitySettings, setUtilitySettings] = useState({});
+
+  useEffect(() => {
+    getUtilitySettings().then((res) => {
+      setUtilitySettings(res?.payload);
+    });
+  }, []);
+
   return (
     <>
       <div className={styles.transformsectionmain}>
@@ -22,22 +31,25 @@ export default function Transformsection() {
                 </p>
               </div>
               <div className={styles.transformboxinputmain}>
-                <label htmlFor="email">
-                  <input
-                    type="email"
-                    placeholder="Your Email Addres"
-                    id="email"
-                  />
                   <div className={styles.transformboxinputbutton}>
                     <Commonarrowbutton
-                      Text="Subscribe"
+                      Text="Explore Algomatic"
                       icon="none"
                       buttonclassName="widthfull"
                       Butttonvarient="darkoutlined"
-                      link="none"
+                      link="/marketplace"
                     />
                   </div>
-                </label>
+                  <div className={styles.transformboxinputbutton}>
+                    <Commonarrowbutton
+                      Text="Contact Us"
+                      icon="none"
+                      buttonclassName="widthfull"
+                      Butttonvarient="darkoutlined"
+                      link={`https://wa.me/${utilitySettings?.phoneNo}`}
+                      Target="blank"
+                    />
+                  </div>
               </div>
             </div>
           </div>

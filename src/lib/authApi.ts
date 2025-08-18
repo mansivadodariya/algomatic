@@ -6,7 +6,6 @@ import { api } from "./axios";
 export const loginUser = async (email: string, password: string) => {
   try {
     const res = await api.post(`/user/login`, { email, password });
-    console.log(res,'-------------login')
     return res.data;
   } catch (error) {
     console.error("Error fetching login:", error);
@@ -14,9 +13,9 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-export const signUpUser = async (name: string, email: string, phone: string, password: string, confirmPassword: string, countryCode: string) => {
+export const signUpUser = async (name: string, email: string, phone: string, password: string, confirmPassword: string, countryCode: string, uplineAffiliateCode: string) => {
     try {
-      const res = await api.post(`/user/signup`, { name, email, phone, password, confirmPassword, countryCode });
+      const res = await api.post(`/user/signup`, { name, email, phone, password, confirmPassword, countryCode, uplineAffiliateCode });
       return res.data;
     } catch (error) {
       console.error("Error fetching signup:", error);

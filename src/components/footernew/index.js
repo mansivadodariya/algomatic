@@ -61,7 +61,7 @@ export default function Footernew() {
             </div>
 
             <div className={styles.footerbottom}>
-              <p>©2025 AlgoMatic All Rights Reserved</p>
+              <p>©{new Date().getFullYear()} AlgoMatic All Rights Reserved</p>
               <div className={styles.socials}>
                 {utilitySettings?.telegramLink && (
                   <Link href={utilitySettings?.telegramLink ?? "https://web.telegram.org/a/"} target="_blank">

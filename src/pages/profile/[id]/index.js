@@ -5,7 +5,7 @@ import Button from "@/components/button";
 import { getPaymentHistory, editUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
-import { ArrowLeft, ChevronLeft, ChevronLeftCircle, ChevronsLeft, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
+import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, Copy, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [isProfileEdit, setIsProfileEdit] = useState(false);
+  const [copied, setCopied] = useState(true);
 
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
@@ -81,6 +82,14 @@ export default function Dashboard() {
     }
   };
 
+  const handleCopy = async () => {
+    if (user?.myAffiliateCode) {
+      await navigator.clipboard.writeText(user.myAffiliateCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   return (
     <>
       <div className={styles.dashboarlayout}>
@@ -140,6 +149,29 @@ export default function Dashboard() {
                     ) : (
                       <p>{user?.myAffiliateCode}</p>
                     )}
+
+                    {/* {isProfileEdit ? (
+        <div className="flex items-center gap-2">
+          <input
+            type="text"
+            value={user?.myAffiliateCode}
+            disabled
+            className="border px-2 py-1 rounded"
+          />
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 border px-3 py-2 rounded-md">
+          <p className="font-medium">{user?.myAffiliateCode}</p>
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleCopy}
+            className="ml-2"
+          >
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+          </Button>
+        </div>
+      )} */}
                   </div>
                 </div>
                 {isProfileEdit && (

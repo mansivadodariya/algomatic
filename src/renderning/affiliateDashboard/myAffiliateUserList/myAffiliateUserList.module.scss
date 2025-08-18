@@ -79,6 +79,8 @@
     }
 
     .tablepaginationmain {
+      display: flex;
+      justify-content: space-between;
       margin-top: 16px;
 
       .tablepagination {
@@ -178,5 +180,11 @@
         }
       }
     }
+  }
+  .paginationrighttext {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 22px;
+    color: #111827;
   }
 }
