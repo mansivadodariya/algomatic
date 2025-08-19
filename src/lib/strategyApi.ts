@@ -51,10 +51,12 @@ interface PaymentLinkData {
   strategyPlanId: string;
   noOfBots: number;
   couponId: string | null;
+  uplineAffiliateCode: string;
 }
 
 export const getPaymentLink = async (data: PaymentLinkData) => {
   try {
+    console.log(data,'-------------------------data qqq')
     const dataObj = {
       userId: data?.userId,
       name: data?.name,
@@ -64,6 +66,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
       strategyPlanId: data?.strategyPlanId,
       noOfBots: data?.noOfBots,
       couponId: data?.couponId?? null,
+      uplineAffiliateCode: data?.uplineAffiliateCode,
     };
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
     return res.data;
@@ -155,7 +158,7 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
       },
     });
   } catch (error) {
-    console.error("Error fetching strategy by id:", error);
+    console.error("Error sendRejoiceBotExeToUser:", error);
     return [];
   }
 };

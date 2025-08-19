@@ -5,7 +5,7 @@ import Button from "@/components/button";
 import { getPaymentHistory, editUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
-import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, Copy, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
+import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, ClipboardCheck, Copy, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [isProfileEdit, setIsProfileEdit] = useState(false);
-  const [copied, setCopied] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
@@ -217,6 +217,9 @@ export default function Dashboard() {
                   <div>
                     <span>My Affiliate Code</span>
                     <p>{user?.myAffiliateCode}</p>
+                    <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
+                      {copied ? <ClipboardCheck /> : <Copy />}
+                    </div>
                   </div>
                 </div>
               </section>

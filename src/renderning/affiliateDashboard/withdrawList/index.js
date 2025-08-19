@@ -6,6 +6,7 @@ import Link from "next/link";
 import _ from "lodash";
 import Image from "next/image";
 import { WITHDRAWAL_REQ_STATUS } from "@/utils/constant";
+import Loader from "@/components/loader";
 const imageNotFound = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8LWlb8l34MXvr3BonwEYsd11lw1QKQVEiQ&s";
 
 export default function WithdrawList() {
@@ -60,28 +61,36 @@ export default function WithdrawList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {loader
-                    ? "Loading..."
-                    : withdrawList?.data?.map((item, index) => {
-                        return (
-                          <tr>
-                            <td>
-                              <span className={styles.tableid}>{index + 1 + (page - 1) * pageSize}</span>
-                            </td>
-                            <td>
-                              <span className={`${styles.tablecustomername} ${styles[item?.withdrawStatus === WITHDRAWAL_REQ_STATUS.APPROVED ? "green" : "red"]}`}>{item?.withdrawStatus ? _.capitalize(item?.withdrawStatus) : ""}</span>
-                            </td>
-                            <td>${item?.withdrawAmount}</td>
-                            <td>
-                              <Link href={item?.imageUrl ?? imageNotFound} target="_blank">
-                                <img className={styles.withdrawImage} src={item?.imageUrl ?? imageNotFound} alt="payment img" />
-                              </Link>
-                            </td>
-                            <td>{item?.createdAt.split("T")[0] + ", " + item?.createdAt.split("T")[1].split(".")[0]}</td>
-                            <td>{item?.isSeenByAdmin ? "Reviewed" : "Not Review"}</td>
-                          </tr>
-                        );
-                      })}
+                  {loader ? (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className={styles.loader}>
+                          <Loader />
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    withdrawList?.data?.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>
+                            <span className={styles.tableid}>{index + 1 + (page - 1) * pageSize}</span>
+                          </td>
+                          <td>
+                            <span className={`${styles.tablecustomername} ${styles[item?.withdrawStatus === WITHDRAWAL_REQ_STATUS.APPROVED ? "green" : "red"]}`}>{item?.withdrawStatus ? _.capitalize(item?.withdrawStatus) : ""}</span>
+                          </td>
+                          <td>${item?.withdrawAmount}</td>
+                          <td>
+                            <Link href={item?.imageUrl ?? imageNotFound} target="_blank">
+                              <img className={styles.withdrawImage} src={item?.imageUrl ?? imageNotFound} alt="payment img" />
+                            </Link>
+                          </td>
+                          <td>{item?.createdAt.split("T")[0] + ", " + item?.createdAt.split("T")[1].split(".")[0]}</td>
+                          <td>{item?.isSeenByAdmin ? "Reviewed" : "Not Review"}</td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>

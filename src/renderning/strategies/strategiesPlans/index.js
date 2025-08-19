@@ -75,7 +75,7 @@ export default function StrategiesPlans({ item, index }) {
     setLoading(true);
     setIsBtnLoading(true);
     try {
-      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId });
+      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId, uplineAffiliateCode:user?.uplineAffiliateCode });
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");

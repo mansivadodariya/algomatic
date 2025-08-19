@@ -3,6 +3,7 @@ import Paginationicon from "../../../../public/assets/icons/paginationicon";
 import React, { useEffect, useState } from "react";
 import { myAffiliateUserList } from "@/lib/userApi";
 import _ from "lodash";
+import Loader from "@/components/loader";
 
 export default function MyAffiliateUserList() {
   const [userList, setUserList] = useState([]);
@@ -55,23 +56,31 @@ export default function MyAffiliateUserList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {loader
-                    ? "Loading..."
-                    : userList?.data?.map((item, index) => {
-                        return (
-                          <tr>
-                            <td>
-                              <span className={styles.tableid}>{index + 1 + (page - 1) * pageSize}</span>
-                            </td>
-                            <td>
-                              <span className={styles.tablecustomername}>{item?.name ? _.capitalize(item?.name) : ""}</span>
-                            </td>
-                            <td>{item?.email}</td>
-                            <td>{item?.countryCode}</td>
-                            <td>{item?.phone}</td>
-                          </tr>
-                        );
-                      })}
+                  {loader ? (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className={styles.loader}>
+                          <Loader />
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    userList?.data?.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>
+                            <span className={styles.tableid}>{index + 1 + (page - 1) * pageSize}</span>
+                          </td>
+                          <td>
+                            <span className={styles.tablecustomername}>{item?.name ? _.capitalize(item?.name) : ""}</span>
+                          </td>
+                          <td>{item?.email}</td>
+                          <td>{item?.countryCode}</td>
+                          <td>{item?.phone}</td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>

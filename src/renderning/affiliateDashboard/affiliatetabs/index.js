@@ -51,7 +51,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total Earning</p>
-                <h2>${affiliateDashboardData?.totalEarningAmount}</h2>
+                <h2>${Number(affiliateDashboardData?.totalEarningAmount).toFixed(3)}</h2>
               </div>
             </div>
 
@@ -61,7 +61,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total Withdrawal</p>
-                <h2>${affiliateDashboardData?.totalWithdrawAmount}</h2>
+                <h2>${Number(affiliateDashboardData?.totalWithdrawAmount).toFixed(3)}</h2>
               </div>
             </div>
 
@@ -71,7 +71,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Pending Withdrawal</p>
-                <h2>${affiliateDashboardData?.pendingWithdrawAmount}</h2>
+                <h2>${Number(affiliateDashboardData?.pendingWithdrawAmount).toFixed(3)}</h2>
               </div>
             </div>
 

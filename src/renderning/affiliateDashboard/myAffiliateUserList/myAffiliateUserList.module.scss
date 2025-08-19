@@ -187,4 +187,11 @@
     line-height: 22px;
     color: #111827;
   }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }

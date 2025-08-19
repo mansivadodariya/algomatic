@@ -27,10 +27,12 @@ export default function WithdrawRequestForm() {
       if(res?.data?.success){
         toast.success(res.data.message);
       }
+      setFormData({ withdrawAmount: "" });
     })
     .catch((err) => {
       console.log(err,'------------------------- sendWithdrawRequest');
       toast.error(err.message || "Failed to send withdraw request.");
+      setFormData({ withdrawAmount: "" });
     });
   };
 

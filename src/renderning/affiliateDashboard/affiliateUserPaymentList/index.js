@@ -3,6 +3,7 @@ import styles from "./affiliateUserPaymentList.module.scss";
 import Paginationicon from "../../../../public/assets/icons/paginationicon";
 import { affiliatePaymentList } from "@/lib/userApi";
 import _ from "lodash";
+import Loader from "@/components/loader";
 
 export default function AffialiateUserPaymentList() {
   const [userList, setUserList] = useState([]);
@@ -57,25 +58,33 @@ export default function AffialiateUserPaymentList() {
                   </tr>
                 </thead>
                 <tbody>
-                  {loader
-                    ? "Loading..."
-                    : userList?.data?.map((item, index) => {
-                        return (
-                          <tr>
-                            <td>
-                              <span className={styles.tableid}>{index + 1}</span>
-                            </td>
-                            <td>
-                              <span className={styles.tablecustomername}>{item?.name ? _.capitalize(item?.name) : ""}</span>
-                            </td>
-                            <td>{item?.email}</td>
-                            <td>${item?.amount}</td>
-                            <td>{item?.uplineCommissionPercentage}%</td>
-                            <td className={styles.green}>${item?.uplineCommissionAmount}</td>
-                            <td>{item?.createdAt.split("T")[0] + ", " + item?.createdAt.split("T")[1].split(".")[0]}</td>
-                          </tr>
-                        );
-                      })}
+                  {loader ? (
+                    <tr>
+                      <td colSpan={5}>
+                        <div className={styles.loader}>
+                          <Loader />
+                        </div>
+                      </td>
+                    </tr>
+                  ) : (
+                    userList?.data?.map((item, index) => {
+                      return (
+                        <tr>
+                          <td>
+                            <span className={styles.tableid}>{index + 1}</span>
+                          </td>
+                          <td>
+                            <span className={styles.tablecustomername}>{item?.name ? _.capitalize(item?.name) : ""}</span>
+                          </td>
+                          <td>{item?.email}</td>
+                          <td>${item?.amount}</td>
+                          <td>{item?.uplineCommissionPercentage}%</td>
+                          <td className={styles.green}>${item?.uplineCommissionAmount}</td>
+                          <td>{item?.createdAt.split("T")[0] + ", " + item?.createdAt.split("T")[1].split(".")[0]}</td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </tbody>
               </table>
             </div>
