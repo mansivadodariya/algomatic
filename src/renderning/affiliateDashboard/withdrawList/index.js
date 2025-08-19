@@ -81,8 +81,24 @@ export default function WithdrawList() {
                           </td>
                           <td>${item?.withdrawAmount}</td>
                           <td>
-                            <Link href={item?.imageUrl ?? imageNotFound} target="_blank">
+                            {/* <Link href={item?.imageUrl ?? imageNotFound} target="_blank">
                               <img className={styles.withdrawImage} src={item?.imageUrl ?? imageNotFound} alt="payment img" />
+                            </Link> */}
+                            <Link href={item?.imageUrl || imageNotFound} target="_blank" rel="noopener noreferrer">
+                              <div className={styles.withdrawImageContainer}>
+                                {console.log(item?.imageUrl, "--------item imageUrl")}
+                                <Image
+                                  src={item?.imageUrl || imageNotFound}
+                                  alt="payment proof"
+                                  width={100}
+                                  height={60}
+                                  className={styles.withdrawImage}
+                                  onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = imageNotFound;
+                                  }}
+                                />
+                              </div>
                             </Link>
                           </td>
                           <td>{item?.createdAt.split("T")[0] + ", " + item?.createdAt.split("T")[1].split(".")[0]}</td>

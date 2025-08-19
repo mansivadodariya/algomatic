@@ -1,5 +1,5 @@
 export const WITHDRAWAL_REQ_STATUS = {
-    PENDING: "PENDING",
-    APPROVED: "APPROVED",
-    REJECTED: "REJECTED",
+    PENDING: "pending",
+    APPROVED: "approved",
+    REJECTED: "rejected",
 }
