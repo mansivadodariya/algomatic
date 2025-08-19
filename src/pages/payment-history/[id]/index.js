@@ -152,7 +152,7 @@ export default function Dashboard() {
                           {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
                             p.paymentStatus === "paid" ? (
                               <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                                + Add Meta Account No
+                                + Add Meta No
                               </button>
                             ) : (
                               "-"
