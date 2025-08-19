@@ -21,6 +21,7 @@ export default function Dashboard() {
   const [savingMeta, setSavingMeta] = useState(false);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     if (!storedUser) {
@@ -193,7 +194,7 @@ export default function Dashboard() {
                     <Loader />
                   </div>
                 )}
-                {payments.length === 0 && (
+                {payments.length === 0 && !loading && (
                   <>
                     <div className={styles.tablenodatamain}>
                       <div className={styles.tablenodataflx}>

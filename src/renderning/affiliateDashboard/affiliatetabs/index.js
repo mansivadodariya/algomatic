@@ -35,7 +35,6 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
     tabs[tab] = true;
     setSelectedTab(tabs);
   };
-  console.log(selectedTabs,'------------ selectedTabs')
 
   return (
     <>
@@ -51,7 +50,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total Earning</p>
-                <h2>${Number(affiliateDashboardData?.totalEarningAmount).toFixed(3)}</h2>
+                <h2>${affiliateDashboardData?.totalEarningAmount ? Number(affiliateDashboardData?.totalEarningAmount).toFixed(3) : "0"}</h2>
               </div>
             </div>
 
@@ -61,7 +60,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total Withdrawal</p>
-                <h2>${Number(affiliateDashboardData?.totalWithdrawAmount).toFixed(3)}</h2>
+                <h2>${affiliateDashboardData?.totalWithdrawAmount ? Number(affiliateDashboardData?.totalWithdrawAmount).toFixed(3) : "0"}</h2>
               </div>
             </div>
 
@@ -71,7 +70,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Pending Withdrawal</p>
-                <h2>${Number(affiliateDashboardData?.pendingWithdrawAmount).toFixed(3)}</h2>
+                <h2>${affiliateDashboardData?.pendingWithdrawAmount ? Number(affiliateDashboardData?.pendingWithdrawAmount).toFixed(3) : "0"}</h2>
               </div>
             </div>
 
@@ -81,7 +80,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total Users</p>
-                <h2>{affiliateDashboardData?.myUserCount}</h2>
+                <h2>{affiliateDashboardData?.myUserCount ? affiliateDashboardData?.myUserCount : "0"}</h2>
               </div>
             </div>
 
@@ -91,7 +90,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
               </div>
               <div>
                 <p>Total User Payments</p>
-                <h2>{affiliateDashboardData?.totalUserPaymentCount}</h2>
+                <h2>{affiliateDashboardData?.totalUserPaymentCount ? affiliateDashboardData?.totalUserPaymentCount : "0"}</h2>
               </div>
             </div>
           </div>

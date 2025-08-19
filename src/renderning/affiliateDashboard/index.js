@@ -10,10 +10,10 @@ import WithdrawRequestForm from "./withdrawRequestForm";
 
 export default function AffiliateDashboard() {
   const [selectedTabs, setSelectedTab] = useState({
-    pendingWithdrawAmount: false, // modal
-    withdrawList: false,  // table done
-    myUser: false, // table done
-    paymentList: true, // table
+    pendingWithdrawAmount: false,
+    withdrawList: false, 
+    myUser: false,
+    paymentList: true,
   });
 
   return (

@@ -24,32 +24,15 @@ export default function Transformsection() {
                 <h2>
                   Ready to <span>Transform</span> Your Trading Journey?
                 </h2>
-                <p>
-                  Join the revolution of forex trading with AlgoMatic. Let smart
-                  automation help you trade smarter, faster, and more
-                  efficiently.
-                </p>
+                <p>Join the revolution of forex trading with AlgoMatic. Let smart automation help you trade smarter, faster, and more efficiently.</p>
               </div>
               <div className={styles.transformboxinputmain}>
-                  <div className={styles.transformboxinputbutton}>
-                    <Commonarrowbutton
-                      Text="Explore Algomatic"
-                      icon="none"
-                      buttonclassName="widthfull"
-                      Butttonvarient="darkoutlined"
-                      link="/marketplace"
-                    />
-                  </div>
-                  <div className={styles.transformboxinputbutton}>
-                    <Commonarrowbutton
-                      Text="Contact Us"
-                      icon="none"
-                      buttonclassName="widthfull"
-                      Butttonvarient="darkoutlined"
-                      link={`https://wa.me/${utilitySettings?.phoneNo}`}
-                      Target="blank"
-                    />
-                  </div>
+                <div className={styles.transformboxinputbutton}>
+                  <Commonarrowbutton Text="Explore Algomatic" icon="none" buttonclassName="widthfull" Butttonvarient="darkoutlined" link="/marketplace" />
+                </div>
+                <div className={styles.transformboxinputbutton}>
+                  <Commonarrowbutton Text="Contact Us" icon="none" buttonclassName="widthfull" Butttonvarient="darkoutlined" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" />
+                </div>
               </div>
             </div>
           </div>

@@ -60,7 +60,7 @@ export default function AffialiateUserPaymentList() {
                 <tbody>
                   {loader ? (
                     <tr>
-                      <td colSpan={5}>
+                      <td colSpan={7}>
                         <div className={styles.loader}>
                           <Loader />
                         </div>

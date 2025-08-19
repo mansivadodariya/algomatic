@@ -63,7 +63,7 @@ export default function WithdrawList() {
                 <tbody>
                   {loader ? (
                     <tr>
-                      <td colSpan={5}>
+                      <td colSpan={6}>
                         <div className={styles.loader}>
                           <Loader />
                         </div>
