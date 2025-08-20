@@ -86,7 +86,6 @@ export default function WithdrawList() {
                             </Link> */}
                             <Link href={item?.imageUrl || imageNotFound} target="_blank" rel="noopener noreferrer">
                               <div className={styles.withdrawImageContainer}>
-                                {console.log(item?.imageUrl, "--------item imageUrl")}
                                 <Image
                                   src={item?.imageUrl || imageNotFound}
                                   alt="payment proof"

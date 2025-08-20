@@ -56,7 +56,6 @@ interface PaymentLinkData {
 
 export const getPaymentLink = async (data: PaymentLinkData) => {
   try {
-    console.log(data,'-------------------------data qqq')
     const dataObj = {
       userId: data?.userId,
       name: data?.name,

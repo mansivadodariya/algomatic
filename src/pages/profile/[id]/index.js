@@ -5,7 +5,7 @@ import Button from "@/components/button";
 import { getPaymentHistory, editUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
-import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, ClipboardCheck, Copy, Info, MoveLeft, MoveLeftIcon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
+import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, ClipboardCheck, ClipboardCheckIcon, Copy, CopyCheck, Info, MoveLeft, MoveLeftIcon, Share2, Share2Icon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -88,6 +88,15 @@ export default function Dashboard() {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
+  };
+
+  const handleShare = () => {
+    const code = user?.myAffiliateCode;
+    const signupUrl = `https://algomaticbot.com?affiliateCode=${encodeURIComponent(code)}`;
+    const shareText = `Join AlgoMatic using my affiliate code!\n${signupUrl}`;
+
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -214,11 +223,19 @@ export default function Dashboard() {
                     <span>Phone</span>
                     <p>{user?.phone}</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <span>My Affiliate Code</span>
                     <p>{user?.myAffiliateCode}</p>
                     <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
                       {copied ? <ClipboardCheck /> : <Copy />}
+                    </div>
+                  </div> */}
+                  {/* share */}
+                  <div>
+                    <span>My Affiliate Code</span>
+                    <p>{user?.myAffiliateCode}</p>
+                    <div className={styles.copyIcon} title="Share" onClick={handleShare}>
+                      <Share2 />
                     </div>
                   </div>
                 </div>

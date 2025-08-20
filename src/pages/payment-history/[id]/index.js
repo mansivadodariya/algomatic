@@ -83,7 +83,6 @@ export default function Dashboard() {
 
       // Rejoice company id from db
       if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
-        console.log("rejoice company bot sending mail ---------");
         // send multiple rejoice bot exe to user
         metaAccountNo.map(async (metaNo, idx) => {
           await sendRejoiceBotExeToUser({
@@ -98,7 +97,6 @@ export default function Dashboard() {
 
       // Algo client spiral company id from db
       if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
-        console.log("spiral company bot sending mail ---------");
         // send multiple spiral bot exe to user
         metaAccountNo.map(async (metaNo, idx) => {
           await sendSpiralBotExeToUser({

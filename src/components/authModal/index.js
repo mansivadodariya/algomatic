@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Modal from "../modal";
 import Image from "next/image";
 import Button from "../button";
@@ -11,10 +11,14 @@ import { Eye, EyeOff } from "lucide-react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Loader from "../loader";
-
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 const Logo = "/assets/logo/logo.svg";
 
 const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
+  const router = useRouter();
+  const params = useSearchParams();
+  const alreadyOpened = useRef(false);
   const [mode, setMode] = useState("login");
   const [showOtp, setShowOtp] = useState(false);
   const { setUser, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen */ } = useAppContext();
@@ -37,6 +41,22 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
 
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const toggleConfirmPasswordVisibility = () => setShowConfirmPassword((prev) => !prev);
+
+  // redirect to signup modal for upcoming shared link users
+  useEffect(() => {
+    const affiliateCode = params.get("affiliateCode");
+
+    if (affiliateCode && !isOpen && !alreadyOpened.current) {
+      alreadyOpened.current = true;
+      setMode("signup");
+      setShowLogin(true);
+      setFormData((prev) => ({
+        ...prev,
+        uplineAffiliateCode: affiliateCode,
+      }));
+      router.replace("/", { scroll: false });
+    }
+  }, [params]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -110,25 +130,18 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log("----------------");
     e.preventDefault();
     if (validate()) {
       setIsSubmitting(true);
       if (mode === "login") {
         const login = await loginUser(formData.email, formData.password);
-        console.log(login, "-------------login");
         if (login?.success) {
           toast.success("Login Successful");
           localStorage.setItem("user", JSON.stringify(login.payload));
           localStorage.setItem("isLogin", true);
           localStorage.setItem("token", login.payload.token);
           setIsUserLoggedIn(true);
-          setUser(login.payload);
-
-          // if (backToStrategyPlan) {
-          //   setSubscriptionPlanModalOpen(true);
-          //   setBackToStrategyPlan(false);
-          // }
+          setUser(login.payload);        
 
           onClose();
         } else {
@@ -138,7 +151,6 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
         setIsSubmitting(false);
       } else {
         const signup = await signUpUser(formData.name, formData.email, formData.phone, formData.password, formData.confirmPassword, formData.countryCode, formData?.uplineAffiliateCode);
-        console.log(signup, "-------------signup");
         if (signup?.success) {
           toast.success("Signup Successful");
           setShowLogin(true);
@@ -175,7 +187,6 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
               <div className={styles.inputGroup}>
                 <input type="email" name="email" placeholder={errors.email || "Email Address"} value={formData?.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
               </div>
-
 
               {/* affialiate code */}
               {mode === "signup" && (
@@ -216,7 +227,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                     {/* {errors.countryCode && <p className={styles.error}>{errors.countryCode}</p>} */}
                   </div>
                 </div>
-              )}              
+              )}
 
               {mode === "signup" ? (
                 <div className={styles.passwordRow}>

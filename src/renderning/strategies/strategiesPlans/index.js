@@ -43,6 +43,8 @@ export default function StrategiesPlans({ item, index }) {
       const couponData = await getCouponByCouponCode(inputValueForDebauncing);
       if (!couponData?.success) {
         toast.error(couponData?.message || "Invalid coupon code!");
+        // change price value
+        setFormData((prev) => ({ ...prev, /* couponCode: "", */ couponDiscount: "", couponId: "" }));
       } else {
         toast.success("Coupon code applied successfully!");
         setFormData((prev) => ({ ...prev, couponCode: inputValueForDebauncing, couponDiscount: couponData?.payload?.discount, couponId: couponData?.payload?._id ?? null }));
@@ -75,7 +77,7 @@ export default function StrategiesPlans({ item, index }) {
     setLoading(true);
     setIsBtnLoading(true);
     try {
-      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId, uplineAffiliateCode:user?.uplineAffiliateCode });
+      const response = await getPaymentLink({ ...formData, strategyPlanId: item?._id, userId: user?._id, noOfBots: noOfPlans, couponId: formData?.couponId, uplineAffiliateCode: user?.uplineAffiliateCode });
       if (response?.success == true) {
         router.push(response.url);
         toast.success("Submitted successfully!");
@@ -225,7 +227,7 @@ export default function StrategiesPlans({ item, index }) {
                   placeholder="Enter your coupon code"
                   value={formData.couponCode}
                   onChange={(e) => {
-                    const value = e.target.value;
+                    const value = e.target.value.trim();
                     setFormData((prev) => ({ ...prev, couponCode: value }));
                     setInputValueForDebauncing(value);
                   }}
@@ -236,7 +238,6 @@ export default function StrategiesPlans({ item, index }) {
               <div className={`${styles.inputGroup} ${styles.finalAmountmain}`}>
                 <label>Final Amount</label>
                 <div className={styles.priceDetails}>
-                  {console.log(item?.initialPrice,'--------------------------- iteam initial price')}
                   <p>
                     <span className={styles.label}>MRP:</span> ${item?.initialPrice}
                   </p>

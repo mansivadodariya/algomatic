@@ -80,14 +80,12 @@ api.interceptors.response.use(
         toast.error(error.response.data.message);
       }
       // else if ( error.response.status === 401 ){
-      //   console.log('--------------2')
       //   toast.error("Session Expired, please login again");
       //   localStorage.clear();
       //   setTimeout(() => {
       //     window.location.href = "/";
       //   }, 1000);
       // } else {
-      //   console.log('--------------3')
       //   toast.error(message);
       // }
       // message = error.response.data?.message || error.response.statusText;
