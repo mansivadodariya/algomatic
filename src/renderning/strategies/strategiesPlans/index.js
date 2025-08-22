@@ -9,6 +9,7 @@ import { useAppContext } from "@/context/AppContext";
 import Image from "next/image";
 import Commonarrowbutton from "@/components/commonarrowbutton";
 import { getCouponByCouponCode } from "@/lib/couponApi";
+import Link from "next/link";
 const Logo = "/assets/logo/logo.svg";
 
 export default function StrategiesPlans({ item, index }) {
@@ -33,6 +34,7 @@ export default function StrategiesPlans({ item, index }) {
     couponId: "",
     couponCode: "",
     couponDiscount: "",
+    terms: false,
   });
 
   // debounce for coupon code
@@ -66,6 +68,10 @@ export default function StrategiesPlans({ item, index }) {
     if (!formData?.name) newErrors.name = "Name is required";
     if (!formData?.email) newErrors.email = "Email is required";
     else if (!/\S+@\S+\.\S+/.test(formData?.email)) newErrors.email = "Invalid email";
+    if (!formData?.terms) {
+      newErrors.terms = "Please accept terms and conditions";
+      toast.error("Please accept terms and conditions");
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -153,7 +159,7 @@ export default function StrategiesPlans({ item, index }) {
                   <p className={styles.planPrice}>-{item?.discount}%</p>
                 </div>
               </div>
-              <p className={styles.discountedPlanPrice}>${planPrice.finalPlanPrice}</p>
+              <p className={styles.discountedPlanPrice}>${(planPrice?.finalPlanPrice ?? 0).toFixed(2)}</p>
             </div>
             <div className={styles.valueincreasermain}>
               <button className={noOfPlans <= 1 ? styles.disable : styles.enable} disabled={noOfPlans <= 1} onClick={() => handleStrategyPlanQunatity("subtract")}>
@@ -258,19 +264,17 @@ export default function StrategiesPlans({ item, index }) {
                 </div>
               </div>
 
-              {/* Meta Account No input */}
-              {/* <div className={styles.inputGroup}>
-                <label>Meta Account No{errors.metaAccountNo ? <span className={styles.error}>*</span> : ""}</label>
-                <input
-                  type="text"
-                  name="metaAccountNo"
-                  placeholder="Enter your Meta Account No"
-                  value={formData.metaAccountNo}
-                  onChange={(e) => {
-                    setFormData({ ...formData, metaAccountNo: e.target.value });
-                  }}
-                />
-              </div> */}
+              {/* terms and condotion */}
+              <div className={styles.termsWrapper}>
+                <input type="checkbox" id="terms" className={styles.checkbox} required onChange={(e) => setFormData({ ...formData, terms: e.target.checked })} />
+                <label htmlFor="terms" className={styles.termsLabel}>
+                  I have read and agree to the{" "}
+                  <Link href="/terms-conditions" className={styles.termsLink} target="_blank">
+                    Terms & Conditions
+                  </Link>
+                  <span className={styles.required}>*</span>
+                </label>
+              </div>
 
               {/* Submit button */}
               <div className={styles.submitBtn}>

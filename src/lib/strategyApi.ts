@@ -124,30 +124,31 @@ export const getBotByName = async (botName: string) => {
 };
 
 
-// rejoice company api
-export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+// rejoice company api (not in use)
+export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string; botProviderId: string }) => {
   try {
-    const calculatePlanEndDate = (startDateStr: string, planType: string) => {
-      const months = +planType.replace(/\D/g, "");
-      const date = new Date(startDateStr);
+    // const calculatePlanEndDate = (startDateStr: string, planType: string) => {
+    //   const months = +planType.replace(/\D/g, "");
+    //   const date = new Date(startDateStr);
 
-      date.setMonth(date.getMonth() + months);
+    //   date.setMonth(date.getMonth() + months);
 
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
+    //   const year = date.getFullYear();
+    //   const month = String(date.getMonth() + 1).padStart(2, "0");
+    //   const day = String(date.getDate()).padStart(2, "0");
 
-      return `${year}-${month}-${day}T23:59`;
-    };
+    //   return `${year}-${month}-${day}T23:59`;
+    // };
 
     // calculate expiry date of plan
-    const formatedDate = calculatePlanEndDate(data.date, data.planType);
+    // const formatedDate = calculatePlanEndDate(data.date, data.planType);
 
     const dataObj = {
       email: data.email,
       account_number: data?.metaAccountNo,
-      end_date: formatedDate, // "2025-08-01T14:30"
+      end_date: data?.date, // "2025-08-01T14:30"
       file_name: data?.file_name || "test",
+      botProviderId: data?.botProviderId,
     };
 
     await axios.post(`https://fxpython.rejoicehub.com/update-details`, dataObj, {
@@ -162,55 +163,56 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
   }
 };
 
-// algo client spiral company api
-export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string }) => {
+// algo client spiral company api (not in use)
+export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountNo: string; totalDays: number; planType: string; file_name: string; botProviderId: string }) => {
   try {
 
-    const calculatePlanEndDate = (
-      startDateStr: string,
-      planType: string
-    ): { endDate: string; totalDays: number } => {
-      const months = +planType.replace(/\D/g, "");
-      const date = new Date(startDateStr);
+    // const calculatePlanEndDate = (
+    //   startDateStr: string,
+    //   planType: string
+    // ): { endDate: string; totalDays: number } => {
+    //   const months = +planType.replace(/\D/g, "");
+    //   const date = new Date(startDateStr);
     
-      date.setMonth(date.getMonth() + months);
+    //   date.setMonth(date.getMonth() + months);
     
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
+    //   const year = date.getFullYear();
+    //   const month = String(date.getMonth() + 1).padStart(2, "0");
+    //   const day = String(date.getDate()).padStart(2, "0");
     
-      // Map of fixed plan durations
-      const planDaysMap: { [key: number]: number } = {
-        1: 30,
-        2: 60,
-        3: 90,
-        4: 120,
-        5: 150,
-        6: 180,
-        7: 210,
-        8: 240,
-        9: 270,
-        10: 300,
-        11: 330,
-        12: 365,
-      };
+    //   // Map of fixed plan durations
+    //   const planDaysMap: { [key: number]: number } = {
+    //     1: 30,
+    //     2: 60,
+    //     3: 90,
+    //     4: 120,
+    //     5: 150,
+    //     6: 180,
+    //     7: 210,
+    //     8: 240,
+    //     9: 270,
+    //     10: 300,
+    //     11: 330,
+    //     12: 365,
+    //   };
     
-      const totalDays = planDaysMap[months] || 0;
+    //   const totalDays = planDaysMap[months] || 0;
     
-      return {
-        endDate: `${year}-${month}-${day}T23:59`,
-        totalDays,
-      };
-    };
+    //   return {
+    //     endDate: `${year}-${month}-${day}T23:59`,
+    //     totalDays,
+    //   };
+    // };
     
-    // calculate expiry date and total days of plan
-    const { endDate, totalDays } = calculatePlanEndDate(data.date, data.planType);
+    // // calculate expiry date and total days of plan
+    // const { endDate, totalDays } = calculatePlanEndDate(data.createdAt, data.planType);
     
     const dataObj = {
       account_id: data?.metaAccountNo,
-      days_valid: totalDays,
+      days_valid: data?.totalDays,
       email: data?.email,
       template: data?.file_name || "template_EA.mq5",
+      botProviderId: data?.botProviderId,
     }
 
     await fetch('https://ea.aistrategy19.com/api/generate-ea', {
@@ -228,3 +230,32 @@ export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountN
   }
 };
 
+
+// rejoice company api
+export const sendBotExeToUser = async (data: { paymentId: string; email: string; metaAccountNo: string; totalDays: number; date: string; planType: string; file_name: string; botProviderId: string }) => {
+  try {
+
+    const dataObj = {
+      paymentId: data.paymentId,
+      email: data.email,
+      metaAccountNo: data?.metaAccountNo,
+      file_name: data?.file_name,
+
+      end_date: data?.date, // "2025-08-01T14:30"
+      days_valid: data?.totalDays,
+
+      botProviderId: data?.botProviderId,
+    };
+
+    await api.post(`${API_BASE_URL}user/send-bot-to-user`, dataObj, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+
+  } catch (error) {
+    console.error("Error sendBotExeToUser:", error);
+    return [];
+  }
+};

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./payment-history.module.scss";
 import Button from "@/components/button";
-import { getPaymentHistory, editUser, updateMetaAccountNo, sendRejoiceBotExeToUser, getBotByName, sendSpiralBotExeToUser } from "@/lib/strategyApi";
+import { getPaymentHistory, editUser, updateMetaAccountNo, sendRejoiceBotExeToUser, getBotByName, sendSpiralBotExeToUser, sendBotExeToUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
 import toast from "react-hot-toast";
 import Loader from "@/components/loader";
 import Useicon from "../../../../public/assets/icons/useicon";
 import CommonButton from "@/components/commonButton";
+import { calculatePlanEndDate, calculatePlanEndDateWithTotalDays } from "@/utils/common";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -85,28 +86,36 @@ export default function Dashboard() {
 
       // Rejoice company id from db
       if (botData?.botProviderId == "6892010294ce94c3494ad1ef") {
+        const formatedDate = calculatePlanEndDate(selectedPayment.createdAt, selectedPayment.planType);
+
         // send multiple rejoice bot exe to user
         metaAccountNo.map(async (metaNo, idx) => {
-          await sendRejoiceBotExeToUser({
+          await sendBotExeToUser({
+            paymentId: selectedPayment._id,
             email: user.email,
             metaAccountNo: metaNo,
-            date: selectedPayment.createdAt,
+            date: formatedDate,
             planType: selectedPayment.planType,
             file_name: selectedPayment?.botName,
+            botProviderId: botData?.botProviderId,
           });
         });
       }
 
       // Algo client spiral company id from db
       if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
+        const { totalDays } = calculatePlanEndDateWithTotalDays(selectedPayment.createdAt, selectedPayment.planType);
+
         // send multiple spiral bot exe to user
         metaAccountNo.map(async (metaNo, idx) => {
-          await sendSpiralBotExeToUser({
+          await sendBotExeToUser({
+            paymentId: selectedPayment._id,
             email: user.email,
             metaAccountNo: metaNo,
-            date: selectedPayment.createdAt,
+            totalDays: totalDays,
             planType: selectedPayment.planType,
             file_name: selectedPayment?.botName,
+            botProviderId: botData?.botProviderId,
           });
         });
       }
