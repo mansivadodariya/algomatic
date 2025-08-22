@@ -7,22 +7,7 @@ import Totalusericon from "../../../../public/assets/icons/totalusericon";
 import Totaluserpaymenticon from "../../../../public/assets/icons/totaluserpaymenticon";
 import { getAffiliateDashboardTabData } from "@/lib/userApi";
 
-export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
-  const [affiliateDashboardData, setAffiliateDashboardData] = useState({});
-
-  useEffect(() => {
-    getAffiliateDashboardTabData()
-      .then((res) => {
-        if (res.success) {
-          setAffiliateDashboardData(res.payload);
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.data);
-        }
-      });
-  }, []);
+export default function Affiliatetabs({ selectedTabs, setSelectedTab, affiliateDashboardData, setRefetch }) {
 
   // handle tab selection for table view
   const handleTabSelection = (tab) => {
@@ -34,6 +19,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
     };
     tabs[tab] = true;
     setSelectedTab(tabs);
+    setRefetch((prev) => !prev);
   };
 
   return (
@@ -89,7 +75,7 @@ export default function Affiliatetabs({ selectedTabs, setSelectedTab }) {
                 <Totaluserpaymenticon />
               </div>
               <div>
-                <p>Total User Payments</p>
+                <p>User Payments</p>
                 <h2>{affiliateDashboardData?.totalUserPaymentCount ? affiliateDashboardData?.totalUserPaymentCount : "0"}</h2>
               </div>
             </div>

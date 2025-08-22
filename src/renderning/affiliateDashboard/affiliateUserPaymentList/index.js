@@ -4,6 +4,7 @@ import Paginationicon from "../../../../public/assets/icons/paginationicon";
 import { affiliatePaymentList } from "@/lib/userApi";
 import _ from "lodash";
 import Loader from "@/components/loader";
+import Useicon from "../../../../public/assets/icons/useicon";
 
 export default function AffialiateUserPaymentList() {
   const [userList, setUserList] = useState([]);
@@ -84,6 +85,23 @@ export default function AffialiateUserPaymentList() {
                         </tr>
                       );
                     })
+                  )}
+                  {userList?.data?.length === 0 && !loader && (
+                    <>
+                      <tr>
+                        <td colSpan={7}>
+                          <div className={styles.tablenodatamain}>
+                            <div className={styles.tablenodataflx}>
+                              <div className={styles.nodatausericon}>
+                                <Useicon />
+                              </div>
+                              <h1>No data found</h1>
+                              <p>No payments records available.</p>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </>
                   )}
                 </tbody>
               </table>

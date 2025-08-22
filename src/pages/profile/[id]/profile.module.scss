@@ -1,24 +1,11 @@
-// .dashboardWrapper {
-//   display: flex;
-//   min-height: 87vh;
-//   // min-height: 100%;
-//   background: #f9fafc;
-// }
-
 .dashboarlayout {
   padding-top: 84px;
 }
 
 .dashboardWrapper {
-  // display: flex;
-  // width: 62.5vw;
   min-height: 87vh;
   background: #f9fafc;
   margin: 0 auto;
-
-  // @media (max-width: 768px) {
-  //   width: 90vw;
-  // }
 }
 
 .sidebar {
@@ -146,38 +133,11 @@
   margin-right: 10px;
 }
 
-// .profileGrid {
-//   display: grid;
-//   gap: 1.5rem;
-//   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
-//   div {
-//     background: #fff;
-//     border: 1px solid #e5e7eb;
-//     border-radius: 8px;
-//     padding: 1rem;
-
-//     span {
-//       display: block;
-//       font-size: 0.85rem;
-//       color: #6b7280;
-//       margin-bottom: 0.25rem;
-//     }
-
-//     p {
-//       margin: 0;
-//       font-weight: 600;
-//       color: #111827;
-//     }
-//   }
-// }
 .profileGrid {
   display: grid;
   gap: 1.5rem;
-  // 2 columns on desktop, 1 column on mobile
   grid-template-columns: repeat(2, 1fr);
 
-  // For mobile screens (below 768px), show 1 column
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
   }
@@ -203,6 +163,25 @@
     }
 
     .copyIcon {
+      position: absolute;
+      top: 50%;
+      right: 62px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50%;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    .shareIcon{
       position: absolute;
       top: 50%;
       right: 12px;

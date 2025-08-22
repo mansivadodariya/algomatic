@@ -22,13 +22,15 @@ export default function Dashboard() {
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
 
+  // check valid user
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
     if (!storedUser) {
       router.push("/");
+      return;
     }
     setUser(storedUser);
-  }, [isUserLoggedIn]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -167,19 +169,6 @@ export default function Dashboard() {
                             </button>
                           )}
                         </td>
-                        {/* <td>
-                          {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
-                            p.paymentStatus === "paid" ? (
-                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                                + Add
-                              </button>
-                            ) : (
-                              "-"
-                            )
-                          ) : (
-                            p.metaAccountNo.join(", ")
-                          )}
-                        </td> */}
                         <td>
                           <span className={p.paymentStatus === "paid" ? styles.statusPaid : styles.statusPending}>{p.paymentStatus === "paid" ? "Paid" : p.paymentStatus === "pending" ? "Pending" : "Failed"}</span>
                         </td>

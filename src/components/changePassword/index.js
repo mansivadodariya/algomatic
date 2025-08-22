@@ -39,11 +39,11 @@ const ChangePassword = ({ email, formDataOfSentOtpModal, isOpen, setShowChangePa
       newErrors.password = "Password is required*";
     }
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password is required*";
+      newErrors.confirmPassword = "Confirm password is required*";
     }
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password && formData.confirmPassword && formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
-      newErrors.confirmPassword = "Passwords do not match";
+      newErrors.confirmPassword = "Confirm passwords do not match";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

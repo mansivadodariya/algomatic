@@ -7,6 +7,7 @@ import _ from "lodash";
 import Image from "next/image";
 import { WITHDRAWAL_REQ_STATUS } from "@/utils/constant";
 import Loader from "@/components/loader";
+import Useicon from "../../../../out/assets/icons/useicon";
 const imageNotFound = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8LWlb8l34MXvr3BonwEYsd11lw1QKQVEiQ&s";
 
 export default function WithdrawList() {
@@ -81,9 +82,6 @@ export default function WithdrawList() {
                           </td>
                           <td>${item?.withdrawAmount}</td>
                           <td>
-                            {/* <Link href={item?.imageUrl ?? imageNotFound} target="_blank">
-                              <img className={styles.withdrawImage} src={item?.imageUrl ?? imageNotFound} alt="payment img" />
-                            </Link> */}
                             <Link href={item?.imageUrl || imageNotFound} target="_blank" rel="noopener noreferrer">
                               <div className={styles.withdrawImageContainer}>
                                 <Image
@@ -105,6 +103,23 @@ export default function WithdrawList() {
                         </tr>
                       );
                     })
+                  )}
+                  {withdrawList?.data?.length === 0 && !loader && (
+                    <>
+                      <tr>
+                        <td colSpan={6}>
+                          <div className={styles.tablenodatamain}>
+                            <div className={styles.tablenodataflx}>
+                              <div className={styles.nodatausericon}>
+                                <Useicon />
+                              </div>
+                              <h1>No data found</h1>
+                              <p>No withdrawal records available.</p>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </>
                   )}
                 </tbody>
               </table>

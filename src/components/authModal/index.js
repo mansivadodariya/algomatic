@@ -88,25 +88,8 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.email) {
-      newErrors.email = "Email is required*";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      toast.error("Valid email required");
-      newErrors.email = "Invalid email";
-    }
-
-    if (mode === "signup" && !formData.name) {
-      newErrors.name = "Name is required*";
-    }
-
-    if (mode === "signup" && !formData.phone) {
-      newErrors.phone = "Phone is required*";
-    } else if (mode === "signup" && !/^[0-9]{7,15}$/.test(formData.phone)) {
-      toast.error("Valid phone required");
-      newErrors.phone = "Valid phone required";
-    }
-
     if (!formData.password) {
+      toast.error("Password is required");
       newErrors.password = "Password is required*";
     } else if (formData.password.length < 6) {
       toast.error("Password must be at least 6 characters long");
@@ -114,15 +97,37 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
     }
 
     if (mode === "signup" && !formData.confirmPassword) {
+      toast.error("Password is required");
       newErrors.confirmPassword = "Password is required*";
     } else if (mode === "signup" && formData.password !== formData.confirmPassword) {
-      toast.error("Passwords do not match");
+      toast.error("Confirm passwords do not match");
       newErrors.confirmPassword = "Passwords do not match";
     }
 
+    if (mode === "signup" && !formData.phone) {
+      toast.error("Phone is required");
+      newErrors.phone = "Phone is required*";
+    } else if (mode === "signup" && !/^[0-9]{7,15}$/.test(formData.phone)) {
+      toast.error("Valid phone required");
+      newErrors.phone = "Valid phone required";
+    }
+
     if (mode === "signup" && !formData.countryCode) {
-      newErrors.countryCode = "Country code is required*";
       toast.error("Country code is required");
+      newErrors.countryCode = "Country code is required*";
+    }
+
+    if (!formData.email) {
+      newErrors.email = "Email is required*";
+      toast.error("Email is required");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      toast.error("Valid email required");
+      newErrors.email = "Invalid email";
+    }
+
+    if (mode === "signup" && !formData.name) {
+      toast.error("Name is required");
+      newErrors.name = "Name is required*";
     }
 
     setErrors(newErrors);
@@ -141,7 +146,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
           localStorage.setItem("isLogin", true);
           localStorage.setItem("token", login.payload.token);
           setIsUserLoggedIn(true);
-          setUser(login.payload);        
+          setUser(login.payload);
 
           onClose();
         } else {
@@ -203,28 +208,35 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
                   <div className={styles.inputGroup}>
                     <PhoneInput
                       country={"in"}
-                      placeholder={errors.phone || ""}
+                      placeholder={errors.phone || "Enter phone number"}
                       enableSearch
                       inputClass={styles.phoneInput}
                       buttonClass={styles.phoneButton}
-                      value={formData?.countryCode}
+                      value={`${formData?.countryCode || ""}${formData?.phone || ""}`}
+                      inputProps={{
+                        onKeyDown: (e) => {
+                          if (e.key === "Backspace") {
+                            const localPhone = formData?.phone || "";
+                            if (localPhone.trim().length === 0) {
+                              e.preventDefault();
+                              e.stopPropagation();
+                            }
+                          }
+                        },
+                      }}
                       onChange={(value, data) => {
-                        const dialCode = data.dialCode;
-                        const phoneWithoutCode = value.replace(dialCode, "").replace(/^\+/, "");
+                        const dialCode = data && data.dialCode ? String(data.dialCode) : "";
+                        const onlyDigits = (value || "").replace(/\D/g, "");
+                        const phoneWithoutCode = dialCode ? onlyDigits.replace(new RegExp("^" + dialCode), "") : onlyDigits;
                         setFormData((prev) => ({
                           ...prev,
-                          countryCode: `+${dialCode}`,
+                          countryCode: dialCode ? `+${dialCode}` : prev?.countryCode || "",
                           phone: phoneWithoutCode,
                         }));
-                        if (errors.countryCode) {
-                          setErrors((prev) => ({
-                            ...prev,
-                            countryCode: "",
-                          }));
-                        }
+
+                        setErrors((prev) => ({ ...prev, phone: "", countryCode: "" }));
                       }}
                     />
-                    {/* {errors.countryCode && <p className={styles.error}>{errors.countryCode}</p>} */}
                   </div>
                 </div>
               )}

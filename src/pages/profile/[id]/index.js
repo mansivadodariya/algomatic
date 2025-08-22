@@ -158,29 +158,6 @@ export default function Dashboard() {
                     ) : (
                       <p>{user?.myAffiliateCode}</p>
                     )}
-
-                    {/* {isProfileEdit ? (
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            value={user?.myAffiliateCode}
-            disabled
-            className="border px-2 py-1 rounded"
-          />
-        </div>
-      ) : (
-        <div className="flex items-center gap-2 border px-3 py-2 rounded-md">
-          <p className="font-medium">{user?.myAffiliateCode}</p>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={handleCopy}
-            className="ml-2"
-          >
-            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-          </Button>
-        </div>
-      )} */}
                   </div>
                 </div>
                 {isProfileEdit && (
@@ -223,18 +200,15 @@ export default function Dashboard() {
                     <span>Phone</span>
                     <p>{user?.phone}</p>
                   </div>
-                  {/* <div>
+
+                  {/* share and copy */}
+                  <div>
                     <span>My Affiliate Code</span>
                     <p>{user?.myAffiliateCode}</p>
                     <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
                       {copied ? <ClipboardCheck /> : <Copy />}
                     </div>
-                  </div> */}
-                  {/* share */}
-                  <div>
-                    <span>My Affiliate Code</span>
-                    <p>{user?.myAffiliateCode}</p>
-                    <div className={styles.copyIcon} title="Share" onClick={handleShare}>
+                    <div className={styles.shareIcon} title="Share" onClick={handleShare}>
                       <Share2 />
                     </div>
                   </div>
@@ -244,7 +218,6 @@ export default function Dashboard() {
               ""
             )}
           </main>
-          {/* </div> */}
         </div>
       </div>
       {/*    */}

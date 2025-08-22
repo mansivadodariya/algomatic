@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { myAffiliateUserList } from "@/lib/userApi";
 import _ from "lodash";
 import Loader from "@/components/loader";
+import Useicon from "../../../../out/assets/icons/useicon";
 
 export default function MyAffiliateUserList() {
   const [userList, setUserList] = useState([]);
@@ -80,6 +81,23 @@ export default function MyAffiliateUserList() {
                         </tr>
                       );
                     })
+                  )}
+                  {userList?.data?.length === 0 && !loader && (
+                    <>
+                      <tr>
+                        <td colSpan={5}>
+                          <div className={styles.tablenodatamain}>
+                            <div className={styles.tablenodataflx}>
+                              <div className={styles.nodatausericon}>
+                                <Useicon />
+                              </div>
+                              <h1>No data found</h1>
+                              <p>No users records available.</p>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </>
                   )}
                 </tbody>
               </table>

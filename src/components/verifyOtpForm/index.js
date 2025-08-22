@@ -9,7 +9,8 @@ import ChangePassword from "../changePassword";
 const Logo = "/assets/logo/logo.svg";
 
 const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerifyOtpModal, onClose }) => {
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const initialData = ["", "", "", "", "", ""];
+  const [otp, setOtp] = useState(initialData);
   const [errors, setErrors] = useState("");
   const [timer, setTimer] = useState(60);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +82,7 @@ const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerif
 
   const handleResend = async () => {
     if (timer === 0 && !isLoading) {
-      // handleResendOTP();
+      setOtp(initialData);
       setTimer(60);
       const apiRes = await sendOtp(email);
       if (apiRes?.success) {
@@ -106,7 +107,6 @@ const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerif
 
           <p className={styles.instructions}>
             Enter the 6-digit OTP sent to
-            {/* <strong>{email}</strong>. */}
           </p>
 
           <form className={styles.form} onSubmit={handleSubmit}>
@@ -115,8 +115,6 @@ const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerif
                 <input key={index} type="text" maxLength="1" value={digit} disabled={isLoading} onChange={(e) => handleChange(e.target.value, index)} onKeyDown={(e) => handleKeyDown(e, index)} ref={(el) => (inputRefs.current[index] = el)} className={styles.otpInput} />
               ))}
             </div>
-
-            {/* {errors && <div className={styles.errorText}>{errors}</div>} */}
 
             <button type="submit" className={styles.primaryButton} disabled={isLoading}>
               {isLoading ? "Verifying..." : "Verify OTP"}
@@ -131,12 +129,6 @@ const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerif
                 </button>
               )}
             </div>
-
-            {/* <div className={styles.backToLogin}>
-              <button type="button" onClick={onClose} disabled={isLoading}>
-                ← Back to Login
-              </button>
-            </div> */}
           </form>
         </div>
       </Modal>

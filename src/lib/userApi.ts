@@ -48,7 +48,6 @@ export const affiliatePaymentList = async (page = 1, size = 5) => {
 export const sendWithdrawRequest = async (data: any) => {
   try {
     const res = await api.post(`/user/send-withdraw-request`, data);
-    (res,'-----------------------------res111')
     return res;
   } catch (error) {
     console.error("Error in sendWithdrawRequest:", error);
