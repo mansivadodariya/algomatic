@@ -3,8 +3,8 @@ import Paginationicon from "../../../../public/assets/icons/paginationicon";
 import React, { useEffect, useState } from "react";
 import { myAffiliateUserList } from "@/lib/userApi";
 import _ from "lodash";
-import Loader from "@/components/loader";
-import Useicon from "../../../../out/assets/icons/useicon";
+  import Loader from "@/components/loader";
+  import Useicon from "../../../../out/assets/icons/useicon";
 
 export default function MyAffiliateUserList() {
   const [userList, setUserList] = useState([]);

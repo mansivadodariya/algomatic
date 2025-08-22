@@ -1,0 +1,91 @@
+.termspagemain {
+  .termspagebanner {
+    padding: 266px 0 130px;
+    background-image: url("../../../public/assets/images/subscribebg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid #f3f3f1;
+    border-radius: 0 0 45px 45px;
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.05);
+
+    @media (max-width:576px) {
+      padding: 160px 0 80px;
+    }
+
+    h1 {
+      font-size: 46px;
+      font-weight: 700;
+      line-height: 58px;
+      color: #111111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      text-align: center;
+      margin: 0 0 16px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 23px;
+      color: #616161;
+      text-align: center;
+    }
+  }
+
+  .termspagecontent {
+    padding: 80px 0 120px 0;
+
+    .termscontent {
+      padding-bottom: 40px;
+      h2 {
+        font-size: 30px;
+        font-weight: 600;
+        line-height: 40px;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        color: #111111;
+        margin-bottom: 16px;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 25px;
+        font-weight: 600;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        color: #111111;
+        margin: 0 0 16px;
+      }
+
+      h4 {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 28px;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        color: #111111;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 30px;
+        color: #616161;
+        margin-bottom: 24px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .listtext {
+        display: flex;
+        align-items: center;
+        padding: 0 0 10px;
+        gap: 6px;
+
+        svg {
+          width: 20px;
+          height: 21px;
+        }
+      }
+    }
+  }
+}

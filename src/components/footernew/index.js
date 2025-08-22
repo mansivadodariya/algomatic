@@ -32,55 +32,150 @@ export default function Footernew() {
                   <img src={Logoimg} alt="logo" />
                 </Link>
               </div>
-              <p>Join the revolution of forex trading with AlgoMatic. Let smart automation help you trade smarter, faster, and more efficiently.</p>
+              <p>
+                Join the revolution of forex trading with AlgoMatic. Let smart
+                automation help you trade smarter, faster, and more efficiently.
+              </p>
             </div>
-            <Commonarrowbutton Text="Contact Us" Butttonvarient="darkoutlined" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" buttonclassName="widthfull" />
+            {/* <Commonarrowbutton
+              Text="Contact Us"
+              Butttonvarient="darkoutlined"
+              link={`https://wa.me/${utilitySettings?.phoneNo}`}
+              Target="blank"
+              buttonclassName="widthfull"
+            /> */}
+            <Commonarrowbutton
+              Text="Contact Us"
+              Butttonvarient="darkoutlined"
+              link={`https://wa.me/${utilitySettings?.phoneNo}`}
+              Target="blank"
+              buttonclassName="widthfull"
+            />
           </div>
 
           <div className={styles.footrright}>
             <div className={styles.footerrightflx}>
               <div className={styles.contactsection}>
                 <h3>Contact Us</h3>
-                <Link href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.contactitem}>
+                <Link
+                  href={`https://wa.me/${utilitySettings?.phoneNo}`}
+                  target="_blank"
+                  className={styles.contactitem}
+                >
                   <Whatsappicon />
                   <p>{utilitySettings?.phoneNo}</p>
                 </Link>
-                <Link href={`mailto:${utilitySettings?.email}`} target="_blank" className={styles.contactitem}>
+                <Link
+                  href={`mailto:${utilitySettings?.email}`}
+                  target="_blank"
+                  className={styles.contactitem}
+                >
                   <Emailicon />
                   <p>{utilitySettings?.email}</p>
                 </Link>
                 <div className={styles.qrcontainer}>
                   <img src={QrImg} alt="QR Code" />
                 </div>
+                {/* <div className={styles.socials}>
+                  {utilitySettings?.telegramLink && (
+                    <Link
+                      href={
+                        utilitySettings?.telegramLink ??
+                        "https://web.telegram.org/a/"
+                      }
+                      target="_blank"
+                    >
+                      <img src={Telegramicon} alt="Telegramicon" />
+                    </Link>
+                  )}
+                  {utilitySettings?.instagramLink && (
+                    <Link
+                      href={
+                        utilitySettings?.instagramLink ??
+                        "https://www.instagram.com/"
+                      }
+                      target="_blank"
+                    >
+                      <img src={Instagramicon} alt="Instagramicon" />
+                    </Link>
+                  )}
+                  {utilitySettings?.facebookLink && (
+                    <Link
+                      href={
+                        utilitySettings?.facebookLink ??
+                        "https://www.facebook.com/"
+                      }
+                      target="_blank"
+                    >
+                      <img src={Facebookicon} alt="Facebookicon" />
+                    </Link>
+                  )}
+                </div> */}
               </div>
 
               <div className={styles.risksection}>
                 <h3>Risk Warning</h3>
-                <p>Forex trading, including automated trading with Algomatic, involves significant risk and is not suitable for all investors. You may lose more than your initial investment, and past performance is not indicative of future results. The forex market is highly volatile, and market conditions can change rapidly. This website does not provide investment advice, and users are encouraged to consult with a qualified financial advisor before making any trading decisions. By using Algomatic, you acknowledge and accept these risks.</p>
+                <p>
+                  Forex trading, including automated trading with Algomatic,
+                  involves significant risk and is not suitable for all
+                  investors. You may lose more than your initial investment, and
+                  past performance is not indicative of future results. The
+                  forex market is highly volatile, and market conditions can
+                  change rapidly. This website does not provide investment
+                  advice, and users are encouraged to consult with a qualified
+                  financial advisor before making any trading decisions. By
+                  using Algomatic, you acknowledge and accept these risks.
+                </p>
               </div>
             </div>
 
             <div className={styles.footerbottom}>
-              <p>©{new Date().getFullYear()} AlgoMatic All Rights Reserved</p>
+              {/* <p>©{new Date().getFullYear()} AlgoMatic All Rights Reserved</p> */}
+              <div className={styles.copyrightpages}>
+                <Link href="/terms-conditions">Terms of Service</Link>
+                <Link href="/privacy-policy">Privacy Policy</Link>
+                <Link href="/refund-policy">Refund Policy</Link>
+              </div>
               <div className={styles.socials}>
                 {utilitySettings?.telegramLink && (
-                  <Link href={utilitySettings?.telegramLink ?? "https://web.telegram.org/a/"} target="_blank">
+                  <Link
+                    href={
+                      utilitySettings?.telegramLink ??
+                      "https://web.telegram.org/a/"
+                    }
+                    target="_blank"
+                  >
                     <img src={Telegramicon} alt="Telegramicon" />
                   </Link>
                 )}
                 {utilitySettings?.instagramLink && (
-                  <Link href={utilitySettings?.instagramLink ?? "https://www.instagram.com/"} target="_blank">
+                  <Link
+                    href={
+                      utilitySettings?.instagramLink ??
+                      "https://www.instagram.com/"
+                    }
+                    target="_blank"
+                  >
                     <img src={Instagramicon} alt="Instagramicon" />
                   </Link>
                 )}
                 {utilitySettings?.facebookLink && (
-                  <Link href={utilitySettings?.facebookLink ?? "https://www.facebook.com/"} target="_blank">
+                  <Link
+                    href={
+                      utilitySettings?.facebookLink ??
+                      "https://www.facebook.com/"
+                    }
+                    target="_blank"
+                  >
                     <img src={Facebookicon} alt="Facebookicon" />
                   </Link>
                 )}
               </div>
             </div>
           </div>
+        </div>
+        <div className={styles.footercopyrightbox}>
+          <p>©{new Date().getFullYear()} AlgoMatic All Rights Reserved</p>
         </div>
       </div>
     </footer>
