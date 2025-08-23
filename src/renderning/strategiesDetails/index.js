@@ -177,10 +177,7 @@ export default function StrategiesDetails() {
             <div className={styles.dropdowncompo} ref={dropdownRef}>
               <p>Select your preferred language :</p>
               <div className={styles.dropdownrel}>
-                <div
-                  className={`${styles.drodpdowninput} ${dropdownOpen ? styles.active : ""}`}
-                  onClick={() => setDropdownOpen(!dropdownOpen)}
-                >
+                <div className={`${styles.drodpdowninput} ${dropdownOpen ? styles.active : ""}`} onClick={() => setDropdownOpen(!dropdownOpen)}>
                   <span>{capitalize(selectedLanguage)}</span>
                   <Dropdownicon />
                 </div>
@@ -201,15 +198,7 @@ export default function StrategiesDetails() {
                 {currentUrl?.map((item, i) => (
                   <div key={i}>
                     <div className={styles.tutorialitem}>
-                      <iframe
-                        src={getEmbedUrl(item?.url)}
-                        title={`YouTube video ${i}`}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        width="100%"
-                        height="400"
-                        frameBorder="0"
-                      />
+                      <iframe src={getEmbedUrl(item?.url)} title={`YouTube video ${i}`} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen width="100%" height="400" frameBorder="0" />
                     </div>
                   </div>
                 ))}
@@ -219,10 +208,7 @@ export default function StrategiesDetails() {
             {/* Strategy Plans */}
             <h2>Plans</h2>
             <div className={styles.strategiesCardList}>
-              <div className={styles.grid}>
-                {strategyCards?.length > 0 &&
-                  strategyCards.map((item, i) => <StrategiesPlans item={item} index={i} key={i} />)}
-              </div>
+              <div className={styles.grid}>{strategyCards?.length > 0 && strategyCards.map((item, i) => <StrategiesPlans item={item} index={i} key={i} />)}</div>
             </div>
           </div>
         </div>

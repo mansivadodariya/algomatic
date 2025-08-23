@@ -1,203 +1,62 @@
 import React from "react";
-import styles from "./privacy.module.scss";
-import Listicon from "../../../public/assets/icons/listicon";
+import styles from "./redund-policy.module.scss";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
+import { useEffect, useState } from "react";
 
 export default function Refundpolicy() {
+  const [utilitySettings, setUtilitySettings] = useState({});
+  useEffect(() => {
+    getUtilitySettings().then((res) => {
+      setUtilitySettings(res?.payload);
+    });
+  }, []);
+
   return (
     <div className={styles.termspagemain}>
       <div className={styles.termspagebanner}>
         <div className="container-xl">
           <h1>Refund Policy</h1>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </p>
+          <p>Last Updated: August 23, 2025</p>
+          {/* <p>This Refund Policy outlines the terms under which Algomatic handles payments and refunds.</p> */}
         </div>
       </div>
       <div className={styles.termspagecontent}>
         <div className="container-xl">
+          {/* Introduction */}
           <div className={styles.termscontent}>
-            <h2>Refund Policy Introduction</h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It
-              has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
-            </p>
+            <h2>1. General Policy</h2>
+            <p>At Algomatic, all sales are final. We do not offer refunds or exchanges for any products, subscriptions, or services once a purchase has been completed.</p>
           </div>
+
+          {/* No Refund Cases */}
           <div className={styles.termscontent}>
-            <h2>Refund Policy Summary</h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-            <h3>1. Personally-Identifiable Information:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>2. Sensitive Personal Data:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>3. Non-Personally-Identifiable Information:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>4. Limited Accessibility:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>5. Inconsistent Quality:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>6. Market Competition:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>7. Customization Limitations:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>8. Scalability Issues:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
+            <h2>2. Non-Refundable Items</h2>
+            <ul>
+              <li>Subscription fees once processed</li>
+              <li>Digital products or downloadable content</li>
+              <li>Services that have already been delivered or accessed</li>
+            </ul>
           </div>
+
+          {/* Responsibility */}
           <div className={styles.termscontent}>
-            <h2>How We Use Your Information:</h2>
-            <p>
-              With your explicit consent, sending you marketing emails informing
-              you about upcoming promotions, product launches, and relevant news
-              about our services and affiliated partners. Rest assured, we
-              respect your privacy preferences and retain information about your
-              marketing preferences for a reasonable period of time. You can opt
-              out of receiving marketing emails at any time by following the
-              instructions provided in the emails. However, please note that
-              even if you opt out of marketing communications, you may still
-              receive non-marketing emails pertaining to your account or
-              essential business dealings with us.
-            </p>
+            <h2>3. Responsibility of Users</h2>
+            <p>By completing a purchase with Algomatic, you acknowledge and agree that you are responsible for understanding the services and products you are buying. We encourage you to carefully review all product information before making a payment.</p>
           </div>
+
+          {/* Exceptions */}
           <div className={styles.termscontent}>
-            <h2>What is a privacy policy?</h2>
-            <h3>1. Types of Policy</h3>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Types of Policy</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Disabling Policy</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Facebook Custom Audiences</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Pixel Tags</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <h3>2. Disclosure of Information</h3>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Do Not Track Signals</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Use Sticker Tokens to Pay AI Service:</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
+            <h2>4. Exceptional Circumstances</h2>
+            <p>While refunds are not provided, Algomatic reserves the right to review special cases at our sole discretion, such as duplicate transactions or technical errors. Approved cases, if any, will be resolved through account credits or alternative solutions rather than monetary refunds.</p>
+          </div>
+
+          {/* Contact */}
+          <div className={styles.termscontent}>
+            <h2>5. Contact Us</h2>
+            <p>If you have questions regarding this Refund Policy, please contact us:</p>
+            <strong>Algomatic smart trading</strong>
+            <p className={styles.email}>Email: {utilitySettings?.email}</p>
+            <p className={styles.phone}>Phone: {utilitySettings?.phoneNo}</p>
           </div>
         </div>
       </div>

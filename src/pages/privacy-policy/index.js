@@ -1,206 +1,142 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./privacy.module.scss";
 import Listicon from "../../../public/assets/icons/listicon";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 
-export default function Privacypolicy() {
+export default function PrivacyPolicy() {
+  const [utilitySettings, setUtilitySettings] = useState({});
+  useEffect(() => {
+    getUtilitySettings().then((res) => {
+      setUtilitySettings(res?.payload);
+    });
+  }, []);
   return (
     <div className={styles.termspagemain}>
+      {/* Banner Section */}
       <div className={styles.termspagebanner}>
         <div className="container-xl">
           <h1>Privacy Policy</h1>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </p>
+          <p>Last Updated: August 23, 2025</p>
         </div>
       </div>
+
+      {/* Main Content */}
       <div className={styles.termspagecontent}>
         <div className="container-xl">
+          {/* Intro */}
           <div className={styles.termscontent}>
-            <h2>privacy Policy Introduction</h2>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry. Lorem Ipsum has been the industry's standard
-              dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It
-              has survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages, and more recently with desktop
-              publishing software like Aldus PageMaker including versions of
-              Lorem Ipsum.
+            This privacy policy describes our policies and procedures for the collection, use, and disclosure of your information when you use the service and tells you about your privacy rights and how the law protects you. We use your personal data to provide and improve the service. By using the service, you agree to the collection and use of information per this privacy policy.
+            </p>
+            <p>
+            Welcome to AlgoMatic ("we," "us," or "our"). This Privacy Policy outlines how we collect, use, disclose, and protect your personal information when you visit our website or use our services.
             </p>
           </div>
+
+          {/* Information We Collect */}
           <div className={styles.termscontent}>
-            <h2>Privacy Summary</h2>
+            <h2>Information We Collect</h2>
+            <h3>1. Personally-Identifiable Information</h3>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              We may collect personal information such as your name, email
+              address, phone number, and billing details when you voluntarily
+              provide it to us.
             </p>
-            <h3>1. Personally-Identifiable Information:</h3>
+
+            <h3>2. Sensitive Personal Data</h3>
             <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
+              Certain information, such as payment data or identity documents,
+              may be collected only when required for services and is handled
+              with strict confidentiality.
             </p>
-            <h3>2. Sensitive Personal Data:</h3>
+
+            <h3>3. Non-Personally-Identifiable Information</h3>
             <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
+              This includes browser type, device information, and general usage
+              patterns to help us improve our website.
             </p>
-            <h3>3. Non-Personally-Identifiable Information:</h3>
+
+            <h3>4. Cookies & Tracking Technologies</h3>
             <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>4. Limited Accessibility:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>5. Inconsistent Quality:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>6. Market Competition:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>7. Customization Limitations:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
-            </p>
-            <h3>8. Scalability Issues:</h3>
-            <p>
-              At Olysim, we take your privacy seriously and only collect
-              personally identifiable information when you voluntarily provide
-              it to us. This information may include your first name, last name,
-              email address, and billing details such as credit card number and
-              billing address.
+              We use cookies, pixel tags, and other technologies to improve your
+              experience, remember preferences, and analyze site performance.
             </p>
           </div>
+
+          {/* How We Use Information */}
           <div className={styles.termscontent}>
-            <h2>How We Use Your Information:</h2>
+            <h2>How We Use Your Information</h2>
+            <ul>
+              <li>To provide, operate, and maintain our services</li>
+              <li>To personalize your experience on our website</li>
+              <li>To process payments securely</li>
+              <li>To send you updates, promotions, and service information</li>
+              <li>To comply with legal obligations</li>
+            </ul>
+          </div>
+
+          {/* Disclosure */}
+          <div className={styles.termscontent}>
+            <h2>Disclosure of Information</h2>
+            <div className={styles.listtext}>
+              <Listicon />
+              <h4>Service Providers</h4>
+            </div>
             <p>
-              With your explicit consent, sending you marketing emails informing
-              you about upcoming promotions, product launches, and relevant news
-              about our services and affiliated partners. Rest assured, we
-              respect your privacy preferences and retain information about your
-              marketing preferences for a reasonable period of time. You can opt
-              out of receiving marketing emails at any time by following the
-              instructions provided in the emails. However, please note that
-              even if you opt out of marketing communications, you may still
-              receive non-marketing emails pertaining to your account or
-              essential business dealings with us.
+              We may share information with trusted third-party providers who
+              help us deliver our services.
+            </p>
+
+            <div className={styles.listtext}>
+              <Listicon />
+              <h4>Legal Requirements</h4>
+            </div>
+            <p>
+              We may disclose personal information when required to comply with
+              legal obligations or protect our rights.
             </p>
           </div>
+
+          {/* Data Security */}
           <div className={styles.termscontent}>
-            <h2>What is a privacy policy?</h2>
-            <h3>1. Types of Policy</h3>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Types of Policy</h4>
-            </div>
+            <h2>Data Security</h2>
             <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
+              We use appropriate security measures to protect your personal
+              information. However, no method of transmission over the Internet
+              is 100% secure.
             </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Disabling Policy</h4>
-            </div>
+          </div>
+
+          {/* Your Rights */}
+          <div className={styles.termscontent}>
+            <h2>Your Rights</h2>
+            <ul>
+              <li>Access, correct, or delete your personal information</li>
+              <li>Opt out of marketing emails at any time</li>
+              <li>Request details about how we process your data</li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div className={styles.termscontent}>
+            <h2>Contact Us</h2>
             <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
+              If you have any questions about this Privacy Policy, please
+              contact us at:
             </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Facebook Custom Audiences</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Pixel Tags</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <h3>2. Disclosure of Information</h3>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Do Not Track Signals</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
-            <div className={styles.listtext}>
-              <Listicon />
-              <h4>Use Sticker Tokens to Pay AI Service:</h4>
-            </div>
-            <p>
-              Essential Cookies: These cookies are vital for providing you with
-              services available through our platform. They enable you to access
-              secure areas, such as logging in, and ensure the speedy loading of
-              requested content. Without these cookies, essential services
-              cannot be provided.
-            </p>
+              <strong>AlgoMatic a smart trading</strong>
+            {/* <p>
+              <br />
+              A-301, Atlanta Shopping Mall, Near Sudama Chowk,
+              <br />
+              Surat, Gujarat 394101, India
+            </p> */}
+            <p className={styles.email}>Email: {utilitySettings?.email}</p>
+            <p className={styles.phone}>Phone: {utilitySettings?.phoneNo}</p>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
