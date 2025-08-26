@@ -11,7 +11,6 @@ export default function StrategiesCardList() {
   const limit = 10;
   useEffect(() => {
     async function fetchStrategies() {
-      // const data = await getStrategies(page, limit);
       const data = await getCategoryWithStrategies(page, limit);
       setStrategyCard(data?.payload?.data || []);
       setTotalCount(data?.payload?.totalRecords || 0);

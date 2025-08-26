@@ -90,10 +90,6 @@ export default function Footer() {
                   <p>Phone Number</p>
                   <a href="callto:+971 50 970 6562">+971 50 970 6562</a>
                 </div>
-                {/* <div className={styles.twoColItems}>
-                  <p>Address</p>
-                  <a>A-301, Atlanta mall, Sudama chowk, Digital Valley (Mota Varachha) , Surat, Gujarat, India 394101</a>
-                </div> */}
               </div>
             </div>
             <div className={styles.footerGridItems}>
@@ -120,7 +116,6 @@ export default function Footer() {
               <div className={styles.lastText}>
                 <h3>Get started to up your business with personal Algomatic </h3>
               </div>
-              {/* <form onSubmit={functionPostContact}> */}
               <div className={styles.input}>
                 <input type="email" placeholder="Enter your email address" value={contactData?.email} onChange={(e) => {
                   setContactData({
@@ -134,7 +129,6 @@ export default function Footer() {
               <div className={styles.secButton} onClick={functionPostContact}>
                 <Button text="Submit" outline={true} icon={<RightBlackLg />} />
               </div>
-              {/* </form> */}
             </div>
           </div>
           <div className={styles.copyRight}>

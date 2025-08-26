@@ -60,8 +60,6 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
       userId: data?.userId,
       name: data?.name,
       email: data?.email,
-      // metaAccountNo: [""],
-      // metaAccountNo: data?.metaAccountNo,
       strategyPlanId: data?.strategyPlanId,
       noOfBots: data?.noOfBots,
       couponId: data?.couponId?? null,
@@ -93,7 +91,6 @@ export const editUser = async (userId: string, user: any) => {
     const userObj = {
       name: user?.name,
       phone: user?.phone,
-      // metaAccountNo: user?.metaAccountNo,
     };
     const res = await api.put(`/user/edit/${userId}`, userObj);
     return res.data;

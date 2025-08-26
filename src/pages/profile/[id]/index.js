@@ -61,11 +61,7 @@ export default function Dashboard() {
     }
   };
 
-  // meta account no edit handling
-  const openMetaModal = (payment) => {
-    setMetaValue(payment.metaAccountNo || "");
-    setMetaModalOpen(true);
-  };
+
   const handleMetaSave = async () => {
     if (!metaValue) return;
     setSavingMeta(true);
@@ -104,7 +100,6 @@ export default function Dashboard() {
       <div className={styles.dashboarlayout}>
         <hr className={styles.hr} />
         <div className={styles.dashboardWrapper}>
-          {/* <div className="container-xl"> */}
           <main className={styles.content}>
             {activeTab === "profile" && isProfileEdit ? (
               <section>
@@ -129,7 +124,7 @@ export default function Dashboard() {
                     <span>Email</span>
                     {isProfileEdit ? (
                       <div className={styles.affiliateCoderel}>
-                        <input type="email" value={user?.email} /* onChange={(e) => setUser({ ...user, email: e.target.value })}  */ className={styles.inputField} disabled />
+                        <input type="email" value={user?.email} className={styles.inputField} disabled />
                         <div className={styles.iicon} title="You cannot edit this field">
                           <Info color="#616161" />
                         </div>

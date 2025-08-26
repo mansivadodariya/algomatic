@@ -112,9 +112,7 @@ export default function Helpsection() {
                         </p>
                     </div>
                     <div className={styles.griditems}>
-                        {/* <form
-                            // action="mailto:yash@rejoicehub.com" 
-                            method="post" onSubmit={(e) => functionPostContact(e)}> */}
+                       
                         <div className={styles.twoCol}>
                             <div className={styles.input}>
                                 <label>First Name <span>* {error?.firstName}</span></label>
@@ -338,7 +336,6 @@ export default function Helpsection() {
                         <div className={styles.firstButton} onClick={functionPostContact}>
                             <Button text="Get Started" icon={<RightLgArrow />} />
                         </div>
-                        {/* </form> */}
                     </div>
                 </div>
             </div>

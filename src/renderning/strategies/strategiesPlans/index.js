@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Button from "@/components/button";
 import toast from "react-hot-toast";
 import styles from "./strategiesPlan.module.scss";
 import { getPaymentLink } from "@/lib/strategyApi";
@@ -21,7 +20,7 @@ export default function StrategiesPlans({ item, index }) {
   const [loading, setLoading] = useState(false);
   const [isBtnLoading, setIsBtnLoading] = useState(false);
   const [showLoginInstructionModal, setShowLoginInstructionModal] = useState(false);
-  const { showLogin, setShowLogin, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen  */ } = useAppContext();
+  const { setShowLogin, setBackToStrategyPlan } = useAppContext();
   const [noOfPlans, setNoOfPlans] = useState(1);
   const [planPrice, setPlanPrice] = useState({
     initialPlanPrice: item?.price,
@@ -39,14 +38,14 @@ export default function StrategiesPlans({ item, index }) {
 
   // debounce for coupon code
   useEffect(() => {
-    if (!inputValueForDebauncing) return; // skip empty input
+    if (!inputValueForDebauncing) return;
 
     const delayDebounce = setTimeout(async () => {
       const couponData = await getCouponByCouponCode(inputValueForDebauncing);
       if (!couponData?.success) {
         toast.error(couponData?.message || "Invalid coupon code!");
         // change price value
-        setFormData((prev) => ({ ...prev, /* couponCode: "", */ couponDiscount: "", couponId: "" }));
+        setFormData((prev) => ({ ...prev, couponDiscount: "", couponId: "" }));
       } else {
         toast.success("Coupon code applied successfully!");
         setFormData((prev) => ({ ...prev, couponCode: inputValueForDebauncing, couponDiscount: couponData?.payload?.discount, couponId: couponData?.payload?._id ?? null }));
@@ -99,7 +98,7 @@ export default function StrategiesPlans({ item, index }) {
       setFormData({ name: user?.name || "", email: user?.email || "", metaAccountNo: "", couponCode: "" });
     } catch (error) {
       setIsBtnLoading(false);
-      toast.error("Submission failed due to some error!"); //check ip is whitelist or not
+      toast.error("Submission failed due to some error!");
     } finally {
       setLoading(false);
       setIsBtnLoading(false);
@@ -142,7 +141,6 @@ export default function StrategiesPlans({ item, index }) {
           <div className={styles.buttonAlignment}>
             <h3 className={styles.planTitle}>{item?.planType}</h3>
             <div onClick={handleClick}>
-              {/* <Button text="Buy Now" /> */}
               <Commonarrowbutton Text="Buy Now" Butttonvarient="Blueoutlined" />
             </div>
           </div>
@@ -202,7 +200,6 @@ export default function StrategiesPlans({ item, index }) {
                     setFormData({ ...formData, name: e.target.value });
                     setErrors({ ...errors, name: "" });
                   }}
-                  // required
                   disabled
                 />
               </div>
@@ -219,7 +216,6 @@ export default function StrategiesPlans({ item, index }) {
                     setFormData({ ...formData, email: e.target.value });
                     setErrors({ ...errors, email: "" });
                   }}
-                  // required
                   disabled
                 />
               </div>
@@ -259,7 +255,6 @@ export default function StrategiesPlans({ item, index }) {
                     </p>
                   )}
                   <hr className={styles.separator} />
-                  {/* <p className={styles.finalAmount}>Final Amount: ${(item?.initialPrice - (item?.initialPrice * (item?.discount ?? 0)) / 100 - (item?.initialPrice * (formData.couponDiscount ?? 0)) / 100).toFixed(2)}</p> */}
                   <p className={styles.finalAmount}>Final Amount: ${planPrice?.initialPlanPrice * noOfPlans - (formData?.couponDiscount ? (item?.initialPrice * (formData?.couponDiscount ?? 0)) / 100 : 0) * noOfPlans}</p>
                 </div>
               </div>
@@ -316,16 +311,6 @@ export default function StrategiesPlans({ item, index }) {
                 isBtnLoading={isBtnLoading}
                 disabled={loading}
               />
-
-              {/* <Button
-                text="Login"
-                onClick={() => {
-                  setShowLoginInstructionModal(false);
-                  setShowLogin(true);
-                  setBackToStrategyPlan(true);
-                }}
-                className="flex-1"
-              /> */}
             </div>
           </div>
         </Modal>

@@ -11,7 +11,7 @@ const Logo = "/assets/logo/logo.svg";
 const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerifyOtpModal, onClose }) => {
   const initialData = ["", "", "", "", "", ""];
   const [otp, setOtp] = useState(initialData);
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState("")
   const [timer, setTimer] = useState(60);
   const [isLoading, setIsLoading] = useState(false);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
@@ -87,9 +87,6 @@ const VerifyOtpModal = ({ email, formData, handleResendOTP, isOpen, setShowVerif
       const apiRes = await sendOtp(email);
       if (apiRes?.success) {
         toast.success("OTP sent successfully");
-        // setShowVerifyOtpModal(false);
-        // setShowChangePasswordModal(true);
-        // onClose();
       }
     }
   };

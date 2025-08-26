@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./header.module.scss";
-import Image from "next/image";
 import DownArrow from "../icons/downArrow";
 import Button from "../button";
-import RightLgArrow from "../icons/rightLgArrow";
 import Link from "next/link";
 import classNames from "classnames";
 import { useRouter } from "next/router";
@@ -11,10 +9,10 @@ import Right from "../icons/right";
 import MobileHeader from "../mobileHeader";
 import AuthModal from "../authModal";
 import { useAppContext } from "../../context/AppContext";
-import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
+import { ChevronDown, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
 const Logo = "/assets/logo/logo.svg";
-const Logoimg = "/assets/logo/logo.png";
+
 export default function Header() {
   const [hoveredMenu, setHoveredMenu] = useState(null);
   const [header, setHeader] = useState(false);
@@ -42,7 +40,7 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    if (!showMenu) return; // no need to attach if hidden
+    if (!showMenu) return;
 
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -218,13 +216,6 @@ export default function Header() {
                   </div>
                 </>
               )}
-              {/* <div className={styles.menuAlignment}>
-                <Commonarrowbutton
-                  Text="Contact Us"
-                  Butttonvarient="lightoutlined"
-                  link="/contact-us"
-                />
-              </div> */}
               <div className={`${styles.mobileMenu} ${header ? styles.active : ""}`} onClick={() => setHeader(!header)}>
                 <span></span>
                 <span></span>
@@ -232,33 +223,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </header>
-      {/* <header className={styles.header}>
-        <div className="container-xl">
-          <div className={styles.headerwrapper}>
-            <div className={styles.headerlogo}>
-              <Link href={"/"}>
-                <img src={Logoimg} alt="logo" />
-              </Link>
-            </div>
-            <div className={styles.headelinksflx}>
-              <Link href={"/"}>About</Link>
-              <Link href={"/"}>How It Works</Link>
-              <Link href={"/"}>Features</Link>
-              <Link href={"/"}>Backtesting</Link>
-              <Link href={"/"}>Marketplace</Link>
-              <Link href={"/"}>Contact Us</Link>
-            </div>
-            <div className={styles.headerbtn}>
-              <Commonarrowbutton Text="Login" Butttonvarient="lightoutlined" />
-            </div>
-            <div className={`${styles.menubutton} ${styles.active}`}>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </header> */}
+      </header>      
       <MobileHeader header={header} setHeader={setHeader} />
       <AuthModal isOpen={showLogin} setShowLogin={setShowLogin} onClose={() => setShowLogin(false)} setIsUserLoggedIn={setIsUserLoggedIn} />
     </>

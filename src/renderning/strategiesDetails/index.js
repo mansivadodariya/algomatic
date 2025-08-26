@@ -11,7 +11,7 @@ import Leftarrow from "../../../public/assets/icons/leftarrow";
 import Dropdownicon from "../../../public/assets/icons/dropdownicon";
 import { capitalize } from "lodash";
 
-// --- Arrow Components ---
+// Arrow Components
 function SampleNextArrow({ onClick, disabled }) {
   return (
     <div className={`${styles.nextArrow} ${disabled ? styles.disable : ""}`} onClick={disabled ? null : onClick}>
@@ -28,7 +28,7 @@ function SamplePrevArrow({ onClick, disabled }) {
   );
 }
 
-// --- Skeleton Loader ---
+// Skeleton Loader
 function Skeleton() {
   return (
     <div className={styles.strategiesDetailsAlignment}>
@@ -58,7 +58,7 @@ function Skeleton() {
   );
 }
 
-// --- Main Component ---
+// Main Component
 export default function StrategiesDetails() {
   const [sterategyDetails, setSterategyDetails] = useState(null);
   const [strategyCards, setStrategyCards] = useState([]);

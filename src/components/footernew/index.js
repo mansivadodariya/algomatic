@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./footernew.module.scss";
 import Link from "next/link";
 import Commonarrowbutton from "../commonarrowbutton";

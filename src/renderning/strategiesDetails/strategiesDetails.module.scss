@@ -11,8 +11,6 @@
   }
 
   .center {
-    // max-width: 800px;
-    // margin: 0 auto;
     padding: 30px 12px 0 12px;
 
     @media (max-width: 1024px) {
@@ -151,8 +149,6 @@
 .strategiesCardList {
   .grid {
     display: grid;
-    // flex-wrap: wrap;
-    // justify-content: flex-start;
     align-items: center;
     padding: 0 0px;
     margin-top: 40px;
@@ -182,7 +178,7 @@
     width: 44px;
     height: 44px;
     background-color: white;
-    border: 1px solid #d1d5db; // Light border
+    border: 1px solid #d1d5db;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -192,7 +188,7 @@
     transition: all 0.3s ease;
 
     &:hover {
-      background-color: #2563eb; // Blue hover (matches your button)
+      background-color: #2563eb;
       border-color: #2563eb;
       transform: translateY(-2px);
     }

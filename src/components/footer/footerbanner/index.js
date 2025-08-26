@@ -1,7 +1,5 @@
 import React from 'react'
 import styles from './footerbanner.module.scss';
-import CommonButton from '@/components/commonButton';
-import Button from '@/components/button';
 import Link from 'next/link';
 import Atropos from 'atropos/react';
 

@@ -264,7 +264,6 @@
     background: #fcfcfc;
   }
 
-  /* No data message overlay */
   .noData {
     position: absolute;
     top: 0;
@@ -275,7 +274,7 @@
     align-items: center;
     justify-content: center;
     color: #6b7280;
-    background: #fff; // match table background
+    background: #fff;
   }
 }
 
@@ -290,7 +289,6 @@
   font-size: 1rem;
   font-weight: 500;
 }
-/* ------------  RESPONSIVE  ------------- */
 
 @media (max-width: 768px) {
   .dashboardWrapper {

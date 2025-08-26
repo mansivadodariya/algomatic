@@ -1,0 +1,105 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background: linear-gradient(to bottom right, #ebf8ff, #faf5ff, #fdf2f8);
+}
+
+.card {
+  width: 100%;
+  max-width: 28rem;
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.iconCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  background: linear-gradient(to bottom right, #8b5cf6, #3b82f6);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ghostIcon {
+  width: 3rem;
+  height: 3rem;
+  color: white;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #111827;
+
+  @media (prefers-color-scheme: dark) {
+    color: #09152e;
+  }
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+
+  @media (prefers-color-scheme: dark) {
+    color: #09152e;
+  }
+}
+
+.description {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4b5563;
+  text-align: center;
+
+  // make sure text doesn't stretch too wide
+  max-width: 40ch; // ~40 characters per line → forces 2 lines
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (prefers-color-scheme: dark) {
+    color: #9ca3af;
+  }
+}
+
+.buttonWrapper {
+  margin-top: 2rem;
+}
+
+.homeButton {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.4);
+  }
+}

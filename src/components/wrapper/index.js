@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import Header from "../header";
-import Footer from "../footer";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Footernew from "../footernew";
@@ -27,7 +26,6 @@ export default function Wrapper({ children }) {
       />
       <Header />
       {children}
-      {/* <Footernew /> */}
       <Whatsappbubble />
       {pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
     </div>

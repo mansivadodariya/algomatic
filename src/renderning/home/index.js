@@ -1,7 +1,3 @@
-import Herobanner from "./herobanner";
-import Aboutus from "./aboutus";
-import Service from "./service";
-import Calculator from "./calculator";
 import React, { useEffect } from "react";
 import Homeherobanner from "../homepage/homeherobanner";
 import Whatalgosection from "../homepage/whatalgosection";
@@ -24,12 +20,6 @@ export default function Homepage() {
   }, []);
   return (
     <div>
-      {/* <-- old sections --> */}
-      {/* <Herobanner/>
-      <Aboutus/>
-      <Service/>
-      <Calculator/> */}
-
       {/* <-- new sections --> */}
       <Homeherobanner />
       <Whatalgosection />

@@ -3,9 +3,9 @@ import styles from './vincentOverview.module.scss';
 import CommonButton from '@/components/commonButton';
 import Button from '@/components/button';
 import RightLgArrow from '@/components/icons/rightLgArrow';
-import Link from 'next/link';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+
 export default function VincentOverview() {
     const [contactData, setContactData] = useState({ country: "Afghanistan" });
     const [error, setError] = useState({});
@@ -122,7 +122,6 @@ export default function VincentOverview() {
                         </div>
                         <div className={styles.griditems}>
                             <div className={styles.box}>
-                                {/* <form action="mailto:yash@rejoicehub.com" method="post" enctype="text/plain"> */}
                                 <div className={styles.twoCol}>
                                     <div className={styles.input}>
                                         <label>First Name <span>* {error?.firstName}</span></label>
@@ -345,7 +344,6 @@ export default function VincentOverview() {
                                 <div className={styles.firstButton} onClick={functionPostContact}>
                                     <Button text="Get Started" icon={<RightLgArrow />} />
                                 </div>
-                                {/* </form> */}
                             </div>
                         </div>
                     </div>

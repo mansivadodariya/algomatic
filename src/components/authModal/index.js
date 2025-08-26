@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Modal from "../modal";
 import Image from "next/image";
-import Button from "../button";
 import styles from "./authModal.module.scss";
 import { loginUser, signUpUser } from "@/lib/authApi";
 import toast from "react-hot-toast";
@@ -21,7 +20,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
   const alreadyOpened = useRef(false);
   const [mode, setMode] = useState("login");
   const [showOtp, setShowOtp] = useState(false);
-  const { setUser, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen */ } = useAppContext();
+  const { setUser } = useAppContext();
 
   const initialData = {
     name: "",
@@ -165,7 +164,6 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
         } else {
           toast.error(signup?.message);
           setIsSubmitting(false);
-          // setIsSubmitting(false);
         }
       }
     }
@@ -173,7 +171,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} /* size="large" */>
+      <Modal isOpen={isOpen} onClose={onClose}>
         <div className={styles.wrapper}>
           <div className={styles.header}>
             <div className={styles.logo}>

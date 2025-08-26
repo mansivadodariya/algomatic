@@ -39,12 +39,7 @@ export default function Pricingsection() {
                     <div className={styles.pricingcardtitle}>
                       <div>
                         <h2 className={styles.cardsTitle}>{item.title}</h2>
-                        {/* {item.strategyPlans.map((plan) => (
-                          // <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
-                          <p className={styles.itemPrice} key={plan.id}>
-                            {plan.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}: {plan.price}$
-                          </p>
-                        ))} */}
+                       
 
                         <div className={styles.pricecardbody}>
                           <div className={styles.priceingdetailsmain}>
@@ -60,13 +55,7 @@ export default function Pricingsection() {
                   </div>
                    <div>
                       <div className={styles.pricecardbody}>
-                        {/* <div className={styles.cardsplanslist}>
-                          {item.strategyPlans.map((plan) => (
-  \                          <p className={styles.itemPrice} key={plan.id}>
-                              {plan.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}: {plan.price}$
-                            </p>
-                          ))}
-                        </div> */}
+                       
                         <div className={styles.planstags}>
                           {item?.strategyPlans?.map((plan) => (
                             <div className={styles.plantag} key={plan?._id}>

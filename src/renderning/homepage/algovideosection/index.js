@@ -20,19 +20,6 @@ export default function Algovideosection() {
 
   return (
     <>
-      {/* <div className="container-xl">
-        <div className={styles.algovideosectionlanguage}>
-          <p>Select your preferred language :</p>
-          <select value={selectedLanguage} onChange={handleLanguageChange} className={styles.languageSelect}>
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-            <option value="indonesian">Indonesian</option>
-            <option value="chinese">Chinese</option>
-            <option value="hindi">Hindi</option>
-          </select>
-        </div>
-      </div> */}
-
       <div className={styles.algovideosectionmain}>
         <div className="container-xl">
           <div className={styles.algovideosectionvidealignment}>

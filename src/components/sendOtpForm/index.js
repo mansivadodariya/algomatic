@@ -13,8 +13,7 @@ const SendOtpModal = ({ isOpen, setShowOtp, onClose }) => {
   const [showVerifyOtpModal, setShowVerifyOtpModal] = useState(false);
   const [formData, setFormData] = useState({ email: "" });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false); // <-- Loader state
-  const { setUser } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -43,19 +42,18 @@ const SendOtpModal = ({ isOpen, setShowOtp, onClose }) => {
     if (!validate()) return;
 
     try {
-      setIsLoading(true); // Start loader
+      setIsLoading(true);
       const res = await sendOtp(formData.email);
       if (res?.success) {
         toast.success("OTP sent successfully");
         setShowOtp(false);
         setShowVerifyOtpModal(true);
-        // setFormData({});
         onClose();
       }
     } catch (err) {
       toast.error("Failed to send OTP. Please try again.");
     } finally {
-      setIsLoading(false); // Stop loader
+      setIsLoading(false);
     }
   };
 
@@ -91,7 +89,7 @@ const SendOtpModal = ({ isOpen, setShowOtp, onClose }) => {
                   placeholder={errors.email || "Enter your email"}
                   value={formData.email}
                   onChange={handleInputChange}
-                  disabled={isLoading} // Disable while loading
+                  disabled={isLoading}
                   className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`}
                 />
               </div>
@@ -99,9 +97,9 @@ const SendOtpModal = ({ isOpen, setShowOtp, onClose }) => {
               <button
                 type="submit"
                 className={styles.primaryButton}
-                disabled={isLoading} // Disable button while loading
+                disabled={isLoading}
               >
-                {isLoading ? "Sending..." : "Send OTP"} {/* Loader text */}
+                {isLoading ? "Sending..." : "Send OTP"}
               </button>
             </form>
           </div>
