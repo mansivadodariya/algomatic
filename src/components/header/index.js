@@ -13,7 +13,6 @@ import AuthModal from "../authModal";
 import { useAppContext } from "../../context/AppContext";
 import { ChevronDown, CircleUserRound, UserCircle } from "lucide-react";
 import Commonarrowbutton from "../commonarrowbutton";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 const Logo = "/assets/logo/logo.svg";
 const Logoimg = "/assets/logo/logo.png";
 export default function Header() {
@@ -21,8 +20,7 @@ export default function Header() {
   const [header, setHeader] = useState(false);
   const { showLogin, setShowLogin } = useAppContext();
   const [showMenu, setShowMenu] = useState(false);
-  const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
-  const [getUtilitySettingsData, setGetUtilitySettingsData] = useState({});
+  const { isUserLoggedIn, setIsUserLoggedIn, user, setUser, utilitySettings } = useAppContext();
 
   const menuRef = useRef(null);
   const router = useRouter();
@@ -40,15 +38,7 @@ export default function Header() {
     const loginStatus = localStorage.getItem("isLogin");
     setIsUserLoggedIn(loginStatus);
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
-    //   const storedUser = typeof window !== "undefined" && localStorage.getItem("user")
-    // ? JSON.parse(localStorage.getItem("user"))
-    // : null;
-
     setUser(storedUser);
-
-    getUtilitySettings().then((res) => {
-      setGetUtilitySettingsData(res.payload);
-    });
   }, []);
 
   useEffect(() => {
@@ -104,7 +94,7 @@ export default function Header() {
       title: "Contact Us",
       submenu: [],
       Target: "__blank",
-      routes: `https://wa.me/${getUtilitySettingsData?.phoneNo}`,
+      routes: `https://wa.me/${utilitySettings?.phoneNo}`,
     },
   ];
 

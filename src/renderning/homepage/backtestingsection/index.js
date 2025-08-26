@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./backtestingsection.module.scss";
 import Commonlable from "@/components/commonlable";
+import { useAppContext } from "@/context/AppContext";
 const backtestingimage = "/assets/images/backtestingimage.png";
 const myfxbook = "/assets/images/myfxbook.png";
 
 export default function Backtestingsection() {
+  const { utilitySettings } = useAppContext();
+
   return (
     <>
       <div className={styles.backtestingsectionmain} id="Backtesting">
@@ -22,7 +25,7 @@ export default function Backtestingsection() {
                 <p>Check our backtested history</p>
                 <div className={styles.backtestingcontentflx}>
                   <span>Broker Name:</span>
-                  <p>Skyriss</p>
+                  <p>{utilitySettings?.brokerName}</p>
                 </div>
                 <div className={styles.backtestingcontentflx}>
                   <span>Server:</span>
@@ -30,11 +33,11 @@ export default function Backtestingsection() {
                 </div>
                 <div className={styles.backtestingcontentflx}>
                   <span>MT5 ID:</span>
-                  <p>200037 </p>
+                  <p>{utilitySettings?.MT5ID}</p>
                 </div>
                 <div className={styles.backtestingcontentflx}>
                   <span>Investor Password:</span>
-                  <p>Inv@2025</p>
+                  <p>{utilitySettings?.investorPassword}</p>
                 </div>
               </div>
               <div className={styles.backtestinglastflx}>

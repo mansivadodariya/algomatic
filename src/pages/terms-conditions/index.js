@@ -1,16 +1,9 @@
 import React from "react";
 import styles from "./termspage.module.scss";
-import Listicon from "../../../public/assets/icons/listicon";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
-import { useEffect, useState } from "react";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Termsconditions() {
-  const [utilitySettings, setUtilitySettings] = useState({});
-  useEffect(() => {
-    getUtilitySettings().then((res) => {
-      setUtilitySettings(res?.payload);
-    });
-  }, []);
+  const { utilitySettings } = useAppContext();
 
   return (
     <div className={styles.termspagemain}>

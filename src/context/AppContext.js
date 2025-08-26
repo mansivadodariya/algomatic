@@ -3,45 +3,23 @@ const AppContext = createContext();
 import jwt_decode from "jwt-decode";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
+import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 
 export const AppProvider = ({ children }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [backToStrategyPlan, setBackToStrategyPlan] = useState(false);
-  // const [subscriptionPlanModalOpen, setSubscriptionPlanModalOpen] = useState(false);
+  const [utilitySettings, setUtilitySettings] = useState({});
 
-  // const router = useRouter();
+  useEffect(() => {
+    getUtilitySettings().then((res) => {
+      setUtilitySettings(res?.payload);
+    });
+  }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     try {
-  //       const payload = JSON.parse(atob(token.split(".")[1]));
-  //       const currentTime = Math.floor(Date.now() / 1000);
 
-  //       if (payload.exp < currentTime) {
-  //         setIsUserLoggedIn(false);
-  //         setUser(null);
-  //         localStorage.removeItem("token");
-  //         toast.error("Session Expired, please login again");
-  //         router.push("/");
-  //       } 
-  //     } catch (error) {
-  //       toast.error("Session Expired, please login again");
-  //       console.error("Invalid token:", error);
-  //       setIsUserLoggedIn(false);
-  //       setUser(null);
-  //       localStorage.removeItem("token");
-  //       router.push("/");
-  //     }
-  //   }else{
-  //     setIsUserLoggedIn(false);
-  //     setUser(null);
-  //   }
-  // }, []);
-
-  return <AppContext.Provider value={{ showLogin, setShowLogin, isUserLoggedIn, setIsUserLoggedIn, user, setUser, backToStrategyPlan, setBackToStrategyPlan /* subscriptionPlanModalOpen, setSubscriptionPlanModalOpen */ }}>{children}</AppContext.Provider>;
+  return <AppContext.Provider value={{ showLogin, setShowLogin, isUserLoggedIn, setIsUserLoggedIn, user, setUser, backToStrategyPlan, setBackToStrategyPlan, utilitySettings }}>{children}</AppContext.Provider>;
 };
 
 export const useAppContext = () => useContext(AppContext);

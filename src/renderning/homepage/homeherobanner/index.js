@@ -1,18 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./homeherobanner.module.scss";
 import Commonarrowbutton from "@/components/commonarrowbutton";
 import Commonlable from "@/components/commonlable";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
-import { useState } from "react";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Homeherobanner() {
-  const [getUtilitySettingsData, setGetUtilitySettingsData] = useState({});
-
-  useEffect(() => {
-    getUtilitySettings().then((res) => {
-      setGetUtilitySettingsData(res.payload);
-    });
-  }, []);
+  const { utilitySettings } = useAppContext();
 
   return (
     <div className={styles.homeherobannermain}>
@@ -29,7 +22,7 @@ export default function Homeherobanner() {
               </h1>
               <p>Algomatic is a smart trading bot that leverages arbitrage opportunities in the XAUUSD forex market, executing real-time trades for maximum profit and minimal risk</p>
               <div className={styles.herobannerbuttons}>
-                <Commonarrowbutton Text="contact us" Butttonvarient="dark" link={`https://wa.me/${getUtilitySettingsData?.phoneNo}`} Target="blank" />
+                <Commonarrowbutton Text="contact us" Butttonvarient="dark" link={`https://wa.me/${utilitySettings?.phoneNo}`} Target="blank" />
                 <Commonarrowbutton Text="explore algomatic" Butttonvarient="light" link="/marketplace" />
               </div>
             </div>

@@ -84,7 +84,7 @@ export default function Dashboard() {
 
   const handleCopy = async () => {
     if (user?.myAffiliateCode) {
-      await navigator.clipboard.writeText(user.myAffiliateCode);
+      await navigator.clipboard.writeText(`https://algomaticbot.com?affiliateCode=${user.myAffiliateCode}`);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }

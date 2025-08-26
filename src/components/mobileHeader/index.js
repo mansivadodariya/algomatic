@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./mobileHeader.module.scss";
 import Link from "next/link";
-import Image from "next/image";
-import DownArrow from "../icons/downArrow";
 import classNames from "classnames";
 import Commonarrowbutton from "../commonarrowbutton";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
-const Logo = "/assets/logo/logo.svg";
+import { useAppContext } from "../../context/AppContext";
 
 export default function MobileHeader({ setHeader, header }) {
-   const [utilitySettings, setUtilitySettings] = useState({});
-   useEffect(() => {
-     getUtilitySettings().then((res) => {
-       setUtilitySettings(res?.payload);
-     });
-   }, []);
+  const { utilitySettings } = useAppContext();
   return (
     <>
       <div className={classNames(styles.mobileHeaderoverlay, header ? styles.open : styles.hide)} onClick={() => setHeader(!header)}></div>

@@ -1,15 +1,9 @@
 import React from "react";
 import styles from "./redund-policy.module.scss";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
-import { useEffect, useState } from "react";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Refundpolicy() {
-  const [utilitySettings, setUtilitySettings] = useState({});
-  useEffect(() => {
-    getUtilitySettings().then((res) => {
-      setUtilitySettings(res?.payload);
-    });
-  }, []);
+  const { utilitySettings } = useAppContext();
 
   return (
     <div className={styles.termspagemain}>

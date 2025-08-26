@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./privacy.module.scss";
 import Listicon from "../../../public/assets/icons/listicon";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
+import { useAppContext } from "@/context/AppContext";
 
 export default function PrivacyPolicy() {
-  const [utilitySettings, setUtilitySettings] = useState({});
-  useEffect(() => {
-    getUtilitySettings().then((res) => {
-      setUtilitySettings(res?.payload);
-    });
-  }, []);
+  const { utilitySettings } = useAppContext();
+
   return (
     <div className={styles.termspagemain}>
       {/* Banner Section */}

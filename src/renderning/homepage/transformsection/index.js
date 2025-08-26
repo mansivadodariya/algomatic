@@ -1,17 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./transformsection.module.scss";
 import Commonlable from "@/components/commonlable";
 import Commonarrowbutton from "@/components/commonarrowbutton";
-import { getUtilitySettings } from "@/lib/utilitySettingsApi";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Transformsection() {
-  const [utilitySettings, setUtilitySettings] = useState({});
-
-  useEffect(() => {
-    getUtilitySettings().then((res) => {
-      setUtilitySettings(res?.payload);
-    });
-  }, []);
+  const { utilitySettings } = useAppContext();
 
   return (
     <>
