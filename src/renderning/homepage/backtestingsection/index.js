@@ -22,7 +22,7 @@ export default function Backtestingsection() {
                 <span>Backtesting</span> Data
               </h3>
               <div className={styles.backtestingcontent}>
-                <p>Check our backtested history</p>
+                <p>Check our live account history</p>
                 <div className={styles.backtestingcontentflx}>
                   <span>Broker Name:</span>
                   <p>{utilitySettings?.brokerName}</p>
