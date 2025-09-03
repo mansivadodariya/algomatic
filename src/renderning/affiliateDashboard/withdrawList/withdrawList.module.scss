@@ -8,6 +8,9 @@
     border-radius: 8px;
 
     .affiliatetabletitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 16px;
 
       h3 {
@@ -16,6 +19,22 @@
         line-height: 28px;
         color: #111827;
         font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      }
+      .affiliateCoderel {
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .copyIcon {
+        cursor: pointer;
+
+        svg {
+          color: #0100029f;
+          width: 17px;
+          height: 17px;
+        }
       }
     }
 

@@ -3,14 +3,18 @@ import Paginationicon from "../../../../public/assets/icons/paginationicon";
 import React, { useEffect, useState } from "react";
 import { myAffiliateUserList } from "@/lib/userApi";
 import _ from "lodash";
-  import Loader from "@/components/loader";
-  import Useicon from "../../../../out/assets/icons/useicon";
+import Loader from "@/components/loader";
+import Useicon from "../../../../out/assets/icons/useicon";
+import { useAppContext } from "@/context/AppContext";
+import { ClipboardCheck, Copy, Share2 } from "lucide-react";
 
 export default function MyAffiliateUserList() {
   const [userList, setUserList] = useState([]);
   const [loader, setLoader] = useState(false);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
+  const [copied, setCopied] = useState(false);
+  const { user } = useAppContext();
 
   useEffect(() => {
     setLoader(true);
@@ -36,6 +40,22 @@ export default function MyAffiliateUserList() {
       setPage(page - 1);
     }
   };
+  const handleCopy = async () => {
+    if (user?.myAffiliateCode) {
+      await navigator.clipboard.writeText(`https://algomaticbot.com?affiliateCode=${user.myAffiliateCode}`);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleShare = () => {
+    const code = user?.myAffiliateCode;
+    const signupUrl = `https://algomaticbot.com?affiliateCode=${encodeURIComponent(code)}`;
+    const shareText = `Join AlgoMatic using my affiliate code!\n${signupUrl}`;
+
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
+    window.open(whatsappUrl, "_blank");
+  };
 
   return (
     <>
@@ -44,6 +64,15 @@ export default function MyAffiliateUserList() {
           <div className={styles.affiliatetablelayout}>
             <div className={styles.affiliatetabletitle}>
               <h3>Affiliate Users List</h3>
+              <div className={styles.affiliateCoderel}>
+                Affiliate Code
+                <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
+                  {copied ? <ClipboardCheck /> : <Copy />}
+                </div>
+                <div className={styles.copyIcon} title="Share" onClick={handleShare}>
+                  <Share2 />
+                </div>
+              </div>
             </div>
             <div className={styles.affiliatetablescroll}>
               <table>
