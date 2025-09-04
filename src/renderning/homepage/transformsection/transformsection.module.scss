@@ -87,6 +87,11 @@
         margin: 0 auto;
         gap: 24px;
 
+        @media (max-width:576px) {
+          flex-direction: column;
+          gap: 12px;
+        }
+
         label {
           padding: 7px;
           display: flex;

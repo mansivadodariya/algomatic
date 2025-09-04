@@ -101,7 +101,7 @@ export default function Header() {
         },
         {
           title: "White-Label",
-          redirectLink: "/white-label",
+          redirectLink: "/partner-with-us/white-label",
         },
       ],
       routes: "",

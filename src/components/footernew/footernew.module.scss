@@ -208,7 +208,9 @@
           gap: 8px;
 
           @media (max-width:576px) {
-            flex-direction: column;
+            // flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
           }
 
           a {

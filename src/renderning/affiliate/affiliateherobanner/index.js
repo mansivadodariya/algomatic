@@ -24,7 +24,7 @@ export default function Affiliateherobanner() {
                 <Commonarrowbutton
                   Text="Become an Affiliate Now"
                   Butttonvarient="light"
-                  link="/marketplace"
+                  link="/"
                 />
               </div>
             </div>
