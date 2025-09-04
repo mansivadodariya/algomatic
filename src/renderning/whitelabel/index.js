@@ -13,8 +13,8 @@ export default function WhitelabelPage() {
       <Whitelabelherobanner />
       <Whatissection />
       <Benefits />
-      <Iblink />
       <Howitworks />
+      <Iblink />
       <Whocanjoin />
       <Transformsection />
     </>
