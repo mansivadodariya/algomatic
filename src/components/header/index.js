@@ -97,7 +97,7 @@ export default function Header() {
       submenu: [
         {
           title: "Affiliate",
-          redirectLink: "/partner-with-us/affiliate",
+          redirectLink: "/partner-with-us/partner-affiliate",
         },
         {
           title: "White-Label",

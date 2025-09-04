@@ -58,7 +58,7 @@ export default function MobileHeader({ setHeader, header }) {
               >
                 <div className={styles.sidebardropdownlinks}>
                   <Link
-                    href="/partner-with-us/affiliate"
+                    href="/partner-with-us/partner-affiliate"
                     onClick={() => {
                       setHeader(!header);
                       setIsDropdownOpen(false);
