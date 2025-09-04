@@ -2,8 +2,11 @@ import React from "react";
 import styles from "./whitelabelherobanner.module.scss";
 import Commonlable from "@/components/commonlable";
 import Commonarrowbutton from "@/components/commonarrowbutton";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Whitelabelherobanner() {
+  const { utilitySettings } =
+    useAppContext();
   return (
     <div className={styles.whitelabelherobannermain}>
       <div className={styles.whitelabelherobannercontentmain}>
@@ -24,7 +27,8 @@ export default function Whitelabelherobanner() {
                 <Commonarrowbutton
                   Text="Request a White Label Demo"
                   Butttonvarient="light"
-                  link="/"
+                  Target="_blank"
+                  link={`https://wa.me/${utilitySettings?.phoneNo}`}
                 />
               </div>
             </div>
