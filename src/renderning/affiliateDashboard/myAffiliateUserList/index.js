@@ -4,9 +4,9 @@ import React, { useEffect, useState } from "react";
 import { myAffiliateUserList } from "@/lib/userApi";
 import _ from "lodash";
 import Loader from "@/components/loader";
-import Useicon from "../../../../out/assets/icons/useicon";
 import { useAppContext } from "@/context/AppContext";
 import { ClipboardCheck, Copy, Share2 } from "lucide-react";
+import Useicon from "../../../../public/assets/icons/useicon";
 
 export default function MyAffiliateUserList() {
   const [userList, setUserList] = useState([]);

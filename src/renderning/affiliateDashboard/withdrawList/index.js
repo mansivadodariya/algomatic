@@ -7,9 +7,9 @@ import _ from "lodash";
 import Image from "next/image";
 import { WITHDRAWAL_REQ_STATUS } from "@/utils/constant";
 import Loader from "@/components/loader";
-import Useicon from "../../../../out/assets/icons/useicon";
 import { useAppContext } from "@/context/AppContext";
 import { ClipboardCheck, Copy, Share2 } from "lucide-react";
+import Useicon from "../../../../public/assets/icons/useicon";
 const imageNotFound = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd8LWlb8l34MXvr3BonwEYsd11lw1QKQVEiQ&s";
 
 export default function WithdrawList() {
