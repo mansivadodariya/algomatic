@@ -28,9 +28,9 @@ export default function Iblink() {
       <div className="container-xl">
         <div className={styles.iblinkboxmain}>
           <div className={styles.iblinktitle}>
-            <Commonlable Text="IB link" />
+            <Commonlable Text="IB links" />
             <h4>
-              Get your <span>IB</span> Link
+              Get your <span>IB</span> Links
             </h4>
           </div>
 

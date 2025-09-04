@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./affiliateherobanner.module.scss";
 import Commonlable from "@/components/commonlable";
 import Commonarrowbutton from "@/components/commonarrowbutton";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Affiliateherobanner() {
+  const { setShowLogin } = useAppContext();
   return (
     <div className={styles.affiliateherobannermain}>
       <div className={styles.affiliateherobannercontentmain}>
@@ -24,7 +26,7 @@ export default function Affiliateherobanner() {
                 <Commonarrowbutton
                   Text="Become an Affiliate Now"
                   Butttonvarient="light"
-                  link="/"
+                  onClick={() => setShowLogin(true)}
                 />
               </div>
             </div>
