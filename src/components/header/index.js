@@ -96,7 +96,7 @@ export default function Header() {
     {
       title: "Trading Tool",
       submenu: [],
-      routes: "/marketplace/#Trading Tools",
+      routes: "/marketplace/#trading-tools",
       Highlight: true,
     },
     {

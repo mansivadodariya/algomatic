@@ -42,7 +42,7 @@ export default function MobileHeader({ setHeader, header }) {
               Algo Bot
             </Link>
             <Link
-              href="/marketplace/#Trading Tools"
+              href="/marketplace/#trading-tools"
               className={styles.hightlight}
               onClick={() => setHeader(!header)}
             >
