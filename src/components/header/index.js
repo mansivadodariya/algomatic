@@ -67,11 +67,11 @@ export default function Header() {
   };
 
   const menuItems = [
-    {
-      title: "About",
-      submenu: [],
-      routes: "/#About",
-    },
+    // {
+    //   title: "About",
+    //   submenu: [],
+    //   routes: "/#About",
+    // },
     {
       title: "How It Works",
       submenu: [],
@@ -91,6 +91,13 @@ export default function Header() {
       title: "Algo Bot",
       submenu: [],
       routes: "/marketplace",
+      Highlight: true,
+    },
+    {
+      title: "Trading Tool",
+      submenu: [],
+      routes: "/marketplace/#Trading Tools",
+      Highlight: true,
     },
     {
       title: "Partner with us",
@@ -138,7 +145,7 @@ export default function Header() {
                 >
                   <div className={styles.menu}>
                     {menu?.routes ? (
-                      <Link href={menu?.routes} target={menu?.Target}>
+                      <Link href={menu?.routes} target={menu?.Target} className={menu?.Highlight ? styles.highlight : ""}>
                         {menu.title}
                       </Link>
                     ) : (

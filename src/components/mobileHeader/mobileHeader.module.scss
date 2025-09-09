@@ -55,7 +55,7 @@
   &.show {
     opacity: 1;
     .menudetails {
-      padding: 68px 20px 20px 20px;
+      padding: 78px 20px 20px 20px;
       max-height: 100vh;
       overflow-y: auto;
       transition: 0.3s ease-in-out;
@@ -63,7 +63,7 @@
   }
 
   .menudetails {
-    padding: 68px 20px 20px 20px;
+    padding: 78px 20px 20px 20px;
     background-color: #fff;
     margin: 0 20px;
     overflow: hidden;
@@ -94,6 +94,10 @@
 
         &:hover {
           color: #111;
+        }
+
+        &.hightlight {
+          font-weight: 600;
         }
       }
 

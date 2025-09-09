@@ -26,9 +26,9 @@ export default function MobileHeader({ setHeader, header }) {
       >
         <div className={styles.menudetails}>
           <div className={styles.menulinks}>
-            <Link href="/#About" onClick={() => setHeader(!header)}>
+            {/* <Link href="/#About" onClick={() => setHeader(!header)}>
               About
-            </Link>
+            </Link> */}
             <Link href="/#Howitworks" onClick={() => setHeader(!header)}>
               How It Works
             </Link>
@@ -38,8 +38,15 @@ export default function MobileHeader({ setHeader, header }) {
             <Link href="/#Backtesting" onClick={() => setHeader(!header)}>
               Backtesting
             </Link>
-            <Link href="/marketplace" onClick={() => setHeader(!header)}>
+            <Link href="/marketplace" className={styles.hightlight} onClick={() => setHeader(!header)}>
               Algo Bot
+            </Link>
+            <Link
+              href="/marketplace/#Trading Tools"
+              className={styles.hightlight}
+              onClick={() => setHeader(!header)}
+            >
+              Trading Tool
             </Link>
             <div className={styles.sidebardropdownmain}>
               <div

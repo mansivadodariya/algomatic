@@ -1,3 +1,4 @@
+import Iblink from "../affiliate/iblink";
 import StrategiesBanner from "./strategiesBanner";
 import StrategiesCardList from "./strategiesCardList";
 export default function Strategies() {
@@ -5,6 +6,7 @@ export default function Strategies() {
     <div>
       <StrategiesBanner />
       <StrategiesCardList />
+      <Iblink />
     </div>
   );
 }

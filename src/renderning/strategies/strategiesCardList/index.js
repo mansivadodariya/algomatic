@@ -32,7 +32,7 @@ export default function StrategiesCardList() {
         {strategyCard.length > 0 &&
           strategyCard?.map((item, i) => {
             return (
-              <div className={styles.strategiesCategoryTitle} key={i}>
+              <div className={styles.strategiesCategoryTitle} id={item.title} key={i}>
               <h1>{item.title}</h1>
               {item.strategies.length > 0 && (
                 <div className={styles.grid}>{item.strategies?.map((item, i) => <StrategiesCard key={i} item={item} index={i} />)}</div>

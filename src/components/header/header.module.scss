@@ -219,6 +219,10 @@
           color: #616161;
           font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
           transition: 0.4s ease-in-out;
+
+          &.highlight {
+            font-weight: 600;
+          }
         }
 
         svg {

@@ -18,7 +18,7 @@ export default function Iblink() {
   };
 
   const brokers = [
-    { name: "vantage", label: "Vantage" },
+    { name: "vantage", label: "IC MARKET" },
     { name: "pepperstone", label: "Pepperstone" },
     { name: "skyriss", label: "Skyriss" },
   ];
@@ -38,17 +38,22 @@ export default function Iblink() {
             {brokers.map((broker) => (
               <div className={styles.iblinkbox} key={broker.name}>
                 <div className={styles.iblinkboxleft}>
-                  <p>{broker.label} :-</p>
+                  <p>{broker.label} :</p>
                 </div>
                 <div className={styles.iblinkboxright}>
-                  <input
-                    type="text"
-                    value={
-                      utilitySettings?.ibLinks?.[broker.name] ||
-                      "X7P9L2MZV8QW3RT1N6YD"
-                    }
-                    readOnly
-                  />
+                  <a
+                    href={utilitySettings?.ibLinks?.[broker.name]}
+                    target="__blank"
+                  >
+                    <input
+                      type="text"
+                      value={
+                        utilitySettings?.ibLinks?.[broker.name] ||
+                        "X7P9L2MZV8QW3RT1N6YD"
+                      }
+                      readOnly
+                    />
+                  </a>
                   <div
                     className={styles.copyicon}
                     title={copiedBroker === broker.name ? "Copied" : "Copy"}
