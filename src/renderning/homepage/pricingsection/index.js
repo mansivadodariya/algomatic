@@ -28,18 +28,22 @@ export default function Pricingsection() {
             <h1>
               Choose the <span>Best Plan</span> for Your Needs
             </h1>
-            <p>Find the right plan, with flexible choices and transparent pricing details.</p>
+            <p>
+              Find the right plan, with flexible choices and transparent pricing
+              details.
+            </p>
           </div>
 
           <div className={styles.pricingcardgrdmain}>
             {categories &&
               categories.map((item, index) => (
-                <div className={`${styles.pricingcard} ${styles.pricingcardactive}`}>
+                <div
+                  className={`${styles.pricingcard} ${styles.pricingcardactive}`}
+                >
                   <div className={styles.pricingcardcontent}>
                     <div className={styles.pricingcardtitle}>
                       <div>
                         <h2 className={styles.cardsTitle}>{item.title}</h2>
-                       
 
                         <div className={styles.pricecardbody}>
                           <div className={styles.priceingdetailsmain}>
@@ -50,34 +54,148 @@ export default function Pricingsection() {
                           </div>
                         </div>
                       </div>
-                      <div className={styles.pricingcardtitlebadge}>{icons[index]}</div>
+                      <div className={styles.pricingcardtitlebadge}>
+                        {icons[index]}
+                      </div>
                     </div>
                   </div>
-                   <div>
-                      <div className={styles.pricecardbody}>
-                       
-                        <div className={styles.planstags}>
-                          {item?.strategyPlans?.map((plan) => (
-                            <div className={styles.plantag} key={plan?._id}>
-                              <div className={styles.planhead}>
-                                <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
-                                <span className={styles.planPrice}>${plan?.price}</span>
-                              </div>
-                              <div className={styles.planmrp}>
-                                <span className={styles.planmrpitle}>M.R.P.:</span>
-                                <del className={styles.planmrpamount}>${plan?.initialPrice ?? 0}</del>
-                              </div>
-                              <div className={styles.plandiscount}>
-                                <span className={styles.plandiscountitle}>Discount :</span>
-                                <span className={styles.plandiscountamount}>-{plan?.discount ?? 0}%</span>
-                              </div>
+                  <div>
+                    <div className={styles.pricecardbody}>
+                      <div className={styles.planstags}>
+                        {item?.strategyPlans?.map((plan) => (
+                          <div className={styles.plantag} key={plan?._id}>
+                            <div className={styles.planhead}>
+                              <span className={styles.planType}>
+                                {plan?.planType.replace(
+                                  /^(\d+)([a-zA-Z]+)$/,
+                                  "$1 $2"
+                                )}
+                              </span>
+                              <span className={styles.planPrice}>
+                                ${plan?.price}
+                              </span>
                             </div>
-                          ))}
-                        </div>
+                            <div className={styles.planmrp}>
+                              <span className={styles.planmrpitle}>
+                                M.R.P.:
+                              </span>
+                              <del className={styles.planmrpamount}>
+                                ${plan?.initialPrice ?? 0}
+                              </del>
+                            </div>
+                            <div className={styles.plandiscount}>
+                              <span className={styles.plandiscountitle}>
+                                Discount :
+                              </span>
+                              <span className={styles.plandiscountamount}>
+                                -{plan?.discount ?? 0}%
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                        {item?.strategyPlans?.map((plan) => (
+                          <div className={styles.plantag} key={plan?._id}>
+                            <div className={styles.planhead}>
+                              <span className={styles.planType}>
+                                {plan?.planType.replace(
+                                  /^(\d+)([a-zA-Z]+)$/,
+                                  "$1 $2"
+                                )}
+                              </span>
+                              <span className={styles.planPrice}>
+                                ${plan?.price}
+                              </span>
+                            </div>
+                            <div className={styles.planmrp}>
+                              <span className={styles.planmrpitle}>
+                                M.R.P.:
+                              </span>
+                              <del className={styles.planmrpamount}>
+                                ${plan?.initialPrice ?? 0}
+                              </del>
+                            </div>
+                            <div className={styles.plandiscount}>
+                              <span className={styles.plandiscountitle}>
+                                Discount :
+                              </span>
+                              <span className={styles.plandiscountamount}>
+                                -{plan?.discount ?? 0}%
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                        {item?.strategyPlans?.map((plan) => (
+                          <div className={styles.plantag} key={plan?._id}>
+                            <div className={styles.planhead}>
+                              <span className={styles.planType}>
+                                {plan?.planType.replace(
+                                  /^(\d+)([a-zA-Z]+)$/,
+                                  "$1 $2"
+                                )}
+                              </span>
+                              <span className={styles.planPrice}>
+                                ${plan?.price}
+                              </span>
+                            </div>
+                            <div className={styles.planmrp}>
+                              <span className={styles.planmrpitle}>
+                                M.R.P.:
+                              </span>
+                              <del className={styles.planmrpamount}>
+                                ${plan?.initialPrice ?? 0}
+                              </del>
+                            </div>
+                            <div className={styles.plandiscount}>
+                              <span className={styles.plandiscountitle}>
+                                Discount :
+                              </span>
+                              <span className={styles.plandiscountamount}>
+                                -{plan?.discount ?? 0}%
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                        {item?.strategyPlans?.map((plan) => (
+                          <div className={styles.plantag} key={plan?._id}>
+                            <div className={styles.planhead}>
+                              <span className={styles.planType}>
+                                {plan?.planType.replace(
+                                  /^(\d+)([a-zA-Z]+)$/,
+                                  "$1 $2"
+                                )}
+                              </span>
+                              <span className={styles.planPrice}>
+                                ${plan?.price}
+                              </span>
+                            </div>
+                            <div className={styles.planmrp}>
+                              <span className={styles.planmrpitle}>
+                                M.R.P.:
+                              </span>
+                              <del className={styles.planmrpamount}>
+                                ${plan?.initialPrice ?? 0}
+                              </del>
+                            </div>
+                            <div className={styles.plandiscount}>
+                              <span className={styles.plandiscountitle}>
+                                Discount :
+                              </span>
+                              <span className={styles.plandiscountamount}>
+                                -{plan?.discount ?? 0}%
+                              </span>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                      <div className={styles.pricingbutton}>
-                        <Commonarrowbutton Text="Show more" Butttonvarient="lightoutlined" buttonclassName="widthfull" link={`/marketplace/${item?._id}`} />
-                      </div>
+                    </div>
+                    <div className={styles.pricingbutton}>
+                      <Commonarrowbutton
+                        Text="Show more"
+                        Butttonvarient="lightoutlined"
+                        buttonclassName="widthfull"
+                        link={`/marketplace/${item?._id}`}
+                      />
+                    </div>
                   </div>
                 </div>
               ))}

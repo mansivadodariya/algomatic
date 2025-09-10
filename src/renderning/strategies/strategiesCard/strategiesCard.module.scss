@@ -185,10 +185,22 @@
   align-items: center;
   white-space: nowrap;
   overflow-x: auto;
-  max-width: 350px;
+  max-width: 310px;
   gap: 8px;
   margin-top: 10px;
   padding-bottom: 10px;
+
+  @media (max-width: 1280px) {
+    max-width: 24vw;
+  }
+
+  @media (max-width: 1200px) {
+    max-width: calc(39vw - 24px);
+  }
+
+  @media (max-width: 768px) {
+    max-width: calc(100vw - 116px);
+  }
 
   &::-webkit-scrollbar {
     height: 10px;
@@ -214,13 +226,17 @@
     flex-direction: column;
     gap: 5px;
     width: 50%;
-    
+
+    @media (max-width: 576px) {
+      width: auto;
+    }
+
     .planhead {
       display: flex;
       justify-content: space-between;
       gap: 10px;
       align-items: center;
-      
+
       .planType {
         font-size: 18px;
         line-height: 20px;
