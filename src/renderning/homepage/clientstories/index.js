@@ -30,14 +30,16 @@ export default function Clientstories() {
       message:
         "As a beginner in forex trading, Algomatic was exactly what I needed. Its easy-to-use interface and quick execution gave me confidence in automated trading. I’ve seen significant growth in my trades since using it.",
       user: "Ayesha Khan",
-      location: "Nepal",
+      // location: "Nepal",
+      location: "India",
       profileimage: profileimage3,
     },
     {
       message:
         "Algomatic has truly simplified my trading process. I no longer need to constantly monitor the market. The bot does it all for me, finding profitable opportunities and executing trades faster than I ever could.",
       user: "Linh Nguyen",
-      location: "India",
+      // location: "India",
+      location: "South Korea",
       profileimage: profileimage4,
     },
     {

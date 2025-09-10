@@ -92,9 +92,24 @@
           flex-direction: column;
         }
 
+        .footercontentlinks {
+          @media (max-width: 1100px) {
+            display: flex;
+            gap: 20px;
+          }
+          @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 15px;
+          }
+        }
+
         .contactsection {
           width: 100%;
           max-width: 300px;
+
+          @media (max-width: 1100px) {
+            max-width: 100%;
+          }
 
           h3 {
             font-size: 15px;
@@ -159,6 +174,51 @@
         }
       }
 
+      .footeraddress {
+        // border-top: 1px solid #ededed;
+        // border-bottom: 1px solid #ededed;
+        // margin-top: 30px;
+        margin: 20px 0 30px 0;
+        // padding: 15px 0;
+
+        @media (max-width: 768px) {
+          margin: 0 0 24px 0;
+        }
+
+        h3 {
+          font-size: 15px;
+          font-weight: 400;
+          line-height: 15px;
+          color: #000;
+          margin-bottom: 16px;
+        }
+
+        a {
+          display: flex;
+          // align-items: center;
+          gap: 8px;
+          margin-bottom: 10px;
+
+          svg {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            min-height: 24px;
+
+            path {
+              fill: #666;
+            }
+          }
+
+          p {
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: 400;
+            color: #000;
+          }
+        }
+      }
+
       .socials {
         display: flex;
         gap: 16px;
@@ -182,13 +242,14 @@
       }
 
       .footerbottom {
-        margin-top: 30px;
+        // margin-top: 30px;
+        margin-top: 15px;
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 20px;
         align-items: center;
-        padding-top: 16px;
+        padding-top: 15px;
 
         @media (max-width: 576px) {
           flex-direction: column;
@@ -207,7 +268,7 @@
           align-items: center;
           gap: 8px;
 
-          @media (max-width:576px) {
+          @media (max-width: 576px) {
             // flex-direction: column;
             flex-wrap: wrap;
             justify-content: center;
@@ -222,7 +283,7 @@
             position: relative;
             margin-right: 16px;
             transition: 0.4s ease-in-out;
-            
+
             &:last-child {
               &::after {
                 display: none;
