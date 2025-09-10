@@ -30,7 +30,7 @@ export default function Iblink() {
           <div className={styles.iblinktitle}>
             <Commonlable Text="IB links" />
             <h4>
-              Get your <span>IB</span> Links
+              Get Our <span>IB</span> Links
             </h4>
           </div>
 
