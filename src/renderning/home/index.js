@@ -11,6 +11,8 @@ import Clientstories from "../homepage/clientstories";
 import Faqsection from "../homepage/faqsection";
 import Transformsection from "../homepage/transformsection";
 import Iblink from "../affiliate/iblink";
+import StrategiesBanner from "../strategies/strategiesBanner";
+import StrategiesCardList from "../strategies/strategiesCardList";
 export default function Homepage() {
   useEffect(() => {
     window.scrollTo({
@@ -27,7 +29,10 @@ export default function Homepage() {
       <Howitworkssection />
       <Keyfeaturessection />
       <Algovideosection />
-      <Pricingsection />
+      {/* <Pricingsection /> */}
+      <StrategiesBanner />
+      <StrategiesCardList />
+
       <Backtestingsection />
       <Recommendedbrokers />
       <Iblink />
