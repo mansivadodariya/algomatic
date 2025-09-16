@@ -5,7 +5,27 @@ import Button from "@/components/button";
 import { getPaymentHistory, editUser } from "@/lib/strategyApi";
 import { useAppContext } from "@/context/AppContext";
 import Modal from "@/components/modal";
-import { ArrowLeft, Check, ChevronLeft, ChevronLeftCircle, ChevronsLeft, ClipboardCheck, ClipboardCheckIcon, Copy, CopyCheck, Info, MoveLeft, MoveLeftIcon, Share2, Share2Icon, SquarePen, UserRoundCog, Wallet } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  ChevronLeft,
+  ChevronLeftCircle,
+  ChevronsLeft,
+  ClipboardCheck,
+  ClipboardCheckIcon,
+  Copy,
+  CopyCheck,
+  Eye,
+  EyeOff,
+  Info,
+  MoveLeft,
+  MoveLeftIcon,
+  Share2,
+  Share2Icon,
+  SquarePen,
+  UserRoundCog,
+  Wallet,
+} from "lucide-react";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -19,7 +39,10 @@ export default function Dashboard() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
+    const storedUser =
+      typeof window !== "undefined"
+        ? JSON.parse(localStorage.getItem("user"))
+        : null;
     if (!storedUser) {
       router.push("/");
     }
@@ -61,7 +84,6 @@ export default function Dashboard() {
     }
   };
 
-
   const handleMetaSave = async () => {
     if (!metaValue) return;
     setSavingMeta(true);
@@ -80,7 +102,9 @@ export default function Dashboard() {
 
   const handleCopy = async () => {
     if (user?.myAffiliateCode) {
-      await navigator.clipboard.writeText(`https://algomaticbot.com?affiliateCode=${user.myAffiliateCode}`);
+      await navigator.clipboard.writeText(
+        `https://algomaticbot.com?affiliateCode=${user.myAffiliateCode}`
+      );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -88,7 +112,9 @@ export default function Dashboard() {
 
   const handleShare = () => {
     const code = user?.myAffiliateCode;
-    const signupUrl = `https://algomaticbot.com?affiliateCode=${encodeURIComponent(code)}`;
+    const signupUrl = `https://algomaticbot.com?affiliateCode=${encodeURIComponent(
+      code
+    )}`;
     const shareText = `Join AlgoMatic using my affiliate code!\n${signupUrl}`;
 
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
@@ -118,14 +144,33 @@ export default function Dashboard() {
                 <div className={styles.profileGrid}>
                   <div>
                     <span>Name</span>
-                    {isProfileEdit ? <input type="text" value={user?.name} onChange={(e) => setUser({ ...user, name: e.target.value })} className={styles.inputField} /> : <p>{user.name}</p>}
+                    {isProfileEdit ? (
+                      <input
+                        type="text"
+                        value={user?.name}
+                        onChange={(e) =>
+                          setUser({ ...user, name: e.target.value })
+                        }
+                        className={styles.inputField}
+                      />
+                    ) : (
+                      <p>{user.name}</p>
+                    )}
                   </div>
                   <div>
                     <span>Email</span>
                     {isProfileEdit ? (
                       <div className={styles.affiliateCoderel}>
-                        <input type="email" value={user?.email} className={styles.inputField} disabled />
-                        <div className={styles.iicon} title="You cannot edit this field">
+                        <input
+                          type="email"
+                          value={user?.email}
+                          className={styles.inputField}
+                          disabled
+                        />
+                        <div
+                          className={styles.iicon}
+                          title="You cannot edit this field"
+                        >
                           <Info color="#616161" />
                         </div>
                       </div>
@@ -135,24 +180,105 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <span>Country Code</span>
-                    {isProfileEdit ? <input type="tel" value={user?.countryCode} onChange={(e) => setUser({ ...user, countryCode: e.target.value })} className={styles.inputField} /> : <p>{user.countryCode}</p>}
+                    {isProfileEdit ? (
+                      <input
+                        type="tel"
+                        value={user?.countryCode}
+                        onChange={(e) =>
+                          setUser({ ...user, countryCode: e.target.value })
+                        }
+                        className={styles.inputField}
+                      />
+                    ) : (
+                      <p>{user.countryCode}</p>
+                    )}
                   </div>
                   <div>
                     <span>Phone</span>
-                    {isProfileEdit ? <input type="tel" value={user?.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
+                    {isProfileEdit ? (
+                      <input
+                        type="tel"
+                        value={user?.phone}
+                        onChange={(e) =>
+                          setUser({ ...user, phone: e.target.value })
+                        }
+                        className={styles.inputField}
+                      />
+                    ) : (
+                      <p>{user?.phone}</p>
+                    )}
                   </div>
                   <div>
                     <span>My Affiliate Code</span>
                     {isProfileEdit ? (
                       <div className={styles.affiliateCoderel}>
-                        <input type="text" value={user?.myAffiliateCode} onChange={(e) => setUser({ ...user, myAffiliateCode: e.target.value })} className={styles.inputField} disabled />
-                        <div className={styles.iicon} title="You cannot edit this field">
+                        <input
+                          type="text"
+                          value={user?.myAffiliateCode}
+                          onChange={(e) =>
+                            setUser({
+                              ...user,
+                              myAffiliateCode: e.target.value,
+                            })
+                          }
+                          className={styles.inputField}
+                          disabled
+                        />
+                        <div
+                          className={styles.iicon}
+                          title="You cannot edit this field"
+                        >
                           <Info color="#616161" />
                         </div>
                       </div>
                     ) : (
                       <p>{user?.myAffiliateCode}</p>
                     )}
+                  </div>
+                </div>
+                <h1 className={styles.passwordtitle}>Change Password</h1>
+                <div className={styles.profileGrid}>
+                  <div>
+                    <span>Current Password</span>
+                    <div className={styles.inputWithIcon}>
+                      <input
+                        type="password"
+                        value="123 456 789 10"
+                        className={styles.inputField}
+                      />
+                      <span className={styles.icon}>
+                        <EyeOff size={20} />
+                        {/* <Eye size={20} /> */}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>New Password</span>
+                    <div className={styles.inputWithIcon}>
+                      <input
+                        type="password"
+                        value="123 456 789 10"
+                        className={styles.inputField}
+                      />
+                      <span className={styles.icon}>
+                        <EyeOff size={20} />
+                        {/* <Eye size={20} /> */}
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Confirm Password</span>
+                    <div className={styles.inputWithIcon}>
+                      <input
+                        type="password"
+                        value="123 456 789 10"
+                        className={styles.inputField}
+                      />
+                      <span className={styles.icon}>
+                        <EyeOff size={20} />
+                        {/* <Eye size={20} /> */}
+                      </span>
+                    </div>
                   </div>
                 </div>
                 {isProfileEdit && (
@@ -200,10 +326,18 @@ export default function Dashboard() {
                   <div>
                     <span>My Affiliate Code</span>
                     <p>{user?.myAffiliateCode}</p>
-                    <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
+                    <div
+                      className={styles.copyIcon}
+                      title="Copy"
+                      onClick={handleCopy}
+                    >
                       {copied ? <ClipboardCheck /> : <Copy />}
                     </div>
-                    <div className={styles.shareIcon} title="Share" onClick={handleShare}>
+                    <div
+                      className={styles.shareIcon}
+                      title="Share"
+                      onClick={handleShare}
+                    >
                       <Share2 />
                     </div>
                   </div>
@@ -217,10 +351,24 @@ export default function Dashboard() {
       </div>
       {/*    */}
       {metaModalOpen && (
-        <Modal size="small" isOpen={metaModalOpen} onClose={() => setMetaModalOpen(false)}>
+        <Modal
+          size="small"
+          isOpen={metaModalOpen}
+          onClose={() => setMetaModalOpen(false)}
+        >
           <h3>Add Meta Account Number</h3>
-          <input type="text" value={metaValue} onChange={(e) => setMetaValue(e.target.value)} placeholder="Enter meta account no" style={{ width: "100%", padding: "0.5rem", margin: "1rem 0" }} />
-          <Button text="Save" onClick={handleMetaSave} isBtnLoading={savingMeta} />
+          <input
+            type="text"
+            value={metaValue}
+            onChange={(e) => setMetaValue(e.target.value)}
+            placeholder="Enter meta account no"
+            style={{ width: "100%", padding: "0.5rem", margin: "1rem 0" }}
+          />
+          <Button
+            text="Save"
+            onClick={handleMetaSave}
+            isBtnLoading={savingMeta}
+          />
         </Modal>
       )}
     </>

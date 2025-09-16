@@ -133,6 +133,15 @@
   margin-right: 10px;
 }
 
+.passwordtitle {
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #111;
+  font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+}
+
 .profileGrid {
   display: grid;
   gap: 1.5rem;
@@ -162,6 +171,26 @@
       color: #111827;
     }
 
+    .inputWithIcon {
+      position: relative;
+      border: none;
+      padding: 0;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        z-index: 1;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
     .copyIcon {
       position: absolute;
       top: 50%;
@@ -181,7 +210,7 @@
       }
     }
 
-    .shareIcon{
+    .shareIcon {
       position: absolute;
       top: 50%;
       right: 12px;
