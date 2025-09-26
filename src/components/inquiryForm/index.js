@@ -87,7 +87,7 @@ export const InquiryForm = () => {
     try {
       const response = await addInquiryForm(formData);
       if (response?.success) {
-        toast.success("Inquiry submitted!");
+        toast.success("Thanks for reaching out! Our team will contact you shortly.");
         setIsOpenInquiryForm(false);
         setFormData(initialData);
         setErrors({});
@@ -158,7 +158,7 @@ export const InquiryForm = () => {
                     <label htmlFor="Above5K">Above 5K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input type="radio" id="2to5K" name="equity" value="2k to 5K USD" checked={formData.equity === "2k to 5K USD"} onChange={handleInputChange} className={styles.radio} />
+                    <input type="radio" id="2to5K" name="equity" value="2K to 5K USD" checked={formData.equity === "2K to 5K USD"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="2to5K">2K to 5K USD</label>
                   </div>
                   <div className={styles.flex}>
