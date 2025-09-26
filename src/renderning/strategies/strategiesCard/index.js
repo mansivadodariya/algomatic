@@ -78,7 +78,7 @@ export default function StrategiesCard({ item, index }) {
             </Slider>
           </div>
         )}
-        <Commonarrowbutton Text="Buy Now" Butttonvarient="darkoutlined" /* Blueoutlined */ link={`/marketplace/${item?._id}`} Target="blank" buttonclassName="widthfull" />
+        <Commonarrowbutton Text="Buy Now" Butttonvarient="Blueoutlined" /* darkoutlined */ link={`/marketplace/${item?._id}`} Target="blank" buttonclassName="widthfull" />
       </Link>
 
       {modalOpen && (
