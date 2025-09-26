@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./strategiesCard.module.scss";
 import { BaseURL } from "@/utils/config";
 import toast from "react-hot-toast";
+import Commonarrowbutton from "../../../components/commonarrowbutton";
 
 const AiIcon = "/assets/icons/ai-gen-xii.png";
 
@@ -43,19 +44,10 @@ export default function StrategiesCard({ item, index }) {
 
   return (
     <>
-      <Link
-        href={`/marketplace/${item?._id}`}
-        className={styles.strategiesCard}
-        key={index}
-      >
+      <Link href={`/marketplace/${item?._id}`} className={styles.strategiesCard} key={index}>
         <div>
           <div className={styles.imageWrapper}>
-            <Image
-              src={item?.imageUrl || AiIcon}
-              alt="strategy"
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={item?.imageUrl || AiIcon} alt="strategy" layout="fill" objectFit="cover" />
           </div>
           <div className={styles.details}>
             <h3>{item?.title}</h3>
@@ -69,24 +61,16 @@ export default function StrategiesCard({ item, index }) {
                 <div key={plan?._id}>
                   <div className={styles.plantag}>
                     <div className={styles.planhead}>
-                      <span className={styles.planType}>
-                        {plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}
-                      </span>
+                      <span className={styles.planType}>{plan?.planType.replace(/^(\d+)([a-zA-Z]+)$/, "$1 $2")}</span>
                       <span className={styles.planPrice}>${plan?.price}</span>
                     </div>
                     <div className={styles.planmrp}>
                       <span className={styles.planmrpitle}>M.R.P.:</span>
-                      <del className={styles.planmrpamount}>
-                        ${plan?.initialPrice ?? 0}
-                      </del>
+                      <del className={styles.planmrpamount}>${plan?.initialPrice ?? 0}</del>
                     </div>
                     <div className={styles.plandiscount}>
-                      <span className={styles.plandiscountitle}>
-                        Discount :
-                      </span>
-                      <span className={styles.plandiscountamount}>
-                        -{plan?.discount ?? 0}%
-                      </span>
+                      <span className={styles.plandiscountitle}>Discount :</span>
+                      <span className={styles.plandiscountamount}>-{plan?.discount ?? 0}%</span>
                     </div>
                   </div>
                 </div>
@@ -94,6 +78,7 @@ export default function StrategiesCard({ item, index }) {
             </Slider>
           </div>
         )}
+        <Commonarrowbutton Text="Buy Now" Butttonvarient="darkoutlined" /* Blueoutlined */ link={`/marketplace/${item?._id}`} Target="blank" buttonclassName="widthfull" />
       </Link>
 
       {modalOpen && (
@@ -111,11 +96,7 @@ export default function StrategiesCard({ item, index }) {
               <span>Link</span>
               <div className={styles.linkText}>
                 <a>{item?.link}</a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  onClick={() => handleCopy(item?.link)}
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" onClick={() => handleCopy(item?.link)}>
                   <path d="M384 336l-192...z" />
                 </svg>
               </div>
