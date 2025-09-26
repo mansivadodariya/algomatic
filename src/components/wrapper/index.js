@@ -4,8 +4,11 @@ import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { usePathname } from "next/navigation";
 import Footernew from "../footernew";
 import Whatsappbubble from "../whatsappbubble";
+import { useAppContext } from "@/context/AppContext";
+import { InquiryForm } from "../inquiryForm";
 
 export default function Wrapper({ children }) {
+  const { isInquiryFormTriggered, ip } = useAppContext();
   const { toasts } = useToasterStore();
   const pathName = usePathname();
   const TOAST_LIMIT = 1;
@@ -16,7 +19,7 @@ export default function Wrapper({ children }) {
       ?.forEach((t) => toast?.dismiss(t.id));
   }, [toasts]);
   return (
-    <div>
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50">
       <Toaster
         containerStyle={{
           zIndex: "99999999999999",
@@ -27,6 +30,7 @@ export default function Wrapper({ children }) {
       <Header />
       {children}
       <Whatsappbubble />
+      <InquiryForm />
       {pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
     </div>
   );

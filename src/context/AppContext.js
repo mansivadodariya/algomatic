@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 const AppContext = createContext();
-import jwt_decode from "jwt-decode";
-import { useRouter } from "next/router";
-import toast from "react-hot-toast";
 import { getUtilitySettings } from "@/lib/utilitySettingsApi";
 
 export const AppProvider = ({ children }) => {
@@ -17,7 +14,6 @@ export const AppProvider = ({ children }) => {
       setUtilitySettings(res?.payload);
     });
   }, []);
-
 
   return <AppContext.Provider value={{ showLogin, setShowLogin, isUserLoggedIn, setIsUserLoggedIn, user, setUser, backToStrategyPlan, setBackToStrategyPlan, utilitySettings }}>{children}</AppContext.Provider>;
 };
