@@ -6,6 +6,7 @@ import Whatsappicon from "../../../public/assets/icons/Whatsappicon";
 import Emailicon from "../../../public/assets/icons/Emailicon";
 import { useAppContext } from "@/context/AppContext";
 import Mapicon from "../../../public/assets/icons/mapicon";
+import Right from "../icons/right";
 const Telegramicon = "/assets/icons/telegramicon.png";
 const Instagramicon = "/assets/icons/instagramicon.png";
 const Facebookicon = "/assets/icons/facebookicon.png";
@@ -93,6 +94,16 @@ export default function Footernew() {
                   financial advisor before making any trading decisions. By
                   using Algomatic, you acknowledge and accept these risks.
                 </p>
+                <div className={styles.webinarlink}>
+                  <Commonarrowbutton
+                    Text="Join Webinar"
+                    Butttonvarient="darkoutlined"
+                    link={"/webinar"}
+                  />
+                  {/* <Link href={"/"}>
+                    Join Webinar <Right />
+                  </Link> */}
+                </div>
               </div>
             </div>
 

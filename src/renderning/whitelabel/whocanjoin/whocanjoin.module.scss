@@ -71,11 +71,21 @@
         grid-column: span 4;
         width: 100%;
         margin: 0 auto;
-        max-width: 33.33333333333333%;
+        max-width: calc(35% - 40px);
+        transform: translateX(-10px);
 
         @media (max-width: 1024px) {
           grid-column: span 1;
           max-width: 100%;
+          transform: translateX(0);
+        }
+
+        &:hover {
+          transform: translate(-10px, -5px);
+
+          @media (max-width: 1024px) {
+            transform: translate(0, -5px);
+          }
         }
       }
 

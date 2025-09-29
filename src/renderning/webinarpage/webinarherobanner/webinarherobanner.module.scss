@@ -1,0 +1,274 @@
+@import "../../../scss/mixins/index.scss";
+
+.heroSection {
+  background: linear-gradient(89deg, #000 -2%, rgba(0, 0, 0, 0) 113%);
+  padding: 170px 0 120px;
+
+  @media (max-width: 1024px) {
+    padding: 150px 0 70px;
+  }
+
+  @media (max-width: 900px) {
+    padding: 120px 0 40px 0;
+  }
+
+  .heroContent {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+
+      h1 {
+        font-size: 64px;
+        font-weight: 500;
+        line-height: 72px;
+        color: #fff;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        margin: 16px 0 24px;
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
+        }
+
+        @media (max-width: 900px) {
+          font-size: 40px;
+          line-height: 48px;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 28px;
+        color: #ededed;
+        max-width: 1024px;
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 60px;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .itemsleft {
+        position: sticky;
+        top: 100px;
+        display: flex;
+        justify-content: flex-end;
+
+        @media (max-width: 768px) {
+          position: static;
+          justify-content: flex-start;
+          top: 0;
+        }
+
+        .webinarbannerimg {
+          max-width: 450px;
+
+          @media (max-width: 1200px) {
+            max-width: 350px;
+          }
+
+          @media (max-width: 576px) {
+            max-width: none;
+          }
+
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+          }
+        }
+      }
+
+      .itemsright {
+        position: sticky;
+        top: 100px;
+
+        @media (max-width: 768px) {
+          position: static;
+          top: 0;
+        }
+
+        .gridcards {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          margin-bottom: 30px;
+
+          @media (max-width: 1024px) {
+            grid-template-columns: 1fr;
+          }
+
+          @media (max-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          @media (max-width: 576px) {
+            grid-template-columns: 1fr;
+          }
+
+          .cards {
+            padding: 15px;
+            border-radius: 20px;
+            background: linear-gradient(170deg, #e6f0ff 0%, #9657fa 100%);
+            border: 2px solid #fff;
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 15px;
+            transition: all 0.4s ease-in-out;
+
+            &:hover {
+              box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18),
+                0 4px 16px 0 rgba(1, 78, 255, 0.1);
+            }
+
+            .cardsicon {
+              padding: 10px;
+              border-radius: 12px;
+              background-color: #9657fa;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              svg {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .cardscontent {
+              span {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 14px;
+                color: #616161;
+              }
+
+              p {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 28px;
+                color: #0f0f1a;
+              }
+            }
+          }
+        }
+
+        .rowlist {
+          padding: 20px;
+          border-radius: 20px;
+          margin-bottom: 30px;
+          background-color: #f7f7f7;
+          border: 1px solid #ebebeb;
+
+          .list {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ebebeb;
+            margin-top: 12px;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            &:last-child {
+              padding-bottom: 0;
+              border-bottom: none;
+            }
+
+            .checked {
+              width: 24px;
+              height: 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 5px;
+              border-radius: 6px;
+              background-color: #9657fa;
+
+              svg {
+                width: 100%;
+                height: 100%;
+
+                path {
+                  fill: #fff;
+                }
+              }
+            }
+
+            p {
+              font-size: 18px;
+              font-weight: 500;
+              line-height: 28px;
+              color: #111;
+
+              @media (max-width: 576px) {
+                font-size: 16px;
+              }
+            }
+          }
+        }
+
+        .ctabuttonmain {
+          .ctaButton {
+            width: 100%;
+            background-color: #9657fa;
+            color: #fff;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease-in-out;
+            text-transform: uppercase;
+            animation: Buttonanimation 1s infinite alternate ease-in-out;
+
+            &:hover {
+              background-color: #8045e8;
+              transform: translateY(-2px);
+              box-shadow: 0 8px 25px rgba(150, 87, 250, 0.3);
+            }
+
+            @media (max-width: 576px) {
+              padding: 12px 15px;
+              font-size: 16px;
+            }
+
+            @keyframes Buttonanimation {
+              0% {
+                transform: translateX(0);
+              }
+              50% {
+                transform: translateX(10px);
+              }
+              100% {
+                transform: translateX(-10px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

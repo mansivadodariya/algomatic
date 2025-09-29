@@ -1,0 +1,158 @@
+@import "../../../scss/mixins/index.scss";
+
+.whyattendsectionmain {
+  padding: 90px 0;
+
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
+  .whyattendcontent {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      margin-bottom: 60px;
+
+      h2 {
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 62px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #616161;
+        max-width: 607px;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+          line-height: 24px;
+          max-width: 500px;
+        }
+      }
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+
+      @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+      }
+
+      .items {
+        border-radius: 20px;
+        border: 1px solid #9657fa;
+        padding: 20px;
+        display: flex;
+        gap: 10px;
+        transition: 0.4s ease-in-out;
+
+        &:hover {
+          box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18),
+            0 4px 16px 0 rgba(1, 78, 255, 0.1);
+        }
+
+        .itemicon {
+          width: 27px;
+          height: 26px;
+          min-width: 27px;
+
+          svg {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        p {
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 28px;
+          color: #616161;
+
+          span {
+            font-weight: 600;
+            color: #37312f;
+          }
+        }
+      }
+    }
+
+    .ctabuttonmain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+
+      .ctaButton {
+        background-color: #9657fa;
+        color: #fff;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        text-transform: uppercase;
+        animation: Buttonanimation 1s infinite alternate ease-in-out;
+
+        &:hover {
+          background-color: #8045e8;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(150, 87, 250, 0.3);
+        }
+
+        @media (max-width: 576px) {
+          padding: 12px 15px;
+          font-size: 16px;
+        }
+
+        @keyframes Buttonanimation {
+          0% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(10px);
+          }
+          100% {
+            transform: translateX(-10px);
+          }
+        }
+      }
+    }
+  }
+}

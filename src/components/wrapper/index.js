@@ -26,8 +26,13 @@ export default function Wrapper({ children }) {
       />
       <Header />
       {children}
-      <Whatsappbubble />
-      {pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
+      {pathName?.includes("/webinar") ? null : <Whatsappbubble />}
+      {pathName?.includes("/webinar") ||
+      pathName?.includes("/payment-history") ||
+      pathName?.includes("/profile") ||
+      pathName?.includes("/affiliate") ? null : (
+        <Footernew />
+      )}
     </div>
   );
 }

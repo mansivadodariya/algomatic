@@ -171,6 +171,33 @@
             line-height: 28px;
             color: #616161;
           }
+
+          .webinarlink {
+            margin-top: 30px;
+            // a {
+            //   display: flex;
+            //   align-items: center;
+            //   gap: 10px;
+            //   font-size: 18px;
+            //   line-height: 20px;
+            //   font-weight: 400;
+            //   color: #000;
+            //   transition: .2s ease-in-out;
+              
+            //   &:hover {
+            //     svg {
+            //       transform: translateX(10px);
+            //     }
+            //   }
+              
+            //   svg {
+            //     transition: .2s ease-in-out;
+            //     path {
+            //       fill: #000;
+            //     }
+            //   }
+            // }
+          }
         }
       }
 

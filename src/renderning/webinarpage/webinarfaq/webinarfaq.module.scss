@@ -1,0 +1,199 @@
+@import "../../../scss/mixins/index.scss";
+
+.faqsectionmain {
+  padding: 90px 0 140px 0;
+
+  @media (max-width: 1024px) {
+    padding: 90px 0 200px 0;
+  }
+  @media (max-width: 900px) {
+    padding: 40px 0 200px 0;
+  }
+
+  .faqcontent {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    .faqsectiontitle {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 60px;
+
+      h6 {
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 62px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
+        }
+      }
+    }
+
+    .faqgrdmain {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .faqboxmain {
+        padding: 24px 36px;
+        background-color: #fff;
+        border-radius: 30px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        @media (max-width: 768px) {
+          padding: 20px;
+        }
+
+        &.faqboxmainactive {
+          border-color: #f3f3f1;
+          background: linear-gradient(
+            180deg,
+            rgb(243, 243, 241) 52%,
+            rgb(250, 250, 247) 100%
+          );
+          .faqboxheader {
+            .faqicon {
+              svg {
+                transform: rotate(180deg);
+              }
+            }
+          }
+
+          .faqboxcontent {
+            max-height: 500px;
+            margin-top: 20px;
+          }
+        }
+
+        .faqboxheader {
+          display: flex;
+          justify-content: space-between;
+
+          h1 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 28px;
+            color: #37312f;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            max-width: 404px;
+
+            @media (max-width: 1200px) {
+              font-size: 22px;
+              line-height: 26px;
+            }
+
+            @media (max-width: 900px) {
+              font-size: 20px;
+              line-height: 24px;
+            }
+          }
+
+          .faqicon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+              width: 100%;
+              height: 100%;
+              transition: 0.3s ease-in-out;
+
+              polyline {
+                stroke: #37312f;
+              }
+            }
+          }
+        }
+
+        .faqboxcontent {
+          max-height: 0;
+          margin-top: 0;
+          overflow: hidden;
+          transition: max-height 0.4s ease-in-out, margin-top 0.4s ease-in-out;
+
+          p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #616161;
+
+            @media (max-width: 1200px) {
+              font-size: 16px;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+
+    .ctabuttonmain {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+
+      .ctaButton {
+        background-color: #9657fa;
+        color: #fff;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        text-transform: uppercase;
+        animation: Buttonanimation 1s infinite alternate ease-in-out;
+
+        &:hover {
+          background-color: #8045e8;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(150, 87, 250, 0.3);
+        }
+
+        @media (max-width: 576px) {
+          padding: 12px 15px;
+          font-size: 16px;
+        }
+
+        @keyframes Buttonanimation {
+          0% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(10px);
+          }
+          100% {
+            transform: translateX(-10px);
+          }
+        }
+      }
+    }
+  }
+}
