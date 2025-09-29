@@ -1,3 +1,7 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+const ipInstance = require("what-is-my-ip-address");
+
 // date formate dd-mm-yyyy
 export const dateFormate = (date) => {
   const newDate = new Date(date);
@@ -53,4 +57,20 @@ export const calculatePlanEndDateWithTotalDays = (startDateStr, planType) => {
     endDate: `${year}-${month}-${day}T23:59`,
     totalDays,
   };
+};
+
+// fetching IP address from third party provider
+export const fetchIpAddress = async () => {
+  const ipAddress = await ipInstance.v4();
+  return ipAddress;
+};
+
+// this function will be called when user doesn't allow their location permission
+export const fetchIPInfo = async () => {
+  const ip = await fetchIpAddress();
+
+  // calling route handler to fetch IP data
+  const request = await fetch(`api/fetchIPInfo?ip=${ip}`);
+  const jsonResponse = await request?.json();
+  return jsonResponse;
 };

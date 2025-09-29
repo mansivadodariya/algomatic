@@ -30,6 +30,7 @@
     "react-slick": "^0.30.3",
     "sass": "^1.79.4",
     "scss": "^0.2.4",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "what-is-my-ip-address": "^1.0.3"
   }
 }
