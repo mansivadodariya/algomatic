@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./benefits.module.scss";
 import Commonlable from "@/components/commonlable";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Benefits() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className={styles.benefitssectionmain}>
@@ -61,11 +67,17 @@ export default function Benefits() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton}>Register Today</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Register Today
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

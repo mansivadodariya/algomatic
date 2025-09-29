@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./workshopfor.module.scss";
 import Commonlable from "@/components/commonlable";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Workshopfor() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className={styles.workshopsectionmain}>
@@ -32,22 +38,30 @@ export default function Workshopfor() {
               <div className={styles.items}>
                 <img src="" alt="Cards Image" />
                 <p>
-                  Investors looking for <span>safe opportunities in XAUUSD (Gold)</span>.
+                  Investors looking for{" "}
+                  <span>safe opportunities in XAUUSD (Gold)</span>.
                 </p>
               </div>
               <div className={styles.items}>
                 <img src="" alt="Cards Image" />
                 <p>
-                  Experienced traders who want to <span>refine their techniques</span>.
+                  Experienced traders who want to{" "}
+                  <span>refine their techniques</span>.
                 </p>
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton}>Register Today</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Register Today
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

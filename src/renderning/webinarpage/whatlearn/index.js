@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./whatlearn.module.scss";
 import Commonlable from "@/components/commonlable";
 import Listicon2 from "../../../../public/assets/icons/listicon2";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Whatlearn() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className={styles.whatlearnsectionmain}>
@@ -71,11 +77,17 @@ export default function Whatlearn() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton}>Reserve Your Seat</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Reserve Your Seat
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

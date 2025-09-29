@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./webinarfaq.module.scss";
 import Commonlable from "@/components/commonlable";
 import Dropdownicon from "../../../../public/assets/icons/dropdownicon";
+import { InquiryForm } from "@/components/inquiryForm";
 
 const faqData = [
   {
@@ -34,6 +35,12 @@ export default function Webinarfaq() {
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
   };
   return (
     <>
@@ -68,11 +75,17 @@ export default function Webinarfaq() {
               ))}
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton}>Secure Your Seat Now</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Secure Your Seat Now
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

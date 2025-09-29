@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./webinarfooter.module.scss";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Webinarfooter() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className={styles.webinarfootermain}>
@@ -14,11 +20,17 @@ export default function Webinarfooter() {
               <p>Registrations End on 29 SEP</p>
             </div>
             <div className={styles.webinarfooterright}>
-              <button className={styles.ctaButton}>Secure Your Seat Now</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Secure Your Seat Now
+              </button>
             </div>
           </div>
         </div>
       </div>
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

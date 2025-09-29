@@ -6,7 +6,7 @@ import { fetchIpAddress } from "@/utils/common";
 import { addInquiryForm, getInquiryByIp } from "@/lib/inquiryApi";
 import Commonarrowbutton from "../commonarrowbutton";
 
-export const InquiryForm = () => {
+export const InquiryForm = ({ isOpen, onClose }) => {
   const [isOpenInquiryForm, setIsOpenInquiryForm] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -21,15 +21,31 @@ export const InquiryForm = () => {
   };
   const [formData, setFormData] = useState(initialData);
 
+  // Use external control if provided, otherwise use internal logic
+  const modalIsOpen = isOpen !== undefined ? isOpen : isOpenInquiryForm;
+  const handleModalClose = onClose || (() => setIsOpenInquiryForm(false));
+
   useEffect(() => {
-    fetchIpAddress().then(async (res) => {
-      const response = await getInquiryByIp({ ipAddress: res });
-      if (!response?.payload?.hasVisited) {
+    // Only auto-open if not externally controlled
+    if (isOpen === undefined) {
+      fetchIpAddress().then(async (res) => {
+        const response = await getInquiryByIp({ ipAddress: res });
+        if (!response?.payload?.hasVisited) {
+          setFormData((prev) => ({ ...prev, ipAddress: res }));
+          setIsOpenInquiryForm(true);
+        }
+      });
+    }
+  }, [isOpen]);
+
+  // Fetch IP address when modal is opened externally
+  useEffect(() => {
+    if (isOpen && !formData.ipAddress) {
+      fetchIpAddress().then((res) => {
         setFormData((prev) => ({ ...prev, ipAddress: res }));
-        setIsOpenInquiryForm(true);
-      }
-    });
-  }, []);
+      });
+    }
+  }, [isOpen, formData.ipAddress]);
 
   const validate = () => {
     const newErrors = {};
@@ -87,8 +103,10 @@ export const InquiryForm = () => {
     try {
       const response = await addInquiryForm(formData);
       if (response?.success) {
-        toast.success("Thanks for reaching out! Our team will contact you shortly.");
-        setIsOpenInquiryForm(false);
+        toast.success(
+          "Thanks for reaching out! Our team will contact you shortly."
+        );
+        handleModalClose();
         setFormData(initialData);
         setErrors({});
       }
@@ -99,7 +117,7 @@ export const InquiryForm = () => {
   };
 
   const handleClose = async () => {
-    setIsOpenInquiryForm(false);
+    handleModalClose();
     await addInquiryForm({ ipAddress: formData.ipAddress });
 
     setFormData(initialData);
@@ -108,40 +126,97 @@ export const InquiryForm = () => {
 
   return (
     <>
-      <Modal isOpen={isOpenInquiryForm} onClose={handleClose}>
+      <Modal isOpen={modalIsOpen} onClose={handleClose}>
         <div className={styles.wrapper}>
           <h2 className="text-xl font-bold mb-4">Let's Connect with us</h2>
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className={styles.inputGroup}>
-                <label>Name *</label> <span className={styles.error}>{errors.name}</span>
-                <input type="name" name="name" placeholder={errors.name || "Enter your name"} value={formData?.name} onChange={handleInputChange} className={`${styles.input} ${errors.name ? styles.errorPlaceholder : ""}`} />
+                <label>Name *</label>{" "}
+                <span className={styles.error}>{errors.name}</span>
+                <input
+                  type="name"
+                  name="name"
+                  placeholder={errors.name || "Enter your name"}
+                  value={formData?.name}
+                  onChange={handleInputChange}
+                  className={`${styles.input} ${
+                    errors.name ? styles.errorPlaceholder : ""
+                  }`}
+                />
               </div>
               <div className={styles.inputGroup}>
-                <label>Email *</label> <span className={styles.error}>{errors.email}</span>
-                <input type="email" name="email" placeholder={errors.email || "Enter your email address"} value={formData?.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
+                <label>Email *</label>{" "}
+                <span className={styles.error}>{errors.email}</span>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder={errors.email || "Enter your email address"}
+                  value={formData?.email}
+                  onChange={handleInputChange}
+                  className={`${styles.input} ${
+                    errors.email ? styles.errorPlaceholder : ""
+                  }`}
+                />
               </div>
               <div className={styles.inputGroup}>
-                <label>Phone *</label> <span className={styles.error}>{errors.phone}</span>
-                <input type="phone" name="phone" placeholder={errors.phone || "Enter your phone number"} value={formData?.phone} onChange={handleInputChange} className={`${styles.input} ${errors.phone ? styles.errorPlaceholder : ""}`} />
+                <label>Phone *</label>{" "}
+                <span className={styles.error}>{errors.phone}</span>
+                <input
+                  type="phone"
+                  name="phone"
+                  placeholder={errors.phone || "Enter your phone number"}
+                  value={formData?.phone}
+                  onChange={handleInputChange}
+                  className={`${styles.input} ${
+                    errors.phone ? styles.errorPlaceholder : ""
+                  }`}
+                />
               </div>
               <div className={styles.inputGroup}>
-                <label>Broker Name *</label> <span className={styles.error}>{errors.brokerName}</span>
-                <input type="text" name="brokerName" placeholder={errors.brokerName || "Enter broker name"} value={formData?.brokerName} onChange={handleInputChange} className={`${styles.input} ${errors.brokerName ? styles.errorPlaceholder : ""}`} />
+                <label>Broker Name *</label>{" "}
+                <span className={styles.error}>{errors.brokerName}</span>
+                <input
+                  type="text"
+                  name="brokerName"
+                  placeholder={errors.brokerName || "Enter broker name"}
+                  value={formData?.brokerName}
+                  onChange={handleInputChange}
+                  className={`${styles.input} ${
+                    errors.brokerName ? styles.errorPlaceholder : ""
+                  }`}
+                />
               </div>
 
               {/* Trading Platform */}
               <div className={styles.radio}>
                 <label>
-                  Trading Platform *<span className={styles.error}>{errors.tradingPlatform}</span>
+                  Trading Platform *
+                  <span className={styles.error}>{errors.tradingPlatform}</span>
                 </label>
                 <div className={styles.flexcol}>
                   <div className={styles.flex}>
-                    <input type="radio" id="MT5" name="tradingPlatform" value="MT5" checked={formData.tradingPlatform === "MT5"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="MT5"
+                      name="tradingPlatform"
+                      value="MT5"
+                      checked={formData.tradingPlatform === "MT5"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="MT5">MT5</label>
                   </div>
                   <div className={styles.flex}>
-                    <input type="radio" id="CTrader" name="tradingPlatform" value="CTrader" checked={formData.tradingPlatform === "CTrader"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="CTrader"
+                      name="tradingPlatform"
+                      value="CTrader"
+                      checked={formData.tradingPlatform === "CTrader"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="CTrader">CTrader</label>
                   </div>
                 </div>
@@ -154,27 +229,66 @@ export const InquiryForm = () => {
                 </label>
                 <div className={styles.flexcol}>
                   <div className={styles.flex}>
-                    <input type="radio" id="Above5K" name="equity" value="Above 5K USD" checked={formData.equity === "Above 5K USD"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="Above5K"
+                      name="equity"
+                      value="Above 5K USD"
+                      checked={formData.equity === "Above 5K USD"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="Above5K">Above 5K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input type="radio" id="2to5K" name="equity" value="2K to 5K USD" checked={formData.equity === "2K to 5K USD"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="2to5K"
+                      name="equity"
+                      value="2K to 5K USD"
+                      checked={formData.equity === "2K to 5K USD"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="2to5K">2K to 5K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input type="radio" id="1to2K" name="equity" value="1K to 2K USD" checked={formData.equity === "1K to 2K USD"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="1to2K"
+                      name="equity"
+                      value="1K to 2K USD"
+                      checked={formData.equity === "1K to 2K USD"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="1to2K">1K to 2K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input type="radio" id="Below1K" name="equity" value="Below 1K USD" checked={formData.equity === "Below 1K USD"} onChange={handleInputChange} className={styles.radio} />
+                    <input
+                      type="radio"
+                      id="Below1K"
+                      name="equity"
+                      value="Below 1K USD"
+                      checked={formData.equity === "Below 1K USD"}
+                      onChange={handleInputChange}
+                      className={styles.radio}
+                    />
                     <label htmlFor="Below1K">Below 1K USD</label>
                   </div>
                 </div>
               </div>
 
               <div className={styles.buttons}>
-                <Commonarrowbutton Text="Cancel" Butttonvarient="lightoutlined" onClick={handleClose} />
-                <Commonarrowbutton Text="Submit" Butttonvarient="lightoutlined" />
+                <Commonarrowbutton
+                  Text="Cancel"
+                  Butttonvarient="lightoutlined"
+                  onClick={handleClose}
+                />
+                <Commonarrowbutton
+                  Text="Submit"
+                  Butttonvarient="lightoutlined"
+                />
               </div>
             </form>
           </div>

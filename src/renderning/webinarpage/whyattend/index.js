@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./whyattend.module.scss";
 import Commonlable from "@/components/commonlable";
 import Listicon from "../../../../public/assets/icons/listicon";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Whyattend() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleRegisterClick = () => {
+    setIsModalOpen(true);
+  };
   return (
     <>
       <div className={styles.whyattendsectionmain}>
@@ -64,11 +70,18 @@ export default function Whyattend() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton}>Reserve Your Spot</button>
+              <button
+                className={styles.ctaButton}
+                onClick={handleRegisterClick}
+              >
+                Reserve Your Spot
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
