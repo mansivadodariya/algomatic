@@ -58,8 +58,8 @@ export default function Dashboard() {
       const trimmedMeta = metaAccountNo[i].trim();
 
       if (!trimmedMeta) {
-        toast.error(`Meta account number ${i + 1} is required`);
-        return;
+       toast.error(`Meta account number ${i + 1} is required`);
+       return;
       }
 
       if (!/^\d+$/.test(trimmedMeta)) {
@@ -89,8 +89,8 @@ export default function Dashboard() {
         const formatedDate = calculatePlanEndDate(selectedPayment.createdAt, selectedPayment.planType);
 
         // send multiple rejoice bot exe to user
-        metaAccountNo.map(async (metaNo, idx) => {
-          await sendBotExeToUser({
+        await Promise.all(metaAccountNo.map(async (metaNo, idx) => {
+          sendBotExeToUser({
             paymentId: selectedPayment._id,
             email: user.email,
             metaAccountNo: metaNo,
@@ -99,7 +99,7 @@ export default function Dashboard() {
             file_name: selectedPayment?.botName,
             botProviderId: botData?.botProviderId,
           });
-        });
+        }));
       }
 
       // Algo client spiral company id from db
@@ -107,8 +107,8 @@ export default function Dashboard() {
         const { totalDays } = calculatePlanEndDateWithTotalDays(selectedPayment.createdAt, selectedPayment.planType);
 
         // send multiple spiral bot exe to user
-        metaAccountNo.map(async (metaNo, idx) => {
-          await sendBotExeToUser({
+        await Promise.all(metaAccountNo.map(async (metaNo, idx) => {
+          sendBotExeToUser({
             paymentId: selectedPayment._id,
             email: user.email,
             metaAccountNo: metaNo,
@@ -117,12 +117,14 @@ export default function Dashboard() {
             file_name: selectedPayment?.botName,
             botProviderId: botData?.botProviderId,
           });
-        });
+        }));
       }
     } catch (e) {
+      setSavingMeta(false);
       console.error(e);
     }
   };
+  
   return (
     <>
       <div className={styles.dashboarlayout}>
@@ -160,9 +162,17 @@ export default function Dashboard() {
                         <td>
                           {p.metaAccountNo == null || p.metaAccountNo.length === 0 ? (
                             p.paymentStatus === "paid" ? (
-                              <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
-                                + Add Meta No
-                              </button>
+                              p.strategyPlanId?.strategyId?.metaNoRequired == true ? (
+                                <button className={styles.addMetaBtn} onClick={() => openMetaModal(p)}>
+                                  + Add Meta No
+                                </button>
+                              ) : (
+                                <span className={styles.infoIcon}>
+                                  i<span className={styles.tooltip}>
+                                    Meta Account not required. <br /> The setup file has already been sent to your email (check inbox/spam).
+                                  </span>
+                                </span>
+                              )
                             ) : (
                               "-"
                             )

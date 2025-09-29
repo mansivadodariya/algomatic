@@ -474,3 +474,40 @@
     }
   }
 }
+
+.infoIcon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgb(170, 170, 170);
+  color: rgb(201, 201, 201);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%; /* show above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #272727;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.infoIcon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
