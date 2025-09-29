@@ -26,12 +26,7 @@ export default function Webinarherobanner() {
               <h1>
                 Zero-Loss Trading Strategy in <span>XAUUSD</span> Pair
               </h1>
-              <p>
-                Discover a powerful trading strategy designed specifically for
-                XAUUSD (Gold) that helps you minimize risks and maximize
-                profits. Learn the proven system we use to trade with
-                confidence—even in volatile markets.
-              </p>
+              <p>Discover a powerful trading strategy designed specifically for XAUUSD (Gold) that helps you minimize risks and maximize profits. Learn the proven system we use to trade with confidence—even in volatile markets.</p>
             </div>
             <div className={styles.grid}>
               <div>
@@ -98,7 +93,7 @@ export default function Webinarherobanner() {
                       <div className={styles.checked}>
                         <Truefillicon />
                       </div>
-                      <p>Gold (XAUUSD) Stop</p>
+                      <p>Gold (XAUUSD) Spot</p>
                     </div>
                     <div className={styles.list}>
                       <div className={styles.checked}>
@@ -118,10 +113,7 @@ export default function Webinarherobanner() {
           </div>
         </div>
       </section>
-      <InquiryForm 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

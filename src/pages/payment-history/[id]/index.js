@@ -58,8 +58,8 @@ export default function Dashboard() {
       const trimmedMeta = metaAccountNo[i].trim();
 
       if (!trimmedMeta) {
-       toast.error(`Meta account number ${i + 1} is required`);
-       return;
+        toast.error(`Meta account number ${i + 1} is required`);
+        return;
       }
 
       if (!/^\d+$/.test(trimmedMeta)) {
@@ -89,17 +89,19 @@ export default function Dashboard() {
         const formatedDate = calculatePlanEndDate(selectedPayment.createdAt, selectedPayment.planType);
 
         // send multiple rejoice bot exe to user
-        await Promise.all(metaAccountNo.map(async (metaNo, idx) => {
-          sendBotExeToUser({
-            paymentId: selectedPayment._id,
-            email: user.email,
-            metaAccountNo: metaNo,
-            date: formatedDate,
-            planType: selectedPayment.planType,
-            file_name: selectedPayment?.botName,
-            botProviderId: botData?.botProviderId,
-          });
-        }));
+        await Promise.all(
+          metaAccountNo.map(async (metaNo, idx) => {
+            sendBotExeToUser({
+              paymentId: selectedPayment._id,
+              email: user.email,
+              metaAccountNo: metaNo,
+              date: formatedDate,
+              planType: selectedPayment.planType,
+              file_name: selectedPayment?.botName,
+              botProviderId: botData?.botProviderId,
+            });
+          })
+        );
       }
 
       // Algo client spiral company id from db
@@ -107,24 +109,26 @@ export default function Dashboard() {
         const { totalDays } = calculatePlanEndDateWithTotalDays(selectedPayment.createdAt, selectedPayment.planType);
 
         // send multiple spiral bot exe to user
-        await Promise.all(metaAccountNo.map(async (metaNo, idx) => {
-          sendBotExeToUser({
-            paymentId: selectedPayment._id,
-            email: user.email,
-            metaAccountNo: metaNo,
-            totalDays: totalDays,
-            planType: selectedPayment.planType,
-            file_name: selectedPayment?.botName,
-            botProviderId: botData?.botProviderId,
-          });
-        }));
+        await Promise.all(
+          metaAccountNo.map(async (metaNo, idx) => {
+            sendBotExeToUser({
+              paymentId: selectedPayment._id,
+              email: user.email,
+              metaAccountNo: metaNo,
+              totalDays: totalDays,
+              planType: selectedPayment.planType,
+              file_name: selectedPayment?.botName,
+              botProviderId: botData?.botProviderId,
+            });
+          })
+        );
       }
     } catch (e) {
       setSavingMeta(false);
       console.error(e);
     }
   };
-  
+
   return (
     <>
       <div className={styles.dashboarlayout}>
@@ -168,7 +172,8 @@ export default function Dashboard() {
                                 </button>
                               ) : (
                                 <span className={styles.infoIcon}>
-                                  i<span className={styles.tooltip}>
+                                  i
+                                  <span className={styles.tooltip}>
                                     Meta Account not required. <br /> The setup file has already been sent to your email (check inbox/spam).
                                   </span>
                                 </span>
@@ -228,6 +233,17 @@ export default function Dashboard() {
           })}
           <Button text="Save" purple onClick={handleMetaSave} isBtnLoading={savingMeta} />
         </Modal>
+        // <Modal size="small" isOpen={metaModalOpen} onClose={() => setMetaModalOpen(false)}>
+        //   <h3 style={{ marginBottom: "1rem", textAlign: "start" }}>Add Meta Account Number</h3>
+        //   {Array.from({ length: selectedPayment.noOfBots }).map((_, idx) => {
+        //     return (
+        //       <div key={idx} className={styles.metaBoxWrapper}>
+        //         <input className={styles.input} type="text" value={metaAccountNo[idx]} onChange={(e) => setMetaAccountNo((prev) => [...prev.slice(0, idx), e.target.value, ...prev.slice(idx + 1)])} placeholder="Enter meta account no" style={{ width: "60%", padding: "0.5rem", margin: "0.5rem 0" }} />
+        //         <Button text="Get file" purple onClick={handleMetaSave} isBtnLoading={savingMeta} />
+        //       </div>
+        //     );
+        //   })}
+        // </Modal>
       )}
 
       {/* view more meta data btn */}
