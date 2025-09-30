@@ -1,0 +1,364 @@
+.genaidevlopmentbannermain {
+  padding: 170px 0 120px;
+  position: relative;
+  background-color: #fff;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #f7f7f7;
+  }
+
+  .contentholder {
+    padding: 0 15px;
+  }
+
+  .genaidevlopmentbannergrd {
+    display: grid;
+    grid-template-columns: 550px 1fr;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    .itemsleft {
+      .title {
+        margin-bottom: 30px;
+
+        h1 {
+          font-size: 52px;
+          font-weight: 600;
+          line-height: 62px;
+          color: #111;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          margin: 16px 0 24px;
+
+          @media (max-width: 1200px) {
+            font-size: 43px;
+            line-height: 52px;
+          }
+
+          @media (max-width: 1024px) {
+            font-size: 33px;
+            line-height: 39px;
+          }
+
+          span {
+            color: #9657fa;
+            font-style: italic;
+            font-weight: 400;
+            font-family: "PT Serif", "PT Serif Placeholder", serif;
+          }
+        }
+
+        p {
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 28px;
+          color: #616161;
+
+          @media (max-width: 1200px) {
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+      }
+
+      .tagsflx {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+
+        .tagsbtn {
+          background: linear-gradient(180deg, #f3f3f1 52%, #fafafa);
+          border: 1px solid #f0ece7;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          padding: 8px 16px;
+          gap: 8px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          span {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 15px;
+            color: #37312f;
+          }
+        }
+      }
+
+      .casestudiesbtnflx {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 30px;
+        gap: 16px;
+
+        .consultationbtn {
+          padding: 16px 32px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          border-radius: 12px;
+          background-color: #000;
+          box-shadow: 0 0.48175px 1.25255px -1.16667px rgba(0, 0, 0, 0.1),
+            0 1.83083px 4.76015px -2.33333px rgba(0, 0, 0, 0.09),
+            0 8px 20.8px -3.5px rgba(0, 0, 0, 0.043),
+            inset 0 -2px 9px 0 hsla(0, 0%, 100%, 0.49),
+            0 0 0 2px rgba(0, 0, 0, 0.2);
+          border: none;
+          cursor: pointer;
+          transition: 0.4s ease-in-out;
+
+          &:hover {
+            opacity: 0.9;
+          }
+
+          span {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            font-family: Urbanist, Urbanist Placeholder, sans-serif;
+            text-transform: capitalize;
+            color: #fff;
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+
+            path {
+              fill: #fff;
+            }
+          }
+        }
+
+        .casestudiesbtn {
+          padding: 16px 32px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          border-radius: 12px;
+          background-color: #fff;
+          border: 1px solid #000;
+          cursor: pointer;
+          transition: 0.4s ease-in-out;
+
+          &:hover {
+            opacity: 0.8;
+          }
+
+          span {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            font-family: Urbanist, Urbanist Placeholder, sans-serif;
+            text-transform: capitalize;
+            color: #000;
+          }
+
+          svg {
+            width: 20px;
+            height: 20px;
+
+            path {
+              fill: #000;
+            }
+          }
+        }
+      }
+
+      .trustline {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #000;
+        margin-bottom: 30px;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+
+      .trustgrid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-bottom: 30px;
+
+        .trustgriditem {
+          text-align: center;
+
+          h6 {
+            font-size: 30px;
+            font-weight: 600;
+            line-height: 36px;
+            color: #000;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            margin-bottom: 5px;
+          }
+
+          p {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 15px;
+            color: #37312f;
+          }
+        }
+      }
+
+      .certiflx {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px 14px;
+
+        .certiflxitems {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          span {
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 15px;
+            color: #37312f;
+          }
+        }
+      }
+    }
+
+    .itemsrightmain {
+      background: linear-gradient(170deg, #e6f0ff, #9657fa);
+      border: 2px solid #fff;
+      padding: 20px;
+      border-radius: 0 24px 24px 0;
+      width: 100%;
+      height: 100%;
+
+      .itemsright {
+        border: 1px solid #e6f0ff;
+        background-color: #9657fa;
+        border-radius: 16px;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+
+        .itemsrighttitle {
+          .itemsrighttitleflx {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+
+            .icon {
+              width: 40px;
+              height: 40px;
+              min-width: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              animation: rotation 2s infinite linear;
+
+              @keyframes rotation {
+                from {
+                  transform: rotate(0deg);
+                }
+                to {
+                  transform: rotate(359deg);
+                }
+              }
+
+              svg {
+                width: 24px;
+                height: 24px;
+
+                path {
+                  stroke: #fff;
+                }
+              }
+            }
+
+            h2 {
+              font-size: 24px;
+              font-weight: 600;
+              line-height: 28px;
+              color: #fff;
+              font-family: Urbanist, Urbanist Placeholder, sans-serif;
+            }
+          }
+
+          p {
+            margin-bottom: 30px;
+            padding: 0 16px;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #ededed;
+          }
+        }
+
+        .buildchatbox {
+          label {
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 28px;
+            color: #fff;
+            display: block;
+            cursor: pointer;
+          }
+
+          .textareamain {
+            position: relative;
+
+            .textarea {
+              resize: none;
+              width: 100%;
+              height: 130px;
+              border-radius: 12px;
+              padding: 16px 24px;
+              border: 1px solid #fff;
+              outline: none;
+              background-color: #ffffff59;
+              font-size: 17px;
+              font-weight: 500;
+              line-height: 20px;
+              color: #fff;
+
+              &::placeholder {
+                color: #fff;
+              }
+            }
+
+            .copyrighttext {
+              position: absolute;
+              bottom: 16px;
+              right: 16px;
+              font-size: 12px;
+              font-weight: 500;
+              line-height: 12px;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

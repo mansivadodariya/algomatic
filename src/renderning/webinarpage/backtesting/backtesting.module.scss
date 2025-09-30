@@ -1,0 +1,65 @@
+.backtestingmain {
+  background-color: #f7f7f7;
+  padding: 90px 0;
+
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
+  .backtestingcontent {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+    margin-bottom: 60px;
+
+    h4 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", "PT Serif Placeholder", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      color: #616161;
+      max-width: 607px;
+
+      @media (max-width: 1200px) {
+        font-size: 16px;
+        line-height: 24px;
+        max-width: 500px;
+      }
+    }
+  }
+}

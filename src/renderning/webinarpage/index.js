@@ -7,6 +7,7 @@ import Workshopfor from "./workshopfor";
 import Testimonials from "./testimonials";
 import Webinarfaq from "./webinarfaq";
 import Webinarfooter from "./webinarfooter";
+import Backtesting from "./backtesting";
 
 export default function Webinarpage() {
   return (
@@ -17,6 +18,7 @@ export default function Webinarpage() {
       <Benefits />
       <Workshopfor />
       <Testimonials />
+      {/* <Backtesting /> */}
       <Webinarfaq />
       <Webinarfooter />
     </>
