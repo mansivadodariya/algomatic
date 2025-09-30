@@ -8,9 +8,11 @@ import Timeicon from "../../../../public/assets/icons/timeicon";
 import Videoicon from "../../../../public/assets/icons/videoicon";
 import Globeicon from "../../../../public/assets/icons/globeicon";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
-import { InquiryForm } from "@/components/inquiryForm";
+import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { useAppContext } from "@/context/AppContext";
 
 export default function Webinarherobanner() {
+  const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -24,7 +26,8 @@ export default function Webinarherobanner() {
             <div className={styles.title}>
               <Commonlable Text="Zero Loss Trading Strategy" />
               <h1>
-                Zero-Loss Trading Strategy in <span>XAUUSD</span> Pair
+                {/* Zero-Loss Trading Strategy in <span>XAUUSD</span> Pair */}
+                Zero Risk Trading Strategy at <span>Zero Cost</span>
               </h1>
               <p>Discover a powerful trading strategy designed specifically for XAUUSD (Gold) that helps you minimize risks and maximize profits. Learn the proven system we use to trade with confidence—even in volatile markets.</p>
             </div>
@@ -45,7 +48,7 @@ export default function Webinarherobanner() {
                       </div>
                       <div className={styles.cardscontent}>
                         <span>Date</span>
-                        <p>1st October '25</p>
+                        <p>{utilitySettings?.webinar?.webinarDate}</p>
                       </div>
                     </div>
                     <div className={styles.cards}>
@@ -54,7 +57,7 @@ export default function Webinarherobanner() {
                       </div>
                       <div className={styles.cardscontent}>
                         <span>Time</span>
-                        <p>08: 00 PM</p>
+                        <p>{utilitySettings?.webinar?.webinarTime}</p>
                       </div>
                     </div>
                     <div className={styles.cards}>
@@ -63,7 +66,7 @@ export default function Webinarherobanner() {
                       </div>
                       <div className={styles.cardscontent}>
                         <span>Venue</span>
-                        <p>Zoom</p>
+                        <p>{utilitySettings?.webinar?.webinarVenue}</p>
                       </div>
                     </div>
                     <div className={styles.cards}>
@@ -72,7 +75,7 @@ export default function Webinarherobanner() {
                       </div>
                       <div className={styles.cardscontent}>
                         <span>Language</span>
-                        <p>English</p>
+                        <p>{utilitySettings?.webinar?.webinarLanguage}</p>
                       </div>
                     </div>
                   </div>
@@ -113,7 +116,7 @@ export default function Webinarherobanner() {
           </div>
         </div>
       </section>
-      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

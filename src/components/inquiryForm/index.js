@@ -5,6 +5,7 @@ import styles from "./inquiryForm.module.scss";
 import { fetchIpAddress } from "@/utils/common";
 import { addInquiryForm, getInquiryByIp } from "@/lib/inquiryApi";
 import Commonarrowbutton from "../commonarrowbutton";
+import PhoneInput from "react-phone-input-2";
 
 export const InquiryForm = ({ isOpen, onClose }) => {
   const [isOpenInquiryForm, setIsOpenInquiryForm] = useState(false);
@@ -13,6 +14,7 @@ export const InquiryForm = ({ isOpen, onClose }) => {
   const initialData = {
     ipAddress: "",
     name: "",
+    countryCode: "",
     phone: "",
     email: "",
     brokerName: "",
@@ -103,9 +105,7 @@ export const InquiryForm = ({ isOpen, onClose }) => {
     try {
       const response = await addInquiryForm(formData);
       if (response?.success) {
-        toast.success(
-          "Thanks for reaching out! Our team will contact you shortly."
-        );
+        toast.success("Thanks for reaching out! Our team will contact you shortly.");
         handleModalClose();
         setFormData(initialData);
         setErrors({});
@@ -132,91 +132,74 @@ export const InquiryForm = ({ isOpen, onClose }) => {
           <div className={styles.formContainer}>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className={styles.inputGroup}>
-                <label>Name *</label>{" "}
-                <span className={styles.error}>{errors.name}</span>
-                <input
-                  type="name"
-                  name="name"
-                  placeholder={errors.name || "Enter your name"}
-                  value={formData?.name}
-                  onChange={handleInputChange}
-                  className={`${styles.input} ${
-                    errors.name ? styles.errorPlaceholder : ""
-                  }`}
-                />
+                <label>Name *</label> <span className={styles.error}>{errors.name}</span>
+                <input type="name" name="name" placeholder={errors.name || "Enter your name"} value={formData?.name} onChange={handleInputChange} className={`${styles.input} ${errors.name ? styles.errorPlaceholder : ""}`} />
               </div>
               <div className={styles.inputGroup}>
-                <label>Email *</label>{" "}
-                <span className={styles.error}>{errors.email}</span>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder={errors.email || "Enter your email address"}
-                  value={formData?.email}
-                  onChange={handleInputChange}
-                  className={`${styles.input} ${
-                    errors.email ? styles.errorPlaceholder : ""
-                  }`}
+                <label>Email *</label> <span className={styles.error}>{errors.email}</span>
+                <input type="email" name="email" placeholder={errors.email || "Enter your email address"} value={formData?.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
+              </div>
+              
+              <div className={styles.inputGroup}>
+                <label>Phone *</label> <span className={styles.error}>{errors.countryCode || errors.phone}</span>
+                <PhoneInput
+                  country={"in"}
+                  enableSearch
+                  placeholder={errors.phone || "Enter phone number"}
+                  value={`${formData?.countryCode || ""}${formData?.phone || ""}`}
+                  inputClass={`${styles.input} ${styles.phoneInput} ${errors.phone ? styles.errorPlaceholder : ""}`}
+                  buttonClass={styles.phoneButton}
+                  inputProps={{
+                    name: "phone",
+                    required: true,
+                    onKeyDown: (e) => {
+                      if (e.key === "Backspace") {
+                        const localPhone = formData?.phone || "";
+                        if (localPhone.trim().length === 0) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }
+                      }
+                    },
+                  }}
+                  onChange={(value, data) => {
+                    const dialCode = data && data.dialCode ? String(data.dialCode) : "";
+                    const onlyDigits = (value || "").replace(/\D/g, "");
+
+                    const phoneWithoutCode = dialCode ? onlyDigits.replace(new RegExp("^" + dialCode), "") : onlyDigits;
+
+                    setFormData((prev) => ({
+                      ...prev,
+                      countryCode: dialCode ? `+${dialCode}` : prev?.countryCode || "",
+                      phone: phoneWithoutCode,
+                    }));
+
+                    setErrors((prev) => ({
+                      ...prev,
+                      phone: "",
+                      countryCode: "",
+                    }));
+                  }}
                 />
               </div>
+
               <div className={styles.inputGroup}>
-                <label>Phone *</label>{" "}
-                <span className={styles.error}>{errors.phone}</span>
-                <input
-                  type="phone"
-                  name="phone"
-                  placeholder={errors.phone || "Enter your phone number"}
-                  value={formData?.phone}
-                  onChange={handleInputChange}
-                  className={`${styles.input} ${
-                    errors.phone ? styles.errorPlaceholder : ""
-                  }`}
-                />
-              </div>
-              <div className={styles.inputGroup}>
-                <label>Broker Name *</label>{" "}
-                <span className={styles.error}>{errors.brokerName}</span>
-                <input
-                  type="text"
-                  name="brokerName"
-                  placeholder={errors.brokerName || "Enter broker name"}
-                  value={formData?.brokerName}
-                  onChange={handleInputChange}
-                  className={`${styles.input} ${
-                    errors.brokerName ? styles.errorPlaceholder : ""
-                  }`}
-                />
+                <label>Broker Name *</label> <span className={styles.error}>{errors.brokerName}</span>
+                <input type="text" name="brokerName" placeholder={errors.brokerName || "Enter broker name"} value={formData?.brokerName} onChange={handleInputChange} className={`${styles.input} ${errors.brokerName ? styles.errorPlaceholder : ""}`} />
               </div>
 
               {/* Trading Platform */}
               <div className={styles.radio}>
                 <label>
-                  Trading Platform *
-                  <span className={styles.error}>{errors.tradingPlatform}</span>
+                  Trading Platform *<span className={styles.error}>{errors.tradingPlatform}</span>
                 </label>
                 <div className={styles.flexcol}>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="MT5"
-                      name="tradingPlatform"
-                      value="MT5"
-                      checked={formData.tradingPlatform === "MT5"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="MT5" name="tradingPlatform" value="MT5" checked={formData.tradingPlatform === "MT5"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="MT5">MT5</label>
                   </div>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="CTrader"
-                      name="tradingPlatform"
-                      value="CTrader"
-                      checked={formData.tradingPlatform === "CTrader"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="CTrader" name="tradingPlatform" value="CTrader" checked={formData.tradingPlatform === "CTrader"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="CTrader">CTrader</label>
                   </div>
                 </div>
@@ -229,66 +212,27 @@ export const InquiryForm = ({ isOpen, onClose }) => {
                 </label>
                 <div className={styles.flexcol}>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="Above5K"
-                      name="equity"
-                      value="Above 5K USD"
-                      checked={formData.equity === "Above 5K USD"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="Above5K" name="equity" value="Above 5K USD" checked={formData.equity === "Above 5K USD"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="Above5K">Above 5K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="2to5K"
-                      name="equity"
-                      value="2K to 5K USD"
-                      checked={formData.equity === "2K to 5K USD"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="2to5K" name="equity" value="2K to 5K USD" checked={formData.equity === "2K to 5K USD"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="2to5K">2K to 5K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="1to2K"
-                      name="equity"
-                      value="1K to 2K USD"
-                      checked={formData.equity === "1K to 2K USD"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="1to2K" name="equity" value="1K to 2K USD" checked={formData.equity === "1K to 2K USD"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="1to2K">1K to 2K USD</label>
                   </div>
                   <div className={styles.flex}>
-                    <input
-                      type="radio"
-                      id="Below1K"
-                      name="equity"
-                      value="Below 1K USD"
-                      checked={formData.equity === "Below 1K USD"}
-                      onChange={handleInputChange}
-                      className={styles.radio}
-                    />
+                    <input type="radio" id="Below1K" name="equity" value="Below 1K USD" checked={formData.equity === "Below 1K USD"} onChange={handleInputChange} className={styles.radio} />
                     <label htmlFor="Below1K">Below 1K USD</label>
                   </div>
                 </div>
               </div>
 
               <div className={styles.buttons}>
-                <Commonarrowbutton
-                  Text="Cancel"
-                  Butttonvarient="lightoutlined"
-                  onClick={handleClose}
-                />
-                <Commonarrowbutton
-                  Text="Submit"
-                  Butttonvarient="lightoutlined"
-                />
+                <Commonarrowbutton Text="Cancel" Butttonvarient="lightoutlined" onClick={handleClose} />
+                <Commonarrowbutton Text="Submit" Butttonvarient="lightoutlined" />
               </div>
             </form>
           </div>

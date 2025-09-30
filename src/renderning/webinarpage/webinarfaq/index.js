@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./webinarfaq.module.scss";
 import Commonlable from "@/components/commonlable";
 import Dropdownicon from "../../../../public/assets/icons/dropdownicon";
-import { InquiryForm } from "@/components/inquiryForm";
+import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 
 const faqData = [
   {
@@ -85,7 +85,7 @@ export default function Webinarfaq() {
           </div>
         </div>
       </div>
-      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./workshopfor.module.scss";
 import Commonlable from "@/components/commonlable";
-import { InquiryForm } from "@/components/inquiryForm";
+import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import Experiencedtraders from "../../../../public/assets/images/Experienced traders.png";
 import Investors from "../../../../public/assets/images/Investors.png";
 import Traders from "../../../../public/assets/images/Traders.png";
@@ -66,7 +66,7 @@ export default function Workshopfor() {
           </div>
         </div>
       </div>
-      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
