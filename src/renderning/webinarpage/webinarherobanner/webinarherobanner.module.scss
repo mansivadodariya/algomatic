@@ -2,7 +2,7 @@
 
 .heroSection {
   background: linear-gradient(89deg, #000 -2%, rgba(0, 0, 0, 0) 113%);
-  padding: 170px 0 120px;
+  padding: 90px 0 120px 0;
 
   @media (max-width: 1024px) {
     padding: 150px 0 70px;
@@ -135,8 +135,7 @@
             transition: all 0.4s ease-in-out;
 
             &:hover {
-              box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18),
-                0 4px 16px 0 rgba(1, 78, 255, 0.1);
+              box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18), 0 4px 16px 0 rgba(1, 78, 255, 0.1);
             }
 
             .cardsicon {

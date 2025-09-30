@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./benefits.module.scss";
 import Commonlable from "@/components/commonlable";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
-import { InquiryForm } from "@/components/inquiryForm";
+import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 
 export default function Benefits() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -77,7 +77,7 @@ export default function Benefits() {
           </div>
         </div>
       </div>
-      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }

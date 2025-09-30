@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./workshopfor.module.scss";
 import Commonlable from "@/components/commonlable";
-import { InquiryForm } from "@/components/inquiryForm";
+import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 
 export default function Workshopfor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -61,7 +61,7 @@ export default function Workshopfor() {
           </div>
         </div>
       </div>
-      <InquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
