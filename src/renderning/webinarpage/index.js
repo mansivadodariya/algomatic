@@ -18,7 +18,7 @@ export default function Webinarpage() {
       <Benefits />
       <Workshopfor />
       <Testimonials />
-      {/* <Backtesting /> */}
+      <Backtesting />
       <Webinarfaq />
       <Webinarfooter />
     </>

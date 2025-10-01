@@ -12,53 +12,80 @@
     @media (max-width: 768px) {
       padding: 0;
     }
-  }
 
-  .title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-    margin-bottom: 60px;
+    .title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 24px;
+      text-align: center;
+      margin-bottom: 60px;
 
-    h4 {
-      font-size: 52px;
-      font-weight: 600;
-      line-height: 62px;
-      color: #111;
-      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      h4 {
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 62px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
 
-      @media (max-width: 1200px) {
-        font-size: 43px;
-        line-height: 52px;
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
+        }
       }
 
-      @media (max-width: 1024px) {
-        font-size: 33px;
-        line-height: 39px;
-      }
-
-      span {
-        color: #9657fa;
-        font-style: italic;
+      p {
+        font-size: 18px;
         font-weight: 400;
-        font-family: "PT Serif", "PT Serif Placeholder", serif;
+        line-height: 28px;
+        color: #616161;
+        max-width: 607px;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+          line-height: 24px;
+          max-width: 500px;
+        }
       }
     }
 
-    p {
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 28px;
-      color: #616161;
-      max-width: 607px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      background-color: #fff;
+      border-radius: 24px;
+      box-shadow: 0 1px 2px 0 rgba(69, 69, 69, 0.24),
+        0 0 0 1px rgba(71, 71, 71, 0.08);
+      padding: 30px;
 
-      @media (max-width: 1200px) {
-        font-size: 16px;
-        line-height: 24px;
-        max-width: 500px;
+      @media (max-width:768px) {
+        grid-template-columns: 1fr;
+      }
+
+      .griditems {
+        border: 1px solid #ebebeb;
+        background-color: #f7f7f7;
+        border-radius: 16px;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
       }
     }
   }

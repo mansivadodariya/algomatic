@@ -66,33 +66,39 @@
         grid-template-columns: 1fr;
       }
 
-      .itemsleft {
-        position: sticky;
-        top: 100px;
-        display: flex;
-        justify-content: flex-end;
+      .itemsleftmain {
+        min-width: 0;
 
-        @media (max-width: 768px) {
-          position: static;
-          justify-content: flex-start;
-          top: 0;
-        }
+        .itemsleft {
+          position: sticky;
+          top: 100px;
+          display: flex;
+          justify-content: flex-end;
 
-        .webinarbannerimg {
-          max-width: 450px;
-
-          @media (max-width: 1200px) {
-            max-width: 350px;
+          @media (max-width: 768px) {
+            position: static;
+            justify-content: flex-start;
+            top: 0;
           }
 
-          @media (max-width: 576px) {
-            max-width: none;
-          }
-
-          img {
+          .webinarbannerimg {
+            max-width: 470px;
             width: 100%;
-            height: auto;
-            border-radius: 20px;
+
+            @media (max-width: 1200px) {
+              max-width: 370px;
+            }
+
+            @media (max-width: 576px) {
+              max-width: none;
+            }
+
+            img {
+              width: calc(100% - 20px);
+              margin: 0 auto;
+              height: auto;
+              border-radius: 20px;
+            }
           }
         }
       }
@@ -135,7 +141,8 @@
             transition: all 0.4s ease-in-out;
 
             &:hover {
-              box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18), 0 4px 16px 0 rgba(1, 78, 255, 0.1);
+              box-shadow: 0 16px 40px 0 rgba(1, 78, 255, 0.18),
+                0 4px 16px 0 rgba(1, 78, 255, 0.1);
             }
 
             .cardsicon {

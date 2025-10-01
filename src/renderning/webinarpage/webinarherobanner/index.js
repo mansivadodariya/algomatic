@@ -10,6 +10,15 @@ import Globeicon from "../../../../public/assets/icons/globeicon";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { useAppContext } from "@/context/AppContext";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import sliderimg1 from "../../../../public/assets/images/sliderimg1.jpeg";
+import sliderimg2 from "../../../../public/assets/images/sliderimg2.jpeg";
+import sliderimg3 from "../../../../public/assets/images/sliderimg3.jpg";
+import sliderimg4 from "../../../../public/assets/images/sliderimg4.jpg";
+import sliderimg5 from "../../../../public/assets/images/sliderimg5.jpg";
+import sliderimg6 from "../../../../public/assets/images/sliderimg6.jpg";
 
 export default function Webinarherobanner() {
   const { utilitySettings } = useAppContext();
@@ -18,6 +27,25 @@ export default function Webinarherobanner() {
   const handleRegisterClick = () => {
     setIsModalOpen(true);
   };
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 3000,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <section className={styles.heroSection}>
@@ -29,13 +57,40 @@ export default function Webinarherobanner() {
                 {/* Zero-Loss Trading Strategy in <span>XAUUSD</span> Pair */}
                 Zero Risk Trading Strategy at <span>Zero Cost</span>
               </h1>
-              <p>Discover a powerful trading strategy designed specifically for XAUUSD (Gold) that helps you minimize risks and maximize profits. Learn the proven system we use to trade with confidence—even in volatile markets.</p>
+              <p>
+                Discover a powerful trading strategy designed specifically for
+                XAUUSD (Gold) that helps you minimize risks and maximize
+                profits. Learn the proven system we use to trade with
+                confidence—even in volatile markets.
+              </p>
             </div>
             <div className={styles.grid}>
-              <div>
+              <div className={styles.itemsleftmain}>
                 <div className={styles.itemsleft}>
                   <div className={styles.webinarbannerimg}>
-                    <Image src={webinarbanner} alt="webinarbanner" />
+                    <Slider {...settings}>
+                      <div>
+                        <Image src={webinarbanner} alt="webinarbanner" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg1} alt="sliderimg1" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg2} alt="sliderimg2" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg3} alt="sliderimg3" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg4} alt="sliderimg4" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg5} alt="sliderimg5" />
+                      </div>
+                      <div>
+                        <Image src={sliderimg6} alt="sliderimg6" />
+                      </div>
+                    </Slider>
                   </div>
                 </div>
               </div>
@@ -106,7 +161,10 @@ export default function Webinarherobanner() {
                     </div>
                   </div>
                   <div className={styles.ctabuttonmain}>
-                    <button className={styles.ctaButton} onClick={handleRegisterClick}>
+                    <button
+                      className={styles.ctaButton}
+                      onClick={handleRegisterClick}
+                    >
                       Register Now
                     </button>
                   </div>
@@ -116,7 +174,10 @@ export default function Webinarherobanner() {
           </div>
         </div>
       </section>
-      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <WebinarInquiryForm
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </>
   );
 }
