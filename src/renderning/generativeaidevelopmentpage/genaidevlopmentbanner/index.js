@@ -119,6 +119,22 @@ export default function Genaidevlopmentbanner() {
                       <span className={styles.copyrighttext}>AI-powered</span>
                     </div>
                   </div>
+                  <div className={styles.solutionsmain}>
+                    <p className={styles.solutionstitle}>
+                      Or choose from popular generative ai development services
+                      solutions:
+                    </p>
+                    <div className={styles.solutionsgrid}>
+                      <div className={styles.solutionsbox}>
+                        <div className={styles.solutionsboxtitleflx}>
+                          <div className={styles.flexitemsleft}>
+                            <Mindicon2 />
+                          </div>
+                          <div className={styles.flexitemsright}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
