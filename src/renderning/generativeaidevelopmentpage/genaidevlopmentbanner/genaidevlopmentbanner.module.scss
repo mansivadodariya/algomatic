@@ -315,6 +315,8 @@
         }
 
         .buildchatbox {
+          margin-bottom: 30px;
+
           label {
             margin-bottom: 15px;
             font-size: 18px;
@@ -355,6 +357,54 @@
               font-weight: 500;
               line-height: 12px;
               color: #fff;
+            }
+          }
+        }
+
+        .solutionsmain {
+          .solutionstitle {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 18px;
+            color: #ededed;
+            margin-bottom: 15px;
+          }
+
+          .solutionsgrid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+
+            .solutionsbox {
+              border: 1px solid #fff;
+              background-color: rgba(255, 255, 255, 0.3490196078);
+              padding: 16px;
+              border-radius: 12px;
+              cursor: pointer;
+              transition: 0.4s ease-in-out;
+
+              &:hover {
+                transform: scale(1.02);
+              }
+
+              .solutionsboxtitleflx {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 30px;
+                margin-bottom: 10px;
+
+                .flexitemsleft {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+
+                  svg {
+                    width: 16px;
+                    height: 16px;
+                  }
+                }
+              }
             }
           }
         }
