@@ -1,0 +1,40 @@
+.tryoutsectionmain {
+  padding: 170px 0 120px;
+
+  @media (max-width: 1024px) {
+    padding: 150px 0 70px;
+  }
+
+  @media (max-width: 900px) {
+    padding: 170px 0 120px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 170px 0 120px;
+  }
+
+  .contentholder {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .tryoutsectionimg {
+    max-width: 896px;
+    margin: 0 auto;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .tryoutbutton {
+    margin: 32px 0 16px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

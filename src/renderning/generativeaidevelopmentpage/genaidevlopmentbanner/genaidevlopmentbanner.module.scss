@@ -402,8 +402,148 @@
                   svg {
                     width: 16px;
                     height: 16px;
+
+                    path,
+                    rect {
+                      stroke: #ededed;
+                    }
+                  }
+
+                  span {
+                    font-size: 14px;
+                    font-weight: 400;
+                    line-height: 18px;
+                    color: #ededed;
                   }
                 }
+
+                .flexitemsright {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+
+                  span {
+                    padding: 4px 8px;
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 15px;
+                    color: #ededed;
+                    border-radius: 4px;
+                    background-color: #ffffff33;
+                  }
+
+                  p {
+                    font-size: 12px;
+                    font-weight: 400;
+                    line-height: 15px;
+                    color: #ededed;
+                  }
+                }
+              }
+
+              .solutionsboxdescription {
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 15px;
+                color: #ededed;
+              }
+            }
+          }
+        }
+
+        .solutionbuttonmain {
+          margin: 30px 0;
+
+          .solutionbutton {
+            padding: 16px 32px;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            align-items: center;
+            gap: 8px;
+            border-radius: 50px;
+            background-color: #000;
+            border: none;
+            cursor: pointer;
+            transition: 0.4s ease-in-out;
+
+            &:hover {
+              transform: scale(1.02);
+            }
+
+            span {
+              font-size: 17px;
+              font-weight: 600;
+              line-height: 20px;
+              font-family: Urbanist, Urbanist Placeholder, sans-serif;
+              text-transform: capitalize;
+              color: #fff;
+            }
+
+            svg {
+              width: 20px;
+              height: 20px;
+
+              path {
+                fill: #fff;
+              }
+            }
+          }
+        }
+
+        .recievebox {
+          border: 1px solid #fff;
+          background-color: rgba(255, 255, 255, 0.3490196078);
+          padding: 16px;
+          border-radius: 12px;
+
+          .recieveboxtitle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+
+            svg {
+              width: 20px;
+              height: 20px;
+
+              path {
+                stroke: #fff;
+              }
+            }
+
+            p {
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 20px;
+              color: #ededed;
+            }
+          }
+
+          .recieveboxgrd {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+
+            .recieveboxgrditems {
+              display: flex;
+              align-items: center;
+              gap: 12px;
+
+              svg {
+                width: 16px;
+                height: 16px;
+
+                path {
+                  stroke: #fff;
+                }
+              }
+
+              p {
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 18px;
+                color: #ededed;
               }
             }
           }

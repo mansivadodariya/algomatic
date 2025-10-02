@@ -72,24 +72,24 @@ export default function Webinarherobanner() {
                       <div>
                         <Image src={webinarbanner} alt="webinarbanner" />
                       </div>
-                      <div>
+                      {/* <div>
                         <Image src={sliderimg1} alt="sliderimg1" />
                       </div>
                       <div>
                         <Image src={sliderimg2} alt="sliderimg2" />
-                      </div>
+                      </div> */}
                       <div>
                         <Image src={sliderimg3} alt="sliderimg3" />
                       </div>
                       <div>
                         <Image src={sliderimg4} alt="sliderimg4" />
                       </div>
-                      <div>
+                      {/* <div>
                         <Image src={sliderimg5} alt="sliderimg5" />
                       </div>
                       <div>
                         <Image src={sliderimg6} alt="sliderimg6" />
-                      </div>
+                      </div> */}
                     </Slider>
                   </div>
                 </div>

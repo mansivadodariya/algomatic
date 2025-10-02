@@ -9,6 +9,13 @@ import Certifiedicon from "../../../../public/assets/icons/certifiedicon";
 import Shieldicon from "../../../../public/assets/icons/shieldicon";
 import Staroutlinedicon from "../../../../public/assets/icons/staroutlinedicon";
 import Mindicon2 from "../../../../public/assets/icons/mindicon2";
+import Sparkleicon from "../../../../public/assets/icons/sparkleicon";
+import Roboicon from "../../../../public/assets/icons/roboicon";
+import Commonarrowbutton from "@/components/commonarrowbutton";
+import Fileicon from "../../../../public/assets/icons/fileicon";
+import Codeicon from "../../../../public/assets/icons/codeicon";
+import Ideaicon from "../../../../public/assets/icons/ideaicon";
+import Downloadicon from "../../../../public/assets/icons/downloadicon";
 
 export default function Genaidevlopmentbanner() {
   return (
@@ -46,14 +53,19 @@ export default function Genaidevlopmentbanner() {
                   </div>
                 </div>
                 <div className={styles.casestudiesbtnflx}>
-                  <button type="button" className={styles.consultationbtn}>
-                    <span>Get Free AI Strategy Consultation</span>
-                    <Right />
-                  </button>
-                  <button type="button" className={styles.casestudiesbtn}>
+                  <a
+                    href="https://calendly.com/dipak-rejoicehub"
+                    target="_blank"
+                  >
+                    <button type="button" className={styles.consultationbtn}>
+                      <span>Get Free AI Strategy Consultation</span>
+                      <Right />
+                    </button>
+                  </a>
+                  {/* <button type="button" className={styles.casestudiesbtn}>
                     <Triangleicon />
                     <span>View AI Case Studies</span>
-                  </button>
+                  </button> */}
                 </div>
                 <p className={styles.trustline}>
                   Trusted by industry leaders across generative ai development
@@ -129,9 +141,84 @@ export default function Genaidevlopmentbanner() {
                         <div className={styles.solutionsboxtitleflx}>
                           <div className={styles.flexitemsleft}>
                             <Mindicon2 />
+                            <span>Custom GPT Model</span>
                           </div>
-                          <div className={styles.flexitemsright}></div>
+                          <div className={styles.flexitemsright}>
+                            <span>Advanced</span>
+                            <p>4-6 weeks</p>
+                          </div>
                         </div>
+                        <p className={styles.solutionsboxdescription}>
+                          Fine-tuned GPT model for your specific domain and use
+                          case
+                        </p>
+                      </div>
+                      <div className={styles.solutionsbox}>
+                        <div className={styles.solutionsboxtitleflx}>
+                          <div className={styles.flexitemsleft}>
+                            <Sparkleicon />
+                            <span>Image Generation API</span>
+                          </div>
+                          <div className={styles.flexitemsright}>
+                            <span>Intermediate</span>
+                            <p>3-4 weeks</p>
+                          </div>
+                        </div>
+                        <p className={styles.solutionsboxdescription}>
+                          DALL-E style image generation integrated into your
+                          applications
+                        </p>
+                      </div>
+                      <div className={styles.solutionsbox}>
+                        <div className={styles.solutionsboxtitleflx}>
+                          <div className={styles.flexitemsleft}>
+                            <Roboicon />
+                            <span>Voice Synthesis Service</span>
+                          </div>
+                          <div className={styles.flexitemsright}>
+                            <span>Intermediate</span>
+                            <p>3-4 weeks</p>
+                          </div>
+                        </div>
+                        <p className={styles.solutionsboxdescription}>
+                          Text-to-speech and voice cloning for personalized
+                          audio content
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.solutionbuttonmain}>
+                    <a
+                      href="https://calendly.com/dipak-rejoicehub"
+                      target="_blank"
+                    >
+                      <button type="button" className={styles.solutionbutton}>
+                        <span>Build My Solution</span>
+                        <Right />
+                      </button>
+                    </a>
+                  </div>
+                  <div className={styles.recievebox}>
+                    <div className={styles.recieveboxtitle}>
+                      <Sparkleicon />
+                      <p>What you'll receive instantly:</p>
+                    </div>
+                    <div className={styles.recieveboxgrd}>
+                      <div className={styles.recieveboxgrditems}>
+                        <Fileicon />
+                        <p>Detailed technical blueprint</p>
+                      </div>
+                      <div className={styles.recieveboxgrditems}>
+                        <Codeicon />
+                        <p>Implementation roadmap</p>
+                      </div>
+                      <div className={styles.recieveboxgrditems}>
+                        <Ideaicon />
+                        <p>Technology recommendations</p>
+                      </div>
+                      <div className={styles.recieveboxgrditems}>
+                        <Downloadicon />
+                        <p>Free consultation call</p>
                       </div>
                     </div>
                   </div>

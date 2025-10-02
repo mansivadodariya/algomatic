@@ -1,0 +1,88 @@
+.benefitscallagentmain {
+  padding: 90px 0;
+  background-color: #f7f7f7;
+
+  .contentholder {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .benefitscallagenttitle {
+    text-align: center;
+    margin-bottom: 60px;
+
+    h3 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", "PT Serif Placeholder", serif;
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .griditems {
+      padding: 20px;
+      border: 1px solid #f0ece7;
+      background: #fff;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+      transition: 0.4s ease-in-out;
+
+      &:hover {
+        background: linear-gradient(180deg, #f3f3f1 52%, #fafafa 100%);
+        transform: translateY(-5px);
+      }
+
+      span {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 28px;
+        color: #37312f;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 27px;
+        color: #616161;
+      }
+    }
+  }
+}
