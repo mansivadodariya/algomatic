@@ -62,7 +62,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
       email: data?.email,
       strategyPlanId: data?.strategyPlanId,
       noOfBots: data?.noOfBots,
-      couponId: data?.couponId?? null,
+      couponId: data?.couponId ?? null,
       uplineAffiliateCode: data?.uplineAffiliateCode,
     };
     const res = await api.post(`/payment/createPaymentLink`, dataObj);
@@ -87,12 +87,26 @@ export const updateMetaAccountNo = async (paymentId: string, metaAccountNo: stri
   }
 };
 
-export const editUser = async (userId: string, user: any) => {
+export const editUser = async (userId: string, user: any, password: any) => {
   try {
-    const userObj = {
+    let userObj:any = {
       name: user?.name,
+      countryCode: user?.countryCode,
       phone: user?.phone,
+
+      // confirmPassword: password?.confirmPassword,
+      // currentPassword: password?.currentPassword,
+      // password: password?.password,
     };
+
+    if (password.password) {
+      userObj.password = password.password
+      userObj.currentPassword = password.currentPassword;
+      userObj.confirmPassword = password.confirmPassword;
+    }
+
+    console.log(userObj,'-----------------')
+
     const res = await api.put(`/user/edit/${userId}`, userObj);
     return res.data;
   } catch (error) {
@@ -120,7 +134,6 @@ export const getBotByName = async (botName: string) => {
     return [];
   }
 };
-
 
 // rejoice company api (not in use)
 export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccountNo: string; date: string; planType: string; file_name: string; botProviderId: string }) => {
@@ -164,20 +177,19 @@ export const sendRejoiceBotExeToUser = async (data: { email: string; metaAccount
 // algo client spiral company api (not in use)
 export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountNo: string; totalDays: number; planType: string; file_name: string; botProviderId: string }) => {
   try {
-
     // const calculatePlanEndDate = (
     //   startDateStr: string,
     //   planType: string
     // ): { endDate: string; totalDays: number } => {
     //   const months = +planType.replace(/\D/g, "");
     //   const date = new Date(startDateStr);
-    
+
     //   date.setMonth(date.getMonth() + months);
-    
+
     //   const year = date.getFullYear();
     //   const month = String(date.getMonth() + 1).padStart(2, "0");
     //   const day = String(date.getDate()).padStart(2, "0");
-    
+
     //   // Map of fixed plan durations
     //   const planDaysMap: { [key: number]: number } = {
     //     1: 30,
@@ -193,46 +205,43 @@ export const sendSpiralBotExeToUser = async (data: { email: string; metaAccountN
     //     11: 330,
     //     12: 365,
     //   };
-    
+
     //   const totalDays = planDaysMap[months] || 0;
-    
+
     //   return {
     //     endDate: `${year}-${month}-${day}T23:59`,
     //     totalDays,
     //   };
     // };
-    
+
     // // calculate expiry date and total days of plan
     // const { endDate, totalDays } = calculatePlanEndDate(data.createdAt, data.planType);
-    
+
     const dataObj = {
       account_id: data?.metaAccountNo,
       days_valid: data?.totalDays,
       email: data?.email,
       template: data?.file_name || "template_EA.mq5",
       botProviderId: data?.botProviderId,
-    }
+    };
 
-    await fetch('https://ea.aistrategy19.com/api/generate-ea', {
-      method: 'POST',
+    await fetch("https://ea.aistrategy19.com/api/generate-ea", {
+      method: "POST",
       headers: {
-        'Authorization': 'Bearer 4534405',
-        'Content-Type': 'application/json',
+        Authorization: "Bearer 4534405",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(dataObj),
     });
-    
   } catch (error) {
     console.error("Error fetching strategy by id:", error);
     return [];
   }
 };
 
-
 // rejoice company api
 export const sendBotExeToUser = async (data: { paymentId: string; email: string; metaAccountNo: string; totalDays: number; date: string; planType: string; file_name: string; botProviderId: string }) => {
   try {
-
     const dataObj = {
       paymentId: data.paymentId,
       email: data.email,
@@ -251,7 +260,6 @@ export const sendBotExeToUser = async (data: { paymentId: string; email: string;
         "Access-Control-Allow-Origin": "*",
       },
     });
-
   } catch (error) {
     console.error("Error sendBotExeToUser:", error);
     return [];

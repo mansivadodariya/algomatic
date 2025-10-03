@@ -17,6 +17,15 @@ export default function Dashboard() {
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser } = useAppContext();
   const [isProfileEdit, setIsProfileEdit] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [currentPasswordEye, setCurrentPasswordEye] = useState(false);
+  const [newPassword, setNewPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
+  const initialPasswordData = {
+    password: "",
+    confirmPassword: "",
+    currentPassword: "",
+  };
+  const [password, setUpPassword] = useState(initialPasswordData);
 
   useEffect(() => {
     const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
@@ -39,22 +48,15 @@ export default function Dashboard() {
     }
   }, [activeTab]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLogin");
-    localStorage.removeItem("token");
-    setIsUserLoggedIn(false);
-    router.push("/");
-  };
-
   // profile edit handling
   const handleProfileSave = async () => {
     try {
-      await editUser(user._id, user);
+      await editUser(user._id, user, password);
       const refreshed = await getPaymentHistory();
       setPayments(refreshed);
       setIsProfileEdit(false);
       setUser(user);
+      setUpPassword(initialPasswordData);
       localStorage.setItem("user", JSON.stringify(user));
     } catch (e) {
       console.error(e);
@@ -101,170 +103,161 @@ export default function Dashboard() {
         <div className={styles.dashboardWrapper}>
           <main className={styles.content}>
             <div className={styles.whiteBox}>
-            {activeTab === "profile" && isProfileEdit ? (
-              <section>
-                <div
-                  style={{ display: "flex", cursor: "pointer" }}
-                  onClick={() => {
-                    setActiveTab("profile");
-                    setIsProfileEdit(false);
-                  }}
-                >
-                  <div>
-                    <ChevronLeft className={styles.arrowIcon} />
-                  </div>
-                  <h1 className={styles.contantHeader}>Back</h1>
-                </div>
-                <div className={styles.profileGrid}>
-                  <div className={styles.inputgroup}>
-                    <span>Name</span>
-                    {isProfileEdit ? <input type="text" value={user?.name} onChange={(e) => setUser({ ...user, name: e.target.value })} className={styles.inputField} /> : <p>{user.name}</p>}
-                  </div>
-                  <div className={styles.inputgroup}>
-                    <span>Email</span>
-                    {isProfileEdit ? (
-                      <div className={styles.affiliateCoderel}>
-                        <input type="email" value={user?.email} className={styles.inputField} disabled />
-                        <div className={styles.iicon} title="You cannot edit this field">
-                          <Info color="#616161" />
-                        </div>
-                      </div>
-                    ) : (
-                      <p>{user.email}</p>
-                    )}
-                  </div>
-                  <div className={styles.inputgroup}>
-                    <span>Country Code</span>
-                    {isProfileEdit ? <input type="tel" value={user?.countryCode} onChange={(e) => setUser({ ...user, countryCode: e.target.value })} className={styles.inputField} /> : <p>{user.countryCode}</p>}
-                  </div>
-                  <div className={styles.inputgroup}>
-                    <span>Phone</span>
-                    {isProfileEdit ? <input type="tel" value={user?.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
-                  </div>
-                  <div className={styles.inputgroup}>
-                    <span>My Affiliate Code</span>
-                    {isProfileEdit ? (
-                      <div className={styles.affiliateCoderel}>
-                        <input
-                          type="text"
-                          value={user?.myAffiliateCode}
-                          onChange={(e) =>
-                            setUser({
-                              ...user,
-                              myAffiliateCode: e.target.value,
-                            })
-                          }
-                          className={styles.inputField}
-                          disabled
-                        />
-                        <div className={styles.iicon} title="You cannot edit this field">
-                          <Info color="#616161" />
-                        </div>
-                      </div>
-                    ) : (
-                      <p>{user?.myAffiliateCode}</p>
-                    )}
-                  </div>
-                </div>
-                <h1 className={styles.passwordtitle}>Change Password</h1>
-                <div className={styles.profileGrid}>
-                  <div>
-                    <span>Current Password</span>
-                    <div className={styles.inputWithIcon}>
-                      <input
-                        type="password"
-                        value="123 456 789 10"
-                        className={styles.inputField}
-                      />
-                      <span className={styles.icon}>
-                        <EyeOff size={20} />
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>New Password</span>
-                    <div className={styles.inputWithIcon}>
-                      <input
-                        type="password"
-                        value="123 456 789 10"
-                        className={styles.inputField}
-                      />
-                      <span className={styles.icon}>
-                        <EyeOff size={20} />
-                      </span>
-                    </div>
-                  </div>
-                  <div>
-                    <span>Confirm Password</span>
-                    <div className={styles.inputWithIcon}>
-                      <input
-                        type="password"
-                        value="123 456 789 10"
-                        className={styles.inputField}
-                      />
-                      <span className={styles.icon}>
-                        <EyeOff size={20} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                {isProfileEdit && (
-                  <button
-                    onClick={() => {
-                      handleProfileSave();
-                    }}
-                    className={styles.saveButton}
-                  >
-                    Save Changes
-                  </button>
-                )}
-              </section>
-            ) : activeTab === "profile" && !isProfileEdit ? (
-              <section>
-                <div style={{ display: "flex", cursor: "pointer" }}>
-                  <h1 className={styles.contantHeader}>Profile</h1>
-                  <SquarePen
-                    className={styles.editIcon}
+              {activeTab === "profile" && isProfileEdit ? (
+                <section>
+                  <div
+                    style={{ display: "flex", cursor: "pointer" }}
                     onClick={() => {
                       setActiveTab("profile");
-                      setIsProfileEdit(true);
+                      setIsProfileEdit(false);
                     }}
-                  />
-                </div>
-                <div className={styles.profileGrid}>
-                  <div className={styles.inputgroup}>
-                    <span>Name</span>
-                    <p>{user?.name}</p>
+                  >
+                    <div>
+                      <ChevronLeft className={styles.arrowIcon} />
+                    </div>
+                    <h1 className={styles.contantHeader}>Back</h1>
                   </div>
-                  <div className={styles.inputgroup}>
-                    <span>Email</span>
-                    <p>{user?.email}</p>
+                  <div className={styles.profileGrid}>
+                    <div className={styles.inputgroup}>
+                      <span>Name</span>
+                      {isProfileEdit ? <input type="text" value={user?.name} onChange={(e) => setUser({ ...user, name: e.target.value })} className={styles.inputField} /> : <p>{user.name}</p>}
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Email</span>
+                      {isProfileEdit ? (
+                        <div className={styles.affiliateCoderel}>
+                          <input type="email" value={user?.email} className={styles.inputField} disabled />
+                          <div className={styles.iicon} title="You cannot edit this field">
+                            <Info color="#616161" />
+                          </div>
+                        </div>
+                      ) : (
+                        <p>{user.email}</p>
+                      )}
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Country Code</span>
+                      {isProfileEdit ? <input type="tel" value={user?.countryCode} onChange={(e) => setUser({ ...user, countryCode: e.target.value })} className={styles.inputField} /> : <p>{user.countryCode}</p>}
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Phone</span>
+                      {isProfileEdit ? <input type="tel" value={user?.phone} onChange={(e) => setUser({ ...user, phone: e.target.value })} className={styles.inputField} /> : <p>{user?.phone}</p>}
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>My Affiliate Code</span>
+                      {isProfileEdit ? (
+                        <div className={styles.affiliateCoderel}>
+                          <input
+                            type="text"
+                            value={user?.myAffiliateCode}
+                            onChange={(e) =>
+                              setUser({
+                                ...user,
+                                myAffiliateCode: e.target.value,
+                              })
+                            }
+                            className={styles.inputField}
+                            disabled
+                          />
+                          <div className={styles.iicon} title="You cannot edit this field">
+                            <Info color="#616161" />
+                          </div>
+                        </div>
+                      ) : (
+                        <p>{user?.myAffiliateCode}</p>
+                      )}
+                    </div>
                   </div>
-                  <div className={styles.inputgroup}>
-                    <span>Country Code</span>
-                    <p>{user?.countryCode ?? "-"}</p>
-                  </div>
-                  <div className={styles.inputgroup}> 
-                    <span>Phone</span>
-                    <p>{user?.phone}</p>
-                  </div>
+                  <h1 className={styles.passwordtitle}>Change Password</h1>
+                  <div className={styles.profileGrid}>
+                    <div>
+                      <span>Current Password</span>
+                      <div className={styles.inputWithIcon}>
+                        <input type={`${currentPasswordEye ? "text" : "password"}`} value={password?.currentPassword} onChange={(e) => setUpPassword((prev) => ({ ...prev, currentPassword: e.target.value }))} className={styles.inputField} />
+                        <span className={styles.icon} /* onClick={setCurrentPasswordEye(true)} */>
+                          <EyeOff size={20} />
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <span>New Password</span>
+                      <div className={styles.inputWithIcon}>
+                        {/* <input type="password" value="123 456 789 10" className={styles.inputField} /> */}
+                        <input type={`${newPassword ? "text" : "password"}`} value={password?.password} onChange={(e) => setUpPassword((prev) => ({ ...prev, password: e.target.value }))} className={styles.inputField} />
 
-                  {/* share and copy */}
-                  <div className={styles.inputgroup}>
-                    <span>My Affiliate Code</span>
-                    <p>{user?.myAffiliateCode}</p>
-                    <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
-                      {copied ? <ClipboardCheck /> : <Copy />}
+                        <span className={styles.icon}>
+                          <EyeOff size={20} />
+                        </span>
+                      </div>
                     </div>
-                    <div className={styles.shareIcon} title="Share" onClick={handleShare}>
-                      <Share2 />
+                    <div>
+                      <span>Confirm Password</span>
+                      <div className={styles.inputWithIcon}>
+                        {/* <input type="password" value="123 456 789 10" className={styles.inputField} /> */}
+                        <input type={`${confirmPassword ? "text" : "password"}`} value={password?.confirmPassword} onChange={(e) => setUpPassword((prev) => ({ ...prev, confirmPassword: e.target.value }))} className={styles.inputField} />
+                        <span className={styles.icon}>
+                          <EyeOff size={20} />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </section>
-            ) : (
-              ""
-            )}
+                  {isProfileEdit && (
+                    <button
+                      onClick={() => {
+                        handleProfileSave();
+                      }}
+                      className={styles.saveButton}
+                    >
+                      Save Changes
+                    </button>
+                  )}
+                </section>
+              ) : activeTab === "profile" && !isProfileEdit ? (
+                <section>
+                  <div style={{ display: "flex", cursor: "pointer" }}>
+                    <h1 className={styles.contantHeader}>Profile</h1>
+                    <SquarePen
+                      className={styles.editIcon}
+                      onClick={() => {
+                        setActiveTab("profile");
+                        setIsProfileEdit(true);
+                      }}
+                    />
+                  </div>
+                  <div className={styles.profileGrid}>
+                    <div className={styles.inputgroup}>
+                      <span>Name</span>
+                      <p>{user?.name}</p>
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Email</span>
+                      <p>{user?.email}</p>
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Country Code</span>
+                      <p>{user?.countryCode ?? "-"}</p>
+                    </div>
+                    <div className={styles.inputgroup}>
+                      <span>Phone</span>
+                      <p>{user?.phone}</p>
+                    </div>
+
+                    {/* share and copy */}
+                    <div className={styles.inputgroup}>
+                      <span>My Affiliate Code</span>
+                      <p>{user?.myAffiliateCode}</p>
+                      <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
+                        {copied ? <ClipboardCheck /> : <Copy />}
+                      </div>
+                      <div className={styles.shareIcon} title="Share" onClick={handleShare}>
+                        <Share2 />
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              ) : (
+                ""
+              )}
             </div>
           </main>
         </div>

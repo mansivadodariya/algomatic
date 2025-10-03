@@ -14,7 +14,7 @@ export default function Tryoutsection() {
               <Image src={aiagentimage} alt="aiagentimage" />
             </div>
             <div className={styles.tryoutbutton}>
-                <Commonarrowbutton Text="Try it now" Butttonvarient="dark" />
+              <Commonarrowbutton Text="Try it now" Target="blank" link="https://callintel.ai/" Butttonvarient="dark" />
             </div>
           </div>
         </div>
