@@ -166,7 +166,7 @@ export default function Dashboard() {
                     )}
                   </div>
                 </div>
-                {/* <h1 className={styles.passwordtitle}>Change Password</h1>
+                <h1 className={styles.passwordtitle}>Change Password</h1>
                 <div className={styles.profileGrid}>
                   <div>
                     <span>Current Password</span>
@@ -207,7 +207,7 @@ export default function Dashboard() {
                       </span>
                     </div>
                   </div>
-                </div> */}
+                </div>
                 {isProfileEdit && (
                   <button
                     onClick={() => {

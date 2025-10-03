@@ -150,7 +150,25 @@
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
   }
+  .inputWithIcon {
+      position: relative;
+      border: none;
+      padding: 0;
 
+      .icon {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #666;
+        z-index: 1;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
   .inputgroup {
     background: #fff;
     border: 1px solid #e5e7eb;
@@ -171,25 +189,7 @@
       color: #111827;
     }
 
-    .inputWithIcon {
-      position: relative;
-      border: none;
-      padding: 0;
-
-      .icon {
-        position: absolute;
-        top: 50%;
-        right: 12px;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: #666;
-        z-index: 1;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    }
+  
 
     .copyIcon {
       position: absolute;
