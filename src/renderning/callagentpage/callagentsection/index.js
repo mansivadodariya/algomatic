@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./callagentsection.module.scss";
-import callagentimg from "../../../../public/assets/images/callagentimg.png";
+import callagentimg from "../../../../public/assets/images/callagentimg1.png";
 import Image from "next/image";
 
 export default function Callagentsection() {

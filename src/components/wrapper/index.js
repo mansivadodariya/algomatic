@@ -6,6 +6,7 @@ import Footernew from "../footernew";
 import Whatsappbubble from "../whatsappbubble";
 import { useAppContext } from "@/context/AppContext";
 import { InquiryForm } from "../inquiryForm";
+import CallWithus from "../callWithus";
 
 export default function Wrapper({ children }) {
   const { isInquiryFormTriggered, ip } = useAppContext();
@@ -31,6 +32,7 @@ export default function Wrapper({ children }) {
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
       {pathName?.includes("/webinar") ? null : <Whatsappbubble />}
+      {pathName?.includes("/webinar") ? null : <CallWithus />}
       <InquiryForm />
       {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
     </div>
