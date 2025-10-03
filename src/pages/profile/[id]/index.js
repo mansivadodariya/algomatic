@@ -100,6 +100,7 @@ export default function Dashboard() {
         <hr className={styles.hr} />
         <div className={styles.dashboardWrapper}>
           <main className={styles.content}>
+            <div className={styles.whiteBox}>
             {activeTab === "profile" && isProfileEdit ? (
               <section>
                 <div
@@ -231,25 +232,25 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className={styles.profileGrid}>
-                  <div>
+                  <div className={styles.inputgroup}>
                     <span>Name</span>
                     <p>{user?.name}</p>
                   </div>
-                  <div>
+                  <div className={styles.inputgroup}>
                     <span>Email</span>
                     <p>{user?.email}</p>
                   </div>
-                  <div>
+                  <div className={styles.inputgroup}>
                     <span>Country Code</span>
                     <p>{user?.countryCode ?? "-"}</p>
                   </div>
-                  <div>
+                  <div className={styles.inputgroup}> 
                     <span>Phone</span>
                     <p>{user?.phone}</p>
                   </div>
 
                   {/* share and copy */}
-                  <div>
+                  <div className={styles.inputgroup}>
                     <span>My Affiliate Code</span>
                     <p>{user?.myAffiliateCode}</p>
                     <div className={styles.copyIcon} title="Copy" onClick={handleCopy}>
@@ -264,6 +265,7 @@ export default function Dashboard() {
             ) : (
               ""
             )}
+            </div>
           </main>
         </div>
       </div>
