@@ -3,9 +3,9 @@ import styles from "./button.module.scss";
 import classNames from "classnames";
 import Atropos from "atropos/react";
 
-export default function Button({ text, outline, icon,purple, send, onClick, isBtnLoading = false }) {
+export default function Button({ text, outline, icon,purple, send, onClick, isBtnLoading = false, disabled }) {
   return (
-    <div className={classNames(styles.button, purple ? styles.purple : "", outline ? styles.outline : "")}>
+    <div className={classNames(styles.button, purple ? styles.purple : "", outline ? styles.outline : "", disabled? styles.disabled : "")}>
       {/* <Atropos shadow={0}> */}
       <button onClick={onClick}>
         {text}

@@ -377,6 +377,10 @@
   &::placeholder {
     color: #999;
   }
+
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .tablenodatamain {
@@ -511,7 +515,6 @@
   visibility: visible;
   opacity: 1;
 }
-
 
 .metaBoxWrapper {
   width: 100%;
