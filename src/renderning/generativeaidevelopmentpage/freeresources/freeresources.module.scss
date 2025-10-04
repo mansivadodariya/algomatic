@@ -1,0 +1,200 @@
+.freeresourcesmain {
+  padding: 90px 0 140px 0;
+
+  @media (max-width: 1024px) {
+    padding: 90px 0 200px 0;
+  }
+  @media (max-width: 900px) {
+    padding: 40px 0 200px 0;
+  }
+
+  .faqcontent {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    .freeresourcestitle {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 60px;
+
+      h6 {
+        font-size: 52px;
+        font-weight: 600;
+        line-height: 62px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+        @media (max-width: 1200px) {
+          font-size: 43px;
+          line-height: 52px;
+        }
+
+        @media (max-width: 1024px) {
+          font-size: 33px;
+          line-height: 39px;
+        }
+
+        span {
+          color: #9657fa;
+          font-style: italic;
+          font-weight: 400;
+          font-family: "PT Serif", "PT Serif Placeholder", serif;
+        }
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #616161;
+      }
+    }
+
+    .freeresourcescols {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+
+      .freeresourcescolsitem {
+        padding: 20px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, #f3f3f1 52%, #fafafa 100%);
+        border: 1px solid #f0ece7;
+        display: flex;
+        gap: 20px;
+        transition: 0.4s ease-in-out;
+
+        @media (max-width:768px) {
+          flex-direction: column;
+        }
+
+        &:hover {
+          border-color: #f3f3f1;
+          transform: translateY(-5px);
+        }
+
+        .icons {
+          width: 48px;
+          height: 48px;
+          border-radius: 12px;
+          padding: 6px;
+          border: 1px solid #f0ece7;
+          background: linear-gradient(170deg, #e6f0ff 0%, #9657fa 100%);
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .freeresourcescenter {
+          width: calc(calc(100% - 129px - 48px - 40px));
+
+          h6 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 28px;
+            color: #111;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            margin-bottom: 15px;
+          }
+
+          p {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px;
+            color: #616161;
+            margin-bottom: 15px;
+          }
+
+          .tagsflx {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            span {
+              padding: 12px 20px;
+              background-color: #fff;
+              border-radius: 50px;
+              border: 1px solid #f3f3f1;
+              white-space: nowrap;
+              font-size: 17px;
+              font-weight: 400;
+              line-height: 20px;
+              color: #616161;
+            }
+          }
+        }
+
+        .value {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+
+          @media (max-width:768px) {
+            align-items: flex-end;
+          }
+
+          .valuetext {
+            text-align: right;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #9657fa;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          }
+
+          .downloadbutton {
+            border-radius: 18px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #000;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 0.48175px 1.25255px -1.16667px,
+              rgba(0, 0, 0, 0.09) 0px 1.83083px 4.76015px -2.33333px,
+              rgba(0, 0, 0, 0.043) 0px 8px 20.8px -3.5px,
+              rgba(255, 255, 255, 0.49) 0px -2px 9px 0px inset,
+              rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
+            color: #fff;
+
+            span {
+              font-size: 17px;
+              font-weight: 600;
+              line-height: 20px;
+              font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            }
+          }
+        }
+      }
+    }
+
+    .freeresourcesbottom {
+      margin-top: 60px;
+
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 28px;
+        color: #616161;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .btnflx {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+    }
+  }
+}

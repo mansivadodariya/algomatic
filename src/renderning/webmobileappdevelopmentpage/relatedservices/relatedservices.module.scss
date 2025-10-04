@@ -1,0 +1,157 @@
+.relatedservicesmain {
+  padding: 90px 0;
+
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
+  .contentholder {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .relatedservicestitle {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 60px;
+
+    h2 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", "PT Serif Placeholder", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      color: #616161;
+      max-width: 530px;
+
+      @media (max-width: 1200px) {
+        font-size: 16px;
+        line-height: 24px;
+        max-width: 500px;
+      }
+    }
+  }
+
+  .relatedservicesgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .relatedservicesgriditem {
+      height: 100%;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #f0ece7;
+      cursor: pointer;
+      transition: 0.4s ease-in-out;
+
+      &:hover {
+        background: linear-gradient(180deg, #f3f3f1 52%, #fafafa 100%);
+        border-color: #f3f3f1;
+        transform: translateY(-5px);
+      }
+
+      .cardiconflx {
+        display: flex;
+        margin-bottom: 30px;
+
+        .cardicon {
+          border-radius: 12px;
+          background: radial-gradient(
+            75% 35% at 50% 50%,
+            #f0ece7 35.3128519144%,
+            #ffffff 100%
+          );
+          border: 1px solid #f3f3f1;
+          padding: 9px;
+
+          svg {
+            width: 40px;
+            height: 40px;
+
+            svg {
+              path {
+                fill: #9657fa;
+              }
+            }
+          }
+        }
+      }
+
+      h6 {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 28px;
+        color: #37312f;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        margin-bottom: 15px;
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 27px;
+        color: #616161;
+        margin-bottom: 15px;
+      }
+
+      span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 20px;
+        color: #000;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+        svg {
+          path {
+            fill: #000;
+          }
+        }
+      }
+    }
+  }
+}

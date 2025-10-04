@@ -1,8 +1,16 @@
 .challengesmain {
   padding: 90px 0;
 
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
   .contentholder {
     padding: 0 15px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
   }
 
   .challengestitle {
@@ -50,6 +58,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
 
     .griditems {
       .griditemslefttitle {
@@ -135,18 +147,18 @@
               font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
               color: #111;
             }
-            
-            .tag {
-               padding: 4px 12px;
-               border-radius: 50px;
-               background-color: #fcbf49;
 
-               span {
-                  font-size: 14px;
-                  font-weight: 500;
-                  line-height: 16px;
-                  color: #fff;
-               }
+            .tag {
+              padding: 4px 12px;
+              border-radius: 50px;
+              background-color: #fcbf49;
+
+              span {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 16px;
+                color: #fff;
+              }
             }
           }
 

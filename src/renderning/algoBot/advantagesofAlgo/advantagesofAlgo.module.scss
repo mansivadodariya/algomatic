@@ -20,6 +20,7 @@
     }
 
     h2 {
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif !important;
         @include heading1;
         color: #0B0B14;
         text-align: center;
@@ -49,6 +50,7 @@
             background: var(--Foundation-White-Normal, #FFF);
 
             h3 {
+                font-family: "Urbanist", "Urbanist Placeholder", sans-serif !important;
                 color: var(--Foundation-Blue-Normal, #0F0F1A);
                 font-size: 22px;
                 font-style: normal;

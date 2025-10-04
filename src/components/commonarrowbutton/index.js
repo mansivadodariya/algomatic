@@ -7,8 +7,14 @@ import Loader from "../loader";
 export default function Commonarrowbutton({ Text, Butttonvarient, link, Target, buttonclassName, icon, onClick, isBtnLoading, disabled }) {
   const showIcon = icon !== "none" && !isBtnLoading;
 
+  // Handle multiple variant classes
+  const getVariantClasses = (variants) => {
+    if (!variants) return '';
+    return variants.split(' ').map(variant => styles[variant]).filter(Boolean).join(' ');
+  };
+
   const buttonContent = (
-    <button className={`${styles.commonarrowbutton} ${styles[Butttonvarient]} ${styles[buttonclassName]}`} onClick={onClick} disabled={disabled || isBtnLoading}>
+    <button className={`${styles.commonarrowbutton} ${getVariantClasses(Butttonvarient)} ${styles[buttonclassName] || ''}`} onClick={onClick} disabled={disabled || isBtnLoading}>
       <span>{Text}</span>
       {showIcon && (
         <div className={styles.butonarrow}>
