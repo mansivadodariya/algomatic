@@ -18,9 +18,10 @@ export default function Iblink() {
   };
 
   const brokers = [
-    { name: "vantage", label: "IC MARKET" },
-    { name: "pepperstone", label: "Pepperstone" },
-    { name: "skyriss", label: "Skyriss" },
+    // { name: "vantage", label: "IC MARKET" },
+    // { name: "pepperstone", label: "Pepperstone" },
+    // { name: "skyriss", label: "Skyriss" },
+    { name: "Anax Capital", label: "Anax Capital" },
   ];
 
   return (
@@ -47,10 +48,11 @@ export default function Iblink() {
                   >
                     <input
                       type="text"
-                      value={
-                        utilitySettings?.ibLinks?.[broker.name] ||
-                        "X7P9L2MZV8QW3RT1N6YD"
-                      }
+                      // value={
+                      //   utilitySettings?.ibLinks?.[broker.name] ||
+                      //   "X7P9L2MZV8QW3RT1N6YD"
+                      // }
+                      value="https://portal.anaxcapital.ae/marketing/links/go/20"
                       readOnly
                     />
                   </a>
