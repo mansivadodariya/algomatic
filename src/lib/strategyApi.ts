@@ -76,7 +76,7 @@ export const getPaymentLink = async (data: PaymentLinkData) => {
 export const updateMetaAccountNo = async (paymentId: string, metaAccountNo: string[]) => {
   try {
     const userObj = {
-      metaAccountNo: metaAccountNo[0],
+      metaAccountNo: metaAccountNo,
     };
 
     const res = await api.put(`/user/updateMetaAccountNo/${paymentId}`, userObj);
@@ -245,7 +245,7 @@ export const sendBotExeToUser = async (data: { paymentId: string; email: string;
     const dataObj = {
       paymentId: data.paymentId,
       email: data.email,
-      metaAccountNo: data?.metaAccountNo[0],
+      metaAccountNo: data?.metaAccountNo,
       file_name: data?.file_name,
 
       end_date: data?.date, // "2025-08-01T14:30"

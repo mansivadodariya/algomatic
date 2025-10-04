@@ -49,33 +49,35 @@ export default function Dashboard() {
     setSelectedPayment(payment);
     setMetaModalOpen(true);
   };
-  
-  const handleMetaSave = async () => {
+
+  const handleMetaSave = async (idx) => {
     // validation error
 
-    const finalMetaNo = metaAccountNo.filter((metaNo) => metaNo && metaNo.trim() !== "");
+    // const finalMetaNo = metaAccountNo[].filter((metaNo) => metaNo && metaNo.trim() !== "");
+    const finalMetaNo = metaAccountNo[idx];
+    console.log("finalMetaNo", finalMetaNo, typeof finalMetaNo);
 
-    if (!finalMetaNo[0] || finalMetaNo[0].trim() === "") {
+    if (!finalMetaNo || finalMetaNo.trim() === "") {
       toast.error(`Meta account number is required`);
       return;
     }
 
-    if (!/^\d+$/.test(finalMetaNo[0])) {
+    if (!/^\d+$/.test(finalMetaNo)) {
       toast.error("Meta account number must be numeric only");
       return;
     }
 
-    if (finalMetaNo[0].length < 6) {
+    if (finalMetaNo.length < 6) {
       toast.error("Meta account number must be at least 6 digits");
       return;
     }
 
     setSavingMeta(true);
     try {
+      setMetaModalOpen(false);
       await updateMetaAccountNo(selectedPayment._id, finalMetaNo);
       const refreshed = await getPaymentHistory();
       setPayments(refreshed);
-      setMetaModalOpen(false);
       toast.success("Meta account updated! The EXE file has been sent to your email.");
 
       const botName = selectedPayment?.botName;
@@ -89,7 +91,7 @@ export default function Dashboard() {
         // send multiple rejoice bot exe to user
         // await Promise.all(
         // metaAccountNo.map(async (metaNo, idx) => {
-        sendBotExeToUser({
+        await sendBotExeToUser({
           paymentId: selectedPayment._id,
           email: user.email,
           metaAccountNo: finalMetaNo,
@@ -98,6 +100,7 @@ export default function Dashboard() {
           file_name: selectedPayment?.botName,
           botProviderId: botData?.botProviderId,
         });
+        // setMetaAccountNo([]);
         // })
         // );
       }
@@ -109,19 +112,21 @@ export default function Dashboard() {
 
         // send multiple spiral bot exe to user
         // await Promise.all(
-          // metaAccountNo.map(async (metaNo, idx) => {
-            sendBotExeToUser({
-              paymentId: selectedPayment._id,
-              email: user.email,
-              metaAccountNo: finalMetaNo,
-              totalDays: totalDays,
-              planType: selectedPayment.planType,
-              file_name: selectedPayment?.botName,
-              botProviderId: botData?.botProviderId,
-            });
-          // })
+        // metaAccountNo.map(async (metaNo, idx) => {
+        await sendBotExeToUser({
+          paymentId: selectedPayment._id,
+          email: user.email,
+          metaAccountNo: finalMetaNo,
+          totalDays: totalDays,
+          planType: selectedPayment.planType,
+          file_name: selectedPayment?.botName,
+          botProviderId: botData?.botProviderId,
+        });
+        // setMetaAccountNo([]);
+        // })
         // );
       }
+      setMetaAccountNo([]);
     } catch (e) {
       setSavingMeta(false);
       console.error(e);
@@ -162,7 +167,7 @@ export default function Dashboard() {
                         <td>{p.planType ?? "-"}</td>
                         <td>${p.amount ?? "-"}</td>
                         <td>{p.transactionId ?? "-"}</td>
-                        
+
                         <td>
                           {p.paymentStatus === "paid" ? (
                             p.strategyPlanId?.strategyId?.metaNoRequired == true ? (
@@ -170,7 +175,7 @@ export default function Dashboard() {
                                 {/* + Add Meta No */}
                                 Manage Meta No
                               </button>
-                            ) : (                              
+                            ) : (
                               <span className={styles.infoIcon}>
                                 i
                                 <span className={styles.tooltip}>
