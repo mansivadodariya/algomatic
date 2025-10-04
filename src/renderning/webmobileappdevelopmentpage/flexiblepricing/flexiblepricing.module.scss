@@ -1,0 +1,300 @@
+.getstartedmain {
+  padding: 90px 0;
+  background-color: #f7f7f7;
+
+  @media (max-width: 900px) {
+    padding: 40px 0;
+  }
+
+  .contentholder {
+    padding: 0 12px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
+
+  .getstartedtitle {
+    text-align: center;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    h4 {
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 62px;
+      color: #111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+
+      @media (max-width: 1200px) {
+        font-size: 43px;
+        line-height: 52px;
+      }
+
+      @media (max-width: 1024px) {
+        font-size: 33px;
+        line-height: 39px;
+      }
+
+      span {
+        color: #9657fa;
+        font-style: italic;
+        font-weight: 400;
+        font-family: "PT Serif", "PT Serif Placeholder", serif;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 28px;
+      color: #616161;
+    }
+  }
+
+  .plansgrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .plangriditems {
+      background: linear-gradient(170deg, #e6f0ff 0%, #9657fa 100%);
+      padding: 20px;
+      border-radius: 14px;
+      border: 7px solid #fff;
+      box-shadow: 0 1px 2px 0 rgba(69, 69, 69, 0.24),
+        0 0 0 1px rgba(71, 71, 71, 0.08);
+      height: 100%;
+      position: relative;
+
+      &.plangriditemsactive {
+        transform: scale(1.05);
+      }
+
+      .populartag {
+        position: absolute;
+        top: -19px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 50px;
+        background-color: #9657fa;
+        padding: 8px 16px;
+        display: flex;
+        align-items: center;
+
+        span {
+          font-size: 17px;
+          font-weight: 600;
+          line-height: 20px;
+          color: #fff;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        }
+      }
+
+      .plantypemain {
+        padding: 32px 24px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-align: center;
+
+        @media (max-width: 1024px) {
+          padding: 32px 0 16px;
+        }
+
+        .icon {
+          background-color: #9657fa;
+          border-radius: 50%;
+          border: 2px solid #fff;
+          padding: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #fff;
+        }
+
+        span {
+          display: block;
+          font-size: 24px;
+          font-weight: 600;
+          line-height: 28px;
+          color: #fff;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          margin: 16px 0 8px 0;
+        }
+
+        p {
+          font-size: 17px;
+          font-weight: 600;
+          line-height: 20px;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          color: #fff;
+        }
+      }
+
+      .plandetailsmain {
+        padding: 0 24px;
+
+        @media (max-width: 1024px) {
+          padding: 0;
+        }
+
+        .contactbtns {
+          margin-bottom: 24px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          .tag {
+            padding: 8px 16px;
+            background-color: #9657fa;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            color: #fff;
+          }
+
+          span {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            color: #fff;
+          }
+        }
+
+        .planprice {
+          text-align: center;
+          margin-bottom: 24px;
+
+          p {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #fff;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          }
+
+          h2 {
+            margin: 8px 0;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 40px;
+            color: #fff;
+            font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+          }
+        }
+
+        .plandetailslistmain {
+          margin-bottom: 40px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+
+          .plandetailslist {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+
+            p {
+              font-size: 17px;
+              font-weight: 600;
+              line-height: 20px;
+              color: #fff;
+              font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .planincmain {
+    margin-top: 60px;
+    padding: 32px 0;
+
+    h6 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 40px;
+      color: #000;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      align-items: center;
+
+      @media (max-width: 768px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 756px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .griditems {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+
+        .icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #9657fa;
+          border-radius: 50%;
+          width: 48px;
+          height: 48px;
+          color: #fff;
+        }
+
+        h4 {
+          font-size: 18px;
+          font-weight: 400;
+          line-height: 28px;
+          color: #000;
+        }
+
+        p {
+          font-size: 17px;
+          font-weight: 600;
+          line-height: 20px;
+          color: #616161;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        }
+      }
+    }
+  }
+}

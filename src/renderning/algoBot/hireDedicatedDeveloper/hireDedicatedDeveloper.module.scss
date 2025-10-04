@@ -27,6 +27,7 @@ background-color: #f7f7f7;
             .griditems {
                 h2 {
                     @include heading1;
+                    font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
                     color: var(--Foundation-Blue-Dark, #0B0B14);
                     margin: 16px 0;
                 }
@@ -60,6 +61,7 @@ background-color: #f7f7f7;
                             gap: 14px;
 
                             p {
+                                font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
                                 color: var(--Foundation-Blue-Normal, #0F0F1A);
                                 text-align: center;
                                 font-size: 20px;

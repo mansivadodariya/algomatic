@@ -165,8 +165,8 @@ export default function Footernew() {
           <div className={styles.footerlinksgrd}>
             <Link href={"/call-agent"}>AI Calling Solutions</Link>
             <Link href={"/generative-ai-development-services"}>GenAI Development</Link>
-            {/* <Link href={"/"}>Web-Mobile App Development</Link> */}
-            {/* <Link href={"/"}>Customer Algo Bot Development</Link> */}
+            <Link href={"/web-mobile-app-development"}>Web-Mobile App Development</Link>
+            <Link href={"/algo-bot"}>Customer Algo Bot Development</Link>
           </div>
         </div>
         <div className={styles.footercopyrightbox}>

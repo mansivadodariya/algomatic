@@ -3,6 +3,19 @@
   position: relative;
   background-color: #fff;
 
+  @media (max-width: 1024px) {
+    background-color: #f7f7f7;
+    padding: 150px 0 70px;
+  }
+
+  @media (max-width: 900px) {
+    padding: 170px 0 120px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 170px 0 120px;
+  }
+
   &::before {
     position: absolute;
     content: "";
@@ -11,10 +24,18 @@
     width: 50%;
     height: 100%;
     background-color: #f7f7f7;
+
+    @media (max-width: 1024px) {
+      display: none;
+    }
   }
 
   .contentholder {
     padding: 0 15px;
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
   }
 
   .genaidevlopmentbannergrd {
@@ -24,6 +45,14 @@
     align-items: center;
     position: relative;
     z-index: 1;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 420px 1fr;
+    }
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
 
     .itemsleft {
       .title {
@@ -196,6 +225,22 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 30px;
         margin-bottom: 30px;
+
+        @media (max-width: 1200px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 1024px) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media (max-width: 768px) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 576px) {
+          grid-template-columns: repeat(1, 1fr);
+        }
 
         .trustgriditem {
           text-align: center;

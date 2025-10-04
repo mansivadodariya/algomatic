@@ -9,16 +9,16 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background-color: #25d366;
+  background-color: #9657fa;
   transition: all 0.4s ease-in-out;
   overflow: hidden;
 
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     bottom: 30px;
     right: 30px;
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     bottom: 20px;
     right: 20px;
   }
