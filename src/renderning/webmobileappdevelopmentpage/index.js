@@ -28,7 +28,7 @@ export default function Webmobileappdevelopmentpage() {
       <Relatedservices />
       <Getstarted />
       <Freeresources />
-      <Flexiblepricing />
+      {/* <Flexiblepricing /> */}
     </>
   );
 }
