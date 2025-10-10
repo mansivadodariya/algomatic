@@ -71,10 +71,10 @@ export default function Freeresources() {
                     </div>
                     <div className={styles.value}>
                       <span className={styles.valuetext}>{resource.value}</span>
-                      <button type="button" className={styles.downloadbutton}>
+                      {/* <button type="button" className={styles.downloadbutton}>
                         <span>Get Free</span>
                         <Download />
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 );

@@ -28,7 +28,7 @@ export default function Generativeaidevelopmentpage() {
       <Relatedservices />
       <Getstarted />
       <Freeresources />
-      <Flexiblepricing />
+      {/* <Flexiblepricing /> */}
     </>
   );
 }

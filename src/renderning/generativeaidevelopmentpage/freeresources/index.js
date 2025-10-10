@@ -39,10 +39,10 @@ export default function Freeresources() {
                 </div>
                 <div className={styles.value}>
                   <span className={styles.valuetext}>$1,800 Value</span>
-                  <button type="button" className={styles.downloadbutton}>
+                  {/* <button type="button" className={styles.downloadbutton}>
                     <span>Get Free</span>
                     <Download />
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className={styles.freeresourcescolsitem}>
@@ -63,10 +63,10 @@ export default function Freeresources() {
                 </div>
                 <div className={styles.value}>
                   <span className={styles.valuetext}>$1,200 value</span>
-                  <button type="button" className={styles.downloadbutton}>
+                  {/* <button type="button" className={styles.downloadbutton}>
                     <span>Get Free</span>
                     <Download />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
