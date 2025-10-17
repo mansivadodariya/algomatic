@@ -3,6 +3,7 @@ import styles from "./webinarfaq.module.scss";
 import Commonlable from "@/components/commonlable";
 import Dropdownicon from "../../../../public/assets/icons/dropdownicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { InquiryForm } from "@/components/inquiryForm";
 
 const faqData = [
   {
@@ -55,13 +56,7 @@ export default function Webinarfaq() {
             </div>
             <div className={styles.faqgrdmain}>
               {faqData.map((faq, index) => (
-                <div
-                  key={index}
-                  className={`${styles.faqboxmain} ${
-                    openIndex === index ? styles.faqboxmainactive : ""
-                  }`}
-                  onClick={() => handleToggle(index)}
-                >
+                <div key={index} className={`${styles.faqboxmain} ${openIndex === index ? styles.faqboxmainactive : ""}`} onClick={() => handleToggle(index)}>
                   <div className={styles.faqboxheader}>
                     <h1>{faq.question}</h1>
                     <div className={styles.faqicon}>
@@ -75,10 +70,7 @@ export default function Webinarfaq() {
               ))}
             </div>
             <div className={styles.ctabuttonmain}>
-              <button
-                className={styles.ctaButton}
-                onClick={handleRegisterClick}
-              >
+              <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Secure Your Seat Now
               </button>
             </div>

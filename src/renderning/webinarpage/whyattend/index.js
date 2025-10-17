@@ -3,6 +3,7 @@ import styles from "./whyattend.module.scss";
 import Commonlable from "@/components/commonlable";
 import Listicon from "../../../../public/assets/icons/listicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Whyattend() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -37,8 +38,7 @@ export default function Whyattend() {
                     </div>
                     <div>
                       <p>
-                        Learn a <span>tested and proven strategy</span> trusted
-                        by professional traders.
+                        Learn a <span>tested and proven strategy</span> trusted by professional traders.
                       </p>
                     </div>
                   </div>
@@ -48,9 +48,7 @@ export default function Whyattend() {
                     </div>
                     <div>
                       <p>
-                        Gain insights into{" "}
-                        <span>market behavior of Gold (XAUUSD)</span> and how to
-                        trade it effectively.
+                        Gain insights into <span>market behavior of Gold (XAUUSD)</span> and how to trade it effectively.
                       </p>
                     </div>
                   </div>
@@ -60,9 +58,7 @@ export default function Whyattend() {
                     </div>
                     <div>
                       <p>
-                        Avoid costly mistakes and{" "}
-                        <span>protect your capital</span> with a structured
-                        system.
+                        Avoid costly mistakes and <span>protect your capital</span> with a structured system.
                       </p>
                     </div>
                   </div>
@@ -72,8 +68,7 @@ export default function Whyattend() {
                     </div>
                     <div>
                       <p>
-                        Free access to <span>live Q&A</span> with our trading
-                        experts.
+                        Free access to <span>live Q&A</span> with our trading experts.
                       </p>
                     </div>
                   </div>
@@ -81,10 +76,7 @@ export default function Whyattend() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button
-                className={styles.ctaButton}
-                onClick={handleRegisterClick}
-              >
+              <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Spot
               </button>
             </div>

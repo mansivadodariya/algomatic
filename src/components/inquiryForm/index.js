@@ -126,7 +126,7 @@ export const InquiryForm = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <Modal isOpen={modalIsOpen} onClose={handleClose}>
+      <Modal isOpen={modalIsOpen} onClose={handleClose} /* noOverlay={false} closedBtn={false} */>
         <div className={styles.wrapper}>
           <h2 className="text-xl font-bold mb-4">Let's Connect with us</h2>
           <div className={styles.formContainer}>
@@ -139,7 +139,7 @@ export const InquiryForm = ({ isOpen, onClose }) => {
                 <label>Email *</label> <span className={styles.error}>{errors.email}</span>
                 <input type="email" name="email" placeholder={errors.email || "Enter your email address"} value={formData?.email} onChange={handleInputChange} className={`${styles.input} ${errors.email ? styles.errorPlaceholder : ""}`} />
               </div>
-              
+
               <div className={styles.inputGroup}>
                 <label>Phone *</label> <span className={styles.error}>{errors.countryCode || errors.phone}</span>
                 <PhoneInput

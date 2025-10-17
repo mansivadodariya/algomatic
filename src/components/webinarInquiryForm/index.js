@@ -124,7 +124,7 @@ export const WebinarInquiryForm = ({ isOpen, onClose }) => {
 
   return (
     <>
-      <Modal isOpen={modalIsOpen} onClose={handleClose}>
+      <Modal isOpen={modalIsOpen} onClose={handleClose} noOverlay={false} closedBtn={false}>
         <div className={styles.wrapper}>
           <h2 className="text-xl font-bold mb-4">Let's Connect with us</h2>
           <div className={styles.formContainer}>
@@ -229,7 +229,7 @@ export const WebinarInquiryForm = ({ isOpen, onClose }) => {
               </div>
 
               <div className={styles.buttons}>
-                <Commonarrowbutton Text="Cancel" Butttonvarient="lightoutlined" onClick={handleClose} />
+                {/* <Commonarrowbutton Text="Cancel" Butttonvarient="lightoutlined" onClick={handleClose} /> */}
                 <Commonarrowbutton Text="Submit" Butttonvarient="lightoutlined" />
               </div>
             </form>

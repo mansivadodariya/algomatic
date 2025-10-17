@@ -7,6 +7,7 @@ import Investors from "../../../../public/assets/images/Investors.png";
 import Traders from "../../../../public/assets/images/Traders.png";
 import Beginners from "../../../../public/assets/images/Beginners.png";
 import Image from "next/image";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Workshopfor() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,8 +31,7 @@ export default function Workshopfor() {
               <div className={styles.items}>
                 <Image src={Beginners} alt="Cards Image" />
                 <p>
-                  Beginners who want to{" "}
-                  <span>start trading with confidence</span>.
+                  Beginners who want to <span>start trading with confidence</span>.
                 </p>
               </div>
               <div className={styles.items}>
@@ -43,23 +43,18 @@ export default function Workshopfor() {
               <div className={styles.items}>
                 <Image src={Investors} alt="Cards Image" />
                 <p>
-                  Investors looking for{" "}
-                  <span>safe opportunities in XAUUSD (Gold)</span>.
+                  Investors looking for <span>safe opportunities in XAUUSD (Gold)</span>.
                 </p>
               </div>
               <div className={styles.items}>
                 <Image src={Experiencedtraders} alt="Cards Image" />
                 <p>
-                  Experienced traders who want to{" "}
-                  <span>refine their techniques</span>.
+                  Experienced traders who want to <span>refine their techniques</span>.
                 </p>
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button
-                className={styles.ctaButton}
-                onClick={handleRegisterClick}
-              >
+              <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Register Today
               </button>
             </div>

@@ -67,10 +67,10 @@ export default function Dashboard() {
       return;
     }
 
-    if (finalMetaNo.length < 6) {
-      toast.error("Meta account number must be at least 6 digits");
-      return;
-    }
+    // if (finalMetaNo.length < 6) {
+    //   toast.error("Meta account number must be at least 6 digits");
+    //   return;
+    // }
 
     setSavingMeta(true);
     try {
