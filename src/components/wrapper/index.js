@@ -32,8 +32,9 @@ export default function Wrapper({ children }) {
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
       {pathName?.includes("/webinar") ? null : <Whatsappbubble />}
-      {pathName?.includes("/webinar") ? null : <CallWithus />}
-      <InquiryForm />
+      {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
+      {pathName?.includes("/webinar") ? null : <InquiryForm />}
+      {/* <InquiryForm /> */}
       {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
     </div>
   );

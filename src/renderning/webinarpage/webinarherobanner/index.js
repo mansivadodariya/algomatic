@@ -19,10 +19,12 @@ import sliderimg3 from "../../../../public/assets/images/sliderimg3.jpg";
 import sliderimg4 from "../../../../public/assets/images/sliderimg4.jpg";
 import sliderimg5 from "../../../../public/assets/images/sliderimg5.jpg";
 import sliderimg6 from "../../../../public/assets/images/sliderimg6.jpg";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Webinarherobanner() {
   const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  (console.log('-----------webinar'))
 
   const handleRegisterClick = () => {
     setIsModalOpen(true);
@@ -57,12 +59,7 @@ export default function Webinarherobanner() {
                 {/* Zero-Loss Trading Strategy in <span>XAUUSD</span> Pair */}
                 Zero Risk Trading Strategy at <span>Zero Cost</span>
               </h1>
-              <p>
-                Discover a powerful trading strategy designed specifically for
-                XAUUSD (Gold) that helps you minimize risks and maximize
-                profits. Learn the proven system we use to trade with
-                confidence—even in volatile markets.
-              </p>
+              <p>Discover a powerful trading strategy designed specifically for XAUUSD (Gold) that helps you minimize risks and maximize profits. Learn the proven system we use to trade with confidence—even in volatile markets.</p>
             </div>
             <div className={styles.grid}>
               <div className={styles.itemsleftmain}>
@@ -161,10 +158,7 @@ export default function Webinarherobanner() {
                     </div>
                   </div>
                   <div className={styles.ctabuttonmain}>
-                    <button
-                      className={styles.ctaButton}
-                      onClick={handleRegisterClick}
-                    >
+                    <button className={styles.ctaButton} onClick={handleRegisterClick}>
                       Register Now
                     </button>
                   </div>

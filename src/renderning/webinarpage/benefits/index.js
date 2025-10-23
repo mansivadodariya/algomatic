@@ -3,6 +3,7 @@ import styles from "./benefits.module.scss";
 import Commonlable from "@/components/commonlable";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Benefits() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -28,8 +29,7 @@ export default function Benefits() {
                   <Truefillicon />
                 </div>
                 <p>
-                  Beginners who want to{" "}
-                  <span>start trading with confidence</span>.
+                  Beginners who want to <span>start trading with confidence</span>.
                 </p>
               </div>
               <div className={styles.item}>
@@ -37,8 +37,7 @@ export default function Benefits() {
                   <Truefillicon />
                 </div>
                 <p>
-                  Learn strategies you can <span>apply instantly</span> to your
-                  trades.
+                  Learn strategies you can <span>apply instantly</span> to your trades.
                 </p>
               </div>
               <div className={styles.item}>
@@ -46,8 +45,7 @@ export default function Benefits() {
                   <Truefillicon />
                 </div>
                 <p>
-                  Gain{" "}
-                  <span>confidence to trade Gold without fear of losses</span>.
+                  Gain <span>confidence to trade Gold without fear of losses</span>.
                 </p>
               </div>
               <div className={styles.item}>
@@ -61,16 +59,12 @@ export default function Benefits() {
                   <Truefillicon />
                 </div>
                 <p>
-                  Opportunity to join our{" "}
-                  <span>community of professional traders</span>.
+                  Opportunity to join our <span>community of professional traders</span>.
                 </p>
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button
-                className={styles.ctaButton}
-                onClick={handleRegisterClick}
-              >
+              <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Register Today
               </button>
             </div>

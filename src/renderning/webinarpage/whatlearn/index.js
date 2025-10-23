@@ -3,6 +3,7 @@ import styles from "./whatlearn.module.scss";
 import Commonlable from "@/components/commonlable";
 import Listicon2 from "../../../../public/assets/icons/listicon2";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Whatlearn() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,8 +30,7 @@ export default function Whatlearn() {
                 </div>
                 <div>
                   <p>
-                    How to trade the{" "}
-                    <span>XAUUSD pair with near-zero losses</span>.
+                    How to trade the <span>XAUUSD pair with near-zero losses</span>.
                   </p>
                 </div>
               </div>
@@ -48,8 +48,7 @@ export default function Whatlearn() {
                 </div>
                 <div>
                   <p>
-                    Using <span>risk management techniques</span> that protect
-                    your investments.
+                    Using <span>risk management techniques</span> that protect your investments.
                   </p>
                 </div>
               </div>
@@ -59,8 +58,7 @@ export default function Whatlearn() {
                 </div>
                 <div>
                   <p>
-                    Understanding market trends and{" "}
-                    <span>real examples of successful trades</span>.
+                    Understanding market trends and <span>real examples of successful trades</span>.
                   </p>
                 </div>
               </div>
@@ -70,17 +68,13 @@ export default function Whatlearn() {
                 </div>
                 <div>
                   <p>
-                    Step-by-step breakdown of the{" "}
-                    <span>exact system we use daily</span>.
+                    Step-by-step breakdown of the <span>exact system we use daily</span>.
                   </p>
                 </div>
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button
-                className={styles.ctaButton}
-                onClick={handleRegisterClick}
-              >
+              <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Seat
               </button>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./webinarfooter.module.scss";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
+import { InquiryForm } from "@/components/inquiryForm";
 
 export default function Webinarfooter() {
   const [isModalOpen, setIsModalOpen] = useState(false);
