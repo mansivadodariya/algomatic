@@ -9,6 +9,7 @@ export default function Iblink() {
   const [copiedBroker, setCopiedBroker] = useState(null);
 
   const handleCopy = async (broker) => {
+    // const link = utilitySettings?.ibLinks?.[broker];
     const link = utilitySettings?.ibLinks?.[broker];
     if (!link) return;
 
@@ -18,10 +19,10 @@ export default function Iblink() {
   };
 
   const brokers = [
-    // { name: "vantage", label: "IC MARKET" },
-    // { name: "pepperstone", label: "Pepperstone" },
-    // { name: "skyriss", label: "Skyriss" },
-    { name: "Anax Capital", label: "Anax Capital" },
+    { name: "vantage", label: "IC MARKET" },
+    { name: "pepperstone", label: "Pepperstone" },
+    { name: "skyriss", label: "Skyriss" },
+    // { name: "Anax Capital", label: "Anax Capital" },
   ];
 
   return (
@@ -42,7 +43,7 @@ export default function Iblink() {
                   <p>{broker.label} :</p>
                 </div>
                 <div className={styles.iblinkboxright}>
-                  <a
+                  {/* <a
                     href={utilitySettings?.ibLinks?.[broker.name]}
                     target="__blank"
                   >
@@ -53,6 +54,19 @@ export default function Iblink() {
                       //   "X7P9L2MZV8QW3RT1N6YD"
                       // }
                       value="https://portal.anaxcapital.ae/marketing/links/go/20"
+                      readOnly
+                    />
+                  </a> */}
+                  <a
+                    href={utilitySettings?.ibLinks?.[broker.name]}
+                    target="__blank"
+                  >
+                    <input
+                      type="text"
+                      value={
+                        utilitySettings?.ibLinks?.[broker.name] ||
+                        "X7P9L2MZV8QW3RT1N6YD"
+                      }
                       readOnly
                     />
                   </a>
