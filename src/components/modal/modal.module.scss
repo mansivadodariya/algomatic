@@ -31,6 +31,7 @@
   position: absolute;
   top: 8px;
   right: 8px;
+  width: fit-content !important;
   background: transparent;
   border: none;
   font-size: 1.7rem;
@@ -62,7 +63,7 @@
 
   .close {
     top: 4px;
-    left: 165px;
+    // left: 165px;
     font-size: 1.5rem;
     transition: opacity 0.2s ease, transform 0.2s ease;
 
