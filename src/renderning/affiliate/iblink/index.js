@@ -59,7 +59,7 @@ export default function Iblink() {
                   </a> */}
                   <a
                     href={utilitySettings?.ibLinks?.[broker.name]}
-                    target="__blank"
+                    target="__blank"  
                   >
                     <input
                       type="text"
