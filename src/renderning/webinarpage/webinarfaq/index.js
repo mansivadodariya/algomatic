@@ -38,7 +38,7 @@ export default function Webinarfaq() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const handleRegisterClick = () => {
     setIsModalOpen(true);

@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import classNames from "classnames";
 import styles from "./modal.module.scss";
 
@@ -7,7 +7,13 @@ export default function Modal({ isOpen, onClose, children, size, modalclass = "d
 
   return (
     <div className={styles.overlay} onClick={noOverlay === false ? undefined : onClose}>
-      <div className={classNames(styles.modal, size === "large" && styles.large, size === "small" && styles.small, styles[modalclass])} onClick={(e) => e.stopPropagation()}>
+      <div className={classNames(
+        styles.modal,
+        size === "large" && styles.large,
+        size === "medium" && styles.medium,
+        size === "small" && styles.small,
+        styles[modalclass]
+      )} onClick={(e) => e.stopPropagation()}>
         {closedBtn && <button className={styles.close} onClick={onClose} aria-label="Close modal">
           &times;
         </button>}
@@ -16,3 +22,4 @@ export default function Modal({ isOpen, onClose, children, size, modalclass = "d
     </div>
   );
 }
+  

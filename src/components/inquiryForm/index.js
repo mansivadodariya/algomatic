@@ -64,8 +64,8 @@ export const InquiryForm = ({ isOpen, onClose }) => {
 
     if (!formData.phone) {
       newErrors.phone = "Phone is required.";
-    } else if (!/^[0-9]{7,15}$/.test(formData.phone)) {
-      newErrors.phone = "Valid phone number required (7 to 15 digits)";
+    } else if (!/^[0-9]{9,11}$/.test(formData.phone)) {
+      newErrors.phone = "Valid phone number required (9 to 11 digits)";
     }
 
     if (!formData.brokerName) {
@@ -143,7 +143,7 @@ export const InquiryForm = ({ isOpen, onClose }) => {
               <div className={styles.inputGroup}>
                 <label>Phone *</label> <span className={styles.error}>{errors.countryCode || errors.phone}</span>
                 <PhoneInput
-                  country={"in"}
+                  country={"ae"}
                   enableSearch
                   placeholder={errors.phone || "Enter phone number"}
                   value={`${formData?.countryCode || ""}${formData?.phone || ""}`}

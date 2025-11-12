@@ -27,6 +27,51 @@
   max-width: 95%;
 }
 
+.medium {
+  width: 520px;
+  max-width: 95%;
+  height: auto;
+  /* increase modal height by 10px as requested */
+  max-height: calc(45vh + 70px);
+  padding: 1.5rem;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden; /* Hide overflow outside rounded corners */
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+
+  /* Title and content spacing */
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  /* Content area with scroll */
+  > div {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin-right: -6px; /* Hide native scrollbar */
+    padding-right: 6px;
+
+    /* Customize scrollbar */
+    &::-webkit-scrollbar {
+      width: 6px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(150, 87, 250, 0.3); /* Light purple to match your theme */
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      margin: 4px;
+    }
+  }
+}
+
 .close {
   position: absolute;
   top: 8px;
