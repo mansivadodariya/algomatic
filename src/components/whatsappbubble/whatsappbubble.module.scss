@@ -13,12 +13,12 @@
   transition: all 0.4s ease-in-out;
   overflow: hidden;
 
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     bottom: 30px;
     right: 30px;
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     bottom: 20px;
     right: 20px;
   }
@@ -38,12 +38,15 @@
     font-weight: 600;
     line-height: 24px;
     color: #fff;
-    max-width: 0;
+    // max-width: 0;
+    // margin-left: 0;
+    // padding: 0;
+    padding-right: 8px;
+    max-width: 158px;
+    margin-left: 8px;
     overflow: hidden;
     white-space: nowrap;
-    margin-left: 0;
     display: inline-block;
-    padding: 0;
     transition: all 0.4s ease-in-out;
   }
 

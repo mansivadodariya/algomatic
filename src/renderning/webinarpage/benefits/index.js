@@ -4,8 +4,11 @@ import Commonlable from "@/components/commonlable";
 import Truefillicon from "../../../../public/assets/icons/truefillicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 export default function Benefits() {
+  const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -64,9 +67,13 @@ export default function Benefits() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Register Today
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>

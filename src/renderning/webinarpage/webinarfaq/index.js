@@ -4,6 +4,8 @@ import Commonlable from "@/components/commonlable";
 import Dropdownicon from "../../../../public/assets/icons/dropdownicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 const faqData = [
   {
@@ -32,6 +34,7 @@ const faqData = [
 ];
 
 export default function Webinarfaq() {
+  const { utilitySettings } = useAppContext();
   const [openIndex, setOpenIndex] = useState(0);
 
   const handleToggle = (index) => {
@@ -70,9 +73,13 @@ export default function Webinarfaq() {
               ))}
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Secure Your Seat Now
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import Whatsappbubble from "../whatsappbubble";
 import { useAppContext } from "@/context/AppContext";
 import { InquiryForm } from "../inquiryForm";
 import CallWithus from "../callWithus";
+import Telegrambubble from "../telegrambubble";
 
 export default function Wrapper({ children }) {
   const { isInquiryFormTriggered, ip } = useAppContext();
@@ -31,6 +32,7 @@ export default function Wrapper({ children }) {
       {pathName?.includes("/webinar") ? null : <Header />}
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
+      {pathName?.includes("/webinar") ? null : <Telegrambubble />}
       {pathName?.includes("/webinar") ? null : <Whatsappbubble />}
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
       {pathName?.includes("/webinar") ? null : <InquiryForm />}

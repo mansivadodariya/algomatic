@@ -4,8 +4,11 @@ import Commonlable from "@/components/commonlable";
 import Listicon2 from "../../../../public/assets/icons/listicon2";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 export default function Whatlearn() {
+  const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -74,9 +77,13 @@ export default function Whatlearn() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Seat
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>

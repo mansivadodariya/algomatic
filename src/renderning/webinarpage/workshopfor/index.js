@@ -8,8 +8,11 @@ import Traders from "../../../../public/assets/images/Traders.png";
 import Beginners from "../../../../public/assets/images/Beginners.png";
 import Image from "next/image";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 export default function Workshopfor() {
+  const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -54,9 +57,13 @@ export default function Workshopfor() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Register Today
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>

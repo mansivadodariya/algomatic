@@ -95,7 +95,7 @@
           width: 60%;
           height: auto;
 
-          @media (max-width:768px) {
+          @media (max-width: 768px) {
             width: 100%;
           }
         }
@@ -143,6 +143,49 @@
         @media (max-width: 576px) {
           padding: 12px 15px;
           font-size: 16px;
+        }
+
+        @keyframes Buttonanimation {
+          0% {
+            transform: translateX(0);
+          }
+          50% {
+            transform: translateX(10px);
+          }
+          100% {
+            transform: translateX(-10px);
+          }
+        }
+      }
+
+      .chatwithus {
+        padding: 14px 20px;
+        border-radius: 99px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: #25d366;
+        animation: Buttonanimation 1s infinite alternate ease-in-out;
+
+        svg {
+          width: 24px;
+          height: 24px;
+          margin-left: 2px;
+
+          path {
+            fill: #fff;
+          }
+        }
+
+        span {
+          font-size: 14px;
+          font-weight: 600;
+          line-height: 24px;
+          color: #fff;
+          padding-right: 8px;
+          margin-left: 8px;
+          text-transform: uppercase;
         }
 
         @keyframes Buttonanimation {

@@ -20,6 +20,7 @@ import sliderimg4 from "../../../../public/assets/images/sliderimg4.jpg";
 import sliderimg5 from "../../../../public/assets/images/sliderimg5.jpg";
 import sliderimg6 from "../../../../public/assets/images/sliderimg6.jpg";
 import { InquiryForm } from "@/components/inquiryForm";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 export default function Webinarherobanner() {
   const { utilitySettings } = useAppContext();
@@ -158,9 +159,13 @@ export default function Webinarherobanner() {
                     </div>
                   </div>
                   <div className={styles.ctabuttonmain}>
-                    <button className={styles.ctaButton} onClick={handleRegisterClick}>
+                    {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                       Register Now
-                    </button>
+                    </button> */}
+                    <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                      <Whatsappicon />
+                      <span>Chat with us</span>
+                    </a>
                   </div>
                 </div>
               </div>

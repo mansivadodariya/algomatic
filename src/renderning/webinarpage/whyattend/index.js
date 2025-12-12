@@ -4,9 +4,12 @@ import Commonlable from "@/components/commonlable";
 import Listicon from "../../../../public/assets/icons/listicon";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 
 export default function Whyattend() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { utilitySettings } = useAppContext();
 
   const handleRegisterClick = () => {
     setIsModalOpen(true);
@@ -76,9 +79,13 @@ export default function Whyattend() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Spot
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>
