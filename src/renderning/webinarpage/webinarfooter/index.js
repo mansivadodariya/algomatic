@@ -43,7 +43,9 @@ export default function Webinarfooter() {
                 {/* <span>Chat with us</span> */}
                 <Telegramicon />
               </a>
-              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.whatsappbubble}>
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
+                target="_blank"
+                rel="noopener noreferrer" className={styles.whatsappbubble}>
                 {/* <span>Chat with us</span> */}
                 <Whatsappicon />
               </a>
@@ -51,7 +53,7 @@ export default function Webinarfooter() {
           </div>
         </div>
       </div>
-      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
     </>
   );
 }

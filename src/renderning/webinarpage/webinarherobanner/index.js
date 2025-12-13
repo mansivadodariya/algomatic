@@ -162,10 +162,16 @@ export default function Webinarherobanner() {
                     {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                       Register Now
                     </button> */}
-                    <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+                    <a
+                      href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.chatwithus}
+                    >
                       <Whatsappicon />
                       <span>Chat with us</span>
                     </a>
+
                   </div>
                 </div>
               </div>
@@ -173,10 +179,10 @@ export default function Webinarherobanner() {
           </div>
         </div>
       </section>
-      <WebinarInquiryForm
+      {/* <WebinarInquiryForm
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-      />
+      /> */}
     </>
   );
 }

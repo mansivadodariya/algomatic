@@ -82,7 +82,9 @@ export default function Whyattend() {
               {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Spot
               </button> */}
-              <a href={`https://wa.me/${utilitySettings?.phoneNo}`} target="_blank" className={styles.chatwithus}>
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
+                target="_blank"
+                rel="noopener noreferrer" className={styles.chatwithus}>
                 <Whatsappicon />
                 <span>Chat with us</span>
               </a>
@@ -91,10 +93,10 @@ export default function Whyattend() {
         </div>
       </div>
 
-      <WebinarInquiryForm
+      {/* <WebinarInquiryForm
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-      />
+      /> */}
     </>
   );
 }
