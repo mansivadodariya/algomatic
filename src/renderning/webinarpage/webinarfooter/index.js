@@ -32,22 +32,22 @@ export default function Webinarfooter() {
           <div className={styles.webinarfooter}>
             <div className={styles.webinarfooterleft}>
               <h1>
-                Chat With Us
+                Book a Live Session with our Arbitrage Expert
               </h1>
             </div>
             <div className={styles.webinarfooterright}>
               {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Secure Your Seat Now
               </button> */}
-              <a href={`${utilitySettings?.telegramLink}`} target="_blank" className={styles.telegrambubble}>
-                {/* <span>Chat with us</span> */}
-                <Telegramicon />
-              </a>
               <a href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
                 target="_blank"
                 rel="noopener noreferrer" className={styles.whatsappbubble}>
-                {/* <span>Chat with us</span> */}
                 <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
+              <a href={`${utilitySettings?.telegramLink}`} target="_blank" className={styles.telegrambubble}>
+                <Telegramicon />
+                <span>Chat with us</span>
               </a>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
 import { useAppContext } from "@/context/AppContext";
 import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
+import Telegramicon from "../../../../public/assets/icons/telegramicon";
 
 export default function Whyattend() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -86,6 +87,10 @@ export default function Whyattend() {
                 target="_blank"
                 rel="noopener noreferrer" className={styles.chatwithus}>
                 <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
+              <a href={`${utilitySettings?.telegramLink}`} target="_blank" className={styles.telegrambutton}>
+                <Telegramicon />
                 <span>Chat with us</span>
               </a>
             </div>

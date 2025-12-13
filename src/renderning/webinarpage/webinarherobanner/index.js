@@ -21,6 +21,7 @@ import sliderimg5 from "../../../../public/assets/images/sliderimg5.jpg";
 import sliderimg6 from "../../../../public/assets/images/sliderimg6.jpg";
 import { InquiryForm } from "@/components/inquiryForm";
 import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
+import Telegramicon from "../../../../public/assets/icons/telegramicon";
 
 export default function Webinarherobanner() {
   const { utilitySettings } = useAppContext();
@@ -94,7 +95,8 @@ export default function Webinarherobanner() {
               </div>
               <div>
                 <div className={styles.itemsright}>
-                  <div className={styles.gridcards}>
+                  <h1>Book a Live Session with our <span>Arbitrage Expert</span></h1>
+                  {/* <div className={styles.gridcards}>
                     <div className={styles.cards}>
                       <div className={styles.cardsicon}>
                         <Calendaricon />
@@ -131,6 +133,25 @@ export default function Webinarherobanner() {
                         <p>{utilitySettings?.webinar?.webinarLanguage}</p>
                       </div>
                     </div>
+                  </div> */}
+                  <div className={styles.ctabuttonmain}>
+                    {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
+                      Register Now
+                    </button> */}
+                    <a
+                      href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.chatwithus}
+                    >
+                      <Whatsappicon />
+                      <span>Chat with us</span>
+                    </a>
+
+                    <a href={`${utilitySettings?.telegramLink}`} target="_blank" className={styles.telegrambutton}>
+                      <Telegramicon />
+                      <span>Chat with us</span>
+                    </a>
                   </div>
                   <div className={styles.rowlist}>
                     <div className={styles.list}>
@@ -157,21 +178,6 @@ export default function Webinarherobanner() {
                       </div>
                       <p>World Most Reliable Bot</p>
                     </div>
-                  </div>
-                  <div className={styles.ctabuttonmain}>
-                    {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
-                      Register Now
-                    </button> */}
-                    <a
-                      href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.chatwithus}
-                    >
-                      <Whatsappicon />
-                      <span>Chat with us</span>
-                    </a>
-
                   </div>
                 </div>
               </div>
