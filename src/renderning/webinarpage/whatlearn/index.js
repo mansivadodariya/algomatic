@@ -4,8 +4,12 @@ import Commonlable from "@/components/commonlable";
 import Listicon2 from "../../../../public/assets/icons/listicon2";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 import { InquiryForm } from "@/components/inquiryForm";
+import { useAppContext } from "@/context/AppContext";
+import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
+import Telegramicon from "../../../../public/assets/icons/telegramicon";
 
 export default function Whatlearn() {
+  const { utilitySettings } = useAppContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -74,14 +78,24 @@ export default function Whatlearn() {
               </div>
             </div>
             <div className={styles.ctabuttonmain}>
-              <button className={styles.ctaButton} onClick={handleRegisterClick}>
+              {/* <button className={styles.ctaButton} onClick={handleRegisterClick}>
                 Reserve Your Seat
-              </button>
+              </button> */}
+              <a href={`https://wa.me/${utilitySettings?.phoneNo}?text=Hi%20want%20to%20Book%20a%20Live%20Session%20with%20Expert`}
+                target="_blank"
+                rel="noopener noreferrer" className={styles.chatwithus}>
+                <Whatsappicon />
+                <span>Chat with us</span>
+              </a>
+              <a href={`${utilitySettings?.telegramLink}`} target="_blank" className={styles.telegrambutton}>
+                <Telegramicon />
+                <span>Chat with us</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
     </>
   );
 }
