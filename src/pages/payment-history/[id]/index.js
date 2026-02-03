@@ -107,7 +107,6 @@ export default function Dashboard() {
 
       // Algo client spiral company id from db
       if (botData?.botProviderId == "6892012f94ce94c3494ad1f0") {
-        // const { totalDays } = calculatePlanEndDateWithTotalDays(selectedPayment.createdAt, selectedPayment.planType);
         const { totalDays } = calculatePlanEndDateWithTotalDays(new Date(), selectedPayment.planType);
 
         // send multiple spiral bot exe to user

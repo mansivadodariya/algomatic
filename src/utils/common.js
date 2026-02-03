@@ -13,6 +13,7 @@ export const dateFormate = (date) => {
 };
 
 export const calculatePlanEndDate = (startDateStr, planType) => {
+  if (planType === "Life Time") planType = "240months";
   const months = +planType.replace(/\D/g, "");
   const date = new Date(startDateStr);
 
@@ -26,6 +27,7 @@ export const calculatePlanEndDate = (startDateStr, planType) => {
 };
 
 export const calculatePlanEndDateWithTotalDays = (startDateStr, planType) => {
+  if (planType === "Life Time") planType = "240months";
   const months = +planType.replace(/\D/g, "");
   const date = new Date(startDateStr);
 
@@ -49,6 +51,7 @@ export const calculatePlanEndDateWithTotalDays = (startDateStr, planType) => {
     10: 300,
     11: 330,
     12: 365,
+    240: 7300, // Life Time
   };
 
   const totalDays = planDaysMap[months] || 0;
