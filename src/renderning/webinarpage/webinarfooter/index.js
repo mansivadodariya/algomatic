@@ -6,7 +6,7 @@ import Telegramicon from "../../../../public/assets/icons/telegramicon";
 import Whatsappicon from "../../../../public/assets/icons/Whatsappicon";
 import { useAppContext } from "@/context/AppContext";
 
-export default function Webinarfooter() {
+export default function Webinarfooter({ title }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { utilitySettings } = useAppContext();
 
@@ -20,7 +20,7 @@ export default function Webinarfooter() {
           {/* <div className={styles.webinarfooter}>
             <div className={styles.webinarfooterleft}>
               <h1>
-                Few Limited Sheet Available <span></span>
+                {title}
               </h1>
             </div>
             <div className={styles.webinarfooterright}>

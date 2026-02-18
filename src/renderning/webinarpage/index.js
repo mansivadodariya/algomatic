@@ -20,7 +20,7 @@ export default function Webinarpage() {
       <Testimonials />
       <Backtesting />
       <Webinarfaq />
-      <Webinarfooter />
+      <Webinarfooter title=' Few Limited Sheet Available' />
     </>
   );
 }

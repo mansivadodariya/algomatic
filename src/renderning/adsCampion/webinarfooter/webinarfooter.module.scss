@@ -1,0 +1,124 @@
+.webinarfootermain {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+
+  .webinarfooter {
+    border-radius: 12px 12px 0 0;
+    border-top: 2px solid #9657fa;
+    background-color: #ffffff80;
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 1024px) {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+
+    .webinarfooterleft {
+      h1 {
+        font-size: 33px;
+        font-weight: 700;
+        line-height: 40px;
+        color: #111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        margin-bottom: 15px;
+
+        @media (max-width: 1024px) {
+          font-size: 28px;
+          line-height: 32px;
+          margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 24px;
+          line-height: 28px;
+        }
+
+        @media (max-width: 576px) {
+          font-size: 20px;
+          line-height: 24px;
+        }
+
+        span {
+          color: #9657fa;
+          transition: 0.4s ease-in-out;
+          animation: Puls 2s ease-in-out infinite;
+        }
+
+        @keyframes Puls {
+          0% {
+            opacity: 0;
+          }
+
+          50% {
+            opacity: 1;
+          }
+
+          100% {
+            opacity: 0;
+          }
+        }
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 27px;
+        color: #111;
+
+        @media (max-width:576px) {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .webinarfooterright {
+      .ctaButton {
+        background-color: #9657fa;
+        color: #fff;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 16px 32px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+        text-transform: uppercase;
+        animation: Buttonanimation 1s infinite alternate ease-in-out;
+
+        &:hover {
+          background-color: #8045e8;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(150, 87, 250, 0.3);
+        }
+
+        @media (max-width: 576px) {
+          padding: 12px 15px;
+          font-size: 16px;
+        }
+
+        @keyframes Buttonanimation {
+          0% {
+            transform: translateX(0);
+          }
+
+          50% {
+            transform: translateX(10px);
+          }
+
+          100% {
+            transform: translateX(-10px);
+          }
+        }
+      }
+    }
+  }
+}

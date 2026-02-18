@@ -29,7 +29,7 @@ export default function Wrapper({ children }) {
         position="top-center"
         reverseOrder={false}
       />
-      {pathName?.includes("/webinar") ? null : <Header />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Header />}
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
       {pathName?.includes("/webinar") ? null : <Telegrambubble />}
@@ -37,7 +37,7 @@ export default function Wrapper({ children }) {
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
       {pathName?.includes("/webinar") ? null : <InquiryForm />}
       {/* <InquiryForm /> */}
-      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") ? null : <Footernew />}
+      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campion") ? null : <Footernew />}
     </div>
   );
 }
