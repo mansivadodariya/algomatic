@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./webinarfooter.module.scss";
 import { WebinarInquiryForm } from "@/components/webinarInquiryForm";
 
-export default function Webinarfooter() {
+export default function Webinarfooter({ title }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleRegisterClick = () => {
@@ -15,7 +15,7 @@ export default function Webinarfooter() {
           <div className={styles.webinarfooter}>
             <div className={styles.webinarfooterleft}>
               <h1>
-                Few Limited Sheet Available <span></span>
+                {title}
               </h1>
             </div>
             <div className={styles.webinarfooterright}>
