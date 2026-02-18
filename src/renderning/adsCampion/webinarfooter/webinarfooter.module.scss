@@ -5,6 +5,12 @@
   z-index: 99;
   width: 100%;
 
+  :global(.container-xl) {
+    @media (max-width: 1024px) {
+      padding: 0;
+    }
+  }
+
   .webinarfooter {
     border-radius: 12px 12px 0 0;
     border-top: 2px solid #9657fa;
@@ -43,6 +49,7 @@
 
         @media (max-width: 576px) {
           font-size: 20px;
+          margin-bottom: 0px;
           line-height: 24px;
         }
 
