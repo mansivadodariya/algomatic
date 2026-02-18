@@ -125,7 +125,7 @@ export const WebinarInquiryForm = ({ isOpen, onClose }) => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Modal isOpen={modalIsOpen} onClose={handleClose} noOverlay={false} closedBtn={false} size="medium">
+        <Modal isOpen={modalIsOpen} onClose={handleClose} noOverlay={false} /* closedBtn={false} */ size="medium">
           <div /* className={styles.wrapper} */>
             <h2 className="text-xl font-bold mb-4">Let's Connect with us</h2>
             <div className={styles.formContainer}>

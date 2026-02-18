@@ -91,7 +91,7 @@ export default function Webinarfaq() {
           </div>
         </div>
       </div>
-      {/* <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
+      <WebinarInquiryForm isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   );
 }
