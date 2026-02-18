@@ -20,7 +20,7 @@ const gamesData = [
             'VolatileMarkets  ',
             'TradeSmart   ',
         ],
-        button: "Chat with volatile exprt team",
+        button: "Chat with Expert team",
         image: '/assets/images/first.jpeg',
     },
     {
@@ -37,7 +37,7 @@ const gamesData = [
             'FinTech  ',
             'AlgorithmicTrading  ',
         ],
-        button: "Chat with Future trad exprt team",
+        button: "Chat with our Expert team",
         image: '/assets/images/sec.jpeg',
     },
     {
@@ -53,7 +53,7 @@ const gamesData = [
             'RuleBasedTrading ',
             'TradingSystems',
         ],
-        button: "Chat with exprt arbitrage team",
+        button: "Chat with Expert arbitrage team",
         image: '/assets/images/three.jpeg',
     },
     {
@@ -72,7 +72,7 @@ const gamesData = [
             'TradingTechnology  ',
             'GoldTrading',
         ],
-        button: "Chat with exprt Hedging team",
+        button: "Chat with Expert Hedging team",
         image: '/assets/images/four.jpeg',
     },
     {
@@ -90,7 +90,7 @@ const gamesData = [
             'FinTech  ',
             'TradingTechnology  ',
         ],
-        button: "Chat with strategy exprt team",
+        button: "Chat with our strategy Expert team",
         image: '/assets/images/five.jpeg',
     },
     {
@@ -109,7 +109,7 @@ const gamesData = [
             'TradeSmart   ',
             'DigitalTrading  ',
         ],
-        button: "Chat with exprt team",
+        button: "Chat with our Expert team",
         image: '/assets/images/six.jpeg',
     },
     {
@@ -128,7 +128,7 @@ const gamesData = [
             'Fintech   ',
             'RuleBasedTrading  ',
         ],
-        button: "Chat with exprt team",
+        button: "Chat with our Expert team",
         image: '/assets/images/seven.jpeg',
     },
     {
@@ -145,7 +145,7 @@ const gamesData = [
             'InstitutionalTrading ',
             'AutomatedTrading',
         ],
-        button: "Chat with strategy exprt team",
+        button: "Chat with our strategy Expert team",
         image: '/assets/images/eight.jpeg',
     },
     {
@@ -161,7 +161,7 @@ const gamesData = [
             'ForexAutomation  ',
             'TradingTechnology ',
         ],
-        button: "Chat with Hedging Automation exprt team",
+        button: "Chat with Hedging Automation Expert team",
 
         image: '/assets/images/none.jpeg',
     },

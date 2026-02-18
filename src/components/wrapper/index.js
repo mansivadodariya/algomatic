@@ -32,8 +32,8 @@ export default function Wrapper({ children }) {
       {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Header />}
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
-      {pathName?.includes("/webinar") ? null : <Telegrambubble />}
-      {pathName?.includes("/webinar") ? null : <Whatsappbubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Telegrambubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Whatsappbubble />}
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
       {pathName?.includes("/webinar") ? null : <InquiryForm />}
       {/* <InquiryForm /> */}

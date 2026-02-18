@@ -2,7 +2,7 @@
     padding: 100px 0 0 0;
 
     @media (max-width:576px) {
-        padding: 120px 0 0 0;
+        padding: 60px 0 0 0;
     }
 
     .allBoxAlignment {
@@ -54,7 +54,7 @@
                     border-radius: 12px 0 0 12px;
 
                     @media (max-width:576px) {
-                        height: 400px;
+                        height: auto;
                     }
 
                     @media (max-width:576px) {
@@ -93,7 +93,7 @@
                 height: 100%;
 
                 @media (max-width:576px) {
-                    height: 400px;
+                    height: auto;
                 }
 
                 img {
@@ -121,6 +121,10 @@
                 .buttonUi {
                     padding: 40px 0 0 0;
 
+                    @media (max-width:576px) {
+                        padding: 20px 0 0 0;
+                    }
+
                     button {
                         background-color: #9657fa;
                         color: #fff;
@@ -142,8 +146,8 @@
                         }
 
                         @media (max-width: 576px) {
-                            padding: 12px 15px;
-                            font-size: 16px;
+                            padding: 10px 15px;
+                            font-size: 14px;
                         }
 
                         @keyframes Buttonanimation {
