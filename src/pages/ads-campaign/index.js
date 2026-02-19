@@ -1,4 +1,4 @@
-import AdsCampion from '@/renderning/adsCampion'
+import AdsCampion from '@/renderning/ads-campaign'
 import React from 'react'
 
 export default function index() {

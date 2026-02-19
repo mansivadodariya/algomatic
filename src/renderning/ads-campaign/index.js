@@ -1,7 +1,7 @@
 'use client'
 import React, { useRef } from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
-import styles from './adsCampion.module.scss';
+import styles from "./adsCampaign.module.scss";
 import classNames from 'classnames';
 import Webinarfooter from './webinarfooter';
 import Webinarfaq from './webinarfaq';

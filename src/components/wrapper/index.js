@@ -35,7 +35,7 @@ export default function Wrapper({ children }) {
       {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Telegrambubble />}
       {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Whatsappbubble />}
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
-      {pathName?.includes("/webinar") ? null : <InquiryForm />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <InquiryForm />}
       {/* <InquiryForm /> */}
       {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campaign") ? null : <Footernew />}
     </div>
