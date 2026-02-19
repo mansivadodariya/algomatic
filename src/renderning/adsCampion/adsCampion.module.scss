@@ -129,15 +129,16 @@
                         background-color: #9657fa;
                         color: #fff;
                         font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
-                        font-size: 14px;
+                        font-size: 16px;
                         font-weight: 600;
-                        padding: 12px 24px;
+                        padding: 14px 26px;
                         border: none;
                         border-radius: 50px;
                         cursor: pointer;
                         transition: all 0.4s ease-in-out;
                         text-transform: uppercase;
                         animation: Buttonanimation 1s infinite alternate ease-in-out;
+
 
                         &:hover {
                             background-color: #8045e8;
@@ -184,9 +185,9 @@
 
                 h3 {
                     font-size: 34px;
-                    font-weight: 900;
+                    font-weight: 600;
                     color: #212121;
-                    font-family: "Big Shoulders", sans-serif;
+                    font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
 
                     @media (max-width:576px) {
                         font-size: 24px;

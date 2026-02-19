@@ -32,11 +32,12 @@
   max-width: 95%;
   height: auto;
   /* increase modal height by 10px as requested */
-  max-height: calc(45vh + 70px);
+  max-height: calc(100dvh - 100px);
   padding: 1.5rem;
   border-radius: 15px;
   position: relative;
-  overflow: hidden; /* Hide overflow outside rounded corners */
+  overflow: hidden;
+  /* Hide overflow outside rounded corners */
   display: flex;
   flex-direction: column;
   background: #fff;
@@ -47,11 +48,12 @@
   }
 
   /* Content area with scroll */
-  > div {
+  >div {
     flex: 1;
     min-height: 0;
     overflow-y: auto;
-    margin-right: -6px; /* Hide native scrollbar */
+    margin-right: -6px;
+    /* Hide native scrollbar */
     padding-right: 6px;
 
     /* Customize scrollbar */
@@ -61,7 +63,8 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: rgba(150, 87, 250, 0.3); /* Light purple to match your theme */
+      background: rgba(150, 87, 250, 0.3);
+      /* Light purple to match your theme */
       border-radius: 3px;
     }
 

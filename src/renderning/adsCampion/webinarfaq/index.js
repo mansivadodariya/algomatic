@@ -74,14 +74,14 @@ export default function Webinarfaq() {
                 </div>
               ))}
             </div>
-            <div className={styles.ctabuttonmain}>
+            {/* <div className={styles.ctabuttonmain}>
               <button
                 className={styles.ctaButton}
                 onClick={handleRegisterClick}
               >
                 Secure Your Seat Now
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
