@@ -29,15 +29,15 @@ export default function Wrapper({ children }) {
         position="top-center"
         reverseOrder={false}
       />
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Header />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Header />}
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Telegrambubble />}
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campion") ? null : <Whatsappbubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Telegrambubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Whatsappbubble />}
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
       {pathName?.includes("/webinar") ? null : <InquiryForm />}
       {/* <InquiryForm /> */}
-      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campion") ? null : <Footernew />}
+      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campaign") ? null : <Footernew />}
     </div>
   );
 }
