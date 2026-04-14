@@ -14,7 +14,7 @@ export default function WhitelabelPage() {
       <Whatissection />
       <Benefits />
       <Howitworks />
-      <Iblink />
+      {/* <Iblink /> */}
       <Whocanjoin />
       <Transformsection />
     </>

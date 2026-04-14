@@ -36,7 +36,7 @@ export default function Homepage() {
 
       <Backtestingsection />
       <Recommendedbrokers />
-      <Iblink />
+      {/* <Iblink /> */}
       <Clientstories />
       <Faqsection />
       <Transformsection />

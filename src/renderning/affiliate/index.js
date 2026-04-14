@@ -11,7 +11,7 @@ export default function Affiliatepagecomponents() {
     <>
       <Affiliateherobanner />
       <Howitworks />
-      <Iblink />
+      {/* <Iblink /> */}
       <Whyalgomatic />
       <Affiliatefeatures />
       <Transformsection />

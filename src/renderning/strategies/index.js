@@ -6,7 +6,7 @@ export default function Strategies() {
     <div>
       <StrategiesBanner />
       <StrategiesCardList />
-      <Iblink />
+      {/* <Iblink /> */}
     </div>
   );
 }
