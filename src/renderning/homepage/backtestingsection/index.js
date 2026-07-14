@@ -29,7 +29,7 @@ export default function Backtestingsection() {
                 </div>
                 <div className={styles.backtestingcontentflx}>
                   <span>Server:</span>
-                  <p>Skyriss Securities Ltd.</p>
+                  <p>NeweraCapitalMarkets-Live</p>
                 </div>
                 <div className={styles.backtestingcontentflx}>
                   <span>MT5 ID:</span>
@@ -45,11 +45,11 @@ export default function Backtestingsection() {
                   <img src={myfxbook} alt="myfxbook" />
                 </div>
                 <div className={styles.backtestinglastflxright}>
-                  <a href="https://www.myfxbook.com/portfolio/algomaticbot-200k/11536065" target="__blank">
+                  <a href="https://www.myfxbook.com/members/Newera365/shameer-ahmed/12107681" target="__blank">
                     <span>Portfolio</span>
-                    <span>$200K</span>
+                    <span>$100K</span>
                   </a>
-                  <a href="https://www.myfxbook.com/portfolio/algomaticbot-10k/11536062" target="__blank">
+                  <a href="https://www.myfxbook.com/members/Newera365/gaurav-salaria/12107697" target="__blank">
                     <span>Portfolio</span>
                     <span>$10K</span>
                   </a>
