@@ -5,7 +5,7 @@ export default function Strategies() {
   return (
     <div>
       <StrategiesBanner />
-      {/* <StrategiesCardList /> */}
+      <StrategiesCardList />
       {/* <Iblink /> */}
     </div>
   );
