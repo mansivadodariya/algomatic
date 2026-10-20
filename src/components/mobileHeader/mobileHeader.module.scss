@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 99;
+  z-index: 98;
   opacity: 0;
   cursor: pointer;
   transition: opacity 0.325s cubic-bezier(0.4, 0, 0.6, 1) 80ms,
@@ -34,10 +34,14 @@
   top: 0;
   left: 0;
   width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   z-index: 99;
-  padding: 10px 0;
+  padding: 0;
+  margin: 0;
   opacity: 0;
   display: none;
+  pointer-events: none;
 
   @media (max-width: 1100px) {
     display: block;
@@ -45,8 +49,10 @@
 
   &.hide {
     opacity: 0;
+    pointer-events: none;
     .menudetails {
-      padding: 0 20px;
+      padding: 0 24px;
+      height: 0;
       max-height: 0;
       transition: 0.3s ease-in-out;
     }
@@ -54,8 +60,11 @@
 
   &.show {
     opacity: 1;
+    pointer-events: auto;
     .menudetails {
-      padding: 78px 20px 20px 20px;
+      padding: 92px 24px 36px 24px;
+      height: 100vh;
+      height: 100dvh;
       max-height: 100vh;
       overflow-y: auto;
       transition: 0.3s ease-in-out;
@@ -63,41 +72,46 @@
   }
 
   .menudetails {
-    padding: 78px 20px 20px 20px;
-    background-color: #fff;
-    margin: 0 20px;
+    padding: 92px 24px 36px 24px;
+    background-color: #ffffff;
+    margin: 0;
     overflow: hidden;
+    height: 0;
     max-height: 0;
-    width: calc(100% - 40px);
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 45px;
-    border-radius: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 32px;
+    border-radius: 0;
+    box-sizing: border-box;
     transition: 0.3s ease-in-out;
 
     .menulinks {
       display: flex;
       width: 100%;
       flex-direction: column;
-      gap: 32px;
+      gap: 24px;
 
       a {
-        color: #616161;
-        font-size: 17px;
-        font-weight: 400;
-        line-height: 22px;
+        color: #2b2838;
+        font-family: "Urbanist", sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 24px;
         cursor: pointer;
         display: block;
-        transition: 0.3s ease-in-out;
+        transition: 0.25s ease-in-out;
 
         &:hover {
-          color: #111;
+          color: #9657fa;
+          transform: translateX(4px);
         }
 
         &.hightlight {
-          font-weight: 600;
+          font-weight: 700;
+          color: #9657fa;
         }
       }
 
@@ -111,56 +125,59 @@
           padding: 0 0 10px 0;
 
           &.active {
-            border-bottom: 1px solid #111;
+            border-bottom: 1.5px solid #9657fa;
 
             span {
-              color: #111;
+              color: #9657fa;
             }
 
             svg {
               transform: rotate(180deg);
 
               path {
-                fill: #111;
+                fill: #9657fa;
               }
             }
           }
 
           &:hover {
             span {
-              color: #111;
+              color: #9657fa;
             }
 
             svg {
               path {
-                fill: #111;
+                fill: #9657fa;
               }
             }
           }
 
           span {
-            color: #616161;
-            font-size: 17px;
-            font-weight: 400;
-            line-height: 22px;
+            color: #2b2838;
+            font-family: "Urbanist", sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 24px;
             cursor: pointer;
             display: block;
-            transition: 0.3s ease-in-out;
+            transition: 0.25s ease-in-out;
           }
 
           svg {
             width: 14px;
             height: 14px;
+            transition: transform 0.25s ease;
 
             path {
               fill: #616161;
+              transition: fill 0.25s ease;
             }
           }
         }
 
         .sidebardropdown {
           width: 100%;
-          padding: 15px 0;
+          padding: 10px 0;
 
           &.hide {
             padding: 0;
@@ -177,15 +194,29 @@
           .sidebardropdownlinks {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding: 0 10px;
+            gap: 12px;
+            padding: 8px 12px;
 
             a {
-              padding: 10px 0;
+              padding: 6px 0;
+              font-size: 16px;
+              color: #5b5770;
+
+              &:hover {
+                color: #9657fa;
+              }
             }
           }
         }
       }
+    }
+
+    .bottomCtaWrapper {
+      width: 100%;
+      margin-top: auto;
+      padding-top: 24px;
+      display: flex;
+      justify-content: center;
     }
   }
 }

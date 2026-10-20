@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
 import Homeherobanner from "../homepage/homeherobanner";
+import Marketplacesection from "../homepage/marketplacesection";
+import Aibotbuildersection from "../homepage/aibotbuildersection";
+import Manualbotconfigsection from "../homepage/manualbotconfigsection";
+import Personalizedbotsection from "../homepage/personalizedbotsection";
 import Whatalgosection from "../homepage/whatalgosection";
 import Howitworkssection from "../homepage/howitworkssection";
 import Keyfeaturessection from "../homepage/keyfeaturessection";
@@ -26,15 +30,18 @@ export default function Homepage() {
     <div>
       {/* <-- new sections --> */}
       <Homeherobanner />
-      <Whatalgosection />
-      <Howitworkssection />
-      <Keyfeaturessection />
-      <Algovideosection />
+      <Marketplacesection />
+      <Aibotbuildersection />
+      <Manualbotconfigsection />
+      <Personalizedbotsection />
+      {/* <Whatalgosection /> */}
+      {/* <Howitworkssection /> */}
+      {/* <Keyfeaturessection />
+      <Algovideosection /> */}
       {/* <Pricingsection /> */}
-      <StrategiesBanner />
-      <StrategiesCardList />
-
-      <Backtestingsection />
+      {/* <StrategiesBanner />
+      <StrategiesCardList /> */}
+      {/* <Backtestingsection /> */}
       <Recommendedbrokers />
       {/* <Iblink /> */}
       <Clientstories />

@@ -7,6 +7,7 @@ import "atropos/css";
 import Script from "next/script";
 import Wrapper from "@/components/wrapper";
 import { AppProvider } from "../context/AppContext";
+import SmoothScroll from "@/components/smoothScroll";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -22,6 +23,7 @@ export default function App({ Component, pageProps }) {
         `}
       </Script>
       <AppProvider>
+        <SmoothScroll />
         <Wrapper>
           <Component {...pageProps} />
         </Wrapper>

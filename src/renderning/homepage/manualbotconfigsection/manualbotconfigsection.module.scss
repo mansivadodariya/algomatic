@@ -1,0 +1,1426 @@
+@import "../../../scss/mixins/index.scss";
+
+.manualbotsectionmain {
+  position: relative;
+  padding: 100px 0 110px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8fe 50%, #ffffff 100%);
+  border-bottom: 1px solid #eeebf3;
+  overflow: hidden;
+
+  @media (max-width: 1024px) {
+    padding: 70px 0 80px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 50px 0 60px;
+  }
+
+  // Background subtle glow circles
+  &::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    right: -150px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(150, 87, 250, 0.07) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 8%;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // Top Small Label
+  .sectionTopBadge {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+  }
+
+  // Section Header
+  .sectionHeader {
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto 54px;
+    position: relative;
+    z-index: 1;
+
+    .sectionIndexBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #7c3aed;
+      background: #f4effe;
+      border: 1px solid #e7dcfa;
+      padding: 6px 16px;
+      border-radius: 30px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+
+      .indexNumber {
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: 800;
+        color: #9657fa;
+      }
+
+      .indexDivider {
+        opacity: 0.4;
+      }
+
+      .indexTitle {
+        font-weight: 700;
+      }
+    }
+
+    h2 {
+      font-family: "Urbanist", sans-serif;
+      font-size: 42px;
+      line-height: 1.22;
+      font-weight: 800;
+      color: #12111d;
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+
+      span {
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 30px;
+      }
+
+      @media (max-width: 480px) {
+        font-size: 26px;
+      }
+    }
+
+    .narrativeParagraph {
+      font-family: "Urbanist", sans-serif;
+      font-size: 17px;
+      line-height: 1.65;
+      color: #555268;
+      max-width: 760px;
+      margin: 0 auto 28px;
+
+      @media (max-width: 768px) {
+        font-size: 15px;
+      }
+    }
+
+    .pillBadgesRow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+
+      .pillBadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ffffff;
+        border: 1px solid #ebe5f5;
+        box-shadow: 0 4px 14px rgba(150, 87, 250, 0.06);
+        padding: 9px 18px;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #2b283d;
+        transition: all 0.25s ease;
+
+        .pillIcon {
+          color: #9657fa;
+        }
+
+        &:hover {
+          border-color: rgba(150, 87, 250, 0.4);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(150, 87, 250, 0.12);
+        }
+      }
+    }
+  }
+
+  // =========================================================================
+  // BRAND-NEW UI: HORIZONTAL STUDIO WORKSTATION PIPELINE
+  // =========================================================================
+  .studioWorkstationWrapper {
+    margin-bottom: 70px;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      margin-bottom: 50px;
+    }
+  }
+
+  // 1. Horizontal 5-Step Pipeline Navigation Track
+  .pipelineStepperTrack {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 640px) {
+      grid-template-columns: 1fr;
+    }
+
+    .stepTabItem {
+      position: relative;
+      background: #ffffff;
+      border: 1.5px solid #ece7f6;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s ease;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(150, 87, 250, 0.03);
+
+      &:hover {
+        border-color: #d8c8f5;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(150, 87, 250, 0.08);
+      }
+
+      .stepTabIconBox {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #f5effe;
+        color: #9657fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        flex-shrink: 0;
+        transition: all 0.25s ease;
+
+        .checkMark {
+          color: #059669;
+          font-weight: 800;
+          font-size: 15px;
+        }
+      }
+
+      .stepTabMeta {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+
+        .stepSeqText {
+          font-size: 11px;
+          text-transform: uppercase;
+          font-weight: 700;
+          letter-spacing: 0.05em;
+          color: #8e8aa0;
+          transition: color 0.25s ease;
+        }
+
+        .stepTitleText {
+          font-size: 13.5px;
+          font-weight: 700;
+          color: #1e1b2e;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: color 0.25s ease;
+        }
+      }
+
+      .tabGlowUnderline {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: transparent;
+      }
+
+      // Active state
+      &.stepTabActive {
+        background: #ffffff;
+        border-color: #9657fa;
+        box-shadow: 0 10px 28px rgba(150, 87, 250, 0.16);
+
+        .stepTabIconBox {
+          background: linear-gradient(135deg, #9657fa 0%, #7c3aed 100%);
+          color: #ffffff;
+          box-shadow: 0 4px 12px rgba(150, 87, 250, 0.3);
+        }
+
+        .stepTabMeta {
+          .stepSeqText {
+            color: #9657fa;
+          }
+
+          .stepTitleText {
+            color: #7c3aed;
+          }
+        }
+
+        .tabGlowUnderline {
+          height: 3px;
+          background: linear-gradient(90deg, #9657fa, #c084fc);
+          animation: stepLoopProgress 5s linear forwards;
+        }
+      }
+
+      // Completed state
+      &.stepTabCompleted {
+        border-color: #dbebe2;
+
+        .stepTabIconBox {
+          background: #ecfdf5;
+          color: #059669;
+        }
+      }
+    }
+  }
+
+  // 2. Grand Studio Workbench Card
+  .workbenchCard {
+    background: #ffffff;
+    border: 1.5px solid #ebe5f5;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(150, 87, 250, 0.07), 0 2px 10px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+
+    // Workbench Top Status Bar
+    .workbenchTopBar {
+      padding: 16px 24px;
+      background: #faf8fe;
+      border-bottom: 1px solid #ebe5f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .barLeft {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+
+        .studioBadgeIcon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          background: #f3ebff;
+          color: #9657fa;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .studioTitleWrap {
+          display: flex;
+          flex-direction: column;
+
+          .mainTitle {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1e1b2e;
+          }
+
+          .subTitle {
+            font-size: 12px;
+            color: #736f87;
+          }
+        }
+      }
+
+      .barRight {
+        .specEngineBadge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: #ffffff;
+          border: 1px solid #e7dcfa;
+          padding: 6px 14px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #7c3aed;
+
+          .pulseDot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: statusPulse 2s infinite;
+          }
+        }
+      }
+    }
+
+    // Workbench Body: 2-Column Studio Grid
+    .workbenchGrid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      min-height: 480px;
+
+      @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    // Left Column: Active Phase Controls Panel
+    .configControlsPanel {
+      padding: 28px;
+      background: #ffffff;
+      border-right: 1px solid #f0ebf8;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 1024px) {
+        border-right: none;
+        border-bottom: 1px solid #f0ebf8;
+      }
+
+      @media (max-width: 640px) {
+        padding: 20px;
+      }
+
+      .phaseHeaderRow {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 24px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #f3eff9;
+
+        .phaseNumberBadge {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          background: #f3ebff;
+          color: #9657fa;
+          font-weight: 800;
+          font-size: 15px;
+          font-family: monospace;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .phaseHeaderText {
+          flex: 1;
+
+          h4 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e1b2e;
+            margin: 0 0 4px;
+          }
+
+          p {
+            font-size: 13.5px;
+            line-height: 1.5;
+            color: #69657f;
+            margin: 0;
+          }
+        }
+
+        .phaseTag {
+          margin-left: auto;
+          background: #faf7ff;
+          border: 1px solid #e8dcfa;
+          color: #8746ec;
+          font-size: 11px;
+          font-weight: 700;
+          padding: 4px 10px;
+          border-radius: 12px;
+          text-transform: uppercase;
+          white-space: nowrap;
+
+          @media (max-width: 480px) {
+            display: none;
+          }
+        }
+      }
+
+      .activePhaseControls {
+        flex: 1;
+
+        .phaseInputsView {
+          animation: fadeInView 0.3s ease;
+        }
+
+        .inputFieldGroup {
+          margin-bottom: 18px;
+
+          label {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #47435e;
+            margin-bottom: 8px;
+            display: block;
+          }
+        }
+
+        .mockInputBox {
+          background: #faf8fe;
+          border: 1px solid #e7dcfa;
+          border-radius: 10px;
+          padding: 11px 14px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 13.5px;
+          font-weight: 600;
+          color: #1e1b2e;
+
+          .inputVersionTag {
+            font-size: 11px;
+            font-weight: 700;
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+            padding: 2px 8px;
+            border-radius: 6px;
+          }
+        }
+
+        .platformSelectorRow {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 8px;
+
+          @media (max-width: 480px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          .platformSelectBtn {
+            background: #faf8fe;
+            border: 1px solid #ece5f7;
+            border-radius: 10px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .pltName {
+              font-size: 13px;
+              font-weight: 700;
+              color: #1e1b2e;
+              transition: color 0.2s;
+            }
+
+            .pltLabel {
+              font-size: 10px;
+              color: #858199;
+              margin-top: 2px;
+              transition: color 0.2s;
+            }
+
+            &:hover {
+              border-color: #d8c8f5;
+              background: #fbf9ff;
+            }
+
+            &.platformSelectActive {
+              background: #9657fa;
+              border-color: #9657fa;
+              box-shadow: 0 4px 12px rgba(150, 87, 250, 0.25);
+
+              .pltName,
+              .pltLabel {
+                color: #ffffff;
+              }
+            }
+          }
+        }
+
+        .twoColRow {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 14px;
+
+          @media (max-width: 540px) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .presetBadgeBox {
+          background: #faf8fe;
+          border: 1px solid #ece5f7;
+          border-radius: 10px;
+          padding: 10px 14px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .badgeKey {
+            font-size: 12px;
+            color: #858199;
+            font-weight: 500;
+          }
+
+          .badgeVal {
+            font-size: 13px;
+            color: #1e1b2e;
+            font-weight: 700;
+          }
+        }
+
+        .tfButtonGroup {
+          display: flex;
+          gap: 6px;
+
+          .tfBtn {
+            flex: 1;
+            padding: 8px 4px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            background: #faf8fe;
+            border: 1px solid #ece5f7;
+            color: #555169;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+
+            &:hover {
+              border-color: #d8c8f5;
+            }
+
+            &.tfBtnActive {
+              background: #9657fa;
+              border-color: #9657fa;
+              color: #ffffff;
+            }
+          }
+        }
+
+        // STEP 2: Indicators & Rules
+        .indicatorPillsWrapper {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          .indPillBtn {
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            background: #faf8fe;
+            border: 1px solid #e7dcfa;
+            color: #58536f;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              border-color: #9657fa;
+            }
+
+            &.indPillActive {
+              background: #f1e7fe;
+              border-color: #9657fa;
+              color: #7c3aed;
+              font-weight: 700;
+            }
+          }
+        }
+
+        .signalCardsStack {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .signalCardBuy {
+            background: #f8fbf9;
+            border: 1px solid #d1fae5;
+            border-radius: 10px;
+            padding: 12px 14px;
+          }
+
+          .signalCardSell {
+            background: #fdfaf8;
+            border: 1px solid #fee2e2;
+            border-radius: 10px;
+            padding: 12px 14px;
+          }
+
+          .signalHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 4px;
+
+            .signalTagBuy {
+              font-size: 11px;
+              font-weight: 800;
+              color: #059669;
+              text-transform: uppercase;
+              letter-spacing: 0.04em;
+            }
+
+            .signalTagSell {
+              font-size: 11px;
+              font-weight: 800;
+              color: #dc2626;
+              text-transform: uppercase;
+              letter-spacing: 0.04em;
+            }
+
+            .signalLogic {
+              font-size: 11px;
+              color: #75718a;
+            }
+          }
+
+          .conditionFormula {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            flex-wrap: wrap;
+
+            code {
+              background: #ffffff;
+              padding: 3px 7px;
+              border-radius: 6px;
+              border: 1px solid #ede8f5;
+              font-family: monospace;
+              color: #1e1b2e;
+              font-weight: 600;
+            }
+
+            .andBadge {
+              font-size: 10px;
+              font-weight: 800;
+              color: #9657fa;
+              background: #f3ebff;
+              padding: 2px 6px;
+              border-radius: 4px;
+            }
+          }
+
+          .exitFormulaCard {
+            background: #f9f8fc;
+            border: 1px dashed #dcd3eb;
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 12px;
+            color: #58536f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+
+            .exitTag {
+              font-weight: 700;
+              color: #7c3aed;
+              font-size: 11px;
+            }
+          }
+        }
+
+        // STEP 3: Risk Grid
+        .riskMetricsGrid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+          margin-bottom: 14px;
+
+          @media (max-width: 480px) {
+            grid-template-columns: 1fr;
+          }
+
+          .metricCard {
+            background: #faf8fe;
+            border: 1px solid #ece5f7;
+            border-radius: 12px;
+            padding: 14px;
+
+            .metricTop {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 6px;
+
+              .metricName {
+                font-size: 12px;
+                font-weight: 600;
+                color: #64607b;
+              }
+
+              .metricBadgeRed {
+                font-size: 10px;
+                font-weight: 700;
+                color: #dc2626;
+                background: #fef2f2;
+                border: 1px solid #fecaca;
+                padding: 1px 6px;
+                border-radius: 4px;
+              }
+
+              .metricBadgeGreen {
+                font-size: 10px;
+                font-weight: 700;
+                color: #059669;
+                background: #ecfdf5;
+                border: 1px solid #a7f3d0;
+                padding: 1px 6px;
+                border-radius: 4px;
+              }
+
+              .metricBadgePurple {
+                font-size: 10px;
+                font-weight: 700;
+                color: #7c3aed;
+                background: #f4effe;
+                border: 1px solid #e7dcfa;
+                padding: 1px 6px;
+                border-radius: 4px;
+              }
+
+              .metricBadgeAmber {
+                font-size: 10px;
+                font-weight: 700;
+                color: #d97706;
+                background: #fffbeb;
+                border: 1px solid #fde68a;
+                padding: 1px 6px;
+                border-radius: 4px;
+              }
+            }
+
+            .metricValue {
+              font-size: 18px;
+              font-weight: 800;
+              color: #1e1b2e;
+              margin-bottom: 2px;
+            }
+
+            .metricNote {
+              font-size: 11px;
+              color: #8a859e;
+            }
+          }
+        }
+
+        .riskGuardInfoRow {
+          display: flex;
+          justify-content: space-between;
+          background: #ffffff;
+          border: 1px solid #eee8f7;
+          border-radius: 10px;
+          padding: 10px 14px;
+          font-size: 12px;
+          flex-wrap: wrap;
+          gap: 8px;
+
+          .guardItem {
+            display: flex;
+            align-items: center;
+          }
+
+          .guardKey {
+            color: #726e85;
+          }
+
+          .guardVal {
+            color: #1e1b2e;
+            font-weight: 700;
+            margin-left: 6px;
+          }
+        }
+
+        // STEP 4: Switches List
+        .switchesList {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .switchRowItem {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            background: #faf8fe;
+            border: 1px solid #ece5f7;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+              border-color: #d8c8f5;
+              background: #fbf9ff;
+            }
+
+            .switchInfo {
+              padding-right: 12px;
+
+              h6 {
+                font-size: 13.5px;
+                font-weight: 700;
+                color: #1e1b2e;
+                margin: 0 0 2px;
+              }
+
+              p {
+                font-size: 12px;
+                color: #706b85;
+                margin: 0;
+              }
+            }
+
+            .toggleSwitch {
+              width: 44px;
+              height: 24px;
+              background: #e5e0ee;
+              border-radius: 14px;
+              position: relative;
+              transition: all 0.25s ease;
+              flex-shrink: 0;
+
+              span {
+                width: 18px;
+                height: 18px;
+                background: #ffffff;
+                border-radius: 50%;
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                transition: all 0.25s ease;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+              }
+
+              &.toggleOn {
+                background: #9657fa;
+
+                span {
+                  transform: translateX(20px);
+                }
+              }
+            }
+          }
+        }
+
+        // STEP 5: Validation Report
+        .validationReportBox {
+          background: #f6fdf9;
+          border: 1px solid #a7f3d0;
+          border-radius: 14px;
+          padding: 16px;
+          margin-bottom: 18px;
+
+          .reportHead {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+
+            .reportIcon {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              background: #10b981;
+              color: #ffffff;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: 800;
+              font-size: 16px;
+              flex-shrink: 0;
+            }
+
+            h5 {
+              font-size: 15px;
+              font-weight: 700;
+              color: #065f46;
+              margin: 0 0 2px;
+            }
+
+            p {
+              font-size: 12px;
+              color: #047857;
+              margin: 0;
+            }
+          }
+
+          .checklistGrid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+
+            @media (max-width: 480px) {
+              grid-template-columns: 1fr;
+            }
+
+            .checkCard {
+              background: #ffffff;
+              border: 1px solid #d1fae5;
+              border-radius: 8px;
+              padding: 8px 10px;
+              font-size: 12px;
+              font-weight: 600;
+              color: #065f46;
+              display: flex;
+              align-items: center;
+              gap: 6px;
+
+              .checkDot {
+                color: #10b981;
+                font-weight: 800;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Right Column: Live Strategy Architecture Inspector Panel
+    .blueprintInspectorPanel {
+      padding: 24px;
+      background: #fbf9fe;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      @media (max-width: 640px) {
+        padding: 18px;
+      }
+
+      .inspectorHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #ebe5f5;
+
+        .inspectorTitleWrap {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          font-weight: 700;
+          color: #1e1b2e;
+
+          .inspectorIcon {
+            color: #9657fa;
+          }
+        }
+      }
+
+      .blueprintContent {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        // Spec Overview Card
+        .specOverviewCard {
+          background: #ffffff;
+          border: 1px solid #e9e1f5;
+          border-radius: 14px;
+          padding: 14px;
+          box-shadow: 0 4px 14px rgba(150, 87, 250, 0.04);
+
+          .specHeaderRow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .specBotName {
+              font-size: 13.5px;
+              font-weight: 800;
+              color: #1e1b2e;
+            }
+
+            .specPlatformPill {
+              font-size: 11px;
+              font-weight: 800;
+              background: #f2e9fe;
+              color: #7c3aed;
+              border: 1px solid #dac6f7;
+              padding: 2px 8px;
+              border-radius: 6px;
+            }
+          }
+
+          .specMiniGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+
+            .miniItem {
+              background: #faf8fe;
+              border-radius: 8px;
+              padding: 8px;
+              text-align: center;
+
+              .miniLabel {
+                font-size: 10.5px;
+                color: #817c96;
+                display: block;
+              }
+
+              .miniVal {
+                font-size: 12px;
+                font-weight: 700;
+                color: #1e1b2e;
+                margin-top: 2px;
+                display: block;
+              }
+            }
+          }
+        }
+
+        // Risk-Reward Calibration Bar
+        .riskRewardMeterBlock {
+          background: #ffffff;
+          border: 1px solid #e9e1f5;
+          border-radius: 14px;
+          padding: 14px;
+
+          .meterHeader {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+
+            span {
+              color: #69657f;
+            }
+
+            strong {
+              color: #1e1b2e;
+            }
+          }
+
+          .meterTrack {
+            height: 24px;
+            border-radius: 8px;
+            background: #f0eaf7;
+            overflow: hidden;
+            display: flex;
+
+            .meterRiskPortion {
+              background: linear-gradient(90deg, #f87171, #ef4444);
+              color: #ffffff;
+              font-size: 10px;
+              font-weight: 700;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            .meterRewardPortion {
+              background: linear-gradient(90deg, #10b981, #059669);
+              color: #ffffff;
+              font-size: 10px;
+              font-weight: 700;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+          }
+        }
+
+        // Architecture Nodes Breakdown
+        .signalsBreakdownBox {
+          background: #ffffff;
+          border: 1px solid #e9e1f5;
+          border-radius: 14px;
+          padding: 14px;
+
+          .breakdownTitle {
+            font-size: 11.5px;
+            font-weight: 700;
+            color: #817c96;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 10px;
+            display: block;
+          }
+
+          .nodesList {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+
+            .nodeItem {
+              display: flex;
+              align-items: center;
+              font-size: 12px;
+              gap: 8px;
+
+              .nodeDot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: #9657fa;
+                flex-shrink: 0;
+              }
+
+              .nodeKey {
+                color: #726e86;
+                font-weight: 500;
+              }
+
+              .nodeVal {
+                color: #1e1b2e;
+                font-weight: 700;
+                margin-left: auto;
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    // Workbench Bottom Footer Bar
+    .workbenchFooterBar {
+      padding: 14px 24px;
+      background: #faf8fe;
+      border-top: 1px solid #ebe5f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+
+      .stepperSummary {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .phaseCounterText {
+          font-size: 12px;
+          font-weight: 600;
+          color: #8a859e;
+        }
+
+        .activePhaseName {
+          font-size: 13.5px;
+          font-weight: 700;
+          color: #7c3aed;
+        }
+      }
+
+      .footerNavButtons {
+        display: flex;
+        gap: 10px;
+
+        .navBtnPrev {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 14px;
+          background: #ffffff;
+          border: 1px solid #dfd6ee;
+          border-radius: 8px;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #625e77;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: #f3ebff;
+            color: #7c3aed;
+            border-color: #9657fa;
+          }
+        }
+
+        .navBtnNext {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 8px 16px;
+          background: linear-gradient(135deg, #9657fa 0%, #7c3aed 100%);
+          border: none;
+          border-radius: 8px;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #ffffff;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 12px rgba(150, 87, 250, 0.25);
+
+          &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(150, 87, 250, 0.35);
+          }
+        }
+      }
+    }
+  }
+
+  // =========================================================================
+  // BOTTOM CTA BANNER (AlgoMatic Theme)
+  // =========================================================================
+  .builderBottomCtaCard {
+    background: linear-gradient(135deg, #ffffff 0%, #f6efff 60%, #eee4fd 100%);
+    background-size: cover;
+    background-position: center;
+    border: 1.5px solid #ece6f6;
+    border-radius: 30px;
+    padding: 42px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 45px rgba(150, 87, 250, 0.08), 0 2px 10px rgba(0, 0, 0, 0.02);
+    z-index: 1;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 32px 28px;
+      gap: 24px;
+    }
+
+    .ctaGlowSphere {
+      position: absolute;
+      top: -80px;
+      right: 10%;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(150, 87, 250, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .ctaContentCol {
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+
+      h4 {
+        font-family: "Urbanist", sans-serif;
+        font-size: 30px;
+        font-weight: 700;
+        color: #12111d;
+        margin-bottom: 8px;
+        letter-spacing: -0.015em;
+
+        span {
+          background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-family: inherit;
+          font-style: normal;
+          font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
+      }
+
+      p {
+        font-family: "Urbanist", sans-serif;
+        font-size: 15.5px;
+        line-height: 1.6;
+        color: #58556d;
+        margin: 0;
+      }
+    }
+
+    .ctaButtonCol {
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+
+      button,
+      .themeCtaBtn {
+        background: linear-gradient(135deg, #9657fa 0%, #7c3aed 100%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.25) !important;
+        box-shadow: 0 8px 24px rgba(150, 87, 250, 0.35) !important;
+        border-radius: 9999px !important;
+        padding: 13px 30px !important;
+
+        span {
+          color: #ffffff !important;
+          font-weight: 600 !important;
+          font-size: 16px !important;
+        }
+
+        svg line,
+        svg polyline {
+          stroke: #ffffff !important;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #8746ec 0%, #6826d7 100%) !important;
+          box-shadow: 0 12px 32px rgba(150, 87, 250, 0.5) !important;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// Keyframe Animations
+@keyframes statusPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes fadeInView {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stepLoopProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

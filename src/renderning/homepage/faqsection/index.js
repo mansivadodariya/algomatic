@@ -1,77 +1,93 @@
 import React, { useState } from "react";
 import styles from "./faqsection.module.scss";
-import Commonlable from "@/components/commonlable";
 import Dropdownicon from "../../../../public/assets/images/dropdownicon";
 
 const faqData = [
   {
-    question: "What is AlgoMatic Bot and how does it work?",
+    id: "01",
+    question: "What is AlgomaticBot?",
     answer: (
       <p>
-        AlgoMatic is an MT5-based automated trading bot that leverages
-        spot-to-future arbitrage to generate low-risk profits. It identifies
-        pricing differences between the spot and futures markets across brokers
-        and executes simultaneous trades in milliseconds—eliminating manual
-        delays, slippage, and human error.
+        AlgomaticBot is a trading bot marketplace and creation platform where
+        users can discover available bots, create their own strategies, and
+        request custom bot development.
       </p>
     ),
   },
   {
-    question: "Is AlgoMatic truly risk-free?",
+    id: "02",
+    question: "Can I create my own trading bot?",
     answer: (
       <p>
-        While no trading strategy is 100% risk-free, AlgoMatic uses a
-        market-neutral arbitrage approach that minimizes directional risk. By
-        buying in one market and selling in another at the same time, it aims to
-        lock in small, consistent profits. That said, broker slippage, latency,
-        and liquidity conditions can impact outcomes—so proper configuration and
-        broker choice are essential.
+        Yes. The planned platform offers an AI Bot Builder for conversational
+        strategy creation and a Custom Bot Builder for configuring strategy
+        rules through a form.
       </p>
     ),
   },
   {
-    question: "Which currency pairs or commodities work best with AlgoMatic?",
+    id: "03",
+    question: "Can I request a custom bot from an expert?",
     answer: (
       <p>
-        AlgoMatic can technically operate on any major forex pair or commodity,
-        but it performs best on highly liquid and volatile instruments like
-        XAUUSD (Gold/USD) and EURUSD. These markets frequently exhibit micro
-        price inefficiencies across brokers, making them ideal for arbitrage.
+        Yes. You can submit your requirements to the expert development team
+        to discuss the strategy, feasibility, scope, pricing, and delivery
+        terms.
       </p>
     ),
   },
   {
-    question: "What do I need to start using AlgoMatic Bot?",
+    id: "04",
+    question: "How do I purchase a trading bot?",
     answer: (
       <p>
-        A PC or VPS with MT5 installed Accounts with two different brokers
-        (preferably with different liquidity providers) The AlgoMatic setup file,
-        provided via Telegram or email Basic configuration as per our setup
-        guide (lot size, buffer, trade thresholds) Our team offers full
-        installation support and configuration help if needed.
+        Browse the marketplace, review a listing's details and license terms,
+        and complete checkout. After successful payment, the bot will become
+        available according to its delivery method.
       </p>
     ),
   },
   {
-    question: "Which brokers are recommended for AlgoMatic?",
+    id: "05",
+    question: "How do I receive a purchased MT5 bot?",
     answer: (
       <p>
-        We recommend brokers that support: Fast execution with low latency
-        Variable spreads Different liquidity providers No restrictions on
-        arbitrage Top suggestions include Skyriss, IC Markets, and Pepperstone.
-        Always test your setup in demo mode before going live.
+        For downloadable bots, eligible purchases provide access to the
+        compiled bot file and installation instructions. Managed deployment
+        may be offered separately for supported environments.
       </p>
     ),
   },
   {
-    question: "Do you offer support or whitelabel options?",
+    id: "06",
+    question: "Can I sell a bot I create?",
     answer: (
       <p>
-        Yes! AlgoMatic provides: 1-on-1 bot setup assistance Broker integration
-        help Real-time troubleshooting White label & franchise solutions for
-        trading educators, prop firms, and academies Contact us on Telegram at
-        @joinalgomatic or visit www.algomaticbot.com to explore partnership
-        options.
+        Eligible creators can submit their bots for marketplace review.
+        Approved listings can be published under the platform's seller terms
+        and commission policy.
+      </p>
+    ),
+  },
+  {
+    id: "07",
+    question: "Does AlgomaticBot guarantee profits?",
+    answer: (
+      <p>
+        No. Trading involves risk, and no trading bot can guarantee profits or
+        eliminate losses. Historical backtests and past performance do not
+        guarantee future results.
+      </p>
+    ),
+  },
+  {
+    id: "08",
+    question: "Which markets and platforms are supported?",
+    answer: (
+      <p>
+        Availability depends on the specific bot, supported instruments,
+        broker, and execution platform. Review each listing for compatibility
+        details.
       </p>
     ),
   },
@@ -84,63 +100,44 @@ export default function Faqsection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const faqsLeft = faqData.slice(0, 3);
-  const faqsRight = faqData.slice(3);
-
   return (
-    <>
-      <div className={styles.faqsectionmain}>
-        <div className="container-xl">
-          <div className={styles.faqsectiontitle}>
-            <Commonlable Text="Common Question" />
-            <h6>
-              Frequently <span>Asked</span> Questions
-            </h6>
-          </div>
-          <div className={styles.faqgrdmain}>
-            <div className={styles.faqgrdleft}>
-              {faqsLeft.map((faq, index) => (
-                <div
-                  key={index}
-                  className={`${styles.faqboxmain} ${
-                    openIndex === index ? styles.faqboxmainactive : ""
-                  }`}
-                  onClick={() => handleToggle(index)}
-                >
-                  <div className={styles.faqboxheader}>
-                    <h1>{faq.question}</h1>
-                    <div className={styles.faqicon}>
-                      <Dropdownicon />
-                    </div>
+    <div className={styles.faqsectionmain}>
+      <div className="container-xl">
+        <div className={styles.faqsectiontitle}>
+          <h6>
+            Frequently <span>Asked</span> Questions
+          </h6>
+          <p className={styles.faqSubtitle}>
+            Everything you need to know about AlgomaticBot marketplace, bot creation, and custom development.
+          </p>
+        </div>
+
+        {/* Single Column (One Line per FAQ) Container */}
+        <div className={styles.faqSingleColumn}>
+          {faqData.map((faq, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                className={`${styles.faqboxmain} ${
+                  isOpen ? styles.faqboxmainactive : ""
+                }`}
+                onClick={() => handleToggle(index)}
+              >
+                <div className={styles.faqboxheader}>
+                  <div className={styles.questionGroup}>
+                    <h2 className={styles.faqQuestionText}>{faq.question}</h2>
                   </div>
-                  <div className={styles.faqboxcontent}>{faq.answer}</div>
-                </div>
-              ))}
-            </div>
-            <div>
-              {faqsRight.map((faq, index) => (
-                <div
-                  key={index + faqsLeft.length}
-                  className={`${styles.faqboxmain} ${
-                    openIndex === index + faqsLeft.length
-                      ? styles.faqboxmainactive
-                      : ""
-                  }`}
-                  onClick={() => handleToggle(index + faqsLeft.length)}
-                >
-                  <div className={styles.faqboxheader}>
-                    <h1>{faq.question}</h1>
-                    <div className={styles.faqicon}>
-                      <Dropdownicon />
-                    </div>
+                  <div className={styles.faqicon}>
+                    <Dropdownicon />
                   </div>
-                  <div className={styles.faqboxcontent}>{faq.answer}</div>
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className={styles.faqboxcontent}>{faq.answer}</div>
+              </div>
+            );
+          })}
         </div>
       </div>
-    </>
+    </div>
   );
 }
