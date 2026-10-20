@@ -1,182 +1,482 @@
 .backtestingsectionmain {
-  padding: 80px 0;
-  background-color: #f7f7f7;
+  padding: 100px 0;
+  position: relative;
+  background: #ffffff;
+  overflow: hidden;
 
-  @media (max-width:1024px) {
-    padding: 80px 0;
+  @media (max-width: 1024px) {
+    padding: 60px 0;
+  }
+
+  .ambientBackdrop {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(
+      circle,
+      rgba(150, 87, 250, 0.05) 0%,
+      transparent 70%
+    );
+    top: 10%;
+    right: 5%;
+    pointer-events: none;
+    filter: blur(60px);
   }
 
   .backtestingsection {
-    background-color: #fff;
-    border-radius: 24px;
-    box-shadow: 0 1px 2px 0 rgba(69, 69, 69, 0.24),
-      0 0 0 1px rgba(71, 71, 71, 0.08);
-    padding: 98px;
+    position: relative;
+    background: #ffffff;
+    border: 1.5px solid #ece8f5;
+    border-radius: 28px;
+    padding: 48px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1.15fr;
+    gap: 48px;
     align-items: center;
-    gap: 40px;
-
-    @media (max-width:1200px) {
-      padding: 70px;
-    }
+    box-shadow: 0 16px 48px -12px rgba(150, 87, 250, 0.08),
+      0 4px 16px rgba(0, 0, 0, 0.02);
+    overflow: hidden;
 
     @media (max-width: 1024px) {
-      grid-template-columns: repeat(1, 1fr);
-      gap: 24px;
-      padding: 44px;
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+      gap: 36px;
     }
 
-    @media (max-width: 900px) {
-      padding: 10px;
+    .topAccentBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        #9657fa,
+        #c084fc,
+        transparent
+      );
+      opacity: 0.8;
     }
 
+    /* Left Column: Phone Showcase Spotlight */
     .backtestingsectionleft {
-      border: 1px solid #ebebeb;
-      background-color: #f7f7f7;
-      border-radius: 16px;
+      .spotlightBackdrop {
+        position: relative;
+        background: linear-gradient(145deg, #fbfaff 0%, #f4effd 100%);
+        border: 1.5px solid #ece4f8;
+        border-radius: 22px;
+        padding: 40px 20px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        min-height: 440px;
 
-      @media (max-width: 1200px) {
-        height: 433px;
-      }
+        .ambientPhoneGlow {
+          position: absolute;
+          width: 220px;
+          height: 220px;
+          border-radius: 50%;
+          background: #9657fa;
+          opacity: 0.15;
+          filter: blur(55px);
+          pointer-events: none;
+        }
 
-      img {
-        width: 100%;
-        height: 100%;
-        display: block;
+        .verifiedFloatingBadge {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          padding: 5px 12px;
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(8px);
+          border: 1px solid #e2e8f0;
+          border-radius: 999px;
+          font-size: 11px;
+          font-weight: 700;
+          color: #15803d;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 
-        @media (max-width: 1200px) {
-          max-width: 457px;
-          margin: 0 auto;
+          .pulseDot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #22c55e;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: greenPulse 2s infinite;
+          }
+        }
+
+        .phoneImageWrapper {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          z-index: 1;
+
+          img {
+            max-width: 90%;
+            max-height: 380px;
+            object-fit: contain;
+            filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.14));
+            transition: transform 0.4s ease;
+
+            &:hover {
+              transform: scale(1.03);
+            }
+          }
+        }
+
+        .verifiedBottomTag {
+          margin-top: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 11px;
+          font-weight: 600;
+          color: #64748b;
+          background: rgba(255, 255, 255, 0.85);
+          padding: 4px 12px;
+          border-radius: 999px;
+          border: 1px solid #ede8fa;
+
+          .shieldIcon {
+            color: #9657fa;
+          }
         }
       }
     }
 
+    /* Right Column: Terminal Credentials & Links */
     .backtestingsectionright {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      h3 {
-        font-size: 52px;
-        font-weight: 600;
-        line-height: 62px;
-        color: #111;
-        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      gap: 22px;
 
-        @media (max-width: 1200px) {
-          font-size: 43px;
-          line-height: 52px;
-        }
-
-        @media (max-width: 1024px) {
-          font-size: 33px;
-          line-height: 39px;
-        }
-
-        span {
-          color: #9657fa;
-          font-style: italic;
-          font-weight: 400;
-          font-family: "PT Serif", "PT Serif Placeholder", serif;
-        }
-      }
-
-      .backtestingcontent {
+      .headerBlock {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 10px;
 
-        @media (max-width: 900px) {
-          gap: 5px;
+        h3 {
+          font-size: 46px;
+          font-weight: 700;
+          line-height: 1.2;
+          color: #0f172a;
+          margin: 0;
+          font-family: "Urbanist", sans-serif;
+          letter-spacing: -0.5px;
+
+          @media (max-width: 768px) {
+            font-size: 32px;
+          }
+
+          span {
+            background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: inherit;
+            font-style: normal;
+            font-weight: 700;
+          }
         }
 
-        p {
-          font-size: 18px;
+        .subtitle {
+          font-size: 15.5px;
           font-weight: 400;
-          line-height: 27px;
-          color: #666666;
-        }
-
-        span {
-          font-size: 18px;
-          font-weight: 500;
-          line-height: 27px;
-          color: #666666;
-        }
-
-        .backtestingcontentflx {
-          display: flex;
-          align-items: center;
-          gap: 7px;
+          line-height: 25px;
+          color: #64748b;
+          margin: 0;
         }
       }
 
-      .backtestinglastflx {
+      /* MT5 Terminal Credentials Card */
+      .credentialsCard {
+        background: #faf8ff;
+        border: 1.5px solid #ede8fa;
+        border-radius: 20px;
+        padding: 22px;
         display: flex;
-        gap: 10px;
+        flex-direction: column;
+        gap: 16px;
+        box-shadow: 0 4px 16px rgba(150, 87, 250, 0.03);
 
-        @media (max-width: 900px) {
-          flex-direction: column;
-        }
-
-        .myfxbook {
-          padding: 10px;
-          background-color: #141414;
-          border-radius: 10px;
-          max-width: 210px;
+        .terminalHeader {
           display: flex;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
-          width: 100%;
+          padding-bottom: 12px;
+          border-bottom: 1px dashed #e8e2f6;
 
-          @media (max-width: 900px) {
-            max-width: 100%;
-          }
-
-          img {
-            width: 190px;
-            height: 49px;
-          }
-        }
-
-        .backtestinglastflxright {
-          display: flex;
-          align-content: center;
-          gap: 10px;
-
-          a {
+          .terminalHeaderLeft {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: #cdcdcd;
-            border-radius: 10px;
-            width: 114px;
-            padding: 10px;
-            transition: 0.4s ease-in-out;
+            gap: 10px;
 
-            @media (max-width: 1200px) {
-              width: 100%;
-            }
-
-            &:hover {
-              background-color: #e0e0e0;
+            .terminalDots {
+              display: flex;
+              gap: 4px;
 
               span {
-                scale: 1.1;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #cbd5e1;
               }
             }
 
-            span {
-              font-size: 17px;
+            .terminalTitle {
+              font-size: 11.5px;
+              font-weight: 700;
+              color: #475569;
+              text-transform: uppercase;
+              letter-spacing: 0.6px;
+            }
+          }
+
+          .liveBadge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #15803d;
+            background: #dcfce7;
+            padding: 2px 8px;
+            border-radius: 999px;
+          }
+        }
+
+        .credentialsGrid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 12px;
+
+          @media (max-width: 640px) {
+            grid-template-columns: 1fr;
+          }
+
+          .credItem {
+            background: #ffffff;
+            border: 1px solid #ebe4f7;
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .credLabelRow {
+              display: flex;
+              align-items: center;
+              gap: 6px;
+              font-size: 11px;
               font-weight: 600;
-              line-height: 19px;
-              color: #111111;
-              transition: 0.2s ease-in-out;
+              color: #94a3b8;
+              text-transform: uppercase;
+              letter-spacing: 0.4px;
+
+              .credIcon {
+                color: #9657fa;
+                flex-shrink: 0;
+              }
+            }
+
+            .credValue {
+              font-size: 14.5px;
+              font-weight: 700;
+              color: #0f172a;
+              word-break: break-all;
+            }
+
+            .copyValueRow {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 8px;
+
+              .credValueMono {
+                font-size: 14px;
+                font-weight: 700;
+                color: #0f172a;
+                font-family: monospace;
+                letter-spacing: 0.5px;
+                word-break: break-all;
+              }
+
+              .copyBtn {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                padding: 4px 8px;
+                background: #faf8ff;
+                border: 1px solid #ede8fa;
+                border-radius: 6px;
+                font-size: 11px;
+                font-weight: 600;
+                color: #9657fa;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                outline: none;
+                flex-shrink: 0;
+
+                &:hover {
+                  background: #9657fa;
+                  color: #ffffff;
+                  border-color: #9657fa;
+                }
+
+                .checkIcon {
+                  color: #22c55e;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      /* Verification Deck & Portfolio Links */
+      .verificationDeck {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        @media (max-width: 640px) {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .myfxbookBrandBox {
+          background: #111827;
+          border: 1px solid #1f2937;
+          border-radius: 14px;
+          padding: 12px 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3px;
+          min-width: 170px;
+
+          @media (max-width: 640px) {
+            width: 100%;
+          }
+
+          img {
+            max-width: 140px;
+            height: auto;
+            object-fit: contain;
+          }
+
+          .auditTag {
+            font-size: 9.5px;
+            font-weight: 600;
+            color: #9ca3af;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+          }
+        }
+
+        .portfolioLinksRow {
+          display: flex;
+          gap: 12px;
+          flex: 1;
+
+          @media (max-width: 640px) {
+            width: 100%;
+          }
+
+          .portfolioBtn {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #faf8ff;
+            border: 1.5px solid #ede8fa;
+            border-radius: 14px;
+            text-decoration: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+            &:hover {
+              background: #9657fa;
+              border-color: #9657fa;
+              transform: translateY(-3px);
+              box-shadow: 0 10px 24px rgba(150, 87, 250, 0.25);
+
+              .btnContent {
+                .btnLabel {
+                  color: rgba(255, 255, 255, 0.85);
+                }
+
+                .btnValue {
+                  color: #ffffff;
+                }
+              }
+
+              .btnIconCircle {
+                background: rgba(255, 255, 255, 0.2);
+                color: #ffffff;
+                border-color: transparent;
+              }
+            }
+
+            .btnContent {
+              display: flex;
+              flex-direction: column;
+              gap: 2px;
+
+              .btnLabel {
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #64748b;
+                transition: color 0.2s ease;
+              }
+
+              .btnValue {
+                font-size: 17px;
+                font-weight: 800;
+                color: #0f172a;
+                font-family: "Urbanist", sans-serif;
+                transition: color 0.2s ease;
+              }
+            }
+
+            .btnIconCircle {
+              width: 28px;
+              height: 28px;
+              border-radius: 50%;
+              background: #ffffff;
+              border: 1px solid #e2e8f0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #9657fa;
+              transition: all 0.2s ease;
             }
           }
         }
       }
     }
+  }
+}
+
+@keyframes greenPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
   }
 }

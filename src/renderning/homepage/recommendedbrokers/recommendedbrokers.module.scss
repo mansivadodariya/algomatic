@@ -1,5 +1,7 @@
 .recommendedbrokersmain {
   padding: 80px 0;
+  width: 100%;
+  overflow: hidden;
 
   .recommendedbrokerstitle {
     display: flex;
@@ -9,11 +11,11 @@
 
     h4 {
       font-size: 52px;
-      font-weight: 600;
+      font-weight: 700;
       line-height: 62px;
       color: #111;
       font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
-      margin-top: 14px;
+      margin-top: 0;
 
       @media (max-width: 1200px) {
         font-size: 43px;
@@ -26,30 +28,40 @@
       }
 
       span {
-        color: #9657fa;
-        font-style: italic;
-        font-weight: 400;
-        font-family: "PT Serif", "PT Serif Placeholder", serif;
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
     }
   }
 
   .marqueecontainer {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgb(0, 0, 0) 10%,
+      rgb(0, 0, 0) 90%,
+      rgba(0, 0, 0, 0) 100%
+    );
     mask-image: linear-gradient(
       to right,
       rgba(0, 0, 0, 0) 0%,
-      rgb(0, 0, 0) 12.5%,
-      rgb(0, 0, 0) 87.5%,
+      rgb(0, 0, 0) 10%,
+      rgb(0, 0, 0) 90%,
       rgba(0, 0, 0, 0) 100%
     );
-    padding: 10px;
+    padding: 10px 0;
 
     .marqueeimage1,
     .marqueeimage2,
     .marqueeimage3,
     .marqueeimage4,
-    .marqueeimage5 {
-      margin-left: 56px;
+    .marqueeimage5,
+    .marqueeimage6,
+    .marqueeimage7 {
+      margin-left: 75px;
 
       img {
         height: 50px;
@@ -84,6 +96,18 @@
     .marqueeimage5 {
       img {
         width: 87px;
+      }
+    }
+
+    .marqueeimage6 {
+      img {
+        width: 195px;
+      }
+    }
+
+    .marqueeimage7 {
+      img {
+        width: 180px;
       }
     }
   }

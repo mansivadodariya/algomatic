@@ -14,7 +14,7 @@ export default function Commonarrowbutton({ Text, Butttonvarient, link, Target, 
   };
 
   const buttonContent = (
-    <button className={`${styles.commonarrowbutton} ${getVariantClasses(Butttonvarient)} ${styles[buttonclassName] || ''}`} onClick={onClick} disabled={disabled || isBtnLoading}>
+    <button className={`${styles.commonarrowbutton} ${getVariantClasses(Butttonvarient)} ${styles[buttonclassName] || buttonclassName || ''}`} onClick={onClick} disabled={disabled || isBtnLoading}>
       <span>{Text}</span>
       {showIcon && (
         <div className={styles.butonarrow}>

@@ -1,127 +1,228 @@
 .clientstoriesmain {
-  padding: 90px 0;
+  position: relative;
+  width: 100%;
   background-color: #f7f7f7;
+  padding: 100px 0 140px;
 
-  .clientstoriestitle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 60px;
+  .sectionInnerWrapper {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 0 40px;
 
-    h5 {
-      font-size: 52px;
-      font-weight: 600;
-      line-height: 62px;
-      color: #111;
-      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+  }
 
-      @media (max-width: 1200px) {
-        font-size: 43px;
-        line-height: 52px;
-      }
+  /* 3-Column Grid with Dedicated Lane for Left, Center, and Right */
+  .threeColumnsGrid {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) minmax(360px, 1fr) minmax(320px, 400px);
+    gap: 48px;
+    align-items: start;
 
-      @media (max-width: 1024px) {
-        font-size: 33px;
-        line-height: 39px;
-      }
-
-      span {
-        color: #9657fa;
-        font-style: italic;
-        font-weight: 400;
-        font-family: "PT Serif", "PT Serif Placeholder", serif;
-      }
+    @media (max-width: 1250px) {
+      grid-template-columns: minmax(280px, 350px) minmax(300px, 1fr) minmax(280px, 350px);
+      gap: 32px;
     }
 
-    p {
-      font-size: 18px;
-      font-weight: 400;
-      line-height: 28px;
-      color: #616161;
-      max-width: 650px;
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
 
-      @media (max-width: 1200px) {
+  /* Left Column */
+  .cardsColumnLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+  }
+
+  /* Right Column (Staggered offset so left and right cards don't align identically) */
+  .cardsColumnRight {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+    padding-top: 140px;
+
+    @media (max-width: 1024px) {
+      padding-top: 0;
+    }
+  }
+
+  /* Center Column: Sticky in its own lane with ample padding */
+  .centerColumnSticky {
+    position: relative;
+    height: 100%;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 1024px) {
+      order: -1; // On mobile, show title at the top
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .stickyTitleContent {
+      position: sticky;
+      top: calc(50vh - 120px);
+      align-self: flex-start;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 10px;
+      z-index: 2;
+
+      @media (max-width: 1024px) {
+        position: static;
+        top: auto;
+        padding: 0;
+      }
+
+
+      .badgeWrap {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 18px;
+      }
+
+      h5 {
+        position: relative;
+        z-index: 1;
+        font-size: clamp(30px, 2.8vw, 44px);
+        font-weight: 800;
+        line-height: 1.22;
+        color: #12111d;
+        margin: 0 0 16px;
+        font-family: "Urbanist", sans-serif;
+        letter-spacing: -0.02em;
+
+        span {
+          background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          font-family: inherit;
+          font-style: normal;
+          font-weight: 800;
+        }
+      }
+
+      p {
+        position: relative;
+        z-index: 1;
         font-size: 16px;
-        line-height: 24px;
+        font-weight: 400;
+        line-height: 1.6;
+        color: #616161;
+        margin: 0;
+        max-width: 440px;
       }
     }
   }
 
-  .clientreviewmarquee {
-    mask-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0) 0%,
-      rgb(0, 0, 0) 12.5%,
-      rgb(0, 0, 0) 87.5%,
-      rgba(0, 0, 0, 0) 100%
-    );
+  /* Review Cards (Spacious, Clean Theme) */
+  .reviewCard {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 30px 28px;
+    border: 1px solid rgba(71, 71, 71, 0.09);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04),
+                0 1px 3px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
-    .clientreviewmarqueeflx {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(150, 87, 250, 0.12),
+                  0 0 0 1px rgba(150, 87, 250, 0.28);
+      border-color: rgba(150, 87, 250, 0.35);
+    }
+
+    .cardHeader {
       display: flex;
-      align-items: flex-start;
-      margin: 4px 0;
+      align-items: center;
+      gap: 14px;
 
-      .clientreviewboxmain {
-        max-width: 371px;
-        min-height: 330px;
-        padding: 24px;
-        border-radius: 24px;
-        box-shadow: 0px 1px 2px 0px rgba(69, 69, 69, 0.24),
-          0px 0px 0px 1px rgba(71, 71, 71, 0.08);
+      .avatarWrap {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: #f0f0f0;
+        flex-shrink: 0;
+        border: 2px solid rgba(150, 87, 250, 0.2);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .userInfo {
         display: flex;
-        justify-content: space-between;
         flex-direction: column;
-        gap: 30px;
-        margin-right: 32px;
-        background-color: #fff;
+        gap: 2px;
 
-        .clientreviewbody {
-          p {
-            font-size: 18px;
-            font-weight: 400;
-            line-height: 28px;
-            color: #111;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 7;
-            -webkit-box-orient: vertical;
-          }
+        h4 {
+          font-size: 18px;
+          font-weight: 700;
+          color: #111111;
+          margin: 0;
+          font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
         }
 
-        .clientreviewfoot {
-          display: flex;
-          align-items: center;
-          gap: 14px;
+        span {
+          font-size: 14px;
+          font-weight: 500;
+          color: #71717a;
+        }
+      }
+    }
 
-          .clientreviewfootimage {
-            width: 56px;
-            height: 56px;
+    .cardBody {
+      p {
+        font-size: 15.5px;
+        font-weight: 400;
+        line-height: 1.65;
+        color: #27272a;
+        margin: 0;
+        letter-spacing: -0.1px;
+      }
+    }
 
-            img {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-              object-fit: cover;
-            }
-          }
+    .cardFooter {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(0, 0, 0, 0.08);
 
-          .clientreviewfoottext {
-            span {
-              font-size: 18px;
-              font-weight: 500;
-              line-height: 32px;
-              color: #111;
-            }
+      .ratingBox {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: rgba(245, 158, 11, 0.1);
+        padding: 5px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(245, 158, 11, 0.22);
 
-            p {
-              font-size: 14px;
-              font-weight: 500;
-              line-height: 20px;
-              color: #666666;
-            }
-          }
+        svg {
+          flex-shrink: 0;
+        }
+
+        span {
+          font-size: 13.5px;
+          font-weight: 700;
+          color: #d97706;
+          line-height: 1;
         }
       }
     }

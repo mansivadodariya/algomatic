@@ -26,27 +26,23 @@ export default function MobileHeader({ setHeader, header }) {
       >
         <div className={styles.menudetails}>
           <div className={styles.menulinks}>
-            {/* <Link href="/#About" onClick={() => setHeader(!header)}>
-              About
-            </Link> */}
-            <Link href="/#Howitworks" onClick={() => setHeader(!header)}>
-              How It Works
-            </Link>
-            <Link href="/#Keyfeatures" onClick={() => setHeader(!header)}>
-              Features
-            </Link>
-            <Link href="/#Backtesting" onClick={() => setHeader(!header)}>
-              Backtesting
-            </Link>
-            <Link href="/marketplace" className={styles.hightlight} onClick={() => setHeader(!header)}>
-              Algo Bot
-            </Link>
             <Link
-              href="/marketplace/#trading-tools"
-              className={styles.hightlight}
+              href="/ai-bot-market-place"
               onClick={() => setHeader(!header)}
             >
-              Trading Tool
+              AI Bot Marketplace
+            </Link>
+            <Link
+              href="/bot-builder"
+              onClick={() => setHeader(!header)}
+            >
+              Bot Builder
+            </Link>
+            <Link
+              href="/ask-our-expert"
+              onClick={() => setHeader(!header)}
+            >
+              Ask our expert
             </Link>
             <div className={styles.sidebardropdownmain}>
               <div
@@ -80,18 +76,21 @@ export default function MobileHeader({ setHeader, header }) {
                       setIsDropdownOpen(false);
                     }}
                   >
-                    White Label
+                    White-Label
                   </Link>
                 </div>
               </div>
             </div>
           </div>
-          <Commonarrowbutton
-            Text="Contact Us"
-            Butttonvarient="lightoutlined"
-            link={`https://wa.me/${utilitySettings?.phoneNo}`}
-            Target="blank"
-          />
+          <div className={styles.bottomCtaWrapper}>
+            <Commonarrowbutton
+              Text="Contact Us"
+              Butttonvarient="lightoutlined"
+              buttonclassName="widthfull"
+              link={`https://wa.me/${utilitySettings?.phoneNo}`}
+              Target="blank"
+            />
+          </div>
         </div>
       </div>
     </>

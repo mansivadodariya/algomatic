@@ -1,0 +1,184 @@
+@import "../../../scss/mixins/index.scss";
+
+.manualFeaturesSection {
+  padding: 100px 0 110px;
+  position: relative;
+  background: linear-gradient(180deg, #faf8fd 0%, #f7f4fb 50%, #faf8fd 100%);
+  border-top: 1px solid #ebe5f5;
+  border-bottom: 1px solid #ebe5f5;
+  overflow: hidden;
+
+  @media (max-width: 991px) {
+    padding: 70px 0;
+  }
+
+  @media (max-width: 576px) {
+    padding: 50px 0;
+  }
+
+  .splitLayout {
+    display: grid;
+    grid-template-columns: 4fr 7fr;
+    gap: 50px;
+    align-items: flex-start;
+
+    @media (max-width: 1100px) {
+      grid-template-columns: 4.5fr 7.5fr;
+      gap: 36px;
+    }
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+
+  // Left Column (Sticky on Desktop)
+  .leftCol {
+    .stickyContent {
+      position: sticky;
+      top: 130px;
+
+      @media (max-width: 991px) {
+        position: static;
+        text-align: center;
+      }
+    }
+
+    .sectionBadge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #6830d6;
+      background: #ffffff;
+      border: 1px solid rgba(150, 87, 250, 0.28);
+      padding: 7px 18px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(104, 48, 214, 0.05);
+    }
+
+    h2 {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 52px;
+      color: #111111;
+      font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+      margin: 0;
+      letter-spacing: -0.5px;
+
+      span {
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      @media (max-width: 1200px) {
+        font-size: 38px;
+        line-height: 46px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 30px;
+        line-height: 38px;
+      }
+    }
+  }
+
+  // Right Column (5 Clean Cards)
+  .rightCol {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .featureCard {
+    background: #ffffff;
+    border: 1px solid #ebe5f5;
+    border-radius: 18px;
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 4px 16px rgba(104, 48, 214, 0.03);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+
+    @media (max-width: 576px) {
+      padding: 20px;
+      gap: 16px;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &:hover {
+      transform: translateX(6px);
+      border-color: #9657fa;
+      box-shadow: 0 12px 28px rgba(104, 48, 214, 0.1);
+
+      @media (max-width: 576px) {
+        transform: translateY(-4px);
+      }
+
+      .iconBox {
+        transform: scale(1.08) rotate(3deg);
+        background: linear-gradient(135deg, rgba(150, 87, 250, 0.22) 0%, rgba(104, 48, 214, 0.28) 100%);
+        color: #551db8;
+      }
+
+      .cardBody {
+        h3 {
+          color: #6830d6;
+        }
+      }
+    }
+
+    .iconBox {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(150, 87, 250, 0.12) 0%, rgba(104, 48, 214, 0.18) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6830d6;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .cardBody {
+      flex: 1;
+
+      h3 {
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 28px;
+        color: #111111;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        margin: 0 0 6px;
+        transition: color 0.25s ease;
+
+        @media (max-width: 576px) {
+          font-size: 19px;
+          line-height: 26px;
+        }
+      }
+
+      p {
+        font-size: 15px;
+        color: #555555;
+        line-height: 24px;
+        margin: 0;
+
+        @media (max-width: 576px) {
+          font-size: 14px;
+          line-height: 22px;
+        }
+      }
+    }
+  }
+}

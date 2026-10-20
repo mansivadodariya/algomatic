@@ -1,344 +1,486 @@
-import React, { useState } from 'react'
-import styles from './helpsection.module.scss';
-import Button from '@/components/button';
-import RightLgArrow from '@/components/icons/rightLgArrow';
-import Link from 'next/link';
-import toast from 'react-hot-toast';
-import axios from 'axios';
+import React, { useState } from "react";
+import styles from "./helpsection.module.scss";
+import {
+  Mail,
+  Phone,
+  MessageCircle,
+  Clock,
+  Send,
+  CheckCircle2,
+  ArrowRight,
+  User,
+  Globe,
+  Loader2,
+} from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
+import { useAppContext } from "@/context/AppContext";
+import { fetchIpAddress } from "@/utils/common";
+import { addInquiryForm } from "@/lib/inquiryApi";
+
+const COUNTRIES = [
+  "India",
+  "United States",
+  "United Kingdom",
+  "United Arab Emirates",
+  "Singapore",
+  "Australia",
+  "Canada",
+  "Germany",
+  "France",
+  "Switzerland",
+  "Netherlands",
+  "Saudi Arabia",
+  "South Africa",
+  "Nigeria",
+  "Malaysia",
+  "Indonesia",
+  "Brazil",
+  "Japan",
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Argentina",
+  "Armenia",
+  "Austria",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Belgium",
+  "Chile",
+  "China",
+  "Colombia",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Egypt",
+  "Finland",
+  "Greece",
+  "Hong Kong",
+  "Hungary",
+  "Iceland",
+  "Ireland",
+  "Israel",
+  "Italy",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kuwait",
+  "Luxembourg",
+  "Mauritius",
+  "Mexico",
+  "New Zealand",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Qatar",
+  "Romania",
+  "Spain",
+  "Sweden",
+  "Thailand",
+  "Turkey",
+  "Vietnam",
+  "Other",
+];
+
 export default function Helpsection() {
-    const [contactData, setContactData] = useState({ country: "Afghanistan" });
-    const [error, setError] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const disposableDomains = ["soebing", "yopmail", "sharklasers", "guerrillamail", "getairmail", "grr", "guerrillamailblock", "pokemail", "spam4", "cazlq", "sloveniakm", "mybx", "memsg", "matra", "maildrop"];
+  const { utilitySettings } = useAppContext();
+  const rawPhone = utilitySettings?.phoneNo || "917046279434";
+  const cleanPhone = rawPhone.replace(/[^0-9]/g, "");
+  const displayPhone = rawPhone.startsWith("+") ? rawPhone : `+${rawPhone}`;
+  const telegramLink = utilitySettings?.telegramLink || "https://t.me/algomaticbot";
+  const officialEmail = utilitySettings?.email || "support@algomaticbot.com";
 
-    const bindInput = (value) => {
-        var regex = new RegExp("^[^0-9]*$");
-        var key = String.fromCharCode(!value.charCode ? value.which : value.charCode);
-        if (regex.test(key)) {
-            value.preventDefault();
-            return false;
-        }
-    };
+  const [contactData, setContactData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    country: "India",
+    message: "",
+  });
 
-    const validateData = () => {
-        let isValid = true;
-        let err = {};
-        let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-        if (!contactData?.email) {
-            err.email = "Please enter your email address";
-            isValid = false;
-        } else if (contactData?.email && regexEmail.test(contactData?.email) === false) {
-            err.email = "Please enter valid email address";
-            isValid = false;
-        }
+  const disposableDomains = [
+    "soebing",
+    "yopmail",
+    "sharklasers",
+    "guerrillamail",
+    "getairmail",
+    "grr",
+    "guerrillamailblock",
+    "pokemail",
+    "spam4",
+    "cazlq",
+    "sloveniakm",
+    "mybx",
+    "memsg",
+    "matra",
+    "maildrop",
+  ];
 
-        if (!contactData?.firstName) {
-            err.firstName = "Please enter your name";
-            isValid = false;
-        }
+  const validate = () => {
+    let isValid = true;
+    let err = {};
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-        if (!contactData?.phone) {
-            err.phone = "Please enter phone number";
-            isValid = false;
-        }
+    if (!contactData.name.trim()) {
+      err.name = "Full name is required";
+      isValid = false;
+    }
 
-        if (!contactData?.message) {
-            err.message = "Please enter your message";
-            isValid = false;
-        }
-
-        setError(err);
-        return isValid;
-    };
-
-    const isDisposableEmail = (email) => {
-        let domain = email.split("@")[1].split(".")[0];
+    if (!contactData.email.trim()) {
+      err.email = "Email address is required";
+      isValid = false;
+    } else if (!emailRegex.test(contactData.email.trim())) {
+      err.email = "Please enter a valid email address";
+      isValid = false;
+    } else {
+      const parts = contactData.email.split("@");
+      if (parts[1]) {
+        const domain = parts[1].split(".")[0]?.toLowerCase();
         if (disposableDomains.includes(domain)) {
-            return true;
-        } else {
-            return false;
+          err.email = "Temporary disposable emails are not permitted";
+          isValid = false;
         }
-    };
-    const functionPostContact = async () => {
-        if (validateData()) {
-            if (isDisposableEmail(contactData?.email)) {
-                toast.error("This email is not allowed. Please use your official email");
-                setContactData({
-                    ...contactData,
-                    email: "",
-                });
-            } else {
+      }
+    }
 
-                setIsLoading(true)
+    if (!contactData.phone.trim()) {
+      err.phone = "Phone number is required";
+      isValid = false;
+    } else if (contactData.phone.replace(/[^0-9]/g, "").length < 7) {
+      err.phone = "Please enter a valid phone number";
+      isValid = false;
+    }
 
-                const newData = {
-                    text: `Name:${contactData?.firstName}\n Email:${contactData?.email}\n Country:${contactData?.country} Phone Number:${contactData?.phone}\n Description:${contactData?.message}`,
-                };
-                await axios(`https://hooks.slack.com/services/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`, {
-                    method: "POST",
-                    data: JSON.stringify(newData),
-                    headers: {
-                        "Content-type": "application/x-www-form-urlencoded",
-                    },
-                })
-                    .then((res) => {
-                        setIsLoading(false)
-                        toast.success("Thank you for contacting us. We will get back to you soon.");
-                        setContactData({
-                            firstName: "",
-                            email: "",
-                            phone: "",
-                            country: "",
-                            message: "",
-                        });
-                    })
-                    .catch((err) => {
-                        toast.error("Something went wrong");
-                        setIsLoading(false)
-                    });
-            }
-        }
-    };
+    if (!contactData.message.trim()) {
+      err.message = "Please write a brief message or requirement";
+      isValid = false;
+    }
 
-    return (
-        <div className={styles.helpsectionAlignment}>
-            <div className="container">
-                <div className={styles.grid}>
-                    <div className={styles.griditems}>
-                        <h2>We're Here to Help</h2>
-                        <p>
-                            Need assistance? Get in touch with our team for any queries about our services.
-                        </p>
-                    </div>
-                    <div className={styles.griditems}>
-                       
-                        <div className={styles.twoCol}>
-                            <div className={styles.input}>
-                                <label>First Name <span>* {error?.firstName}</span></label>
+    setErrors(err);
+    return isValid;
+  };
 
-                                <input type="name" placeholder="Enter your first name" value={contactData?.firstName} onChange={(e) => {
-                                    setContactData({
-                                        ...contactData,
-                                        firstName: e.target.value,
-                                    });
-                                    setError({ ...error, firstName: "" });
-                                }} />
-                            </div>
-                            <div className={styles.input}>
-                                <label>Email Address
-                                    <span>* {error?.email}</span></label>
-                                <input type="email" placeholder="Enter your email address" value={contactData?.email} onChange={(e) => {
-                                    setContactData({
-                                        ...contactData,
-                                        email: e.target.value,
-                                    });
-                                    setError({ ...error, email: "" });
-                                }} />
-                            </div>
-                            <div className={styles.input}>
-                                <label>Country</label>
-                                <select value={contactData?.country} onChange={(e) => setContactData({
-                                    ...contactData,
-                                    country: e.target.value,
-                                })}>
-                                    <option value="Afghanistan">Afghanistan</option>
-                                    <option value="Albania">Albania</option>
-                                    <option value="Algeria">Algeria</option>
-                                    <option value="Andorra">Andorra</option>
-                                    <option value="Angola">Angola</option>
-                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                    <option value="Argentina">Argentina</option>
-                                    <option value="Armenia">Armenia</option>
-                                    <option value="Australia">Australia</option>
-                                    <option value="Austria">Austria</option>
-                                    <option value="Azerbaijan">Azerbaijan</option>
-                                    <option value="Bahamas">Bahamas</option>
-                                    <option value="Bahrain">Bahrain</option>
-                                    <option value="Bangladesh">Bangladesh</option>
-                                    <option value="Barbados">Barbados</option>
-                                    <option value="Belarus">Belarus</option>
-                                    <option value="Belgium">Belgium</option>
-                                    <option value="Belize">Belize</option>
-                                    <option value="Benin">Benin</option>
-                                    <option value="Bhutan">Bhutan</option>
-                                    <option value="Bolivia">Bolivia</option>
-                                    <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                                    <option value="Botswana">Botswana</option>
-                                    <option value="Brazil">Brazil</option>
-                                    <option value="Brunei">Brunei</option>
-                                    <option value="Bulgaria">Bulgaria</option>
-                                    <option value="Burkina">Burkina Faso</option>
-                                    <option value="Burundi">Burundi</option>
-                                    <option value="Cabo Verde">Cabo Verde</option>
-                                    <option value="Cambodia">Cambodia</option>
-                                    <option value="Cameroon">Cameroon</option>
-                                    <option value="Canada">Canada</option>
-                                    <option value="Central African Republic">Central African Republic</option>
-                                    <option value="Chad">Chad</option>
-                                    <option value="Chile">Chile</option>
-                                    <option value="China">China</option>
-                                    <option value="Colombia">Colombia</option>
-                                    <option value="Comoros">Comoros</option>
-                                    <option value="Congo">Congo</option>
-                                    <option value="Congo (DRC)">Congo (DRC)</option>
-                                    <option value="Costa Rica">Costa Rica</option>
-                                    <option value="Côte d'Ivoire">Côte d'Ivoire</option>
-                                    <option value="Croatia">Croatia</option>
-                                    <option value="Cuba">Cuba</option>
-                                    <option value="Cyprus">Cyprus</option>
-                                    <option value="Czech Republic">Czech Republic</option>
-                                    <option value="Denmark">Denmark</option>
-                                    <option value="Djibouti">Djibouti</option>
-                                    <option value="Dominica">Dominica</option>
-                                    <option value="Dominican Republic">Dominican Republic</option>
-                                    <option value="Ecuador">Ecuador</option>
-                                    <option value="Egypt">Egypt</option>
-                                    <option value="El Salvador">El Salvador</option>
-                                    <option value="Equatorial Guinea">Equatorial Guinea</option>
-                                    <option value="Eritrea">Eritrea</option>
-                                    <option value="Estonia">Estonia</option>
-                                    <option value="Eswatini">Eswatini</option>
-                                    <option value="Ethiopia">Ethiopia</option>
-                                    <option value="Fiji">Fiji</option>
-                                    <option value="Finland">Finland</option>
-                                    <option value="France">France</option>
-                                    <option value="Gabon">Gabon</option>
-                                    <option value="Gambia">Gambia</option>
-                                    <option value="Georgia">Georgia</option>
-                                    <option value="Germany">Germany</option>
-                                    <option value="Ghana">Ghana</option>
-                                    <option value="Greece">Greece</option>
-                                    <option value="Grenada">Grenada</option>
-                                    <option value="Guatemala">Guatemala</option>
-                                    <option value="Guinea">Guinea</option>
-                                    <option value="Guinea-Bissau">Guinea-Bissau</option>
-                                    <option value="Guyana">Guyana</option>
-                                    <option value="Haiti">Haiti</option>
-                                    <option value="Honduras">Honduras</option>
-                                    <option value="Hungary">Hungary</option>
-                                    <option value="Iceland">Iceland</option>
-                                    <option value="India">India</option>
-                                    <option value="Indonesia">Indonesia</option>
-                                    <option value="Iran">Iran</option>
-                                    <option value="Iraq">Iraq</option>
-                                    <option value="Ireland">Ireland</option>
-                                    <option value="Israel">Israel</option>
-                                    <option value="Italy">Italy</option>
-                                    <option value="Jamaica">Jamaica</option>
-                                    <option value="Japan">Japan</option>
-                                    <option value="Jordan">Jordan</option>
-                                    <option value="Kazakhstan">Kazakhstan</option>
-                                    <option value="Kenya">Kenya</option>
-                                    <option value="Kiribati">Kiribati</option>
-                                    <option value="North Korea">North Korea</option>
-                                    <option value="South Korea">South Korea</option>
-                                    <option value="Kuwait">Kuwait</option>
-                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                    <option value="Laos">Laos</option>
-                                    <option value="Latvia">Latvia</option>
-                                    <option value="Lebanon">Lebanon</option>
-                                    <option value="Lesotho">Lesotho</option>
-                                    <option value="Liberia">Liberia</option>
-                                    <option value="Libya">Libya</option>
-                                    <option value="Liechtenstein">Liechtenstein</option>
-                                    <option value="Lithuania">Lithuania</option>
-                                    <option value="Luxembourg">Luxembourg</option>
-                                    <option value="Madagascar">Madagascar</option>
-                                    <option value="Malawi">Malawi</option>
-                                    <option value="Malaysia">Malaysia</option>
-                                    <option value="Maldives">Maldives</option>
-                                    <option value="Mali">Mali</option>
-                                    <option value="Malta">Malta</option>
-                                    <option value="Marshall Islands">Marshall Islands</option>
-                                    <option value="Mauritania">Mauritania</option>
-                                    <option value="Mauritius">Mauritius</option>
-                                    <option value="Mexico">Mexico</option>
-                                    <option value="Micronesia">Micronesia</option>
-                                    <option value="Moldova">Moldova</option>
-                                    <option value="Monaco">Monaco</option>
-                                    <option value="Mongolia">Mongolia</option>
-                                    <option value="Montenegro">Montenegro</option>
-                                    <option value="Morocco">Morocco</option>
-                                    <option value="Mozambique">Mozambique</option>
-                                    <option value="Myanmar">Myanmar</option>
-                                    <option value="Namibia">Namibia</option>
-                                    <option value="Nauru">Nauru</option>
-                                    <option value="Nepal">Nepal</option>
-                                    <option value="Netherlands">Netherlands</option>
-                                    <option value="New Zealand">New Zealand</option>
-                                    <option value="Nicaragua">Nicaragua</option>
-                                    <option value="Niger">Niger</option>
-                                    <option value="Nigeria">Nigeria</option>
-                                    <option value="North Macedonia">North Macedonia</option>
-                                    <option value="Norway">Norway</option>
-                                    <option value="Oman">Oman</option>
-                                    <option value="Pakistan">Pakistan</option>
-                                    <option value="Palau">Palau</option>
-                                    <option value="Panama">Panama</option>
-                                    <option value="Papua New Guinea">Papua New Guinea</option>
-                                    <option value="Paraguay">Paraguay</option>
-                                    <option value="Peru">Peru</option>
-                                    <option value="Philippines">Philippines</option>
-                                    <option value="Poland">Poland</option>
-                                    <option value="Portugal">Portugal</option>
-                                    <option value="Qatar">Qatar</option>
-                                    <option value="Romania">Romania</option>
-                                    <option value="Russia">Russia</option>
-                                    <option value="Rwanda">Rwanda</option>
-                                    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-                                    <option value="Saint Lucia">Saint Lucia</option>
-                                    <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
-                                    <option value="Samoa">Samoa</option>
-                                    <option value="San Marino">San Marino</option>
-                                    <option value="São Tomé and Príncipe">São Tomé and Príncipe</option>
-                                    <option value="Saudi Arabia">Saudi Arabia</option>
-                                    <option value="Senegal">Senegal</option>
-                                    <option value="Serbia">Serbia</option>
-                                    <option value="Seychelles">Seychelles</option>
-                                    <option value="Sierra Leone">Sierra Leone</option>
-                                    <option value="Singapore">Singapore</option>
-                                    <option value="Slovakia">Slovakia</option>
-                                    <option value="Slovenia">Slovenia</option>
-                                    <option value="Solomon Islands">Solomon Islands</option>
-                                    <option value="Somalia">Somalia</option>
-                                    <option value="South Africa">South Africa</option>
-                                    <option value="South Sudan">South Sudan</option>
-                                    <option value="Spain">Spain</option>
-                                    <option value="Sri Lanka">Sri Lanka</option>
-                                    <option value="Sudan">Sudan</option>
-                                </select>
-                            </div>
-                            <div className={styles.input}>
-                                <label>Phone <span>* {error?.phone}</span></label>
-                                <input type="text" value={contactData?.phone} placeholder="Enter your number"
-                                    onChange={(e) => {
-                                        setContactData({
-                                            ...contactData,
-                                            phone: e.target.value,
-                                        });
-                                        setError({ ...error, phone: "" });
-                                    }}
-                                    onKeyPress={bindInput}
-                                />
-                            </div>
-                            <div className={styles.input}>
-                                <label>Message <span>* {error?.message}</span></label>
-                                <textarea placeholder="Type your message here..." value={contactData?.message} onChange={(e) => {
-                                    setContactData({
-                                        ...contactData,
-                                        message: e.target.value,
-                                    });
-                                    setError({ ...error, message: "" });
-                                }}></textarea>
-                            </div>
-                        </div>
-                        <div className={styles.firstButton} onClick={functionPostContact}>
-                            <Button text="Get Started" icon={<RightLgArrow />} />
-                        </div>
-                    </div>
+  const handleInputChange = (field, value) => {
+    setContactData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: "" }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      // 1. Send to Slack Webhook for team alert
+      const slackMessage = {
+        text: `🚀 *New Contact Inquiry - Algomatic Web*\n\n` +
+          `*Name:* ${contactData.name}\n` +
+          `*Email:* ${contactData.email}\n` +
+          `*Phone:* ${contactData.phone}\n` +
+          `*Country:* ${contactData.country}\n` +
+          `*Message:* ${contactData.message}\n` +
+          `*Timestamp:* ${new Date().toLocaleString()}`,
+      };
+
+      await axios("https://hooks.slack.com/services/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", {
+        method: "POST",
+        data: JSON.stringify(slackMessage),
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+        },
+      }).catch((err) => {
+        console.warn("Slack notification error:", err);
+      });
+
+      // 2. Also register with inquiry backend if available
+      try {
+        const ip = await fetchIpAddress();
+        await addInquiryForm({
+          ipAddress: ip || "0.0.0.0",
+          name: contactData.name,
+          email: contactData.email,
+          phone: contactData.phone,
+        });
+      } catch (backendErr) {
+        console.warn("Backend inquiry sync fallback:", backendErr);
+      }
+
+      setIsSuccess(true);
+      toast.success("Thank you! Your message has been received. Our team will contact you shortly.");
+    } catch (err) {
+      console.error("Submission failed:", err);
+      toast.error("Something went wrong. Please reach out to us on WhatsApp directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleReset = () => {
+    setContactData({
+      name: "",
+      email: "",
+      phone: "",
+      country: "India",
+      message: "",
+    });
+    setErrors({});
+    setIsSuccess(false);
+  };
+
+  return (
+    <section className={styles.helpSectionMain} id="contact-form">
+      <div className="container-xl">
+        <div className={styles.contentGrid}>
+          {/* ─── LEFT COLUMN: INFO & DIRECT CHANNELS ─── */}
+          <div className={styles.infoCol}>
+            <div className={styles.infoCard}>
+              <div className={styles.infoHeader}>
+                <div className={styles.sectionBadge}>Direct Communication</div>
+
+                <h3>
+                  We're Here to <span>Empower Your Trading</span>
+                </h3>
+
+                <p className={styles.narrative}>
+                  Whether you are an individual trader looking to automate strategies, need dedicated quant
+                  bot development, or require enterprise brokerage infrastructure, our global desk is ready
+                  to assist with high speed and precision.
+                </p>
+              </div>
+
+              {/* Direct Contact Cards */}
+              <div className={styles.contactCardsList}>
+                <a
+                  href={`https://wa.me/${cleanPhone}?text=Hi%20Algomatic%20Desk,%20I%20would%20like%20to%20connect.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.contactDetailCard}
+                >
+                  <div className={styles.cardIcon}>
+                    <Phone size={20} />
+                  </div>
+                  <div className={styles.cardText}>
+                    <span className={styles.cardLabel}>Direct Phone & WhatsApp</span>
+                    <span className={styles.cardValue}>{displayPhone}</span>
+                  </div>
+                  <ArrowRight size={16} className={styles.cardLinkAction} />
+                </a>
+
+                <a href={`mailto:${officialEmail}`} className={styles.contactDetailCard}>
+                  <div className={styles.cardIcon}>
+                    <Mail size={20} />
+                  </div>
+                  <div className={styles.cardText}>
+                    <span className={styles.cardLabel}>Official Support Email</span>
+                    <span className={styles.cardValue}>{officialEmail}</span>
+                  </div>
+                  <ArrowRight size={16} className={styles.cardLinkAction} />
+                </a>
+
+                <a
+                  href={telegramLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.contactDetailCard}
+                >
+                  <div className={styles.cardIcon}>
+                    <MessageCircle size={20} />
+                  </div>
+                  <div className={styles.cardText}>
+                    <span className={styles.cardLabel}>Telegram Community & Support</span>
+                    <span className={styles.cardValue}>@algomaticbot</span>
+                  </div>
+                  <ArrowRight size={16} className={styles.cardLinkAction} />
+                </a>
+
+                <div className={`${styles.contactDetailCard} ${styles.staticCard}`}>
+                  <div className={styles.cardIcon}>
+                    <Clock size={20} />
+                  </div>
+                  <div className={styles.cardText}>
+                    <span className={styles.cardLabel}>Trading Desk Hours</span>
+                    <span className={styles.cardValue}>24/5 Live Market Coverage (Mon - Fri)</span>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+
+          {/* ─── RIGHT COLUMN: CLEAN & SIMPLE CONTACT FORM ─── */}
+          <div className={styles.formCol}>
+            <div className={styles.formCard}>
+              {isSuccess ? (
+                <div className={styles.successCard}>
+                  <div className={styles.successIconWrapper}>
+                    <CheckCircle2 size={36} />
+                  </div>
+                  <h3>Message Received!</h3>
+                  <p>
+                    Thank you for reaching out to Algomatic. Our team has received your inquiry and a
+                    dedicated specialist will respond shortly.
+                  </p>
+                  <div className={styles.successActions}>
+                    <a
+                      href={`https://wa.me/${cleanPhone}?text=Hi%20Algomatic%20Desk,%20I%20just%20submitted%20an%20inquiry%20via%20your%20website.`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.urgentWhatsAppBtn}
+                    >
+                      <MessageCircle size={16} />
+                      <span>Chat Urgently on WhatsApp</span>
+                    </a>
+                    <button type="button" onClick={handleReset} className={styles.resetBtn}>
+                      Send Another Message
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.formHeader}>
+                    <div className={styles.sectionBadge}>Inquiry Desk</div>
+                    <h3>Send Us a Message</h3>
+                    <p className={styles.narrative}>
+                      Fill out the form below. Our quantitative specialists will review and get back to
+                      you promptly.
+                    </p>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className={styles.formContent}>
+                    {/* Input Fields */}
+                    <div className={styles.inputsRow}>
+                      <div className={styles.inputGroup}>
+                        <label>
+                          <span>
+                            Full Name <span className={styles.req}>*</span>
+                          </span>
+                          {errors.name && <span className={styles.errorText}>{errors.name}</span>}
+                        </label>
+                        <div className={styles.inputWithIcon}>
+                          <User size={16} className={styles.fieldIcon} />
+                          <input
+                            type="text"
+                            placeholder="e.g. Alex Morgan"
+                            value={contactData.name}
+                            onChange={(e) => handleInputChange("name", e.target.value)}
+                            className={errors.name ? styles.hasError : ""}
+                          />
+                        </div>
+                      </div>
+
+                      <div className={styles.inputGroup}>
+                        <label>
+                          <span>
+                            Email Address <span className={styles.req}>*</span>
+                          </span>
+                          {errors.email && <span className={styles.errorText}>{errors.email}</span>}
+                        </label>
+                        <div className={styles.inputWithIcon}>
+                          <Mail size={16} className={styles.fieldIcon} />
+                          <input
+                            type="email"
+                            placeholder="e.g. alex@trader.com"
+                            value={contactData.email}
+                            onChange={(e) => handleInputChange("email", e.target.value)}
+                            className={errors.email ? styles.hasError : ""}
+                          />
+                        </div>
+                      </div>
+
+                      <div className={styles.inputGroup}>
+                        <label>
+                          <span>
+                            Phone / WhatsApp <span className={styles.req}>*</span>
+                          </span>
+                          {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
+                        </label>
+                        <div className={styles.inputWithIcon}>
+                          <Phone size={16} className={styles.fieldIcon} />
+                          <input
+                            type="text"
+                            placeholder="e.g. +1 555 123 4567"
+                            value={contactData.phone}
+                            onChange={(e) => handleInputChange("phone", e.target.value)}
+                            className={errors.phone ? styles.hasError : ""}
+                          />
+                        </div>
+                      </div>
+
+                      <div className={styles.inputGroup}>
+                        <label>
+                          <span>Country</span>
+                        </label>
+                        <div className={styles.inputWithIcon}>
+                          <Globe size={16} className={styles.fieldIcon} />
+                          <select
+                            value={contactData.country}
+                            onChange={(e) => handleInputChange("country", e.target.value)}
+                          >
+                            {COUNTRIES.map((country, idx) => (
+                              <option key={idx} value={country}>
+                                {country}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Message Field */}
+                    <div className={`${styles.inputGroup} ${styles.messageGroup}`}>
+                      <label>
+                        <span>
+                          Message / Requirements <span className={styles.req}>*</span>
+                        </span>
+                        {errors.message && (
+                          <span className={styles.errorText}>{errors.message}</span>
+                        )}
+                      </label>
+                      <textarea
+                        placeholder="Tell us about your trading platform, strategy idea, or specific questions..."
+                        value={contactData.message}
+                        onChange={(e) => handleInputChange("message", e.target.value)}
+                        className={errors.message ? styles.hasError : ""}
+                      ></textarea>
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className={styles.formFooter}>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={styles.submitBtn}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 size={16} className="animate-spin" />
+                            <span>Submitting...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>Submit Inquiry</span>
+                            <Send size={15} />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
         </div>
-    )
+      </div>
+    </section>
+  );
 }

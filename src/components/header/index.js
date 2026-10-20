@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./header.module.scss";
-import DownArrow from "../icons/downArrow";
-import Button from "../button";
 import Link from "next/link";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import Right from "../icons/right";
 import MobileHeader from "../mobileHeader";
 import AuthModal from "../authModal";
 import { useAppContext } from "../../context/AppContext";
-import { ChevronDown, UserCircle } from "lucide-react";
-import Commonarrowbutton from "../commonarrowbutton";
+import { ChevronDown, UserCircle, ArrowRight } from "lucide-react";
+import Right from "../icons/right";
+
 const Logo = "/assets/logo/logo.svg";
 
 export default function Header() {
@@ -18,6 +16,9 @@ export default function Header() {
   const [header, setHeader] = useState(false);
   const { showLogin, setShowLogin } = useAppContext();
   const [showMenu, setShowMenu] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const { isUserLoggedIn, setIsUserLoggedIn, user, setUser, utilitySettings } =
     useAppContext();
 
@@ -25,7 +26,40 @@ export default function Header() {
   const router = useRouter();
 
   useEffect(() => {
-    // check for login btn or menu btn show condition
+    const handleScroll = () => {
+      const currentScrollY =
+        window.pageYOffset ||
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        0;
+
+      // Scrolled past 200px threshold
+      setIsScrolled(currentScrollY > 200);
+
+      // Keep header visible at the top of the page or when mobile drawer is open
+      if (currentScrollY <= 80 || header) {
+        setIsVisible(true);
+      } else {
+        // If scrolling down, hide the header
+        if (currentScrollY > lastScrollY.current + 6) {
+          setIsVisible(false);
+          setHoveredMenu(null);
+        }
+        // If scrolling up, reveal the header
+        else if (currentScrollY < lastScrollY.current - 6) {
+          setIsVisible(true);
+        }
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [header]);
+
+  useEffect(() => {
     if (header) {
       document.body.style.overflow = "hidden";
     } else {
@@ -56,48 +90,48 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showMenu]);
 
-  const handleMouseEnter = (menu) => {
-    if (menu != 0) {
-      setHoveredMenu(menu);
-    }
+  const handleMouseEnter = (index) => {
+    setHoveredMenu(index);
   };
 
   const handleMouseLeave = () => {
     setHoveredMenu(null);
   };
 
+  const handleLinkClick = () => {
+    setHoveredMenu(null);
+  };
+
   const menuItems = [
     // {
-    //   title: "About",
+    //   title: "How It Works",
     //   submenu: [],
-    //   routes: "/#About",
+    //   routes: "/#Howitworks",
+    // },
+    // {
+    //   title: "Features",
+    //   submenu: [],
+    //   routes: "/#Keyfeatures",
+    // },
+    // {
+    //   title: "Backtesting",
+    //   submenu: [],
+    //   routes: "/#Backtesting",
     // },
     {
-      title: "How It Works",
+      title: "AI Bot Marketplace",
       submenu: [],
-      routes: "/#Howitworks",
+      routes: "/ai-bot-market-place",
     },
     {
-      title: "Features",
+      title: "Bot Builder",
       submenu: [],
-      routes: "/#Keyfeatures",
+      routes: "/bot-builder",
     },
     {
-      title: "Backtesting",
+      title: "Ask our expert",
       submenu: [],
-      routes: "/#Backtesting",
-    },
-    {
-      title: "Algo Bot",
-      submenu: [],
-      routes: "/marketplace",
-      Highlight: true,
-    },
-    {
-      title: "Trading Tool",
-      submenu: [],
-      routes: "/marketplace/#trading-tools",
-      Highlight: true,
+      routes: "/ask-our-expert",
     },
     {
       title: "Partner with us",
@@ -116,175 +150,205 @@ export default function Header() {
     {
       title: "Contact Us",
       submenu: [],
-      Target: "__blank",
-      routes: `https://wa.me/${utilitySettings?.phoneNo}`,
+      routes: "/contact-us",
     },
   ];
 
-  const handleLinkClick = () => {
-    setHoveredMenu(null);
-  };
-
   return (
     <>
-      <header className={styles.header}>
-        <div className="container-xl">
-          <div className={styles.headerAlignment}>
-            <div className={styles.logo}>
-              <Link href="/">
-                <img src={Logo} alt="logo" />
-              </Link>
-            </div>
-            <div className={styles.menuAlignment}>
-              {menuItems.map((menu, index) => (
-                <div
-                  key={index}
-                  className={styles.relativeHeader}
-                  onMouseEnter={() => handleMouseEnter(index)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className={styles.menu}>
-                    {menu?.routes ? (
-                      <Link href={menu?.routes} target={menu?.Target} className={menu?.Highlight ? styles.highlight : ""}>
+      <header
+        className={classNames(styles.header, {
+          [styles.scrolled]: isScrolled,
+          [styles.headerHidden]: !isVisible,
+        })}
+      >
+        {/* White Top Strip (Taskbet-style) */}
+        <div className={styles.whiteTopStrip}></div>
+
+        {/* Navbar Container (centered, max-width) */}
+        <div className={styles.navbarContainer}>
+          <div className={styles.navbarWrapper}>
+            <div className={styles.headerAlignment}>
+              {/* Left Section: Logo */}
+              <div className={styles.logo}>
+                <Link href="/">
+                  <img src={Logo} alt="AlgoMatic" />
+                </Link>
+              </div>
+
+              {/* Center Section: Navigation Links */}
+              <nav className={styles.menuAlignment}>
+                {menuItems.map((menu, index) => (
+                  <div
+                    key={index}
+                    className={styles.relativeHeader}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {menu.submenu.length > 0 ? (
+                      <div
+                        className={classNames(styles.menu, {
+                          [styles.active]: hoveredMenu === index,
+                        })}
+                      >
+                        <span>{menu.title}</span>
+                        <ChevronDown
+                          className={classNames(styles.chevronIcon, {
+                            [styles.rotated]: hoveredMenu === index,
+                          })}
+                        />
+                      </div>
+                    ) : (
+                      <Link
+                        href={menu.routes}
+                        target={menu.Target || ""}
+                        onClick={handleLinkClick}
+                        className={classNames(styles.menuLink, {
+                          [styles.active]: router.pathname === menu.routes,
+                        })}
+                      >
                         {menu.title}
                       </Link>
-                    ) : (
-                      <span>{menu?.title}</span>
                     )}
 
-                    {menu.submenu.length > 0 && <DownArrow />}
-                  </div>
-                  <div
-                    onMouseEnter={handleMouseLeave}
-                    className={classNames({
-                      [styles.open]: hoveredMenu === index,
-                      [styles.blurDiv]: hoveredMenu === index,
-                    })}
-                  ></div>
-                  {menu.submenu.length > 0 && (
-                    <div
-                      className={classNames(
-                        styles.submenubox,
-                        hoveredMenu === index ? styles.show : styles.hide
-                      )}
-                    >
-                      <div className="container-xl">
-                        <div className={styles.grid}>
-                          {menu.submenu.map((item, i) => (
-                            <Link
-                              className={styles.boxLine}
-                              href={item?.redirectLink}
-                              onClick={handleLinkClick}
-                              target={item.isNewTab ? "_blank" : ""}
-                            >
-                              <div key={i}>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                              </div>
-                              <div className={styles.solution}>
-                                <span>See Solution</span>
-                                <Right />
-                              </div>
-                            </Link>
-                          ))}
+                    {/* Spacious luxury dropdown panel for Partner with us */}
+                    {menu.submenu.length > 0 && (
+                      <div
+                        className={classNames(
+                          styles.submenubox,
+                          hoveredMenu === index ? styles.show : styles.hide,
+                          { [styles.scrolledSubmenu]: isScrolled }
+                        )}
+                      >
+                        <div className="container-xl">
+                          <div className={styles.grid}>
+                            {menu.submenu.map((item, i) => (
+                              <Link
+                                key={i}
+                                className={styles.boxLine}
+                                href={item?.redirectLink}
+                                onClick={handleLinkClick}
+                                target={item.isNewTab ? "_blank" : ""}
+                              >
+                                <div className={styles.cardHeader}>
+                                  <h3>{item.title}</h3>
+                                  {item.description && <p>{item.description}</p>}
+                                </div>
+                                <div className={styles.solution}>
+                                  <span>See Solution</span>
+                                  <Right />
+                                </div>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className={styles.buttonDesign}>
-              {isUserLoggedIn ? (
-                <div className={styles.menuWrapper} ref={menuRef}>
-                  <Button
-                    btnStyle={true}
-                    text={
-                      <div className={styles.userIconWrapper}>
-                        <UserCircle className={styles.userIcon} />
-                        <span>
-                          {user?.name?.slice(0, 8).length > 8
-                            ? "..."
-                            : user?.name}
-                        </span>
-                        <ChevronDown className={styles.downIcon} />
-                      </div>
-                    }
-                    onClick={() => setShowMenu((prev) => !prev)}
-                  />
-                  {showMenu && (
-                    <div className={styles.menuDropdown}>
-                      <button
-                        onClick={() => {
-                          setShowMenu(false);
-                          router.push("/dashboard");
-                        }}
-                      >
-                        Dashboard
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowMenu(false);
-                          router.push("/dashboard?tab=profile");
-                        }}
-                      >
-                        Profile
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowMenu(false);
-                          router.push("/dashboard?tab=payments");
-                        }}
-                      >
-                        Payment History
-                      </button>
-                      <button
-                        onClick={() => {
-                          setShowMenu(false);
-                          router.push("/dashboard?tab=affiliate");
-                        }}
-                      >
-                        Affiliate dashboard
-                      </button>
-                      <button
-                        onClick={() => {
-                          localStorage.removeItem("user");
-                          localStorage.removeItem("isLogin");
-                          localStorage.removeItem("token");
-                          router.push("/");
-                          setIsUserLoggedIn(false);
-                          setShowMenu(false);
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  )}
-                </div>
-              ) : (
-                <>
-                  <div onClick={() => setShowLogin(true)}>
-                    <Commonarrowbutton
-                      Text="Login"
-                      Butttonvarient="lightoutlined"
-                    />
+                    )}
                   </div>
-                </>
-              )}
-              <div
-                className={`${styles.mobileMenu} ${
-                  header ? styles.active : ""
-                }`}
-                onClick={() => setHeader(!header)}
-              >
-                <span></span>
-                <span></span>
+                ))}
+              </nav>
+
+              {/* Right Section: Action Buttons */}
+              <div className={styles.buttonDesign}>
+                {/* Login Button / User Profile Dropdown */}
+                {isUserLoggedIn ? (
+                  <div className={styles.userMenuWrapper} ref={menuRef}>
+                    <button
+                      className={styles.userButton}
+                      onClick={() => setShowMenu((prev) => !prev)}
+                    >
+                      <UserCircle className={styles.userIcon} />
+                      <span>{user?.name?.slice(0, 10) || "Account"}</span>
+                      <ChevronDown className={styles.userDownIcon} />
+                    </button>
+                    {showMenu && (
+                      <div className={styles.userDropdown}>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push("/dashboard");
+                          }}
+                        >
+                          Dashboard
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push("/dashboard?tab=profile");
+                          }}
+                        >
+                          Profile
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push("/dashboard?tab=payments");
+                          }}
+                        >
+                          Payment History
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push("/dashboard?tab=affiliate");
+                          }}
+                        >
+                          Affiliate Dashboard
+                        </button>
+                        <div className={styles.dropdownDivider} />
+                        <button
+                          className={styles.logoutBtn}
+                          onClick={() => {
+                            localStorage.removeItem("user");
+                            localStorage.removeItem("isLogin");
+                            localStorage.removeItem("token");
+                            router.push("/");
+                            setIsUserLoggedIn(false);
+                            setShowMenu(false);
+                          }}
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <button
+                    className={styles.loginButton}
+                    onClick={() => setShowLogin(true)}
+                  >
+                    <span>Login</span>
+                    <div className={styles.loginBtnArrow}>
+                      <ArrowRight />
+                    </div>
+                  </button>
+                )}
+
+                {/* Mobile Menu Hamburger Toggle */}
+                <div
+                  className={classNames(styles.mobileMenuToggle, {
+                    [styles.active]: header,
+                  })}
+                  onClick={() => setHeader(!header)}
+                >
+                  <span></span>
+                  <span></span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </header>
-      <MobileHeader header={header} setHeader={setHeader} />
+
+      {/* Mobile drawer header and auth modal */}
+      <MobileHeader
+        header={header}
+        setHeader={setHeader}
+        setShowLogin={setShowLogin}
+        isUserLoggedIn={isUserLoggedIn}
+        user={user}
+        setIsUserLoggedIn={setIsUserLoggedIn}
+      />
       <AuthModal
         isOpen={showLogin}
         setShowLogin={setShowLogin}
