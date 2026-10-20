@@ -6,7 +6,8 @@
     "dev": "next dev -p 4000",
     "build": "next build",
     "start": "next start -p 7878",
-    "lint": "next lint"
+    "lint": "next lint",
+    "env:pull": "node scripts/fetch-env.mjs"
   },
   "dependencies": {
     "atropos": "^2.0.2",

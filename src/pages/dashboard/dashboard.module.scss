@@ -1,0 +1,12 @@
+// Main Dashboard Module Stylesheet
+// Modularized into clean, focused partials under ./styles/ (< 810 lines each)
+
+@import './styles/variables';
+@import './styles/layout';
+@import './styles/greeting';
+@import './styles/overview';
+@import './styles/quick_actions';
+@import './styles/bots';
+@import './styles/profile';
+@import './styles/payments';
+@import './styles/modals';

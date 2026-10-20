@@ -20,14 +20,9 @@ export default function Dashboard() {
   const { user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
 
-  // check valid user
+  // check valid user & redirect to unified dashboard
   useEffect(() => {
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
-    if (!storedUser) {
-      router.push("/");
-      return;
-    }
-    setUser(storedUser);
+    router.replace("/dashboard?tab=payments");
   }, []);
 
   useEffect(() => {

@@ -28,12 +28,8 @@ export default function Dashboard() {
   const [password, setUpPassword] = useState(initialPasswordData);
 
   useEffect(() => {
-    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
-    if (!storedUser) {
-      router.push("/");
-    }
-    setUser(storedUser);
-  }, [isUserLoggedIn]);
+    router.replace("/dashboard?tab=profile");
+  }, []);
 
   useEffect(() => {
     if (activeTab === "payments") {
