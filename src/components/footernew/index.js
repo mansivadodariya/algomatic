@@ -5,9 +5,9 @@ import { useAppContext } from "@/context/AppContext";
 import { ShieldAlert } from "lucide-react";
 
 const Logoimg = "/assets/logo/logo.png";
-const Telegramicon = "/assets/icons/telegramicon.png";
-const Instagramicon = "/assets/icons/instagramicon.png";
-const Facebookicon = "/assets/icons/facebookicon.png";
+const Telegramicon = "/assets/icons/Telegramicon.png";
+const Instagramicon = "/assets/icons/Instagramicon.png";
+const Facebookicon = "/assets/icons/Facebookicon.png";
 
 export default function Footernew() {
   const { utilitySettings } = useAppContext();
