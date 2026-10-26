@@ -2,7 +2,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3002/api/v1/";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4002/api/v1";
 export const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -35,16 +35,16 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error.response.status,'-----------------------------error')
-    if(error.response.status === 401){
-      localStorage.clear()
+    console.log(error?.response?.status, '-----------------------------error');
+    if (error?.response?.status === 401) {
+      localStorage.clear();
       toast.error("Please login to continue.");
       window.location.href = "/";
     }
-    if (error.response) {
-      console.log(error.response.data.message,'-----------------------------error.response')
+    if (error?.response) {
+      console.log(error.response.data?.message, '-----------------------------error.response');
 
-      if(error?.response?.data?.message){
+      if (error?.response?.data?.message) {
         toast.error(error.response.data.message);
       }
     } 

@@ -13,23 +13,300 @@ import {
   ShieldCheck,
   BarChart3,
   Layers,
+  Send,
+  Sparkles,
+  Copy,
+  Check,
+  MessageSquare,
+  Terminal,
+  RefreshCw,
 } from "lucide-react";
+
+const STRATEGIES = {
+  gold: {
+    name: "Gold Momentum Pulse EA",
+    pair: "XAUUSD (Gold) • M15 Timeframe",
+    winRate: "99.4%",
+    monthlyRoi: "+28.4%",
+    drawdown: "1.2%",
+    riskReward: "1 : 3.2",
+    speed: "0.02ms",
+    code: `// AlgoMatic Quant Engine - Gold Momentum EA v2.4
+input double RiskPerTrade  = 0.5;   // Risk % per trade
+input int    FastEMA       = 9;     // Fast Trend EMA
+input int    SlowEMA       = 21;    // Slow Trend EMA
+input int    RSI_Filter    = 14;    // Volatility Filter
+input double DynamicSL     = 15.0;  // Trailing Stop (Pips)
+
+void OnTick() {
+  if (CrossAbove(FastEMA, SlowEMA) && RSI(RSI_Filter) < 38) {
+    OpenBuyOrder(Symbol(), DynamicSL);
+  }
+}`,
+  },
+  crypto: {
+    name: "Crypto Arbitrage QuantBot",
+    pair: "BTC/USDT, ETH/USDT • Real-Time",
+    winRate: "99.8%",
+    monthlyRoi: "+34.2%",
+    drawdown: "0.4%",
+    riskReward: "1 : 4.5",
+    speed: "0.01ms",
+    code: `# AlgoMatic Cross-Exchange Arbitrage v3.1
+class CryptoArbitrage:
+    def __init__(self, min_spread=0.0035):
+        self.min_spread = min_spread
+
+    async def scan_and_execute(self, binance_bid, bybit_ask):
+        spread = (binance_bid - bybit_ask) / bybit_ask
+        if spread > self.min_spread:
+            await asyncio.gather(
+                place_buy("Bybit", lot=1.5),
+                place_sell("Binance", lot=1.5)
+            )`,
+  },
+  hedge: {
+    name: "EUR/USD Shield Matrix EA",
+    pair: "EURUSD • H1 Swing",
+    winRate: "96.7%",
+    monthlyRoi: "+18.2%",
+    drawdown: "0.8%",
+    riskReward: "1 : 2.8",
+    speed: "0.03ms",
+    code: `// AlgoMatic News Filter & Dynamic Hedge EA
+input double MaxEquityRisk = 2.0; // Max Drawdown %
+input bool   AutoNewsPause = true;
+
+void OnTick() {
+  if (AutoNewsPause && IsHighImpactNews(15)) return;
+  if (CurrentEquityDrawdown() > MaxEquityRisk) {
+    ExecuteDynamicHedge();
+  }
+}`,
+  },
+  trend: {
+    name: "Multi-Asset Trend Rider Pro",
+    pair: "US30, XAUUSD, GBPJPY • H4",
+    winRate: "94.2%",
+    monthlyRoi: "+24.6%",
+    drawdown: "1.8%",
+    riskReward: "1 : 3.8",
+    speed: "0.02ms",
+    code: `// AlgoMatic Trend Rider Multi-Asset EA
+input double ATR_Multiplier = 2.5;
+input ENUM_TIMEFRAMES TF    = PERIOD_H4;
+
+void OnBarClose() {
+  if (SuperTrendBullish(Symbol(), TF)) {
+    TrailingStopTrail(ATR_Multiplier);
+  }
+}`,
+  },
+};
+
+const QUICK_PROMPTS = [
+  {
+    label: "⚡ Gold Momentum Scalper",
+    key: "gold",
+    prompt: "Build a high-win-rate scalper bot for XAUUSD (Gold) on MT5 with strict 0.5% risk control.",
+  },
+  {
+    label: "📈 Crypto Arbitrage Bot",
+    key: "crypto",
+    prompt: "Build a cross-exchange arbitrage bot for BTC & ETH with zero market risk.",
+  },
+  {
+    label: "🛡️ Safe Hedging EA (EUR/USD)",
+    key: "hedge",
+    prompt: "Create a safe hedging bot for EURUSD that protects equity during major economic news.",
+  },
+  {
+    label: "🎯 Multi-Asset Trend Rider",
+    key: "trend",
+    prompt: "Generate a multi-asset trend rider bot for XAUUSD, US30 and GBPJPY on H4 timeframe.",
+  },
+];
 
 export default function Homeherobanner() {
   const heroRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [isDesktop, setIsDesktop] = useState(true);
+  const [showSideCards, setShowSideCards] = useState(true);
+  const [displayText, setDisplayText] = useState("AI Trading Bots");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+
+  const [activeStrategyKey, setActiveStrategyKey] = useState("gold");
+  const [copiedCode, setCopiedCode] = useState(false);
+  const [inputVal, setInputVal] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const chatStreamRef = useRef(null);
+  const isInitialMount = useRef(true);
+
+  const INITIAL_MESSAGES = [
+    {
+      id: 1,
+      role: "ai",
+      text: "Hello! I am your AlgoMatic AI Quant Copilot. Describe your strategy or pick a quick prompt below to build, backtest, and deploy a verified trading bot in real time.",
+      time: "10:30 AM",
+    },
+    {
+      id: 2,
+      role: "user",
+      text: "Build a high-win-rate scalper bot for XAUUSD (Gold) on MT5 with strict 0.5% risk control.",
+      time: "10:31 AM",
+    },
+    {
+      id: 3,
+      role: "ai",
+      text: "Strategy synthesized & verified against 10 years of tick data! Here is your compiled Gold Momentum Pulse EA with dynamic trailing stop and 99.4% win rate.",
+      time: "10:31 AM",
+      strategyKey: "gold",
+    },
+  ];
+
+  const [chatMessages, setChatMessages] = useState(INITIAL_MESSAGES);
+
+  const handleResetChat = () => {
+    setChatMessages(INITIAL_MESSAGES);
+    setActiveStrategyKey("gold");
+    setInputVal("");
+    if (chatStreamRef.current) {
+      chatStreamRef.current.scrollTop = 0;
+    }
+  };
+
+  const currentStrategy = STRATEGIES[activeStrategyKey] || STRATEGIES.gold;
+
+  const handleCopyCode = (code) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(code);
+      setCopiedCode(true);
+      setTimeout(() => setCopiedCode(false), 2000);
+    }
+  };
+
+  const handleSelectPrompt = (promptItem) => {
+    if (isTyping) return;
+    const userMsg = {
+      id: Date.now(),
+      role: "user",
+      text: promptItem.prompt,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
+    setChatMessages((prev) => [...prev, userMsg]);
+    setIsTyping(true);
+    setActiveStrategyKey(promptItem.key);
+
+    setTimeout(() => {
+      const selectedStrat = STRATEGIES[promptItem.key];
+      const aiReply = {
+        id: Date.now() + 1,
+        role: "ai",
+        text: `Neural engine generated ${selectedStrat.name}! Calibrated for ${selectedStrat.pair} with verified ${selectedStrat.winRate} win rate and ${selectedStrat.drawdown} max drawdown.`,
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        strategyKey: promptItem.key,
+      };
+      setChatMessages((prev) => [...prev, aiReply]);
+      setIsTyping(false);
+    }, 1000);
+  };
+
+  const handleSendMessage = (e) => {
+    if (e) e.preventDefault();
+    if (!inputVal.trim() || isTyping) return;
+
+    const query = inputVal.trim();
+    setInputVal("");
+    const userMsg = {
+      id: Date.now(),
+      role: "user",
+      text: query,
+      time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    };
+    setChatMessages((prev) => [...prev, userMsg]);
+    setIsTyping(true);
+
+    let key = "gold";
+    const lower = query.toLowerCase();
+    if (lower.includes("crypto") || lower.includes("btc") || lower.includes("arbitrage")) key = "crypto";
+    else if (lower.includes("hedge") || lower.includes("eur") || lower.includes("news")) key = "hedge";
+    else if (lower.includes("trend") || lower.includes("us30") || lower.includes("multi")) key = "trend";
+    setActiveStrategyKey(key);
+
+    setTimeout(() => {
+      const strat = STRATEGIES[key];
+      const aiReply = {
+        id: Date.now() + 1,
+        role: "ai",
+        text: `Optimized strategy for "${query}"! Loaded ${strat.name} with ${strat.winRate} backtest accuracy, ${strat.riskReward} R:R, and automatic execution slippage guard.`,
+        time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        strategyKey: key,
+      };
+      setChatMessages((prev) => [...prev, aiReply]);
+      setIsTyping(false);
+    }, 1100);
+  };
+
+  const rotatingWords = ["AI Trading Bots", "Winning Strategies", "Automated Systems"];
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (chatStreamRef.current) {
+      chatStreamRef.current.scrollTo({
+        top: chatStreamRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [chatMessages, isTyping]);
+
+  useEffect(() => {
+    const currentWord = rotatingWords[wordIndex];
+    let timeout;
+
+    if (!isDeleting) {
+      // Typing
+      if (displayText.length < currentWord.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(currentWord.slice(0, displayText.length + 1));
+        }, 80);
+      } else {
+        // Pause before deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true);
+        }, 2000);
+      }
+    } else {
+      // Deleting
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 40);
+      } else {
+        // Move to next word
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % rotatingWords.length);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, wordIndex]);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth > 991);
+      const isLargeScreen = window.innerWidth > 1280;
+      setIsDesktop(true);
+      setShowSideCards(isLargeScreen);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
 
     let ticking = false;
     const handleScroll = () => {
-      if (!heroRef.current || window.innerWidth <= 991) return;
+      if (!heroRef.current) return;
       if (!ticking) {
         window.requestAnimationFrame(() => {
           if (!heroRef.current) return;
@@ -49,70 +326,119 @@ export default function Homeherobanner() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  // ─── TERNIC EXACT SCROLL INTERPOLATION MATH (DESKTOP) ───
-  let textOpacity = 1;
-  let textBlur = 0;
-  let textY = 0;
-  if (isDesktop && progress > 0.14) {
-    const t = Math.min(1, (progress - 0.14) / 0.22);
-    textOpacity = 1 - t;
-    textBlur = t * 12;
-    textY = -(t * 60);
-  }
-
+  // ─── TERNIC EXACT SCROLL INTERPOLATION MATH ───
   let set1Opacity = 1;
   let set1Y = 0;
   let set1Scale = 1;
-  if (isDesktop && progress > 0.1) {
-    const t = Math.min(1, (progress - 0.1) / 0.24);
-    set1Opacity = 1 - t;
-    set1Y = -(t * 220);
-    set1Scale = 1 - t * 0.08;
-  }
 
   let set2Opacity = 0;
-  let set2Y = 260;
+  let set2Y = 240;
   let set2Scale = 0.92;
-  if (isDesktop) {
-    if (progress < 0.12) {
-      set2Opacity = 0;
-      set2Y = 260;
-      set2Scale = 0.92;
-    } else if (progress >= 0.12 && progress < 0.34) {
-      const t = (progress - 0.12) / 0.22;
-      set2Opacity = t;
-      set2Y = (1 - t) * 260;
-      set2Scale = 0.92 + t * 0.08;
-    } else if (progress >= 0.34 && progress < 0.46) {
-      set2Opacity = 1;
-      set2Y = 0;
-      set2Scale = 1;
-    } else if (progress >= 0.46) {
-      const t = Math.min(1, (progress - 0.46) / 0.16);
-      set2Opacity = 1 - t;
-      set2Y = -(t * 260);
-      set2Scale = 1 - t * 0.08;
-    }
-  }
+
+  let textOpacity = 1;
+  let textBlur = 0;
+  let textY = 0;
+
+  let videoOpacity = 1;
 
   let dashOpacity = 0;
-  let dashY = 450;
-  let dashScale = 0.88;
+  let dashY = 300;
+  let dashScale = 0.92;
+  let dashVisible = false;
+
   if (isDesktop) {
-    if (progress > 0.44) {
-      const t = Math.min(1, (progress - 0.44) / 0.36);
-      const ease = 1 - Math.pow(1 - t, 3);
-      dashOpacity = Math.min(1, t * 1.6);
-      dashY = (1 - ease) * 450;
-      dashScale = 0.88 + ease * 0.12;
+    if (showSideCards) {
+      // ════════ LARGE SCREENS (> 1280px) WITH 4 SIDE CARDS ════════
+      // 1. Set 1 Floating Cards (Card 1 Left, Card 2 Right)
+      if (progress > 0.08) {
+        const t = Math.min(1, (progress - 0.08) / 0.16);
+        set1Opacity = 1 - t;
+        set1Y = -(t * 220);
+        set1Scale = 1 - t * 0.08;
+      }
+
+      // 2. Set 2 Floating Cards (Card 3 Left, Card 4 Right - "Bija Cards")
+      if (progress < 0.10) {
+        set2Opacity = 0;
+        set2Y = 240;
+        set2Scale = 0.92;
+      } else if (progress >= 0.10 && progress < 0.26) {
+        const t = (progress - 0.10) / 0.16;
+        set2Opacity = t;
+        set2Y = (1 - t) * 240;
+        set2Scale = 0.92 + t * 0.08;
+      } else if (progress >= 0.26 && progress < 0.42) {
+        set2Opacity = 1;
+        set2Y = 0;
+        set2Scale = 1;
+      } else if (progress >= 0.42) {
+        const t = Math.min(1, (progress - 0.42) / 0.14);
+        set2Opacity = 1 - t;
+        set2Y = -(t * 240);
+        set2Scale = 1 - t * 0.08;
+      }
+
+      // 3. Center Hero Area (stays visible while Set 1 & Set 2 cards animate)
+      if (progress > 0.44) {
+        const t = Math.min(1, (progress - 0.44) / 0.14);
+        textOpacity = 1 - t;
+        textBlur = t * 10;
+        textY = -(t * 60);
+      }
+
+      // 4. Video Layer
+      if (progress > 0.44) {
+        const t = Math.min(1, (progress - 0.44) / 0.14);
+        videoOpacity = 1 - t;
+      }
+
+      // 5. Chatbot Section: slides in after second cards and center text leave
+      if (progress > 0.54) {
+        dashVisible = true;
+        const t = Math.min(1, (progress - 0.54) / 0.26);
+        const ease = 1 - Math.pow(1 - t, 3);
+        dashOpacity = Math.min(1, t * 1.5);
+        dashY = (1 - ease) * 320;
+        dashScale = 0.92 + ease * 0.08;
+      }
+    } else {
+      // ════════ LAPTOPS, TABLETS & MOBILE (WIDTH <= 1280px) ════════
+      // NO side cards to wait for! Snappy transition with ZERO dead scrolling!
+
+      // 1. Center Hero Area fades out smoothly on scroll
+      if (progress > 0.04) {
+        const t = Math.min(1, (progress - 0.04) / 0.18);
+        textOpacity = 1 - t;
+        textBlur = t * 8;
+        textY = -(t * 40);
+      }
+
+      // 2. Video Layer fades out smoothly
+      if (progress > 0.06) {
+        const t = Math.min(1, (progress - 0.06) / 0.18);
+        videoOpacity = 1 - t;
+      }
+
+      // 3. Chatbot slides up and centers
+      if (progress > 0.08) {
+        dashVisible = true;
+        const t = Math.min(1, (progress - 0.08) / 0.28);
+        const ease = 1 - Math.pow(1 - t, 3);
+        dashOpacity = Math.min(1, t * 1.4);
+        dashY = (1 - ease) * 200;
+        dashScale = 0.94 + ease * 0.06;
+      }
     }
   } else {
+    // ════════ MOBILE FALLBACK (<= 768px) ════════
+    dashVisible = true;
     dashOpacity = 1;
     dashY = 0;
     dashScale = 1;
@@ -121,15 +447,46 @@ export default function Homeherobanner() {
   return (
     <div ref={heroRef} className={styles.scrollSectionContainer}>
       <div className={styles.stickyViewport}>
-        {/* Light Theme Ambient Background with Purple Aurora & Tech Dot Grid */}
-        <div className={styles.lightBgWrapper}>
+        {/* Video & Tech Dot Grid strictly for top hero view, fades away so chatbot has clean light theme */}
+        <div
+          className={styles.lightBgWrapper}
+          style={isDesktop ? { opacity: videoOpacity, pointerEvents: "none" } : undefined}
+        >
+          <video
+            ref={(el) => {
+              if (el) {
+                el.muted = true;
+                el.play().catch(() => {});
+              }
+            }}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            src="/videos/hero.mp4"
+            className={styles.heroBackgroundVideo}
+          >
+            <source src="/videos/hero.mp4" type="video/mp4" />
+          </video>
+          <div className={styles.videoGlassOverlay}></div>
           <div className={styles.purpleGlowOrbTop}></div>
           <div className={styles.blueGlowOrbLeft}></div>
           <div className={styles.violetGlowOrbRight}></div>
           <div className={styles.dotGridOverlay}></div>
+          <div className={styles.videoBottomFade}></div>
         </div>
 
-        {/* ═════════ 1. CENTER HERO AREA ═════════ */}
+        {/* Ambient Glow Orbs for Chatbot Phase (revealed as video fades out) */}
+        <div
+          className={styles.chatGlowWrapper}
+          style={isDesktop ? { opacity: 1 - videoOpacity } : undefined}
+        >
+          <div className={styles.chatGlowOrbLeft}></div>
+          <div className={styles.chatGlowOrbRight}></div>
+        </div>
+
+        {/* Center Hero Area */}
         <div
           className={styles.heroArea}
           style={
@@ -155,8 +512,11 @@ export default function Homeherobanner() {
 
           {/* Main Headline */}
           <h1 className={styles.ternicHeadline}>
-            Discover. Build. <br />
-            <span className={styles.highlightText}>Automate.</span>
+            We Help You Create <br />
+            <span className={styles.typewriterWrapper}>
+              <span className={styles.typewriterText}>{displayText}</span>
+              <span className={styles.typewriterCursor}>|</span>
+            </span>
           </h1>
 
           {/* Subtitle */}
@@ -182,14 +542,18 @@ export default function Homeherobanner() {
         </div>
 
         {/* ═════════ 2. ALGOMATIC BOT CARD 1: LIVE BOT STATUS (LEFT) ═════════ */}
-        {isDesktop && (
+        {showSideCards && (
           <div
             className={styles.heroCardOne}
-            style={{
-              opacity: set1Opacity,
-              transform: `translateY(calc(-50% + ${set1Y}px)) scale(${set1Scale})`,
-              pointerEvents: set1Opacity <= 0.05 ? "none" : "auto",
-            }}
+            style={
+              isDesktop
+                ? {
+                    opacity: set1Opacity,
+                    transform: `translateY(calc(-50% + ${set1Y}px)) scale(${set1Scale})`,
+                    pointerEvents: set1Opacity <= 0.05 ? "none" : "auto",
+                  }
+                : undefined
+            }
           >
             <div className={styles.botCardWidget}>
               <div className={styles.widgetHeader}>
@@ -233,27 +597,33 @@ export default function Homeherobanner() {
         )}
 
         {/* ═════════ 3. ALGOMATIC BOT CARD 2: BOT PERFORMANCE CHART (RIGHT) ═════════ */}
-        {isDesktop && (
+        {showSideCards && (
           <div
             className={styles.heroCardTwo}
-            style={{
-              opacity: set1Opacity,
-              transform: `translateY(calc(-50% + ${set1Y}px)) scale(${set1Scale})`,
-              pointerEvents: set1Opacity <= 0.05 ? "none" : "auto",
-            }}
+            style={
+              isDesktop
+                ? {
+                    opacity: set1Opacity,
+                    transform: `translateY(calc(-50% + ${set1Y}px)) scale(${set1Scale})`,
+                    pointerEvents: set1Opacity <= 0.05 ? "none" : "auto",
+                  }
+                : undefined
+            }
           >
             <div className={styles.botCardWidget}>
               <div className={styles.widgetHeader}>
                 <div>
                   <h4 className={styles.widgetTitle}>Bot Performance</h4>
-                  <div className={styles.profitHighlight}>
-                    <span className={styles.bigGain}>+284.6%</span>
-                    <span className={styles.verifiedTag}>
-                      <CheckCircle2 size={13} /> MyFxBook Verified
-                    </span>
-                  </div>
+                  <p className={styles.widgetSub}>Verified Live ROI</p>
                 </div>
                 <span className={styles.periodBadge}>All Time</span>
+              </div>
+
+              <div className={styles.profitHighlight}>
+                <span className={styles.bigGain}>+284.6%</span>
+                <span className={styles.verifiedTag}>
+                  <CheckCircle2 size={13} /> MyFxBook Verified
+                </span>
               </div>
 
               {/* Glowing SVG Area Chart */}
@@ -296,14 +666,18 @@ export default function Homeherobanner() {
         )}
 
         {/* ═════════ 4. ALGOMATIC BOT CARD 3: AI BOT BUILDER STUDIO (CENTER-LEFT) ═════════ */}
-        {isDesktop && (
+        {showSideCards && (
           <div
             className={styles.heroCardThree}
-            style={{
-              opacity: set2Opacity,
-              transform: `translateY(calc(-50% + ${set2Y}px)) scale(${set2Scale})`,
-              pointerEvents: set2Opacity <= 0.05 ? "none" : "auto",
-            }}
+            style={
+              isDesktop
+                ? {
+                    opacity: set2Opacity,
+                    transform: `translateY(calc(-50% + ${set2Y}px)) scale(${set2Scale})`,
+                    pointerEvents: set2Opacity <= 0.05 ? "none" : "auto",
+                  }
+                : undefined
+            }
           >
             <div className={styles.botCardWidget}>
               <div className={styles.widgetHeader}>
@@ -345,14 +719,18 @@ export default function Homeherobanner() {
         )}
 
         {/* ═════════ 5. ALGOMATIC BOT CARD 4: LIVE TRADE EXECUTION FEED (CENTER-RIGHT) ═════════ */}
-        {isDesktop && (
+        {showSideCards && (
           <div
             className={styles.heroCardFour}
-            style={{
-              opacity: set2Opacity,
-              transform: `translateY(calc(-50% + ${set2Y}px)) scale(${set2Scale})`,
-              pointerEvents: set2Opacity <= 0.05 ? "none" : "auto",
-            }}
+            style={
+              isDesktop
+                ? {
+                    opacity: set2Opacity,
+                    transform: `translateY(calc(-50% + ${set2Y}px)) scale(${set2Scale})`,
+                    pointerEvents: set2Opacity <= 0.05 ? "none" : "auto",
+                  }
+                : undefined
+            }
           >
             <div className={styles.botCardWidget}>
               <div className={styles.widgetHeader}>
@@ -402,257 +780,207 @@ export default function Homeherobanner() {
           </div>
         )}
 
-        {/* ═════════ 6. ALGOMATIC PRO TRADING BOT DASHBOARD SHOWCASE ═════════ */}
+        {/* ═════════ 6. ALGOMATIC AI BOT CHAT COPILOT SECTION (SLIDES IN SMOOTHLY) ═════════ */}
         <div
-          className={styles.heroDashboard}
+          className={styles.heroBotChatSection}
           style={
             isDesktop
               ? {
                   opacity: dashOpacity,
                   transform: `translate(-50%, calc(-50% + ${dashY}px)) scale(${dashScale})`,
-                  pointerEvents: dashOpacity <= 0.05 ? "none" : "auto",
+                  pointerEvents: dashOpacity <= 0.1 ? "none" : "auto",
+                  visibility: dashVisible ? "visible" : "hidden",
                 }
               : undefined
           }
         >
-          <div className={styles.dashboardContainer}>
-            {/* Top Navigation Bar */}
-            <div className={styles.dashTopBar}>
-              <div className={styles.dashLogoSection}>
-                <div className={styles.algoIconBox}>
-                  <Bot size={20} />
+          <div className={styles.chatStudioCard}>
+          {/* Top Bar of Studio */}
+          <div className={styles.studioHeader}>
+            <div className={styles.studioHeaderLeft}>
+              <div className={styles.botAvatarGlow}>
+                <Bot size={22} color="#ffffff" />
+                <span className={styles.onlineStatusDot}></span>
+              </div>
+              <div className={styles.studioTitleWrap}>
+                <div className={styles.studioTitleRow}>
+                  <h3 className={styles.studioTitle}>AlgoMatic Bot Copilot</h3>
+                  <span className={styles.aiBadge}>
+                    <Sparkles size={12} /> GPT-4o Quant Engine
+                  </span>
                 </div>
-                <div className={styles.dashLogoText}>
-                  <span className={styles.logoBold}>AlgoMatic</span>
-                  <span className={styles.logoBadge}>PRO TERMINAL</span>
-                </div>
+                <p className={styles.studioSubtitle}>
+                  Chat with AI to generate, optimize & backtest automated trading algorithms in real-time
+                </p>
               </div>
             </div>
 
-            {/* Dashboard Inner Body */}
-            <div className={styles.dashBody}>
-              {/* Sidebar */}
-              <div className={styles.dashSidebar}>
-                <div className={`${styles.navItem} ${styles.navActive}`}>
-                  <BarChart3 size={16} />
-                  <span>Overview</span>
-                </div>
-                <div className={styles.navItem}>
-                  <Bot size={16} />
-                  <span>My Bots (8)</span>
-                </div>
-                <div className={styles.navItem}>
-                  <Cpu size={16} />
-                  <span>AI Builder</span>
-                </div>
-                <div className={styles.navItem}>
-                  <Layers size={16} />
-                  <span>Backtesting</span>
-                </div>
-                <div className={styles.navItem}>
-                  <ShieldCheck size={16} />
-                  <span>Risk Guard</span>
-                </div>
+            <div className={styles.studioHeaderRight}>
+              <div className={styles.latencyBadge}>
+                <Activity size={13} className={styles.pulseIcon} />
+                <span>0.02ms Latency</span>
               </div>
-
-              {/* Main Content Area */}
-              <div className={styles.dashMainContent}>
-                {/* 3 Metric Cards */}
-                <div className={styles.dashMetricsGrid}>
-                  <div className={styles.dashMetricCard}>
-                    <span className={styles.dashMetricLabel}>
-                      Total Bot Portfolio
-                    </span>
-                    <div className={styles.dashMetricValue}>
-                      $124,567.89
-                    </div>
-                    <span className={styles.dashMetricGain}>
-                      +18.4% this month (+$19,410.50)
-                    </span>
-                  </div>
-
-                  <div className={styles.dashMetricCard}>
-                    <span className={styles.dashMetricLabel}>
-                      Today's Live Profit
-                    </span>
-                    <div className={styles.dashMetricValueGreen}>
-                      +$2,640.20
-                    </div>
-                    <span className={styles.dashMetricSub}>
-                      14 Trades • 99.2% Win Rate
-                    </span>
-                  </div>
-
-                  <div className={styles.dashMetricCard}>
-                    <span className={styles.dashMetricLabel}>
-                      Max Historical Drawdown
-                    </span>
-                    <div className={styles.dashMetricValue}>
-                      1.2%
-                    </div>
-                    <span className={styles.dashMetricSafe}>
-                      ✓ Protected by Risk Guard
-                    </span>
-                  </div>
-                </div>
-
-                {/* Main Interactive Chart Preview */}
-                <div className={styles.dashChartPanel}>
-                  <div className={styles.chartPanelHeader}>
-                    <div>
-                      <h5 className={styles.chartPanelTitle}>
-                        Cumulative Bot Profit Growth
-                      </h5>
-                      <span className={styles.chartPanelSub}>
-                        Real-time algorithmic trade compounding
-                      </span>
-                    </div>
-                    <div className={styles.chartTabs}>
-                      <span className={styles.tabActive}>1D</span>
-                      <span>1W</span>
-                      <span>1M</span>
-                      <span>1Y</span>
-                      <span>ALL</span>
-                    </div>
-                  </div>
-
-                  {/* High Quality Rich SVG Area Chart */}
-                  <div className={styles.mainSvgWrapper}>
-                    <svg
-                      viewBox="0 0 800 210"
-                      preserveAspectRatio="none"
-                      className={styles.mainChartSvg}
-                    >
-                      <defs>
-                        <linearGradient
-                          id="dashAreaGrad"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop
-                            offset="0%"
-                            stopColor="#9657fa"
-                            stopOpacity="0.28"
-                          />
-                          <stop
-                            offset="100%"
-                            stopColor="#9657fa"
-                            stopOpacity="0.01"
-                          />
-                        </linearGradient>
-                      </defs>
-
-                      {/* Horizontal Grid lines */}
-                      <line
-                        x1="0"
-                        y1="40"
-                        x2="800"
-                        y2="40"
-                        stroke="#f0ebf8"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                      />
-                      <line
-                        x1="0"
-                        y1="90"
-                        x2="800"
-                        y2="90"
-                        stroke="#f0ebf8"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                      />
-                      <line
-                        x1="0"
-                        y1="140"
-                        x2="800"
-                        y2="140"
-                        stroke="#f0ebf8"
-                        strokeWidth="1"
-                        strokeDasharray="4 4"
-                      />
-
-                      {/* Area Fill */}
-                      <path
-                        d="M0,180 Q100,165 180,140 T360,110 T520,75 T680,45 T800,20 L800,210 L0,210 Z"
-                        fill="url(#dashAreaGrad)"
-                      />
-
-                      {/* Profit Line */}
-                      <path
-                        d="M0,180 Q100,165 180,140 T360,110 T520,75 T680,45 T800,20"
-                        fill="none"
-                        stroke="#9657fa"
-                        strokeWidth="3.5"
-                        strokeLinecap="round"
-                      />
-
-                      {/* Key Trade Execution Markers */}
-                      <circle cx="180" cy="140" r="5" fill="#9657fa" />
-                      <circle cx="180" cy="140" r="2.5" fill="#ffffff" />
-
-                      <circle cx="360" cy="110" r="5" fill="#9657fa" />
-                      <circle cx="360" cy="110" r="2.5" fill="#ffffff" />
-
-                      <circle cx="520" cy="75" r="5" fill="#9657fa" />
-                      <circle cx="520" cy="75" r="2.5" fill="#ffffff" />
-
-                      <circle cx="800" cy="20" r="6" fill="#6830d6" />
-                      <circle cx="800" cy="20" r="3" fill="#ffffff" />
-                    </svg>
-                  </div>
-                </div>
-
-                {/* Bottom Active Bots & Trade Feed Row */}
-                <div className={styles.dashBottomGrid}>
-                  <div className={styles.bottomBox}>
-                    <div className={styles.bottomBoxHeader}>
-                      <span>Active Running Bots</span>
-                      <span className={styles.linkView}>Manage All &gt;</span>
-                    </div>
-                    <div className={styles.botRowItem}>
-                      <div className={styles.botRowLeft}>
-                        <span className={styles.dotRunning}></span>
-                        <strong>Plus Arbitrage (XAUUSD)</strong>
-                      </div>
-                      <span className={styles.botRowPnl}>+$8,420.00</span>
-                    </div>
-                    <div className={styles.botRowItem}>
-                      <div className={styles.botRowLeft}>
-                        <span className={styles.dotRunning}></span>
-                        <strong>Trend Matrix (EURUSD)</strong>
-                      </div>
-                      <span className={styles.botRowPnl}>+$5,210.00</span>
-                    </div>
-                  </div>
-
-                  <div className={styles.bottomBox}>
-                    <div className={styles.bottomBoxHeader}>
-                      <span>Recent Auto Trades</span>
-                      <span className={styles.linkView}>MT5 History &gt;</span>
-                    </div>
-                    <div className={styles.botRowItem}>
-                      <div className={styles.botRowLeft}>
-                        <span className={styles.tagBuyMini}>BUY</span>
-                        <span>XAUUSD 1.50 Lots</span>
-                      </div>
-                      <span className={styles.botRowPnlGreen}>+$420.00</span>
-                    </div>
-                    <div className={styles.botRowItem}>
-                      <div className={styles.botRowLeft}>
-                        <span className={styles.tagBuyMini}>BUY</span>
-                        <span>US30 0.80 Lots</span>
-                      </div>
-                      <span className={styles.botRowPnlGreen}>+$280.00</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button
+                type="button"
+                className={styles.resetChatBtn}
+                onClick={handleResetChat}
+                title="Reset conversation"
+              >
+                <RefreshCw size={13} />
+                <span>Reset</span>
+              </button>
             </div>
           </div>
+
+          {/* Main Single-Column Chat Stream */}
+          <div className={styles.chatStream} ref={chatStreamRef}>
+            {chatMessages.map((msg) => {
+              const strat = msg.strategyKey ? STRATEGIES[msg.strategyKey] : null;
+
+              return (
+                <div
+                  key={msg.id}
+                  className={`${styles.chatRow} ${
+                    msg.role === "user" ? styles.chatRowUser : styles.chatRowAi
+                  }`}
+                >
+                  {msg.role === "ai" && (
+                    <div className={styles.msgAvatar}>
+                      <Bot size={16} />
+                    </div>
+                  )}
+
+                  <div className={styles.msgBubbleWrap}>
+                    <div
+                      className={`${styles.msgBubble} ${
+                        msg.role === "user" ? styles.msgBubbleUser : styles.msgBubbleAi
+                      }`}
+                    >
+                      <p>{msg.text}</p>
+
+                      {strat && (
+                        <div className={styles.strategyCardInline}>
+                          {/* Card Top Meta */}
+                          <div className={styles.stratCardHeader}>
+                            <div className={styles.stratMetaLeft}>
+                              <span className={styles.stratBadge}>
+                                <CheckCircle2 size={12} /> Strategy Verified
+                              </span>
+                              <span className={styles.stratPair}>{strat.pair}</span>
+                            </div>
+                            <span className={styles.stratSpeed}>
+                              <Zap size={11} /> {strat.speed}
+                            </span>
+                          </div>
+
+                          <h4 className={styles.stratName}>{strat.name}</h4>
+
+                          {/* 4 Stats Grid in single row */}
+                          <div className={styles.stratMetricsGrid}>
+                            <div className={styles.stratMetricItem}>
+                              <span className={styles.metricLabel}>Win Rate</span>
+                              <strong className={styles.greenText}>{strat.winRate}</strong>
+                            </div>
+                            <div className={styles.stratMetricItem}>
+                              <span className={styles.metricLabel}>Monthly ROI</span>
+                              <strong className={styles.greenText}>{strat.monthlyRoi}</strong>
+                            </div>
+                            <div className={styles.stratMetricItem}>
+                              <span className={styles.metricLabel}>Max Drawdown</span>
+                              <strong className={styles.whiteText}>{strat.drawdown}</strong>
+                            </div>
+                            <div className={styles.stratMetricItem}>
+                              <span className={styles.metricLabel}>Risk / Reward</span>
+                              <strong className={styles.whiteText}>{strat.riskReward}</strong>
+                            </div>
+                          </div>
+
+                          {/* Action Toolbar */}
+                          <div className={styles.stratActionsRow}>
+                            <button
+                              type="button"
+                              className={styles.copyBtn}
+                              onClick={() => handleCopyCode(strat.code)}
+                            >
+                              {copiedCode ? (
+                                <>
+                                  <Check size={13} color="#22c55e" /> Copied!
+                                </>
+                              ) : (
+                                <>
+                                  <Copy size={13} /> Copy EA Code
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    <span className={styles.msgTime}>{msg.time}</span>
+                  </div>
+                </div>
+              );
+            })}
+
+            {isTyping && (
+              <div className={`${styles.chatRow} ${styles.chatRowAi}`}>
+                <div className={styles.msgAvatar}>
+                  <Bot size={16} />
+                </div>
+                <div className={styles.typingIndicator}>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Prompts Carousel / Pills */}
+          <div className={styles.quickPromptsSection}>
+            <span className={styles.quickPromptsLabel}>
+              <Sparkles size={13} /> Try asking the Bot:
+            </span>
+            <div className={styles.promptsPillsRow}>
+              {QUICK_PROMPTS.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  className={`${styles.promptPill} ${
+                    activeStrategyKey === item.key ? styles.promptPillActive : ""
+                  }`}
+                  onClick={() => handleSelectPrompt(item)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Chat Input Bar */}
+          <form className={styles.chatInputForm} onSubmit={handleSendMessage}>
+            <div className={styles.inputInnerWrap}>
+              <MessageSquare size={19} className={styles.inputIcon} />
+              <input
+                type="text"
+                value={inputVal}
+                onChange={(e) => setInputVal(e.target.value)}
+                placeholder="Ask AI to build, optimize or backtest a trading bot..."
+                className={styles.chatInput}
+              />
+              <button
+                type="submit"
+                className={styles.chatSendBtn}
+                disabled={!inputVal.trim() || isTyping}
+                aria-label="Send message"
+              >
+                <Send size={18} />
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 }

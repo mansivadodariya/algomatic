@@ -1,0 +1,232 @@
+@import "../../scss/mixins/index.scss";
+
+/* ── Common Premium Broker Card Component ── */
+.brokerCard {
+  background: #ffffff;
+  border: 1.5px solid #ece6f6;
+  border-radius: 20px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px rgba(150, 87, 250, 0.05);
+  width: 100%;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #9657fa;
+    box-shadow: 0 16px 36px rgba(150, 87, 250, 0.12);
+  }
+
+  /* 1. Top Logo Banner */
+  .topLogoBanner {
+    background: #f7f5fb;
+    border: 1px solid #ebe5f5;
+    border-radius: 14px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 84px;
+    position: relative;
+    overflow: hidden;
+
+    .logoWrap {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 100%;
+      height: 52px;
+
+      img {
+        max-height: 48px;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .initialsLogo {
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 22px;
+        font-family: "Urbanist", sans-serif;
+        padding: 8px 16px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+
+  /* 2. Card Content Wrapper */
+  .cardContentWrapper {
+    padding: 16px 4px 4px 4px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .titleStack {
+      margin-bottom: 8px;
+
+      .brokerName {
+        font-family: "Urbanist", sans-serif;
+        font-size: 21px;
+        font-weight: 700;
+        color: #111118;
+        margin: 0 0 4px 0;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+      }
+
+      .brokerSubtitle {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #7b3fe4;
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+
+    .brokerDescription {
+      font-size: 13.5px;
+      line-height: 20px;
+      color: #555566;
+      margin: 0 0 16px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 3. Three Full-Width Pill Rows */
+    .featureRows {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 22px;
+
+      .featureRowItem {
+        background: #fbf9fe;
+        border: 1px solid #ebe5f5;
+        border-radius: 12px;
+        padding: 11px 14px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: #f4effd;
+          border-color: rgba(150, 87, 250, 0.4);
+          transform: translateX(2px);
+        }
+
+        .featureRowIcon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #9657fa;
+          flex-shrink: 0;
+        }
+
+        .featureRowText {
+          color: #1e1e2d;
+          font-size: 13.5px;
+          font-weight: 500;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          line-height: 1.2;
+        }
+      }
+    }
+
+    /* 4. Action Buttons (Side by Side) */
+    .cardActionsRow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+
+      @media (max-width: 380px) {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .visitSiteBtn {
+        flex: 1;
+        height: 44px;
+        background: #ffffff;
+        border: 1.5px solid #9657fa;
+        border-radius: 9999px;
+        color: #7b3fe4;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+        cursor: pointer;
+
+        @media (max-width: 380px) {
+          width: 100%;
+          flex: none;
+        }
+
+        &:hover {
+          background: rgba(150, 87, 250, 0.08);
+          border-color: #6830d6;
+          color: #6830d6;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(150, 87, 250, 0.12);
+        }
+
+        svg {
+          color: currentColor;
+        }
+      }
+
+      .viewDetailsBtn {
+        flex: 1.15;
+        height: 44px;
+        background: linear-gradient(135deg, #9657fa 0%, #7b3fe4 100%);
+        border: none;
+        border-radius: 9999px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow: 0 4px 16px rgba(150, 87, 250, 0.28);
+
+        @media (max-width: 380px) {
+          width: 100%;
+          flex: none;
+        }
+
+        &:hover {
+          background: linear-gradient(135deg, #a76ffa 0%, #894ff5 100%);
+          transform: translateY(-1px);
+          box-shadow: 0 6px 20px rgba(150, 87, 250, 0.4);
+        }
+
+        svg {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

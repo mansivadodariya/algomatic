@@ -81,6 +81,12 @@ export default function MobileHeader({ setHeader, header }) {
                 </div>
               </div>
             </div>
+            <Link
+              href="/broker"
+              onClick={() => setHeader(!header)}
+            >
+              Broker
+            </Link>
           </div>
           <div className={styles.bottomCtaWrapper}>
             <Commonarrowbutton

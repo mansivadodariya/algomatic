@@ -102,7 +102,17 @@ export default function Header() {
     setHoveredMenu(null);
   };
 
+  const getUserInitials = (name) => {
+    if (!name || typeof name !== "string") return "U";
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length >= 2) {
+      return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
+    }
+    return parts[0]?.slice(0, 2)?.toUpperCase() || "U";
+  };
+
   const menuItems = [
+    
     // {
     //   title: "How It Works",
     //   submenu: [],
@@ -148,10 +158,15 @@ export default function Header() {
       routes: "",
     },
     {
-      title: "Contact Us",
+      title: "Broker",
       submenu: [],
-      routes: "/contact-us",
+      routes: "/broker",
     },
+    // {
+    //   title: "Contact Us",
+    //   submenu: [],
+    //   routes: "/contact-us",
+    // },
   ];
 
   return (
@@ -258,7 +273,7 @@ export default function Header() {
                       onClick={() => setShowMenu((prev) => !prev)}
                     >
                       <UserCircle className={styles.userIcon} />
-                      <span>{user?.name?.slice(0, 10) || "Account"}</span>
+                      <span>{getUserInitials(user?.name)}</span>
                       <ChevronDown className={styles.userDownIcon} />
                     </button>
                     {showMenu && (
@@ -282,7 +297,7 @@ export default function Header() {
                         <button
                           onClick={() => {
                             setShowMenu(false);
-                            router.push("/affiliate");
+                            router.push(`/affiliate/${user?._id}`);
                           }}
                         >
                           Affiliate Dashboard

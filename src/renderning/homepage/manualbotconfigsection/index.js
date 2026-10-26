@@ -169,9 +169,8 @@ export default function Manualbotconfigsection() {
                 <button
                   key={step.id}
                   type="button"
-                  className={`${styles.stepTabItem} ${isActive ? styles.stepTabActive : ""} ${
-                    isCompleted ? styles.stepTabCompleted : ""
-                  }`}
+                  className={`${styles.stepTabItem} ${isActive ? styles.stepTabActive : ""} ${isCompleted ? styles.stepTabCompleted : ""
+                    }`}
                   onClick={() => setActiveStep(idx)}
                 >
                   <div className={styles.stepTabIconBox}>
@@ -252,9 +251,8 @@ export default function Manualbotconfigsection() {
                             <button
                               key={plt.name}
                               type="button"
-                              className={`${styles.platformSelectBtn} ${
-                                selectedPlatform === plt.name ? styles.platformSelectActive : ""
-                              }`}
+                              className={`${styles.platformSelectBtn} ${selectedPlatform === plt.name ? styles.platformSelectActive : ""
+                                }`}
                               onClick={() => setSelectedPlatform(plt.name)}
                             >
                               <span className={styles.pltName}>{plt.name}</span>
@@ -280,9 +278,8 @@ export default function Manualbotconfigsection() {
                               <button
                                 key={tf}
                                 type="button"
-                                className={`${styles.tfBtn} ${
-                                  selectedTimeframe === tf ? styles.tfBtnActive : ""
-                                }`}
+                                className={`${styles.tfBtn} ${selectedTimeframe === tf ? styles.tfBtnActive : ""
+                                  }`}
                                 onClick={() => setSelectedTimeframe(tf)}
                               >
                                 {tf}
@@ -312,9 +309,8 @@ export default function Manualbotconfigsection() {
                               <button
                                 key={ind}
                                 type="button"
-                                className={`${styles.indPillBtn} ${
-                                  isSelected ? styles.indPillActive : ""
-                                }`}
+                                className={`${styles.indPillBtn} ${isSelected ? styles.indPillActive : ""
+                                  }`}
                                 onClick={() => toggleIndicator(ind)}
                               >
                                 {isSelected ? "✓ " : "+ "}
@@ -425,9 +421,8 @@ export default function Manualbotconfigsection() {
                             <p>Execute exclusively during London & New York overlap (13:00 - 17:00 UTC)</p>
                           </div>
                           <div
-                            className={`${styles.toggleSwitch} ${
-                              sessionFilterActive ? styles.toggleOn : ""
-                            }`}
+                            className={`${styles.toggleSwitch} ${sessionFilterActive ? styles.toggleOn : ""
+                              }`}
                           >
                             <span />
                           </div>
@@ -442,9 +437,8 @@ export default function Manualbotconfigsection() {
                             <p>Reject order execution if broker spread exceeds 1.2 pips</p>
                           </div>
                           <div
-                            className={`${styles.toggleSwitch} ${
-                              spreadFilterActive ? styles.toggleOn : ""
-                            }`}
+                            className={`${styles.toggleSwitch} ${spreadFilterActive ? styles.toggleOn : ""
+                              }`}
                           >
                             <span />
                           </div>
@@ -459,9 +453,8 @@ export default function Manualbotconfigsection() {
                             <p>Locks in profits once trade achieves +15 pips, trails at 8 pips</p>
                           </div>
                           <div
-                            className={`${styles.toggleSwitch} ${
-                              trailingStopActive ? styles.toggleOn : ""
-                            }`}
+                            className={`${styles.toggleSwitch} ${trailingStopActive ? styles.toggleOn : ""
+                              }`}
                           >
                             <span />
                           </div>
@@ -476,9 +469,8 @@ export default function Manualbotconfigsection() {
                             <p>Move stop loss to entry price + 2 pips after +18 pips in green</p>
                           </div>
                           <div
-                            className={`${styles.toggleSwitch} ${
-                              breakEvenActive ? styles.toggleOn : ""
-                            }`}
+                            className={`${styles.toggleSwitch} ${breakEvenActive ? styles.toggleOn : ""
+                              }`}
                           >
                             <span />
                           </div>
@@ -625,7 +617,11 @@ export default function Manualbotconfigsection() {
                   className={styles.navBtnNext}
                   onClick={() => setActiveStep((prev) => (prev + 1) % steps.length)}
                 >
-                  <span>Next Step</span>
+                  <span>
+                    {activeStep === steps.length - 1
+                      ? "Generate Your Strategy"
+                      : "Next Step"}
+                  </span>
                   <ArrowRight size={14} />
                 </button>
               </div>

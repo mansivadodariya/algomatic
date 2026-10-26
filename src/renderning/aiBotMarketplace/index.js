@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./aiBotMarketplace.module.scss";
 import AiMarketplaceHeroBanner from "./aiMarketplaceHeroBanner";
-import Marketplacesection from "../homepage/marketplacesection";
+import AiMarketplaceBotListing from "./aiMarketplaceBotListing";
 
 export default function AiBotMarketplace() {
   const [openFaq, setOpenFaq] = useState(0);
@@ -43,8 +43,8 @@ export default function AiBotMarketplace() {
       {/* 1. HERO BANNER */}
       <AiMarketplaceHeroBanner />
 
-      {/* 2. MARKETPLACE BOTS SECTION (from Homepage) */}
-      <Marketplacesection />
+      {/* 2. MARKETPLACE BOTS SECTION WITH FILTERS & CATEGORIES */}
+      <AiMarketplaceBotListing />
 
       {/* 4. FAQ SECTION */}
       <section className={styles.faqSection}>

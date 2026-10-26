@@ -4,12 +4,19 @@
 
 .scrollSectionContainer {
   position: relative;
-  height: 280vh;
-  background-color: #ffffff;
+  height: 220vh;
+  background-color: #090d16;
 
-  @media (max-width: 991px) {
-    height: auto !important;
-    min-height: 100vh;
+  @media (max-width: 1280px) {
+    height: 145vh;
+  }
+
+  @media (max-width: 768px) {
+    height: 124vh;
+  }
+
+  @media (max-width: 576px) {
+    height: 116vh;
   }
 }
 
@@ -17,32 +24,16 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(180deg, #ffffff 0%, #faf8ff 35%, #f4effd 65%, #ffffff 100%);
-
-  @media (max-width: 991px) {
-    position: relative !important;
-    top: auto !important;
-    height: auto !important;
-    min-height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    padding: 120px 20px 60px !important;
-    overflow: visible !important;
-  }
-
-  @media (max-width: 576px) {
-    padding: 105px 16px 50px !important;
-  }
 }
 
-// ─── Ambient Lighting & Tech Dot Grid ───
+// ─── Ambient Lighting, 3D Trading Video & Tech Dot Grid ───
 .lightBgWrapper {
   position: absolute;
   inset: 0;
@@ -50,7 +41,40 @@
   height: 100%;
   overflow: hidden;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
+  will-change: opacity;
+  transition: opacity 0.08s linear;
+  background: #090d16;
+
+  .heroBackgroundVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+    filter: saturate(1.25) contrast(1.1);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .videoGlassOverlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse 80% 70% at 50% 50%,
+        rgba(9, 13, 24, 0.45) 0%,
+        rgba(7, 10, 20, 0.72) 60%,
+        rgba(4, 6, 14, 0.94) 100%);
+    backdrop-filter: blur(1.5px);
+    z-index: 1;
+    pointer-events: none;
+  }
 
   .purpleGlowOrbTop {
     position: absolute;
@@ -59,12 +83,10 @@
     transform: translateX(-50%);
     width: 900px;
     height: 550px;
-    background: radial-gradient(
-      ellipse at 50% 50%,
-      rgba(150, 87, 250, 0.18) 0%,
-      rgba(104, 48, 214, 0.08) 50%,
-      transparent 75%
-    );
+    background: radial-gradient(ellipse at 50% 50%,
+        rgba(150, 87, 250, 0.18) 0%,
+        rgba(104, 48, 214, 0.08) 50%,
+        transparent 75%);
     filter: blur(40px);
 
     @media (max-width: 768px) {
@@ -79,11 +101,9 @@
     left: -10%;
     width: 600px;
     height: 500px;
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(56, 189, 248, 0.12) 0%,
-      transparent 65%
-    );
+    background: radial-gradient(circle at 50% 50%,
+        rgba(56, 189, 248, 0.12) 0%,
+        transparent 65%);
     filter: blur(50px);
 
     @media (max-width: 991px) {
@@ -97,11 +117,9 @@
     right: -10%;
     width: 600px;
     height: 500px;
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(168, 85, 247, 0.14) 0%,
-      transparent 65%
-    );
+    background: radial-gradient(circle at 50% 50%,
+        rgba(168, 85, 247, 0.14) 0%,
+        transparent 65%);
     filter: blur(50px);
 
     @media (max-width: 991px) {
@@ -121,6 +139,61 @@
       background-size: 24px 24px;
     }
   }
+
+  .videoBottomFade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 220px;
+    background: linear-gradient(to bottom,
+        rgba(9, 13, 22, 0) 0%,
+        rgba(9, 13, 22, 0.75) 50%,
+        #090d16 100%);
+    pointer-events: none;
+    z-index: 2;
+
+    @media (max-width: 768px) {
+      height: 80px;
+    }
+
+    @media (max-width: 480px) {
+      height: 40px;
+    }
+  }
+}
+
+// ─── Ambient Glow Orbs for Chatbot Phase (revealed as video fades out) ───
+.chatGlowWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity;
+  transition: opacity 0.08s linear;
+
+  .chatGlowOrbLeft {
+    position: absolute;
+    top: 20%;
+    left: -120px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(150, 87, 250, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  }
+
+  .chatGlowOrbRight {
+    position: absolute;
+    bottom: 15%;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  }
 }
 
 // ─── 1. CENTER HERO AREA (RESPONSIVE TYPOGRAPHY & BUTTONS) ───
@@ -130,37 +203,36 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 560px;
+  max-width: 720px;
   margin: 0 auto;
   text-align: center;
   z-index: 5;
   will-change: transform, opacity, filter;
   transition: transform 0.08s linear, opacity 0.08s linear, filter 0.08s linear;
 
-  @media (max-width: 1399px) {
-    max-width: 490px;
+  @media (max-width: 1440px) {
+    max-width: 640px;
   }
 
-  @media (max-width: 991px) {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    opacity: 1 !important;
-    filter: none !important;
-    pointer-events: auto !important;
-    width: 100% !important;
-    max-width: 680px !important;
-    margin: 0 auto !important;
-    padding: 0 !important;
+  @media (max-width: 768px) {
+    width: 94%;
+    max-width: 580px;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
   }
 
   // Eyebrow Tag
   .eyebrowWrapper {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
 
-    @media (max-width: 576px) {
-      margin-bottom: 16px;
+    @media (max-width: 768px) {
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 480px) {
+      margin-bottom: 8px;
     }
 
     .ternicEyebrow {
@@ -169,10 +241,10 @@
       gap: 9px;
       padding: 6px 16px 6px 7px;
       border-radius: 100px;
-      background: #ffffff;
-      border: 1px solid rgba(150, 87, 250, 0.28);
-      box-shadow: 0 4px 20px rgba(150, 87, 250, 0.12);
-      backdrop-filter: blur(10px);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      box-shadow: 0 4px 25px rgba(168, 85, 247, 0.3);
+      backdrop-filter: blur(12px);
       white-space: nowrap;
 
       @media (max-width: 576px) {
@@ -210,7 +282,7 @@
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.8px;
-        color: #6830d6;
+        color: #e9d5ff;
         font-family: "Urbanist", sans-serif;
 
         @media (max-width: 576px) {
@@ -227,21 +299,47 @@
 
   // Headline
   .ternicHeadline {
-    font-size: 58px;
+    font-size: 68px;
     font-weight: 700;
-    line-height: 1.14;
-    color: #0f172a;
+    line-height: 1.15;
+    color: #ffffff;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
     font-family: "Urbanist", sans-serif;
     letter-spacing: -1.2px;
-    margin: 0 0 18px;
+    margin: 0 0 22px;
 
-    .highlightText {
-      background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+    .typewriterWrapper {
+      display: inline;
+    }
+
+    .typewriterText {
+      background: linear-gradient(135deg, #9657fa 0%, #7c3aed 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 25px rgba(124, 58, 237, 0.5));
       font-family: inherit;
-      font-style: normal;
       font-weight: 700;
+    }
+
+    .typewriterCursor {
+      display: inline-block;
+      color: #9657fa;
+      font-weight: 300;
+      animation: blink 0.8s infinite;
+      margin-left: 2px;
+      filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
     }
 
     @media (max-width: 1399px) {
@@ -255,55 +353,57 @@
     }
 
     @media (max-width: 768px) {
-      font-size: 38px;
+      font-size: 34px;
       letter-spacing: -0.5px;
       line-height: 1.18;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     @media (max-width: 480px) {
-      font-size: 32px;
+      font-size: 28px;
       line-height: 1.2;
+      margin-bottom: 10px;
     }
 
     @media (max-width: 360px) {
-      font-size: 28px;
+      font-size: 24px;
     }
   }
 
   // Subtitle
   .ternicSubtitle {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
-    line-height: 26px;
-    color: #475569;
-    max-width: 540px;
-    margin: 0 auto 32px;
+    line-height: 30px;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    max-width: 700px;
+    margin: 0 auto 36px;
 
     @media (max-width: 1399px) {
       font-size: 14.5px;
-      line-height: 23px;
-      max-width: 450px;
-      margin-bottom: 26px;
+      line-height: 25px;
+      max-width: 600px;
+      margin-bottom: 28px;
     }
 
     @media (max-width: 991px) {
       font-size: 15.5px;
-      line-height: 25px;
+      line-height: 26px;
       max-width: 560px;
-      margin-bottom: 28px;
+      margin-bottom: 30px;
     }
 
     @media (max-width: 768px) {
-      font-size: 14.5px;
-      line-height: 23px;
-      margin-bottom: 24px;
+      font-size: 13.5px;
+      line-height: 21px;
+      margin-bottom: 16px;
     }
 
     @media (max-width: 480px) {
-      font-size: 13.5px;
-      line-height: 21px;
-      margin-bottom: 22px;
+      font-size: 12.5px;
+      line-height: 18px;
+      margin-bottom: 14px;
     }
   }
 
@@ -312,12 +412,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
+    gap: 16px;
 
     @media (max-width: 576px) {
-      flex-direction: column;
-      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
       gap: 10px;
+      width: 100%;
+    }
+
+    @media (max-width: 380px) {
+      flex-direction: column;
+      gap: 8px;
     }
 
     .ternicPrimaryBtn {
@@ -367,14 +473,15 @@
       gap: 8px;
       padding: 16px 30px;
       border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      color: #0f172a;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
       font-size: 15px;
       font-weight: 600;
       font-family: "Urbanist", sans-serif;
       text-decoration: none;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(12px);
       white-space: nowrap;
       transition: all 0.25s ease;
 
@@ -390,14 +497,14 @@
       }
 
       .btnPlayIcon {
-        color: #6830d6;
+        color: #c084fc;
       }
 
       &:hover {
-        background: #faf5ff;
-        border-color: rgba(150, 87, 250, 0.5);
-        color: #6830d6;
-        box-shadow: 0 6px 20px rgba(150, 87, 250, 0.12);
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(168, 85, 247, 0.6);
+        color: #ffffff;
+        box-shadow: 0 6px 24px rgba(168, 85, 247, 0.3);
       }
     }
   }
@@ -405,28 +512,51 @@
 
 // ─── PROMINENT FLOATING CARDS STYLES (GENEROUS PADDING & LUXURIOUS SPACING) ───
 .botCardWidget {
-  background: #ffffff;
-  border: 1px solid rgba(150, 87, 250, 0.24);
+  background: rgba(11, 16, 32, 0.88);
+  border: 1px solid rgba(168, 85, 247, 0.35);
   border-radius: 26px;
-  padding: 38px 40px;
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.1),
-    0 8px 26px rgba(150, 87, 250, 0.12);
+  padding: 28px 28px;
+  height: 345px;
+  min-height: 345px;
+  max-height: 345px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6),
+    0 8px 30px rgba(168, 85, 247, 0.2);
   font-family: "Urbanist", sans-serif;
   text-align: left;
-  backdrop-filter: blur(14px);
+  backdrop-filter: blur(20px);
   transition: all 0.3s ease;
+  box-sizing: border-box;
+
+  @media (max-width: 1399px) {
+    padding: 20px 18px;
+    height: 305px;
+    min-height: 305px;
+    max-height: 305px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 1199px) {
+    padding: 16px 14px;
+    height: 275px;
+    min-height: 275px;
+    max-height: 275px;
+    border-radius: 16px;
+  }
 
   .widgetHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 0;
   }
 
   .widgetHeaderLeft {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   .botIconBadge {
@@ -458,14 +588,14 @@
   .widgetTitle {
     font-size: 19px;
     font-weight: 700;
-    color: #0f172a;
+    color: #ffffff;
     margin: 0;
     line-height: 1.25;
   }
 
   .widgetSub {
     font-size: 14px;
-    color: #64748b;
+    color: #94a3b8;
     margin: 5px 0 0;
   }
 
@@ -475,9 +605,9 @@
     gap: 7px;
     padding: 7px 16px;
     border-radius: 100px;
-    background: #ecfdf5;
-    border: 1px solid #a7f3d0;
-    color: #059669;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #34d399;
     font-size: 13px;
     font-weight: 700;
 
@@ -494,11 +624,44 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    background: #faf8fe;
-    border: 1px solid #f0eaf8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
-    padding: 20px 24px;
-    margin-bottom: 22px;
+    padding: 16px 20px;
+    margin: auto 0;
+
+    @media (max-width: 1399px) {
+      padding: 12px 14px;
+      gap: 12px;
+      margin: auto 0;
+      border-radius: 14px;
+
+      .statBox {
+
+        .statValGreen,
+        .statValPurple {
+          font-size: 20px;
+        }
+      }
+    }
+
+    @media (max-width: 1199px) {
+      padding: 10px 12px;
+      gap: 8px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+
+      .statBox {
+        .statLabel {
+          font-size: 11px;
+        }
+
+        .statValGreen,
+        .statValPurple {
+          font-size: 17px;
+        }
+      }
+    }
 
     .statBox {
       display: flex;
@@ -506,7 +669,7 @@
 
       .statLabel {
         font-size: 12.5px;
-        color: #64748b;
+        color: #94a3b8;
         margin-bottom: 6px;
         font-weight: 500;
       }
@@ -514,14 +677,14 @@
       .statValGreen {
         font-size: 24px;
         font-weight: 800;
-        color: #059669;
+        color: #10b981;
         letter-spacing: -0.3px;
       }
 
       .statValPurple {
         font-size: 24px;
         font-weight: 800;
-        color: #6830d6;
+        color: #c084fc;
         letter-spacing: -0.3px;
       }
     }
@@ -529,8 +692,8 @@
 
   .widgetDivider {
     height: 1px;
-    background: #f1ecf9;
-    margin: 22px 0 20px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 14px 0;
   }
 
   .widgetFooter {
@@ -550,8 +713,9 @@
   }
 
   .strategyPill {
-    background: #f3e8ff;
-    color: #6830d6;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #d8b4fe;
     font-weight: 700;
     padding: 6px 14px;
     border-radius: 9px;
@@ -562,66 +726,105 @@
   .profitHighlight {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-top: 12px;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 4px 0 6px;
 
     .bigGain {
-      font-size: 34px;
+      font-size: 32px;
       font-weight: 800;
-      color: #0f172a;
+      color: #ffffff;
       letter-spacing: -0.5px;
+      line-height: 1;
     }
 
     .verifiedTag {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: #059669;
-      font-size: 12.5px;
+      color: #10b981;
+      font-size: 12px;
       font-weight: 700;
-      background: #ecfdf5;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
       padding: 5px 12px;
       border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   }
 
   .periodBadge {
-    font-size: 12.5px;
-    font-weight: 600;
-    color: #6830d6;
-    background: #f5f0ff;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d8b4fe;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.25);
     padding: 6px 14px;
     border-radius: 9px;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .sparklineChart {
-    margin: 16px 0 14px;
+    margin: 4px 0 6px;
     width: 100%;
 
     .chartSvg {
       width: 100%;
-      height: 100px;
+      height: 80px;
       display: block;
     }
   }
 
   .chartMetricsRow {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    font-size: 13px;
-    color: #64748b;
-    border-top: 1px solid #f1ecf9;
-    padding-top: 20px;
+    gap: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 12px;
+    margin-top: auto;
 
-    strong {
-      color: #0f172a;
-      font-weight: 700;
+    .miniMetric {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+
+      span {
+        font-size: 12px;
+        color: #94a3b8;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      strong {
+        font-size: 15px;
+        color: #ffffff;
+        font-weight: 700;
+        white-space: nowrap;
+        letter-spacing: -0.2px;
+      }
+
+      .statValGreen {
+        color: #059669;
+        font-weight: 800;
+      }
     }
 
-    .statValGreen {
-      color: #059669;
-      font-weight: 700;
+    @media (max-width: 1399px) {
+      padding-top: 12px;
+      gap: 12px;
+
+      .miniMetric {
+        span {
+          font-size: 11px;
+        }
+
+        strong {
+          font-size: 13.5px;
+        }
+      }
     }
   }
 
@@ -629,36 +832,57 @@
   .aiTag {
     font-size: 12.5px;
     font-weight: 700;
-    color: #2563eb;
-    background: #eff6ff;
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
     padding: 6px 14px;
     border-radius: 9px;
+    white-space: nowrap;
   }
 
   .codeSnippet {
-    background: #faf8fe;
-    border: 1px solid #f0eaf8;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
-    padding: 20px 22px;
-    margin-bottom: 22px;
+    padding: 18px 22px;
+    margin: auto 0;
     font-family: monospace;
     font-size: 13px;
     display: flex;
     flex-direction: column;
     gap: 9px;
 
+    @media (max-width: 1399px) {
+      padding: 12px 14px;
+      margin: auto 0;
+      font-size: 12px;
+      border-radius: 14px;
+    }
+
+    @media (max-width: 1199px) {
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      gap: 6px;
+      border-radius: 12px;
+    }
+
     .codeRow {
       display: flex;
       justify-content: space-between;
       font-size: 13px;
 
+      @media (max-width: 1199px) {
+        font-size: 11px;
+      }
+
       .codeKey {
-        color: #7c3aed;
+        color: #c084fc;
         font-weight: 600;
       }
 
       .codeVal {
-        color: #0f172a;
+        color: #ffffff;
         font-weight: 500;
       }
     }
@@ -668,18 +892,29 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: #059669;
+    color: #10b981;
     font-weight: 700;
     font-size: 13.5px;
+
+    @media (max-width: 1199px) {
+      font-size: 11.5px;
+      gap: 5px;
+    }
   }
 
   .mtBadge {
     font-size: 12.5px;
-    color: #6830d6;
+    color: #d8b4fe;
     font-weight: 600;
-    background: #f5f0ff;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.25);
     padding: 5px 12px;
     border-radius: 9px;
+
+    @media (max-width: 1199px) {
+      font-size: 11px;
+      padding: 4px 8px;
+    }
   }
 
   // Card 4 specific
@@ -687,12 +922,18 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    color: #059669;
+    color: #10b981;
     font-size: 12.5px;
     font-weight: 700;
-    background: #ecfdf5;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
     padding: 6px 14px;
     border-radius: 100px;
+
+    @media (max-width: 1199px) {
+      font-size: 11px;
+      padding: 4px 9px;
+    }
 
     .pulseIcon {
       animation: pulseAnim 1.5s infinite;
@@ -702,23 +943,43 @@
   .orderList {
     display: flex;
     flex-direction: column;
-    gap: 13px;
-    margin: 20px 0;
+    gap: 8px;
+    margin: auto 0;
+
+    @media (max-width: 1399px) {
+      gap: 6px;
+      margin: auto 0;
+    }
+
+    @media (max-width: 1199px) {
+      gap: 5px;
+      margin: auto 0;
+    }
 
     .orderItem {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: #faf8fe;
-      border: 1px solid #f1ebf9;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 14px;
-      padding: 13px 18px;
+      padding: 9px 14px;
+
+      @media (max-width: 1399px) {
+        padding: 7px 10px;
+        border-radius: 12px;
+      }
+
+      @media (max-width: 1199px) {
+        padding: 6px 8px;
+        border-radius: 10px;
+      }
 
       .orderBuy {
         font-size: 11.5px;
         font-weight: 800;
-        background: #dcfce7;
-        color: #15803d;
+        background: rgba(16, 185, 129, 0.2);
+        color: #34d399;
         padding: 3px 9px;
         border-radius: 7px;
       }
@@ -730,19 +991,19 @@
 
         strong {
           font-size: 14.5px;
-          color: #0f172a;
+          color: #ffffff;
         }
 
         small {
           font-size: 12.5px;
-          color: #64748b;
+          color: #94a3b8;
         }
       }
 
       .orderPnl {
         font-size: 14.5px;
         font-weight: 800;
-        color: #059669;
+        color: #10b981;
       }
     }
   }
@@ -752,12 +1013,12 @@
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    color: #64748b;
-    border-top: 1px solid #f1ecf9;
+    color: #94a3b8;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 18px;
 
     .liveTick {
-      color: #6830d6;
+      color: #c084fc;
       font-weight: 700;
     }
   }
@@ -767,483 +1028,1096 @@
   0% {
     opacity: 0.4;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0.4;
   }
 }
 
-// ─── 2. TERNIC FLOATING CARD 1 (LEFT) ───
+// ─── 2. TERNIC FLOATING CARD 1 (LEFT - SET 1) ───
 .heroCardOne {
   position: absolute;
   left: 2%;
   top: 50%;
-  width: 410px;
-  max-width: 27vw;
+  width: 400px;
+  max-width: 26vw;
   z-index: 6;
   pointer-events: none;
   will-change: transform, opacity;
   transition: transform 0.08s linear, opacity 0.08s linear;
 
-  @media (max-width: 1399px) {
-    left: 1.2%;
-    width: 330px;
-    max-width: 22vw;
+  @media (max-width: 1536px) {
+    width: 350px;
+    max-width: 25vw;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1399px) {
+    width: 300px;
+    left: 1.5%;
+  }
+
+  @media (max-width: 1280px) {
     display: none !important;
   }
 }
 
-// ─── 3. TERNIC FLOATING CARD 2 (RIGHT) ───
+// ─── 3. TERNIC FLOATING CARD 2 (RIGHT - SET 1) ───
 .heroCardTwo {
   position: absolute;
   right: 2%;
   top: 50%;
-  width: 410px;
-  max-width: 27vw;
+  width: 400px;
+  max-width: 26vw;
   z-index: 6;
   pointer-events: none;
   will-change: transform, opacity;
   transition: transform 0.08s linear, opacity 0.08s linear;
 
-  @media (max-width: 1399px) {
-    right: 1.2%;
-    width: 330px;
-    max-width: 22vw;
+  @media (max-width: 1536px) {
+    width: 350px;
+    max-width: 25vw;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1399px) {
+    width: 300px;
+    right: 1.5%;
+  }
+
+  @media (max-width: 1280px) {
     display: none !important;
   }
 }
 
-// ─── 4. TERNIC FLOATING CARD 3 (CENTER-LEFT) ───
+// ─── 4. TERNIC FLOATING CARD 3 (LEFT - SET 2) ───
 .heroCardThree {
   position: absolute;
-  left: 9%;
+  left: 2%;
   top: 50%;
-  width: 395px;
+  width: 400px;
   max-width: 26vw;
-  z-index: 7;
+  z-index: 6;
   pointer-events: none;
   will-change: transform, opacity;
   transition: transform 0.08s linear, opacity 0.08s linear;
 
-  @media (max-width: 1399px) {
-    left: 5.5%;
-    width: 320px;
-    max-width: 21vw;
+  @media (max-width: 1536px) {
+    width: 350px;
+    max-width: 25vw;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1399px) {
+    width: 300px;
+    left: 1.5%;
+  }
+
+  @media (max-width: 1280px) {
     display: none !important;
   }
 }
 
-// ─── 5. TERNIC FLOATING CARD 4 (CENTER-RIGHT) ───
+// ─── 5. TERNIC FLOATING CARD 4 (RIGHT - SET 2) ───
 .heroCardFour {
   position: absolute;
-  right: 9%;
+  right: 2%;
   top: 50%;
-  width: 395px;
+  width: 400px;
   max-width: 26vw;
-  z-index: 7;
+  z-index: 6;
   pointer-events: none;
   will-change: transform, opacity;
   transition: transform 0.08s linear, opacity 0.08s linear;
 
-  @media (max-width: 1399px) {
-    right: 5.5%;
-    width: 320px;
-    max-width: 21vw;
+  @media (max-width: 1536px) {
+    width: 350px;
+    max-width: 25vw;
   }
 
-  @media (max-width: 991px) {
+  @media (max-width: 1399px) {
+    width: 300px;
+    right: 1.5%;
+  }
+
+  @media (max-width: 1280px) {
     display: none !important;
   }
 }
 
-// ─── 6. ALGOMATIC PRO DASHBOARD (CENTERPIECE SHOWCASE) ───
-.heroDashboard {
+// ─── 6. ALGOMATIC AI BOT CHAT COPILOT SECTION (SLIDES IN SMOOTHLY) ───
+.heroBotChatSection {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 90%;
-  max-width: 1140px;
+  transform: translate(-50%, -50%);
+  width: 92%;
+  max-width: 920px;
+  margin: 0 auto;
   z-index: 10;
-  pointer-events: none;
   will-change: transform, opacity;
   transition: transform 0.08s linear, opacity 0.08s linear;
 
   @media (max-width: 1399px) {
-    max-width: 960px;
-    width: 88%;
+    max-width: 860px;
+    width: 92%;
   }
 
-  @media (max-width: 991px) {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-    width: 100% !important;
-    max-width: 720px !important;
-    margin: 40px auto 0 !important;
-    padding: 0 !important;
+  @media (max-width: 768px) {
+    top: calc(50% + 30px);
+    max-width: 680px;
+    width: 94%;
+    height: calc(100vh - 84px);
+    height: calc(100dvh - 84px);
   }
 
   @media (max-width: 576px) {
-    margin-top: 26px !important;
+    top: calc(50% + 30px);
+    width: calc(100% - 20px);
+    max-width: 480px;
+    height: calc(100vh - 80px);
+    height: calc(100dvh - 80px);
   }
 }
 
-.dashboardContainer {
+.chatStudioCard {
   background: #ffffff;
-  border: 1px solid rgba(150, 87, 250, 0.25);
+  border: 1.5px solid #eae6f2;
   border-radius: 22px;
-  box-shadow: 0 35px 90px rgba(104, 48, 214, 0.16),
-    0 15px 35px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 60px rgba(104, 48, 214, 0.09),
+    0 4px 16px rgba(0, 0, 0, 0.03);
   overflow: hidden;
   font-family: "Urbanist", sans-serif;
   text-align: left;
+  transition: all 0.3s ease;
+  max-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
 
-  @media (max-width: 576px) {
-    border-radius: 14px;
-    box-shadow: 0 15px 40px rgba(104, 48, 214, 0.12);
+  @media (max-width: 768px) {
+    border-radius: 18px;
+    height: 100%;
+    max-height: none;
   }
 
-  // Top Nav Bar
-  .dashTopBar {
+  @media (max-width: 576px) {
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(104, 48, 214, 0.08);
+    height: 100%;
+    max-height: none;
+  }
+
+  // ── Header Bar ──
+  .studioHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 22px 36px;
-    background: #faf8ff;
-    border-bottom: 1px solid #f0eaf8;
+    padding: 18px 26px;
+    background: #ffffff;
+    border-bottom: 1px solid #eeebf3;
+    gap: 14px;
+    flex-shrink: 0;
 
     @media (max-width: 768px) {
-      padding: 16px 20px;
+      padding: 12px 16px;
+      gap: 10px;
     }
 
-    .dashLogoSection {
+    @media (max-width: 576px) {
+      padding: 10px 12px;
+      gap: 8px;
+    }
+
+    .studioHeaderLeft {
       display: flex;
       align-items: center;
-      gap: 12px;
-
-      .algoIconBox {
-        width: 38px;
-        height: 38px;
-        border-radius: 11px;
-        background: linear-gradient(135deg, #9657fa, #6830d6);
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .dashLogoText {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        .logoBold {
-          font-size: 17.5px;
-          font-weight: 800;
-          color: #0f172a;
-          letter-spacing: -0.3px;
-        }
-
-        .logoBadge {
-          font-size: 10px;
-          font-weight: 800;
-          letter-spacing: 0.6px;
-          background: #f3e8ff;
-          color: #6830d6;
-          padding: 3px 8px;
-          border-radius: 5px;
-        }
-      }
-    }
-  }
-
-  // Dashboard Body
-  .dashBody {
-    display: flex;
-
-    .dashSidebar {
-      width: 190px;
-      background: #fbf9ff;
-      border-right: 1px solid #f1ecf9;
-      padding: 28px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex-shrink: 0;
-
-      @media (max-width: 900px) {
-        display: none;
-      }
-
-      .navItem {
-        display: flex;
-        align-items: center;
-        gap: 11px;
-        padding: 12px 16px;
-        border-radius: 10px;
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #64748b;
-        cursor: pointer;
-        transition: all 0.2s ease;
-
-        &:hover {
-          color: #6830d6;
-          background: #f5f0ff;
-        }
-
-        &.navActive {
-          background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
-          color: #ffffff;
-          box-shadow: 0 4px 12px rgba(150, 87, 250, 0.3);
-        }
-      }
-    }
-
-    .dashMainContent {
-      flex: 1;
-      padding: 34px 40px;
-      background: #ffffff;
+      gap: 14px;
       min-width: 0;
 
       @media (max-width: 768px) {
-        padding: 20px 18px;
+        gap: 10px;
       }
-    }
-  }
-
-  // Metrics Grid
-  .dashMetricsGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 26px;
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
-
-    .dashMetricCard {
-      background: #faf8fe;
-      border: 1px solid #f0eaf8;
-      border-radius: 16px;
-      padding: 20px 22px;
-
-      .dashMetricLabel {
-        font-size: 12.5px;
-        color: #64748b;
-        font-weight: 500;
-        display: block;
-        margin-bottom: 5px;
-      }
-
-      .dashMetricValue {
-        font-size: 26px;
-        font-weight: 800;
-        color: #0f172a;
-        letter-spacing: -0.5px;
-        margin-bottom: 5px;
-
-        @media (max-width: 576px) {
-          font-size: 22px;
-        }
-      }
-
-      .dashMetricValueGreen {
-        font-size: 26px;
-        font-weight: 800;
-        color: #059669;
-        letter-spacing: -0.5px;
-        margin-bottom: 5px;
-
-        @media (max-width: 576px) {
-          font-size: 22px;
-        }
-      }
-
-      .dashMetricGain {
-        font-size: 11.5px;
-        font-weight: 700;
-        color: #059669;
-      }
-
-      .dashMetricSub {
-        font-size: 11.5px;
-        color: #64748b;
-      }
-
-      .dashMetricSafe {
-        font-size: 11.5px;
-        font-weight: 700;
-        color: #6830d6;
-      }
-    }
-  }
-
-  // Chart Panel
-  .dashChartPanel {
-    background: #faf8fe;
-    border: 1px solid #f0eaf8;
-    border-radius: 18px;
-    padding: 24px 28px;
-    margin-bottom: 26px;
-
-    .chartPanelHeader {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
 
       @media (max-width: 576px) {
-        flex-direction: column;
-        align-items: flex-start;
         gap: 8px;
       }
 
-      .chartPanelTitle {
-        font-size: 16.5px;
-        font-weight: 700;
-        color: #0f172a;
-        margin: 0;
-      }
-
-      .chartPanelSub {
-        font-size: 12.5px;
-        color: #64748b;
-      }
-
-      .chartTabs {
+      .botAvatarGlow {
+        position: relative;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
         display: flex;
-        gap: 6px;
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 4px;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 18px rgba(150, 87, 250, 0.35);
+        flex-shrink: 0;
 
-        span {
-          font-size: 11.5px;
-          font-weight: 700;
-          padding: 5px 12px;
-          border-radius: 6px;
-          color: #64748b;
-          cursor: pointer;
+        @media (max-width: 768px) {
+          width: 36px;
+          height: 36px;
+          border-radius: 10px;
 
-          &.tabActive {
-            background: #9657fa;
-            color: #ffffff;
+          svg {
+            width: 18px;
+            height: 18px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          width: 30px;
+          height: 30px;
+          border-radius: 8px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        .onlineStatusDot {
+          position: absolute;
+          bottom: -2px;
+          right: -2px;
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          background: #10b981;
+          border: 2px solid #ffffff;
+          box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+
+          @media (max-width: 576px) {
+            width: 8px;
+            height: 8px;
+            border-width: 1.5px;
+          }
+        }
+      }
+
+      .studioTitleWrap {
+        min-width: 0;
+
+        .studioTitleRow {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+
+          @media (max-width: 576px) {
+            gap: 6px;
+            flex-wrap: nowrap;
+          }
+
+          .studioTitle {
+            font-size: 19px;
+            font-weight: 800;
+            color: #111827;
+            letter-spacing: -0.3px;
+            margin: 0;
+            line-height: 1.2;
+            white-space: nowrap;
+
+            @media (max-width: 768px) {
+              font-size: 16px;
+            }
+
+            @media (max-width: 576px) {
+              font-size: 14px;
+            }
+
+            @media (max-width: 380px) {
+              font-size: 13px;
+            }
+          }
+
+          .aiBadge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7c3aed;
+            background: rgba(150, 87, 250, 0.09);
+            border: 1px solid rgba(150, 87, 250, 0.25);
+            padding: 2.5px 9px;
+            border-radius: 100px;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+
+            @media (max-width: 768px) {
+              font-size: 10px;
+              padding: 2px 7px;
+            }
+
+            @media (max-width: 480px) {
+              display: none;
+            }
+          }
+        }
+
+        .studioSubtitle {
+          font-size: 13px;
+          color: #334155;
+          font-weight: 500;
+          margin: 3px 0 0;
+          line-height: 1.4;
+
+          @media (max-width: 768px) {
+            font-size: 11.5px;
+            line-height: 1.3;
+          }
+
+          @media (max-width: 576px) {
+            display: none;
           }
         }
       }
     }
 
-    .mainSvgWrapper {
-      width: 100%;
-      height: 165px;
+    .studioHeaderRight {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
 
       @media (max-width: 576px) {
-        height: 110px;
+        gap: 6px;
       }
 
-      .mainChartSvg {
-        width: 100%;
-        height: 100%;
-        display: block;
+      .latencyBadge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: #059669;
+        background: rgba(16, 185, 129, 0.08);
+        border: 1px solid rgba(16, 185, 129, 0.25);
+        padding: 5px 10px;
+        border-radius: 100px;
+
+        @media (max-width: 768px) {
+          font-size: 10px;
+          padding: 4px 8px;
+          gap: 4px;
+        }
+
+        @media (max-width: 576px) {
+          display: none;
+        }
+
+        .pulseIcon {
+          animation: pulseAnim 2s infinite ease-in-out;
+        }
+      }
+
+      .resetChatBtn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #f8fafc;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 11.5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        @media (max-width: 768px) {
+          padding: 4px 8px;
+          font-size: 11px;
+        }
+
+        @media (max-width: 576px) {
+          padding: 4px 7px;
+          font-size: 10.5px;
+          gap: 3px;
+        }
+
+        &:hover {
+          color: #0f172a;
+          background: #f1f5f9;
+          border-color: #9657fa;
+        }
       }
     }
   }
 
-  // Bottom Grid
-  .dashBottomGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  // ── Chat Stream (Light Theme Tint) ──
+  .chatStream {
+    padding: 22px 26px;
+    max-height: 440px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: #fbfafd;
+    border-bottom: 1px solid #eeebf3;
+    flex: 1;
+    min-height: 0;
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
+    @media (max-width: 1024px) {
+      padding: 16px 20px;
+      max-height: 320px;
       gap: 14px;
     }
 
-    .bottomBox {
-      background: #faf8fe;
-      border: 1px solid #f0eaf8;
-      border-radius: 16px;
-      padding: 20px 24px;
+    @media (max-width: 768px) {
+      padding: 14px 14px;
+      max-height: none !important;
+      flex: 1;
+      gap: 12px;
+    }
 
-      .bottomBoxHeader {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 13.5px;
-        font-weight: 700;
-        color: #0f172a;
-        margin-bottom: 14px;
+    @media (max-width: 576px) {
+      padding: 12px 10px;
+      max-height: none !important;
+      flex: 1;
+      gap: 10px;
+    }
 
-        .linkView {
-          font-size: 12px;
-          color: #9657fa;
-          cursor: pointer;
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(150, 87, 250, 0.25);
+      border-radius: 10px;
+    }
+
+    .chatRow {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+
+      @media (max-width: 768px) {
+        gap: 8px;
+      }
+
+      &.chatRowUser {
+        justify-content: flex-end;
+
+        .msgBubbleWrap {
+          align-items: flex-end;
         }
       }
 
-      .botRowItem {
+      &.chatRowAi {
+        justify-content: flex-start;
+
+        .msgBubbleWrap {
+          align-items: flex-start;
+        }
+      }
+
+      .msgAvatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        background: #f0ebf8;
+        border: 1px solid #e2d9f3;
+        color: #7c3aed;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 10px 0;
-        border-top: 1px solid #f1ecf9;
-        font-size: 13px;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 6px rgba(150, 87, 250, 0.12);
 
-        .botRowLeft {
-          display: flex;
-          align-items: center;
-          gap: 8px;
+        @media (max-width: 768px) {
+          width: 28px;
+          height: 28px;
+          border-radius: 8px;
+        }
 
-          .dotRunning {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #10b981;
+        @media (max-width: 576px) {
+          width: 24px;
+          height: 24px;
+          border-radius: 6px;
+
+          svg {
+            width: 13px;
+            height: 13px;
+          }
+        }
+      }
+
+      .msgBubbleWrap {
+        display: flex;
+        flex-direction: column;
+        max-width: 88%;
+
+        @media (max-width: 768px) {
+          max-width: 92%;
+        }
+
+        @media (max-width: 576px) {
+          max-width: 95%;
+        }
+
+        .msgBubble {
+          border-radius: 16px;
+          padding: 14px 18px;
+          font-size: 14px;
+          line-height: 1.5;
+          position: relative;
+
+          @media (max-width: 768px) {
+            padding: 10px 14px;
+            font-size: 13px;
+            line-height: 1.45;
+            border-radius: 14px;
           }
 
-          .tagBuyMini {
-            font-size: 10.5px;
-            font-weight: 800;
-            background: #dcfce7;
-            color: #15803d;
-            padding: 2px 7px;
-            border-radius: 4px;
+          @media (max-width: 576px) {
+            padding: 8px 11px;
+            font-size: 12px;
+            line-height: 1.4;
+            border-radius: 12px;
           }
 
-          strong {
+          p {
+            margin: 0;
+            color: inherit;
+            word-break: break-word;
+          }
+
+          &.msgBubbleUser {
+            background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 4px 14px rgba(104, 48, 214, 0.25);
+          }
+
+          &.msgBubbleAi {
+            background: #ffffff;
+            border: 1px solid #eae6f2;
             color: #0f172a;
+            font-weight: 500;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+          }
+
+          // Modern Clean Strategy Card (Light Theme)
+          .strategyCardInline {
+            margin-top: 12px;
+            background: #fbfafd;
+            border: 1.5px solid rgba(150, 87, 250, 0.25);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: 0 4px 16px rgba(150, 87, 250, 0.07);
+
+            @media (max-width: 768px) {
+              padding: 10px 12px;
+              border-radius: 12px;
+              margin-top: 8px;
+            }
+
+            @media (max-width: 576px) {
+              padding: 8px 10px;
+              border-radius: 10px;
+              margin-top: 6px;
+            }
+
+            .stratCardHeader {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              margin-bottom: 8px;
+              gap: 6px;
+              flex-wrap: wrap;
+
+              @media (max-width: 576px) {
+                margin-bottom: 5px;
+              }
+
+              .stratMetaLeft {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                @media (max-width: 576px) {
+                  gap: 5px;
+                }
+
+                .stratBadge {
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 5px;
+                  font-size: 11px;
+                  font-weight: 700;
+                  color: #059669;
+                  background: rgba(16, 185, 129, 0.1);
+                  border: 1px solid rgba(16, 185, 129, 0.25);
+                  padding: 3px 8px;
+                  border-radius: 6px;
+
+                  @media (max-width: 576px) {
+                    font-size: 9.5px;
+                    padding: 2px 5px;
+                    gap: 3px;
+                  }
+                }
+
+                .stratPair {
+                  font-size: 11.5px;
+                  color: #334155;
+                  font-weight: 600;
+
+                  @media (max-width: 576px) {
+                    font-size: 10px;
+                  }
+                }
+              }
+
+              .stratSpeed {
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 11px;
+                color: #7c3aed;
+                font-weight: 600;
+
+                @media (max-width: 576px) {
+                  font-size: 9.5px;
+                }
+              }
+            }
+
+            .stratName {
+              font-size: 16px;
+              font-weight: 700;
+              color: #0f172a;
+              margin: 0 0 10px;
+
+              @media (max-width: 768px) {
+                font-size: 14px;
+                margin-bottom: 8px;
+              }
+
+              @media (max-width: 576px) {
+                font-size: 12.5px;
+                margin-bottom: 6px;
+              }
+            }
+
+            .stratMetricsGrid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 8px;
+              background: #ffffff;
+              border: 1px solid #eae6f2;
+              border-radius: 10px;
+              padding: 10px 12px;
+              margin-bottom: 10px;
+
+              @media (max-width: 768px) {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                padding: 8px 10px;
+                margin-bottom: 8px;
+              }
+
+              @media (max-width: 480px) {
+                gap: 4px;
+                padding: 6px 8px;
+                margin-bottom: 6px;
+              }
+
+              .stratMetricItem {
+                display: flex;
+                flex-direction: column;
+
+                .metricLabel {
+                  font-size: 11px;
+                  color: #334155;
+                  font-weight: 600;
+                  margin-bottom: 2px;
+
+                  @media (max-width: 576px) {
+                    font-size: 9.5px;
+                    margin-bottom: 1px;
+                  }
+                }
+
+                strong {
+                  font-size: 14px;
+                  font-weight: 700;
+
+                  @media (max-width: 576px) {
+                    font-size: 12px;
+                  }
+
+                  &.greenText {
+                    color: #059669;
+                  }
+
+                  &.whiteText {
+                    color: #0f172a;
+                    font-weight: 800;
+                  }
+                }
+              }
+            }
+
+            .stratActionsRow {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+
+              .copyBtn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                padding: 7px 14px;
+                border-radius: 8px;
+                font-size: 12px;
+                font-weight: 700;
+                color: #ffffff;
+                background: linear-gradient(135deg, #9657fa, #6830d6);
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                box-shadow: 0 3px 10px rgba(104, 48, 214, 0.25);
+
+                @media (max-width: 768px) {
+                  padding: 5px 11px;
+                  font-size: 11px;
+                }
+
+                @media (max-width: 576px) {
+                  padding: 4px 8px;
+                  font-size: 10px;
+                  gap: 4px;
+                }
+
+                &:hover {
+                  opacity: 0.94;
+                  transform: translateY(-1px);
+                  box-shadow: 0 5px 14px rgba(104, 48, 214, 0.35);
+                }
+              }
+            }
           }
         }
 
-        .botRowPnl {
-          font-weight: 700;
-          color: #6830d6;
+        .msgTime {
+          font-size: 10.5px;
+          color: #64748b;
+          font-weight: 500;
+          margin-top: 5px;
+          padding: 0 4px;
+
+          @media (max-width: 576px) {
+            font-size: 9.5px;
+            margin-top: 3px;
+          }
+        }
+      }
+
+      // Typing Indicator Dots
+      .typingIndicator {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 14px 18px;
+        background: #ffffff;
+        border: 1px solid #eae6f2;
+        border-radius: 16px;
+        border-bottom-left-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+
+        @media (max-width: 576px) {
+          padding: 8px 12px;
+          border-radius: 12px;
+          gap: 4px;
         }
 
-        .botRowPnlGreen {
-          font-weight: 700;
-          color: #059669;
+        span {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          background: #9657fa;
+          animation: bounceAnim 1.4s infinite ease-in-out both;
+
+          @media (max-width: 576px) {
+            width: 5px;
+            height: 5px;
+          }
+
+          &:nth-child(1) {
+            animation-delay: -0.32s;
+          }
+
+          &:nth-child(2) {
+            animation-delay: -0.16s;
+          }
         }
       }
     }
+  }
+
+  // ── Quick Prompts Section (Light Theme) ──
+  .quickPromptsSection {
+    padding: 14px 26px 10px;
+    background: #ffffff;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      padding: 8px 16px 6px;
+    }
+
+    @media (max-width: 576px) {
+      padding: 6px 12px 5px;
+    }
+
+    .quickPromptsLabel {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #7c3aed;
+      margin-bottom: 8px;
+
+      @media (max-width: 576px) {
+        font-size: 10px;
+        margin-bottom: 4px;
+        gap: 4px;
+      }
+    }
+
+    .promptsPillsRow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+
+      @media (max-width: 576px) {
+        gap: 5px;
+        padding-bottom: 2px;
+      }
+
+      &::-webkit-scrollbar {
+        height: 2px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(150, 87, 250, 0.25);
+        border-radius: 4px;
+      }
+
+      .promptPill {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        padding: 6px 12px;
+        border-radius: 100px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1e293b;
+        background: #f8f7fc;
+        border: 1px solid #eae6f2;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+
+        @media (max-width: 768px) {
+          padding: 5px 10px;
+          font-size: 11px;
+        }
+
+        @media (max-width: 576px) {
+          padding: 4px 8px;
+          font-size: 10.5px;
+        }
+
+        &:hover {
+          color: #7c3aed;
+          border-color: #9657fa;
+          background: rgba(150, 87, 250, 0.08);
+          transform: translateY(-1px);
+        }
+
+        &.promptPillActive {
+          color: #7c3aed;
+          background: rgba(150, 87, 250, 0.12);
+          border-color: #9657fa;
+        }
+      }
+    }
+  }
+
+  // ── Input Bar (Light Theme) ──
+  .chatInputForm {
+    padding: 0 26px 22px;
+    background: #ffffff;
+    flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      padding: 0 16px 14px;
+    }
+
+    @media (max-width: 576px) {
+      padding: 0 10px 10px;
+    }
+
+    .inputInnerWrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #fbfafd;
+      border: 1.5px solid #dcd5ee;
+      border-radius: 16px;
+      padding: 8px 8px 8px 18px;
+      box-shadow: 0 2px 8px rgba(150, 87, 250, 0.04), inset 0 1px 2px rgba(0, 0, 0, 0.015);
+      transition: all 0.25s ease;
+      cursor: pointer;
+
+      @media (max-width: 768px) {
+        padding: 6px 6px 6px 14px;
+        gap: 8px;
+        border-radius: 14px;
+      }
+
+      @media (max-width: 576px) {
+        padding: 4px 4px 4px 10px;
+        gap: 6px;
+        border-radius: 12px;
+      }
+
+      &:hover {
+        border-color: #c7b8ee;
+      }
+
+      &:focus-within {
+        border-color: #9657fa;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(150, 87, 250, 0.16);
+      }
+
+      .inputIcon {
+        color: #9657fa;
+        flex-shrink: 0;
+        cursor: pointer;
+
+        @media (max-width: 576px) {
+          width: 15px;
+          height: 15px;
+        }
+      }
+
+      .chatInput {
+        flex: 1;
+        min-width: 0;
+        background: transparent;
+        border: none;
+        color: #0f172a;
+        font-size: 14.5px;
+        font-weight: 500;
+        font-family: inherit;
+        outline: none;
+        padding: 4px 0;
+        cursor: pointer;
+        text-overflow: ellipsis;
+
+        @media (max-width: 768px) {
+          font-size: 13px;
+        }
+
+        @media (max-width: 576px) {
+          font-size: 12px;
+        }
+
+        &:focus {
+          cursor: text;
+        }
+
+        &::placeholder {
+          color: #64748b;
+          font-weight: 450;
+          cursor: pointer;
+
+          @media (max-width: 576px) {
+            font-size: 11.5px;
+          }
+        }
+      }
+
+      .chatSendBtn {
+        width: 44px;
+        height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #9657fa 0%, #6830d6 100%);
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+
+        @media (max-width: 768px) {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+        }
+
+        @media (max-width: 576px) {
+          width: 34px;
+          height: 34px;
+          border-radius: 9px;
+
+          svg {
+            width: 14px;
+            height: 14px;
+          }
+        }
+
+        &:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+          transform: none !important;
+        }
+
+        &:not(:disabled):hover {
+          transform: translateY(-1px) scale(1.03);
+          box-shadow: 0 4px 16px rgba(150, 87, 250, 0.4);
+        }
+
+        &:not(:disabled):active {
+          transform: scale(0.97);
+        }
+      }
+    }
+  }
+}
+
+@keyframes bounceAnim {
+
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1);
   }
 }

@@ -71,10 +71,10 @@ export default function Footernew() {
             </div>
             <ul className={styles.linksList}>
               <li>
-                <Link href="/marketplace">Marketplace</Link>
+                <Link href="/ai-bot-market-place">Marketplace</Link>
               </li>
               <li>
-                <Link href="/ai-bot-market-place">AI Bot Builder</Link>
+                <Link href="/bot-builder">AI Bot Builder</Link>
               </li>
               <li>
                 <Link href="/bot-builder">Custom Bot Builder</Link>

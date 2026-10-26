@@ -8,6 +8,7 @@ const damanmarketlogo = "/assets/logo/damanmarketlogo.png";
 const cmclogo = "/assets/logo/cmclogo.png";
 const fifomarket = "/assets/logo/fifo-market.png";
 const avatrade = "/assets/logo/ava-trade.png";
+const tickmill = "/assets/logo/tick-mill.png";
 
 export default function Recommendedbrokers() {
   return (
@@ -21,7 +22,7 @@ export default function Recommendedbrokers() {
           </div>
         </div>
         <div className={styles.marqueecontainer}>
-          <Marquee autoFill speed={80}>
+          <Marquee autoFill speed={70} pauseOnHover={true}>
             {/* <div className={styles.marqueeimage1}>
               <img src={pepperstonelogo} alt="pepperstonelogo" />
             </div>
@@ -37,11 +38,14 @@ export default function Recommendedbrokers() {
             <div className={styles.marqueeimage5}>
               <img src={cmclogo} alt="cmclogo" />
             </div> */}
-            <div className={styles.marqueeimage6}>
-              <img src={fifomarket} alt="fifomarket" />
+            <div className={styles.brokerCard}>
+              <img src={fifomarket} alt="FIFO Markets" />
             </div>
-            <div className={styles.marqueeimage7}>
-              <img src={avatrade} alt="avatrade" />
+            <div className={styles.brokerCard}>
+              <img src={tickmill} alt="Tickmill" />
+            </div>
+            <div className={styles.brokerCard}>
+              <img src={avatrade} alt="AvaTrade" />
             </div>
           </Marquee>
         </div>
