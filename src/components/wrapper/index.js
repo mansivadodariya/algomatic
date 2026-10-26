@@ -29,15 +29,15 @@ export default function Wrapper({ children }) {
         position="top-center"
         reverseOrder={false}
       />
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Header />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") || pathName?.startsWith("/dashboard") ? null : <Header />}
       {children}
       {/* {pathName?.includes("/webinar") ? null : <Whatsappbubble />} */}
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Telegrambubble />}
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <Whatsappbubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") || pathName?.startsWith("/dashboard") ? null : <Telegrambubble />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") || pathName?.startsWith("/dashboard") ? null : <Whatsappbubble />}
       {/* {pathName?.includes("/webinar") ? null : <CallWithus />} */}
-      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") ? null : <InquiryForm />}
+      {pathName?.includes("/webinar") || pathName?.includes("/ads-campaign") || pathName?.startsWith("/dashboard") ? null : <InquiryForm />}
       {/* <InquiryForm /> */}
-      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campaign") ? null : <Footernew />}
+      {pathName?.includes("/webinar") || pathName?.includes("/payment-history") || pathName?.includes("/profile") || pathName?.includes("/affiliate") || pathName?.includes("/ads-campaign") || pathName?.startsWith("/dashboard") ? null : <Footernew />}
     </div>
   );
 }

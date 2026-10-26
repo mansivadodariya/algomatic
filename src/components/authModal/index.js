@@ -148,6 +148,7 @@ const AuthModal = ({ isOpen, setShowLogin, onClose, setIsUserLoggedIn }) => {
           setUser(login.payload);
 
           onClose();
+          router.push("/dashboard");
         } else {
           toast.error(login?.message);
           setIsSubmitting(false);

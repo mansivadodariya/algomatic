@@ -1,0 +1,38 @@
+// Dashboard SCSS Styles - Donezo inspired with Algomatic Theme Palette
+
+// Color Tokens
+$algo-purple-hero: #6d28d9;
+$algo-purple-dark: #4c1d95;
+$algo-purple-deep: #1e1b4b;
+$algo-purple-primary: #7c3aed;
+$algo-purple-light: #8b5cf6;
+$algo-purple-soft: #f5f3ff;
+$algo-purple-subtle: #ede9fe;
+$algo-purple-border: #ddd6fe;
+
+// Algomatic Logo Gradient Tokens (Extracted directly from logo.svg isometric bot: electric blue #498DF9 to vivid violet-purple #905AFA)
+$algo-blue-logo: #498df9;
+$algo-indigo-logo: #6279f9;
+$algo-purple-logo: #905afa;
+$algo-gradient-hero: linear-gradient(135deg, #498df9 0%, #6279f9 48%, #905afa 100%);
+$algo-gradient-hero-hover: linear-gradient(135deg, #3d84f5 0%, #546df9 48%, #844df5 100%);
+$algo-gradient-soft: linear-gradient(135deg, rgba(73, 141, 249, 0.08) 0%, rgba(144, 90, 250, 0.12) 100%);
+
+$text-dark: #111827;
+$text-muted: #6b7280;
+$text-light: #9ca3af;
+$card-border: #e5e7eb;
+$bg-canvas: #f3f4f8;
+$bg-card: #ffffff;
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

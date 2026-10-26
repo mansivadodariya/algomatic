@@ -281,7 +281,15 @@ export default function Header() {
                         <button
                           onClick={() => {
                             setShowMenu(false);
-                            router.push(`/profile/${user?._id}`);
+                            router.push("/dashboard");
+                          }}
+                        >
+                          Dashboard
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push("/dashboard?tab=profile");
                           }}
                         >
                           Profile
@@ -289,7 +297,7 @@ export default function Header() {
                         <button
                           onClick={() => {
                             setShowMenu(false);
-                            router.push(`/payment-history/${user?._id}`);
+                            router.push("/dashboard?tab=payments");
                           }}
                         >
                           Payment History
