@@ -286,30 +286,6 @@ export default function Header() {
                         >
                           Dashboard
                         </button>
-                        <button
-                          onClick={() => {
-                            setShowMenu(false);
-                            router.push("/dashboard?tab=profile");
-                          }}
-                        >
-                          Profile
-                        </button>
-                        <button
-                          onClick={() => {
-                            setShowMenu(false);
-                            router.push("/dashboard?tab=payments");
-                          }}
-                        >
-                          Payment History
-                        </button>
-                        <button
-                          onClick={() => {
-                            setShowMenu(false);
-                            router.push(`/affiliate/${user?._id}`);
-                          }}
-                        >
-                          Affiliate Dashboard
-                        </button>
                         <div className={styles.dropdownDivider} />
                         <button
                           className={styles.logoutBtn}
