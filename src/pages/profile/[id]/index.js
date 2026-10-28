@@ -28,8 +28,12 @@ export default function Dashboard() {
   const [password, setUpPassword] = useState(initialPasswordData);
 
   useEffect(() => {
-    router.replace("/dashboard?tab=profile");
-  }, []);
+    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
+    if (!storedUser) {
+      router.push("/");
+    }
+    setUser(storedUser);
+  }, [isUserLoggedIn]);
 
   useEffect(() => {
     if (activeTab === "payments") {
@@ -95,7 +99,7 @@ export default function Dashboard() {
   return (
     <>
       <div className={styles.dashboarlayout}>
-        <hr className={styles.hr} />
+        {/* <hr className={styles.hr} /> */}
         <div className={styles.dashboardWrapper}>
           <main className={styles.content}>
             <div className={styles.whiteBox}>

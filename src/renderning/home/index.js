@@ -10,6 +10,7 @@ import Keyfeaturessection from "../homepage/keyfeaturessection";
 import Algovideosection from "../homepage/algovideosection";
 import Pricingsection from "../homepage/pricingsection";
 import Backtestingsection from "../homepage/backtestingsection";
+import Brokersection from "../homepage/brokersection";
 import Recommendedbrokers from "../homepage/recommendedbrokers";
 import Clientstories from "../homepage/clientstories";
 import Faqsection from "../homepage/faqsection";
@@ -42,6 +43,7 @@ export default function Homepage() {
       {/* <StrategiesBanner />
       <StrategiesCardList /> */}
       {/* <Backtestingsection /> */}
+      <Brokersection />     
       <Recommendedbrokers />
       {/* <Iblink /> */}
       <Clientstories />

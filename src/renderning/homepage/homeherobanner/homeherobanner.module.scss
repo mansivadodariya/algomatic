@@ -1,3 +1,18 @@
+
+@keyframes graphRiseUp {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════
 // ALGOMATIC PRO TRADING BOT HERO BANNER (LIGHT THEME & FULLY RESPONSIVE)
 // ═══════════════════════════════════════════════════════════════
@@ -313,21 +328,21 @@
     }
 
     .typewriterText {
-      background: linear-gradient(135deg, #9657fa 0%, #7c3aed 100%);
+      background: linear-gradient(135deg, #c49eff 0%, #a476fd 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 25px rgba(124, 58, 237, 0.5));
+      filter: drop-shadow(0 0 25px rgba(164, 118, 253, 0.55));
       font-family: inherit;
       font-weight: 700;
     }
 
     .typewriterCursor {
       display: inline-block;
-      color: #9657fa;
+      color: #c49eff;
       font-weight: 300;
       animation: blink 0.8s infinite;
       margin-left: 2px;
-      filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.6));
+      filter: drop-shadow(0 0 10px rgba(164, 118, 253, 0.7));
     }
 
     @keyframes blink {
@@ -774,6 +789,8 @@
       width: 100%;
       height: 80px;
       display: block;
+      transform-origin: bottom center;
+      animation: graphRiseUp 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
   }
 
@@ -784,8 +801,6 @@
     gap: 16px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 12px;
-    margin-top: auto;
-
     .miniMetric {
       display: flex;
       flex-direction: column;
@@ -1210,12 +1225,14 @@
 
   // ── Header Bar ──
   .studioHeader {
+    position: relative;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 18px 26px;
     background: #ffffff;
-    border-bottom: 1px solid #eeebf3;
+    border-bottom: 1.5px solid #e2dded;
     gap: 14px;
     flex-shrink: 0;
 
@@ -1456,7 +1473,7 @@
     flex-direction: column;
     gap: 16px;
     background: #fbfafd;
-    border-bottom: 1px solid #eeebf3;
+    border-bottom: 1.5px solid #e2dded;
     flex: 1;
     min-height: 0;
 
@@ -1886,11 +1903,11 @@
       font-size: 11.5px;
       font-weight: 700;
       color: #7c3aed;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
 
       @media (max-width: 576px) {
         font-size: 10px;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
         gap: 4px;
       }
     }
@@ -1900,16 +1917,16 @@
       align-items: center;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding: 6px 2px 8px;
       -webkit-overflow-scrolling: touch;
 
       @media (max-width: 576px) {
         gap: 5px;
-        padding-bottom: 2px;
+        padding: 4px 2px 6px;
       }
 
       &::-webkit-scrollbar {
-        height: 2px;
+        height: 3px;
       }
 
       &::-webkit-scrollbar-thumb {
@@ -1947,6 +1964,7 @@
           border-color: #9657fa;
           background: rgba(150, 87, 250, 0.08);
           transform: translateY(-1px);
+          box-shadow: 0 3px 10px rgba(150, 87, 250, 0.12);
         }
 
         &.promptPillActive {

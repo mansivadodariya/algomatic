@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import styles from "./brokerCard.module.scss";
-import { resolveBrokerLogo } from "@/lib/brokerApi";
 import {
   ExternalLink,
   ChevronRight,
@@ -24,8 +23,7 @@ export default function BrokerCard({ broker, className }) {
 
   const brokerId = broker._id || broker.id || "";
   const targetUrl = broker.website_url || broker.websiteUrl || "";
-  const resolvedLogo = resolveBrokerLogo(broker.logo);
-  const showInitials = imageError || !resolvedLogo;
+  const showInitials = imageError || !broker?.logo;
 
   const initials = broker.name
     ? broker.name
@@ -50,7 +48,7 @@ export default function BrokerCard({ broker, className }) {
         <div className={styles.logoWrap}>
           {!showInitials ? (
             <img
-              src={resolvedLogo}
+              src={broker?.logo}
               alt={broker.name || "Broker"}
               onError={() => setImageError(true)}
             />

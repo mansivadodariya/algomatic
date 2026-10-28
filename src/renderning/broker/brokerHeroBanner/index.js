@@ -15,19 +15,12 @@ export default function BrokerHeroBanner() {
       <div className={styles.glowCircleTop}></div>
       <div className="container-xl">
         <div className={styles.bannerContent}>
-          <div className={styles.badgePill}>
-            <span className={styles.pulsingDot}></span>
-            <span>Certified Execution & Liquidity Desks</span>
-          </div>
-
           <h1>
             Institutional & Retail <span>Trading Brokers</span>
           </h1>
 
           <p className={styles.description}>
-            Connect your Algomatic AI trading bots with world-class, multi-regulated brokers.
-            Enjoy institutional-grade liquidity, ultra-low spread execution, robust FIX Protocol API
-            connectivity, and automated risk controls.
+            Connect with trusted global brokers and power your AlgomaticBot strategies with reliable liquidity, competitive spreads, fast execution, and seamless MetaTrader connectivity.
           </p>
 
           <div className={styles.highlightsRow}>

@@ -86,7 +86,7 @@ export default function Marketplacesection() {
               <Commonarrowbutton
                 Text="Explore Marketplace"
                 Butttonvarient="dark"
-                link="/marketplace"
+                link="/ai-bot-market-place"
               />
             </div>
           </div>

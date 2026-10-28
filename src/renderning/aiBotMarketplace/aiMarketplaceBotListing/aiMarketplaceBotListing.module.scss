@@ -4,7 +4,7 @@
   background-color: #f7f7f7;
   border-top: 1px solid #ebe5f5;
   border-bottom: 1px solid #ebe5f5;
-  overflow: hidden;
+  overflow: clip;
 
   @media (max-width: 1024px) {
     padding: 60px 0 80px;
@@ -219,6 +219,28 @@
     position: sticky;
     top: 90px;
     z-index: 10;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d8cde8 transparent;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #d8cde8;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: #9657fa;
+      }
+    }
+
     transition: all 0.3s ease;
 
     @media (max-width: 991px) {

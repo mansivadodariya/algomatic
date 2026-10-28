@@ -141,22 +141,14 @@ export const getBrokerCategories = async (): Promise<string[]> => {
 export const getBrokerById = async (id: string): Promise<BrokerItem | null> => {
   if (!id) return null;
 
-  const urlsToTry = [
-    `/broker/getBroker/${id}`,
-    `/broker/getBrokerById/${id}`,
-    `/broker/${id}`,
-  ];
-
-  for (const url of urlsToTry) {
-    try {
-      const res = await api.get(url);
-      const data = res?.data?.payload || res?.data?.data || res?.data;
-      if (data && (data._id || data.id || data.name)) {
-        return data;
-      }
-    } catch {
-      // Continue to next endpoint
+  try {
+    const res = await api.get(`/broker/${id}`);
+    const data = res?.data?.payload || res?.data?.data || res?.data;
+    if (data && (data._id || data.id || data.name)) {
+      return data;
     }
+  } catch (err) {
+    console.warn(`Error fetching broker /broker/${id}:`, err);
   }
 
   // Fallback: search in getAllBrokers

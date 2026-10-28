@@ -20,9 +20,14 @@ export default function Dashboard() {
   const { user, setUser } = useAppContext();
   const [loading, setLoading] = useState(false);
 
-  // check valid user & redirect to unified dashboard
+  // check valid user
   useEffect(() => {
-    router.replace("/dashboard?tab=payments");
+    const storedUser = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("user")) : null;
+    if (!storedUser) {
+      router.push("/");
+      return;
+    }
+    setUser(storedUser);
   }, []);
 
   useEffect(() => {
@@ -130,7 +135,7 @@ export default function Dashboard() {
   return (
     <>
       <div className={styles.dashboarlayout}>
-        <hr className={styles.hr} />
+        {/* <hr className={styles.hr} /> */}
         <div className={styles.dashboardWrapper}>
           {/* <div className="container-xl"> */}
           <main className={styles.content}>

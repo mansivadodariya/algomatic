@@ -278,13 +278,37 @@ export default function Header() {
                     </button>
                     {showMenu && (
                       <div className={styles.userDropdown}>
-                        <button
+                        {/* <button
                           onClick={() => {
                             setShowMenu(false);
                             router.push("/dashboard");
                           }}
                         >
                           Dashboard
+                        </button> */}
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push(`/profile/${user?._id}`);
+                          }}
+                        >
+                          Profile
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push(`/payment-history/${user?._id}`);
+                          }}
+                        >
+                          Payment History
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowMenu(false);
+                            router.push(`/affiliate/${user?._id}`);
+                          }}
+                        >
+                          Affiliate dashboard
                         </button>
                         <div className={styles.dropdownDivider} />
                         <button

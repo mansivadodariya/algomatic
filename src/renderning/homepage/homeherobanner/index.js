@@ -142,6 +142,34 @@ export default function Homeherobanner() {
   const [isTyping, setIsTyping] = useState(false);
   const chatStreamRef = useRef(null);
   const isInitialMount = useRef(true);
+  // Animated counters on load
+  const [dailyProfit, setDailyProfit] = useState(0);
+  const [winRate, setWinRate] = useState(0);
+  const [liveRoi, setLiveRoi] = useState(0);
+
+  useEffect(() => {
+    const duration = 2000;
+    let startTime = null;
+    let animId;
+
+    const animateCounters = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+
+      setDailyProfit(ease * 1420.5);
+      setWinRate(ease * 99.4);
+      setLiveRoi(ease * 284.6);
+
+      if (progress < 1) {
+        animId = requestAnimationFrame(animateCounters);
+      }
+    };
+
+    animId = requestAnimationFrame(animateCounters);
+    return () => cancelAnimationFrame(animId);
+  }, []);
+
 
   const INITIAL_MESSAGES = [
     {
@@ -529,15 +557,15 @@ export default function Homeherobanner() {
 
           {/* Dual Action Buttons */}
           <div className={styles.ternicButtonGroup}>
-            <Link href="/marketplace" className={styles.ternicPrimaryBtn}>
+            <Link href="/ai-bot-marketplace" className={styles.ternicPrimaryBtn}>
               <span>Explore Marketplace</span>
               <ArrowRight size={16} className={styles.btnArrowIcon} />
             </Link>
 
-            <Link href="#AIBotBuilder" className={styles.ternicSecondaryBtn}>
+            {/* <Link href="#AIBotBuilder" className={styles.ternicSecondaryBtn}>
               <span>Build Your Own Bot</span>
               <Play size={13} className={styles.btnPlayIcon} />
-            </Link>
+            </Link> */}
           </div>
         </div>
 
@@ -575,11 +603,11 @@ export default function Homeherobanner() {
               <div className={styles.statsRow}>
                 <div className={styles.statBox}>
                   <span className={styles.statLabel}>Daily Bot Profit</span>
-                  <span className={styles.statValGreen}>+$1,420.50</span>
+                  <span className={styles.statValGreen}>+${dailyProfit.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className={styles.statBox}>
                   <span className={styles.statLabel}>Win Rate</span>
-                  <span className={styles.statValPurple}>99.4%</span>
+                  <span className={styles.statValPurple}>{winRate.toFixed(1)}%</span>
                 </div>
               </div>
 
@@ -620,7 +648,7 @@ export default function Homeherobanner() {
               </div>
 
               <div className={styles.profitHighlight}>
-                <span className={styles.bigGain}>+284.6%</span>
+                <span className={styles.bigGain}>+{liveRoi.toFixed(1)}%</span>
                 <span className={styles.verifiedTag}>
                   <CheckCircle2 size={13} /> MyFxBook Verified
                 </span>
@@ -805,9 +833,6 @@ export default function Homeherobanner() {
               <div className={styles.studioTitleWrap}>
                 <div className={styles.studioTitleRow}>
                   <h3 className={styles.studioTitle}>AlgoMatic Bot Copilot</h3>
-                  <span className={styles.aiBadge}>
-                    <Sparkles size={12} /> GPT-4o Quant Engine
-                  </span>
                 </div>
                 <p className={styles.studioSubtitle}>
                   Chat with AI to generate, optimize & backtest automated trading algorithms in real-time
@@ -816,10 +841,6 @@ export default function Homeherobanner() {
             </div>
 
             <div className={styles.studioHeaderRight}>
-              <div className={styles.latencyBadge}>
-                <Activity size={13} className={styles.pulseIcon} />
-                <span>0.02ms Latency</span>
-              </div>
               <button
                 type="button"
                 className={styles.resetChatBtn}
@@ -896,7 +917,7 @@ export default function Homeherobanner() {
                           </div>
 
                           {/* Action Toolbar */}
-                          <div className={styles.stratActionsRow}>
+                          {/* <div className={styles.stratActionsRow}>
                             <button
                               type="button"
                               className={styles.copyBtn}
@@ -912,7 +933,7 @@ export default function Homeherobanner() {
                                 </>
                               )}
                             </button>
-                          </div>
+                          </div> */}
                         </div>
                       )}
                     </div>
