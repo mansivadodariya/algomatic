@@ -205,13 +205,6 @@ export default function Manualbotconfigsection() {
                   </span>
                 </div>
               </div>
-
-              <div className={styles.barRight}>
-                <span className={styles.specEngineBadge}>
-                  <span className={styles.pulseDot} />
-                  Strategy Engine: {selectedPlatform} • {selectedTimeframe}
-                </span>
-              </div>
             </div>
 
             {/* Main Workbench Body: 2-Column Studio Grid */}

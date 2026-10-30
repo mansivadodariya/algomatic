@@ -1,40 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styles from "./aibotbuildersection.module.scss";
-import Commonlable from "@/components/commonlable";
 import Commonarrowbutton from "@/components/commonarrowbutton";
 import {
   Sparkles,
   Bot,
   Sliders,
-  Terminal,
-  Cpu,
   CheckCircle2,
   ArrowRight,
   MessageSquare,
   HelpCircle,
   FileCode,
-  Rocket,
-  ShieldAlert,
-  TrendingUp,
-  Activity,
-  Play,
   RotateCcw,
-  Zap,
   Layers,
 } from "lucide-react";
 
 export default function Aibotbuildersection() {
   const [activeStep, setActiveStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
-  // Auto-play the 4 steps every 5 seconds unless user hovers
-  useEffect(() => {
-    if (isPaused) return;
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % 4);
-    }, 5500);
-    return () => clearInterval(interval);
-  }, [isPaused]);
 
   const steps = [
     {
@@ -58,22 +40,22 @@ export default function Aibotbuildersection() {
     {
       id: 3,
       number: "03",
-      title: "Review your bot strategy",
+      title: "Review strategy & test your bot",
       subtitle:
-        "Review the structured strategy generated from your answers. Refine the rules and confirm the configuration before generation.",
-      icon: FileCode,
-      badge: "Structured Blueprint",
-    },
-    {
-      id: 4,
-      number: "04",
-      title: "Generate and test your bot",
-      subtitle:
-        "Generate the bot using the supported strategy engine, then compile and backtest it to verify historical strategy performance.",
+        "Review the structured strategy blueprint, compile your bot engine, and verify backtest performance with verified historical metrics.",
       icon: Layers,
-      badge: "Compilation & Backtesting",
+      badge: "Blueprint & Backtesting",
     },
   ];
+
+  // Auto-play the 3 steps every 5.5 seconds unless user hovers
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 5500);
+    return () => clearInterval(interval);
+  }, [isPaused, steps.length]);
 
   return (
     <section className={styles.aibotbuildersectionmain} id="AIBotBuilder">
@@ -118,7 +100,7 @@ export default function Aibotbuildersection() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Left: 4 Steps Accordion / Stepper */}
+          {/* Left: 3 Steps Accordion / Stepper */}
           <div className={styles.stepsColumn}>
             <div className={styles.stepperHeader}>
               <h3>How It Works</h3>
@@ -148,6 +130,7 @@ export default function Aibotbuildersection() {
                       <div className={styles.stepIconWrap}>
                         <StepIcon size={22} />
                       </div>
+                      <span className={styles.stepIndexNum}>{step.number}</span>
                       <h4 className={styles.stepTitle}>{step.title}</h4>
                     </div>
 
@@ -176,12 +159,7 @@ export default function Aibotbuildersection() {
                   </div>
                   <div className={styles.studioNameWrap}>
                     <span className={styles.studioName}>AlgoMatic AI Studio</span>
-                    <span className={styles.versionPill}>v2.4 Bot Engine</span>
                   </div>
-                </div>
-                <div className={styles.engineStatus}>
-                  <span className={styles.pulseIndicator} />
-                  <span>AI Engine Online</span>
                 </div>
               </div>
 
@@ -295,7 +273,7 @@ export default function Aibotbuildersection() {
                   </div>
                 )}
 
-                {/* STEP 3: Review Strategy Blueprint */}
+                {/* STEP 3: Review Strategy Blueprint & Backtest Results (Merged, without JSON) */}
                 {activeStep === 2 && (
                   <div className={`${styles.stepView} ${styles.stepView3}`}>
                     <div className={styles.blueprintHeaderRow}>
@@ -324,43 +302,6 @@ export default function Aibotbuildersection() {
                       <div className={styles.specBox}>
                         <span className={styles.specKey}>Lot Sizing:</span>
                         <strong className={styles.specVal}>0.5% Account Equity</strong>
-                      </div>
-                    </div>
-
-                    <div className={styles.codeSnippetBox}>
-                      <div className={styles.codeHeader}>
-                        <span>strategy_config.json</span>
-                        <span>Auto-Generated</span>
-                      </div>
-                      <pre className={styles.codePre}>
-                        {`{
-  "name": "XAUUSD_EMA_RSI_Scalper",
-  "entryRules": {
-    "long": "EMA(20) > EMA(50) && RSI(14) < 35",
-    "short": "EMA(20) < EMA(50) && RSI(14) > 65"
-  },
-  "riskManagement": {
-    "stopLossPips": 25,
-    "takeProfitPips": 50,
-    "trailingStop": true,
-    "maxDrawdownLimit": 0.025
-  }
-}`}
-                      </pre>
-                    </div>
-                  </div>
-                )}
-
-                {/* STEP 4: Generate and Test */}
-                {activeStep === 3 && (
-                  <div className={`${styles.stepView} ${styles.stepView4}`}>
-                    <div className={styles.buildSuccessBanner}>
-                      <div className={styles.successIconWrap}>
-                        <CheckCircle2 size={24} />
-                      </div>
-                      <div>
-                        <h5>Bot Compilation Successful!</h5>
-                        <p>Artifact built with 0 errors. Backtest performance ready.</p>
                       </div>
                     </div>
 
