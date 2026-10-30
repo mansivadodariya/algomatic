@@ -15,7 +15,7 @@
   }
 
   :global(.container-xl) {
-    max-width: calc(1440px + 40px);
+    max-width: calc(1660px + 40px);
   }
 
   // Header Section
@@ -649,11 +649,15 @@
       gap: 24px;
       width: 100%;
 
+      @media (min-width: 1400px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       @media (max-width: 1200px) {
         gap: 20px;
       }
 
-      @media (max-width: 640px) {
+      @media (max-width: 768px) {
         grid-template-columns: 1fr;
         gap: 20px;
       }
@@ -674,7 +678,7 @@
       height: 100%;
       min-width: 0;
       position: relative;
-      max-width: 400px;
+      width: 100%;
 
       &:hover {
         transform: translateY(-4px);
