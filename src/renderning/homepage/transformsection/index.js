@@ -36,7 +36,7 @@ export default function Transformsection() {
                     icon="none"
                     buttonclassName="widthfull"
                     Butttonvarient="darkoutlined"
-                    link="#AIBotBuilder"
+                    link="/contact-us"
                   />
                 </div>
               </div>
