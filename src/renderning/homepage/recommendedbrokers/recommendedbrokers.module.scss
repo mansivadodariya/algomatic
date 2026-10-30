@@ -82,7 +82,7 @@
       transition: all 0.25s ease;
       flex-shrink: 0;
       user-select: none;
-      cursor: pointer;
+      cursor: default;
 
       &:hover {
         border-color: #9657fa;
@@ -103,6 +103,14 @@
         transform: scale(1.03);
       }
 
+      .brokerTextName {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1a1a2e;
+        font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+        white-space: nowrap;
+      }
+
       @media (max-width: 768px) {
         width: 200px;
         height: 74px;
@@ -112,6 +120,10 @@
 
         img {
           max-height: 38px;
+        }
+
+        .brokerTextName {
+          font-size: 15px;
         }
       }
     }

@@ -1,55 +1,86 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./recommendedbrokers.module.scss";
 import Marquee from "react-fast-marquee";
-const pepperstonelogo = "/assets/logo/pepperstonelogo.jpg";
-const skyrisslogo = "/assets/logo/skyrisslogo.jpg";
-const hfmlogo = "/assets/logo/hfmlogo.webp";
-const damanmarketlogo = "/assets/logo/damanmarketlogo.png";
-const cmclogo = "/assets/logo/cmclogo.png";
-const fifomarket = "/assets/logo/fifo-market.png";
-const avatrade = "/assets/logo/ava-trade.png";
-const tickmill = "/assets/logo/tick-mill.png";
+import { getAllBrokers, resolveBrokerLogo } from "@/lib/brokerApi";
 
 export default function Recommendedbrokers() {
+  const [brokers, setBrokers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchBrokers = async () => {
+      try {
+        setLoading(true);
+        const res = await getAllBrokers({
+          page: 1,
+          limit: 10,
+          is_active: true,
+          sortBy: "createdAt",
+          sortOrder: "desc",
+        });
+
+        const list = Array.isArray(res?.payload?.data)
+          ? res.payload.data
+          : Array.isArray(res?.data)
+            ? res.data
+            : [];
+
+        if (isMounted) {
+          setBrokers(list);
+        }
+      } catch (err) {
+        console.error("Error fetching recommended brokers:", err);
+        if (isMounted) {
+          setBrokers([]);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchBrokers();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // Filter dynamic brokers that have a logo from API
+  const brokersWithLogo = brokers.filter((b) => b?.logo && b.logo.trim());
+
+  if (!loading && brokersWithLogo.length === 0) {
+    return null;
+  }
+
   return (
-    <>
-      <div className={styles.recommendedbrokersmain}>
-        <div className="container-xl">
-          <div className={styles.recommendedbrokerstitle}>
-            <h4>
-              <span>Recommended</span> Brokers
-            </h4>
-          </div>
-        </div>
-        <div className={styles.marqueecontainer}>
-          <Marquee autoFill speed={70} pauseOnHover={true}>
-            {/* <div className={styles.marqueeimage1}>
-              <img src={pepperstonelogo} alt="pepperstonelogo" />
-            </div>
-            <div className={styles.marqueeimage2}>
-              <img src={skyrisslogo} alt="skyrisslogo" />
-            </div>
-            <div className={styles.marqueeimage3}>
-              <img src={hfmlogo} alt="hfmlogo" />
-            </div>
-            <div className={styles.marqueeimage4}>
-              <img src={damanmarketlogo} alt="damanmarketlogo" />
-            </div>
-            <div className={styles.marqueeimage5}>
-              <img src={cmclogo} alt="cmclogo" />
-            </div> */}
-            <div className={styles.brokerCard}>
-              <img src={fifomarket} alt="FIFO Markets" />
-            </div>
-            <div className={styles.brokerCard}>
-              <img src={tickmill} alt="Tickmill" />
-            </div>
-            <div className={styles.brokerCard}>
-              <img src={avatrade} alt="AvaTrade" />
-            </div>
-          </Marquee>
+    <div className={styles.recommendedbrokersmain}>
+      <div className="container-xl">
+        <div className={styles.recommendedbrokerstitle}>
+          <h4>
+            <span>Recommended</span> Brokers
+          </h4>
         </div>
       </div>
-    </>
+      <div className={styles.marqueecontainer}>
+        <Marquee autoFill speed={70} pauseOnHover={true}>
+          {brokersWithLogo.map((broker, idx) => (
+            <div
+              className={styles.brokerCard}
+              key={broker?._id || broker?.id || idx}
+              title={broker?.name || "Broker"}
+            >
+              <img
+                src={resolveBrokerLogo(broker.logo)}
+                alt={broker?.name || "Broker"}
+              />
+            </div>
+          ))}
+        </Marquee>
+      </div>
+    </div>
   );
 }
