@@ -94,11 +94,14 @@ export default function Footernew() {
               <h4>Resources</h4>
             </div>
             <ul className={styles.linksList}>
-              <li>
+              {/* <li>
                 <Link href="/marketplace">Getting Started</Link>
               </li>
               <li>
                 <Link href="/marketplace">Bot Setup Guide</Link>
+              </li> */}
+              <li>
+                <Link href="/broker">Broker</Link>
               </li>
               <li>
                 <Link href="/#CommonQuestion">FAQs</Link>

@@ -446,7 +446,7 @@ export default function Aibotbuildersection() {
           <div className={styles.ctaButtonCol}>
             <Commonarrowbutton
               Text="Build Bot With AI"
-              link="/marketplace"
+              link="/ai-bot-market-place"
               buttonclassName={styles.themeCtaBtn}
             />
           </div>

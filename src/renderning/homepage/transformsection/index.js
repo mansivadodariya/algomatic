@@ -27,7 +27,7 @@ export default function Transformsection() {
                     icon="none"
                     buttonclassName="widthfull"
                     Butttonvarient="darkoutlined"
-                    link="/marketplace"
+                    link="/ai-bot-market-place"
                   />
                 </div>
                 <div className={styles.transformboxinputbutton}>

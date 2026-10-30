@@ -101,7 +101,7 @@ export default function Faqsection() {
   };
 
   return (
-    <div className={styles.faqsectionmain}>
+    <div className={styles.faqsectionmain} id="CommonQuestion">
       <div className="container-xl">
         <div className={styles.faqsectiontitle}>
           <h6>
